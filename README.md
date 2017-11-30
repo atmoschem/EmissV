@@ -13,6 +13,7 @@ functions:
 
 # to install
 
+```{r eval=F}
 devtools::install_github("Schuch666/EmissV")
-
 library(EmissV)
+```
