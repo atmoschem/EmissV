@@ -23,7 +23,6 @@ Create a subset of a raster by a shape and return a raster. If grid argument is 
 \dontrun{
 # Do not run
 
-# trocar por raster::shapefile
 shape     <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
 shape     <- shape[22,1] # subset for Sao Paulo - BR
 raster    <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
