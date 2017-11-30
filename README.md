@@ -10,6 +10,8 @@ functions:
 - rasterToGrid: Transform a raster into a grinded outpu
 - shapeToGrid: Transform a shape into a grinded output
 - territory: Process georeferenced and geopolitical information
+- totalEmission: total emissions by territory
+- vehicles: tool to define vehicle information
 
 # to install
 
