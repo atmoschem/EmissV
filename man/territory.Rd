@@ -2,8 +2,7 @@
 % Please edit documentation in R/territory.R
 \name{territory}
 \alias{territory}
-\title{Process georeferenced and geopolitical information}
-\format{a list with a raster and fraction = 1 of a list of grided output and a fraction.}
+\title{Subset a raster with a shape (and grid)}
 \usage{
 territory(s, r, grid = NA, verbose = T)
 }
@@ -14,21 +13,20 @@ territory(s, r, grid = NA, verbose = T)
 
 \item{grid}{grid with the output format}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display adicional data}
 }
 \description{
-Create a subset of a raster by a shape and return a raster. If grid argument is used return in grid format and the fraction within the grid.
+Create a subset of a raster by a shape and return a new masked raster. If grid argument is used return in grid format and the fraction within the grid.
 }
 \examples{
 \dontrun{
 # Do not run
 
-shape     <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
-shape     <- shape[22,1] # subset for Sao Paulo - BR
-raster    <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
-grid      <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-SP        <- territory(shape,raster,grid)
-plot(SP$esp)
-
+shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+shape  <- shape[22,1] # subset for Sao Paulo - BR
+raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
+SP     <- territory(shape,raster,grid)
+plot(SP,main = "Sao Paulo Metropolitan Area", xlab="Lon",ylab="Lat",col = heat.colors(12, alpha = 1))
 }
 }
