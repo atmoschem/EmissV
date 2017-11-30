@@ -5,8 +5,8 @@ Authors@R: person(given = "Daniel", family = "Schuch", email = "underschuch@gmai
 Description: Top-down methods to create vehicular emissions based on rasters and shapefiles.
 Depends: R (>= 3.4.2),ncdf4,raster,rgdal
 Suggests: eixport,sp,sf
-URL: https://github.com/schuch666/EmissV
-BugReports: https://github.com/schuch666/EmissV/issues/
+URL: https://github.com/Schuch666/EmissV
+BugReports: https://github.com/Schuch666/EmissV/issues/
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
