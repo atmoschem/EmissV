@@ -5,7 +5,7 @@
 \title{Calculate total emissions by territory (city, state, country, etc) by pollutant}
 \format{Return the total emission (or a list) with the total emission (by day)}
 \usage{
-totalEmission(v, ef, pol = "CO", verbose = T)
+totalEmission(v, ef, pol, verbose = T)
 }
 \arguments{
 \item{v}{dataframe with the vehicle data}
@@ -37,8 +37,16 @@ veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
                      type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
                      fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 
+EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 2,nrow = 8))
+rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
+                               "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+names(EmissionFactors) <- c("CO","HC")
+EmissionFactors["CO"]  <- rep(0.1,8)
+EmissionFactors["HC"]  <- rep(0.15,8)
+
+TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","HC"),verbose = T)
 
 }
 }

@@ -68,11 +68,11 @@ vehicles <- function(total_v,territory_name,distribution,category,type,fuel,vnam
   }
 
   Veh_fuel$Use <- ifelse(
-    veh$Type == "LDV", 41,
+    Veh_fuel$Type == "LDV", 41,
     ifelse(
-      veh$Type == "TRUCKS", 110,
+      Veh_fuel$Type == "TRUCKS", 110,
       ifelse(
-        veh$Type == "BUS", 165,
+        Veh_fuel$Type == "BUS", 165,
         140
       )
     )

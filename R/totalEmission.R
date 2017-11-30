@@ -29,8 +29,16 @@
 #'                      type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
 #'                      fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
 #'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-#'                                 "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+#'                                 "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 #'
+#' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 2,nrow = 8))
+#' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
+#'                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+#' names(EmissionFactors) <- c("CO","HC")
+#' EmissionFactors["CO"]  <- rep(0.1,8)
+#' EmissionFactors["HC"]  <- rep(0.15,8)
+#'
+#' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","HC"),verbose = T)
 #'
 #'}
 
@@ -43,13 +51,20 @@ totalEmission <- function(v,ef,pol,verbose = T){
     fe_p       <- ef[,pol[i]]
 
     total =  TOTAL_veic[1,] * use[1] * fe_p[1]
-           + TOTAL_veic[2,] * use[2] * fe_p[2]
-           + TOTAL_veic[3,] * use[3] * fe_p[3]
-           + TOTAL_veic[4,] * use[4] * fe_p[4]
-           + TOTAL_veic[5,] * use[5] * fe_p[5]
-           + TOTAL_veic[6,] * use[6] * fe_p[6]
-           + TOTAL_veic[7,] * use[7] * fe_p[7]
-           + TOTAL_veic[8,] * use[8] * fe_p[8]
+    if(nrow(v) >= 2){
+      for(j in 2:nrow(v)){
+        total   = total + TOTAL_veic[j,] * use[j] * fe_p[j]
+      }
+    }
+
+    # total =  TOTAL_veic[1,] * use[1] * fe_p[1]
+    #        + TOTAL_veic[2,] * use[2] * fe_p[2]
+    #        + TOTAL_veic[3,] * use[3] * fe_p[3]
+    #        + TOTAL_veic[4,] * use[4] * fe_p[4]
+    #        + TOTAL_veic[5,] * use[5] * fe_p[5]
+    #        + TOTAL_veic[6,] * use[6] * fe_p[6]
+    #        + TOTAL_veic[7,] * use[7] * fe_p[7]
+    #        + TOTAL_veic[8,] * use[8] * fe_p[8]
 
     if(verbose){
       print(paste("Total of",pol[i],":",sum(as.numeric(total))))
