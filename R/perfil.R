@@ -1,0 +1,34 @@
+#' Temporal profile for veicular emissions
+#'
+#' @description List with two dataframes with temporal profile based on trafic count for Brazilian city of Sao Paulo. CO is from intencity of light vehicles and NO from intencity of heavy vehicles.
+#'
+#' @format A list of dataframes for CO and NO for hour for day of the week.
+#'
+#' @note The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = houry emission.
+#'
+#' @examples \dontrun{
+#' # Do not run
+#'
+#' # load the data
+#' data(perfil)
+#'
+#' # see a plot
+#' plot(perfil$co[,1],ty = "b",ylim = c(0,.1),ylab="Intensity",xlab="hour",axe = F,pch= 1)
+#' axis(1,at=0.5+c(0,6,12,18,24),labels = c("00:00","06:00","12:00","18:00","00:00"))
+#' axis(2)
+#' box()
+#' for(i in 2:7){
+#'  lines(perfil$co[,i],ty = "b",pch = i)
+#' }
+#' title("Daylly Profile (EmissV)")
+#' for(i in 1:7){
+#'  lines(perfil$no[,i],ty = "b",pch = i,col = "darkgray")
+#' }
+#' legend("topleft",legend = c("seg","ter","qua","qui","sex","sab","dom","seg","ter","qua","qui","sex","sab","dom"),
+#'       pch=c(1:7,1:7),lty=c(rep(1,7),rep(2,7)),col=c(rep("black",7),rep("darkgray",7)),bty="n",ncol = 2,
+#'       title = c("CO               NO"))
+#'}
+#'
+#' @usage data(perfil)
+#' @docType data
+"perfil"
