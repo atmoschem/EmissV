@@ -14,6 +14,8 @@ functions:
 # to install
 
 ```{r eval=F}
+install.packages("devtools")
+library(devtools)
 devtools::install_github("Schuch666/EmissV")
 library(EmissV)
 ```
