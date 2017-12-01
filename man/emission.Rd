@@ -5,10 +5,10 @@
 \title{Emissions to atmospheric models}
 \format{a matrix of emission}
 \usage{
-emission(emis, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
+emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 }
 \arguments{
-\item{emis}{list of total emission}
+\item{total}{list of total emission}
 
 \item{pol}{pollutant name}
 
@@ -23,7 +23,7 @@ emission(emis, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-Merge terrytory data with emissions to model output
+Merge terrytory data with total emissions and convert to model output
 }
 \examples{
 \dontrun{
