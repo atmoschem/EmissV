@@ -2,8 +2,8 @@
 % Please edit documentation in R/totalEmission.R
 \name{totalEmission}
 \alias{totalEmission}
-\title{Calculate total emissions by territory (city, state, country, etc) by pollutant}
-\format{Return the total emission (or a list) with the total emission (by day)}
+\title{Calculate total emissions}
+\format{Return a list with the daily total emission by territory.}
 \usage{
 totalEmission(v, ef, pol, verbose = T)
 }
@@ -19,12 +19,9 @@ totalEmission(v, ef, pol, verbose = T)
 \description{
 caculate the total emission with:
 
-  Emission = sum( No_vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) (*Deterioration_Factors(n)) )
+  Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) (*Deterioration_Factors(n)) )
 
 where n is the type of the veicle
-}
-\note{
-its works with some wrf files (inicial condictions and emission) for now.
 }
 \examples{
 \dontrun{

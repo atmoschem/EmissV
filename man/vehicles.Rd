@@ -52,8 +52,7 @@ veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
                      type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
                      fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
-                     )
+                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 
 }
 }

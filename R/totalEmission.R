@@ -1,19 +1,17 @@
-#' Calculate total emissions by territory (city, state, country, etc) by pollutant
+#' Calculate total emissions
 #'
 #' @description caculate the total emission with:
 #'
-#'   Emission = sum( No_vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) (*Deterioration_Factors(n)) )
+#'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) (*Deterioration_Factors(n)) )
 #'
 #' where n is the type of the veicle
 #'
-#' @format Return the total emission (or a list) with the total emission (by day)
+#' @format Return a list with the daily total emission by territory.
 #'
 #' @param v dataframe with the vehicle data
 #' @param ef emission factors
 #' @param pol pollutant name in ef
 #' @param verbose display adicional information
-#'
-#' @note its works with some wrf files (inicial condictions and emission) for now.
 #'
 #' @seealso \code{\link{territory}}
 #'
@@ -56,15 +54,6 @@ totalEmission <- function(v,ef,pol,verbose = T){
         total   = total + TOTAL_veic[j,] * use[j] * fe_p[j]
       }
     }
-
-    # total =  TOTAL_veic[1,] * use[1] * fe_p[1]
-    #        + TOTAL_veic[2,] * use[2] * fe_p[2]
-    #        + TOTAL_veic[3,] * use[3] * fe_p[3]
-    #        + TOTAL_veic[4,] * use[4] * fe_p[4]
-    #        + TOTAL_veic[5,] * use[5] * fe_p[5]
-    #        + TOTAL_veic[6,] * use[6] * fe_p[6]
-    #        + TOTAL_veic[7,] * use[7] * fe_p[7]
-    #        + TOTAL_veic[8,] * use[8] * fe_p[8]
 
     if(verbose){
       print(paste("Total of",pol[i],":",sum(as.numeric(total))))

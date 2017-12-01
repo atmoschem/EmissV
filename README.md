@@ -12,6 +12,7 @@ functions:
 - territory: Process georeferenced and geopolitical information
 - totalEmission: total emissions by territory
 - vehicles: tool to define vehicle information
+- voc: VOCs emission by fuel type
 
 # to install
 
