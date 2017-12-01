@@ -2,7 +2,7 @@
 % Please edit documentation in R/voc.R
 \name{voc}
 \alias{voc}
-\title{Calculate VOCs emissions by fuel type}
+\title{Total VOCs emissions}
 \format{Return a list with the daily total emission by territory.}
 \usage{
 voc(v, ef, pol, verbose = T)

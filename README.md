@@ -6,13 +6,14 @@ Collection of methods for create veicular emissions to air quality models like [
 
 functions:
 
+- emission:	Emissions to atmospheric models
 - newGrid: Create a grid set-up based on a NetCDF file
 - rasterToGrid: Transform a raster into a grinded outpu
 - shapeToGrid: Transform a shape into a grinded output
 - territory: Process georeferenced and geopolitical information
 - totalEmission: total emissions by territory
 - vehicles: tool to define vehicle information
-- voc: VOCs emission by fuel type
+- voc: total VOCs emission
 
 # to install
 

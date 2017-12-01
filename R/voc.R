@@ -1,4 +1,4 @@
-#' Calculate VOCs emissions by fuel type
+#' Total VOCs emissions
 #'
 #' @description cacule Volatile Organic Compounds (COVs) emited by the process of exaustao (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 #'
