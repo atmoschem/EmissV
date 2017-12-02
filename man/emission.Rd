@@ -3,7 +3,7 @@
 \name{emission}
 \alias{emission}
 \title{Emissions to atmospheric models}
-\format{a matrix of emission}
+\format{matrix of emission}
 \usage{
 emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 }
@@ -23,12 +23,44 @@ emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-Merge terrytory data with total emissions and convert to model output
+Combine territorial data and total emissions to model output
+}
+\note{
+the list of territorys must be in the same order as defined in vehicles and total emission.
 }
 \examples{
 \dontrun{
 # Do not run
+veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
+                     territory_name = c("SP", "RJ", "MG", "PR", "SC"),
+                     distribution = c( 0.4253, 0.0320, 0.3602, 0.0260, 0.0290, 0.0008, 0.1181, 0.0086),
+                     category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5","CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
+                     type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
+                     fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
+                     vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
+                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 
+EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
+rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
+                               "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+names(EmissionFactors) <- c("CO")
+EmissionFactors["CO"]  <- rep(0.1,8)
+
+TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
+
+grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
+shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+
+SP     <- territory(shape[22,1],raster,grid)
+MG     <- territory(shape[12,1],raster,grid)
+RJ     <- territory(shape[17,1],raster,grid)
+SC     <- territory(shape[21,1],raster,grid)
+PR     <- territory(shape[25,1],raster,grid)
+
+sudoeste <- list(SP = SP, RJ = RJ, MG = MG, PR = PR, SC = SC)
+
+e_CO   <- emission(TOTAL,"CO",sudoeste,grid)
 }
 }
 \seealso{

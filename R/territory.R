@@ -21,6 +21,9 @@
 #'}
 
 territory <- function(s,r,grid = NA,verbose = T){
+  if(verbose){
+    print("processing territory's frontier ... ")
+  }
 
   sp       <- mask(r,spTransform(s,CRS(proj4string(r))))
   sp_soma  <- cellStats(sp,"sum")
@@ -36,9 +39,7 @@ territory <- function(s,r,grid = NA,verbose = T){
     sp_r   <- cellStats(sp,"sum")
     if(verbose)
       print(paste("fraction =",sp_r))
-    # return(list(esp = sp ,r = sp_r))
     return(sp)
   }
-  # return(list(esp = sp ,r = 1))
   return(sp)
 }
