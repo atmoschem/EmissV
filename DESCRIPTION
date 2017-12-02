@@ -1,6 +1,6 @@
 Package: EmissV
 Title: Top-down methods to create vehicular emissions.
-Version: 0.6
+Version: 0.61
 Authors@R: person(given = "Daniel", family = "Schuch", email = "underschuch@gmail.com", role = c("aut", "cre"))
 Description: Top-down methods to create vehicular emissions based on rasters and shapefiles.
 Depends: R (>= 3.4.2),ncdf4,raster,rgdal,sp
