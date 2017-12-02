@@ -16,7 +16,7 @@ emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 
 \item{grid}{grid information}
 
-\item{mm}{molar mass}
+\item{mm}{pollutant molar mass}
 
 \item{aerosol}{TRUE for aerosols and FALSE (defoult) for gazes}
 

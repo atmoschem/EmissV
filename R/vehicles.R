@@ -22,7 +22,7 @@
 #' @param category category (category length)
 #' @param type type of vehicle by category (category length)
 #' @param fuel fuel type by category (category length)
-#' @param vnames name of eath categoy (category length / NA)
+#' @param vnames name of eath vehicle categoy (category length / NA)
 #' @param verbose display adicional information
 #'
 #' @seealso \code{\link{territory}} and  \code{\link{totalEmission}}

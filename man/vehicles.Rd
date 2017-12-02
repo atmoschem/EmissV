@@ -21,7 +21,7 @@ vehicles(total_v, territory_name, distribution, category, type, fuel,
 
 \item{fuel}{fuel type by category (category length)}
 
-\item{vnames}{name of eath categoy (category length / NA)}
+\item{vnames}{name of eath vehicle categoy (category length / NA)}
 
 \item{verbose}{display adicional information}
 }
