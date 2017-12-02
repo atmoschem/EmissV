@@ -8,7 +8,7 @@
 #' @param pol pollutant name
 #' @param territorys list of territory outputs
 #' @param grid grid information
-#' @param mm molar mass
+#' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param verbose display adicional information
 #'
