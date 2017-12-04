@@ -1,6 +1,6 @@
 #' Transform a shape into a grinded output
 #'
-#' @description under development
+#' @description under development (test)
 #'
 #' @param s input shape object
 #' @param grid grid object with the grid information
@@ -11,5 +11,8 @@
 #' @seealso \code{\link{newGrid}} and \code{\link{rasterToGrid}}
 #'
 shapeToGrid <- function(s,grid,verbose = T){
+
+  print("test")
+
   return(NA)
 }

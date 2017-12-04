@@ -14,7 +14,7 @@ shapeToGrid(s, grid, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-under development
+under development (test)
 }
 \seealso{
 \code{\link{newGrid}} and \code{\link{rasterToGrid}}
