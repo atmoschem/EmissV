@@ -2,6 +2,7 @@
 
 export(emission)
 export(newGrid)
+export(pointToGrid)
 export(rasterToGrid)
 export(shapeToGrid)
 export(territory)
