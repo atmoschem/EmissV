@@ -19,9 +19,7 @@ shapeToGrid <- function(s,grid,verbose = T){
 
 # olhar emis_grid do vein :
 
-# FUNÇÃO NO PACOTE VEIN
-# emis_grid <- function(spobj, g, sr, type="lines"){
-#   if ( type == "lines" ) {
+# emis_grid <- function(spobj, g, sr){
 #     net <- spobj
 #     for( i in 1:ncol(net@data) ){
 #       net@data[,i] <- as.numeric(net@data[,i])
@@ -38,9 +36,4 @@ shapeToGrid <- function(s,grid,verbose = T){
 #     #   gg@data[,i] <- gg@data[,i] * units::parse_unit("g h-1")
 #     # } # spplot does not work with units
 #     return(gg)
-#   } else if ( type == "points" ){
-#     g@data <- sp::over(g,spobj, fn=sum)
-#     #Add units
-#     return(g)
-#   }
 # }
