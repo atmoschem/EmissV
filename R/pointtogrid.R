@@ -28,14 +28,12 @@ pointToGrid <- function(p = list(x=-24.67123,y=-47.26636),grid,verbose = T){
   # return(g)
   return(g)
 }
-
-<<<<<<< HEAD
 # emis_grid <- function(spobj, g, sr){
 #     g@data <- sp::over(g,spobj, fn=sum)
 #     #Add units
 #     return(g)
 # }
-=======
+#
 # x = "SpatialPoints", y = "SpatialGrid"
 # xx
 #
@@ -50,4 +48,3 @@ pointToGrid <- function(p = list(x=-24.67123,y=-47.26636),grid,verbose = T){
 #
 # x = "SpatialPolygons", y = "SpatialGridDataFrame"
 # xx
->>>>>>> 4183b48a1bcad77af07dc14220d292f93681bca2
