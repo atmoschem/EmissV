@@ -21,13 +21,19 @@ pointToGrid <- function(p = list(x=-24.67123,y=-47.26636),grid,verbose = T){
 
   x <- grid$Lon
   y <- grid$Lat
-  p2 <- SpatialPoints(data.frame(x,y))
-  g <- SpatialGrid(p2)
+  points <- SpatialPoints(data.frame(x,y))
+
+  Spixel <- sp::SpatialPixels(points)
+  # g <- SpatialGrid(p2)
 
   # g <- sp::over(g,spobj, fn=sum)
   # return(g)
-  return(g)
+  return(Spixel)
 }
+
+# apt do sergio: http://rpubs.com/djxhie/autooilp3
+# esse artigo: https://rpubs.com/markpayne/132500
+
 # emis_grid <- function(spobj, g, sr){
 #     g@data <- sp::over(g,spobj, fn=sum)
 #     #Add units

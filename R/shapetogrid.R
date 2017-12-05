@@ -34,7 +34,7 @@ shapeToGrid <- function(s,grid,verbose = T){
 #     #   gg@data[,i] <- gg@data[,i] * units::parse_unit("g h-1")
 #     # } # spplot does not work with units
 #     return(gg)
-
+#}
 # spobj:
 # g:
 # sr:
