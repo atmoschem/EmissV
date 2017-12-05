@@ -4,17 +4,17 @@
 \alias{pointToGrid}
 \title{create a point source}
 \usage{
-pointToGrid(p, grid, verbose = T)
+pointToGrid(p = list(x = -24.67123, y = -47.26636), grid, verbose = T)
 }
 \arguments{
-\item{p}{input point object}
+\item{p}{list of points}
 
 \item{grid}{grid object with the grid information}
 
 \item{verbose}{display adicional information}
 }
 \description{
-under development (test)
+Transform a set of points into a grinded output
 }
 \seealso{
 \code{\link{newGrid}} and \code{\link{rasterToGrid}}

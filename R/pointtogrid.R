@@ -1,8 +1,8 @@
 #' create a point source
 #'
-#' @description under development (test)
+#' @description Transform a set of points into a grinded output
 #'
-#' @param p input point object
+#' @param p list of points
 #' @param grid grid object with the grid information
 #' @param verbose display adicional information
 #'
@@ -10,17 +10,44 @@
 #'
 #' @seealso \code{\link{newGrid}} and \code{\link{rasterToGrid}}
 #'
-pointToGrid <- function(p,grid,verbose = T){
+pointToGrid <- function(p = list(x=-24.67123,y=-47.26636),grid,verbose = T){
+  # g     <- grid with class SpatialPolygonsDataFrame
+  # spobj <- A spatial dataframe of class sp
+  x <- p$x
+  y <- p$y
+  p <- SpatialPoints(data.frame(x,y))
 
-  print("test")
+  cc <- matrix(c(grid$Lon,grid$Lat),ncol = 2,byrow = F)
 
-  return(NA)
+  x <- grid$Lon
+  y <- grid$Lat
+  p2 <- SpatialPoints(data.frame(x,y))
+  g <- SpatialGrid(p2)
+
+  # g <- sp::over(g,spobj, fn=sum)
+  # return(g)
+  return(g)
 }
 
-# olhar emis_grid do vein :
-
+<<<<<<< HEAD
 # emis_grid <- function(spobj, g, sr){
 #     g@data <- sp::over(g,spobj, fn=sum)
 #     #Add units
 #     return(g)
 # }
+=======
+# x = "SpatialPoints", y = "SpatialGrid"
+# xx
+#
+# x = "SpatialPoints", y = "SpatialGridDataFrame"
+# xx
+#
+# x = "SpatialPoints", y = "SpatialPixels"
+# xx
+#
+# x = "SpatialPoints", y = "SpatialPixelsDataFrame"
+# xx
+#
+# x = "SpatialPolygons", y = "SpatialGridDataFrame"
+# xx
+>>>>>>> 4183b48a1bcad77af07dc14220d292f93681bca2

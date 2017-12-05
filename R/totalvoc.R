@@ -50,10 +50,10 @@
 #' EF_voc["voc_exa_e"]  <- c(0.00, 1.30,0.217,0.00,0.00,0.00,0.00,1.08)
 #' EF_voc["voc_exa_d"]  <- c(0.00, 0.00,0.00, 2.05,0.00,0.00,0.00,0.00)
 #'
-#' VOC <- voc(veiculos,EF_voc,pol = voc[12])
+#' VOC <- totalVoc(veiculos,EF_voc,pol = voc[12])
 #'}
 
-voc <- function(v,ef,pol,verbose=T){
+totalVoc <- function(v,ef,pol,verbose=T){
   # data from ??
   cov_table <- matrix(c(0.025000, 0.000000, 0.282625, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000,
                         0.240000, 0.213150, 0.435206, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.048995,
