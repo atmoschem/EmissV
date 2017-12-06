@@ -10,25 +10,27 @@
 #'
 #' @seealso \code{\link{newGrid}} and \code{\link{rasterToGrid}}
 #'
-pointToGrid <- function(p = list(x=-24.67123,y=-47.26636),grid,verbose = T){
+pointToGrid <- function(p = list(lat=-24.67123,lon=-47.26636,z = 100, e = 666),grid,verbose = T){
   # g     <- grid with class SpatialPolygonsDataFrame
   # spobj <- A spatial dataframe of class sp
-  x <- p$x
-  y <- p$y
-  p <- SpatialPoints(data.frame(x,y))
+  lat <- p$lat
+  lon <- p$lon
+  z   <- p$z
+  e   <- p$e
+  p   <- SpatialPoints(data.frame(lon,lat))
+  # lon <- grid$Lon
+  # lat <- grid$Lat
 
-  cc <- matrix(c(grid$Lon,grid$Lat),ncol = 2,byrow = F)
+  # pts = expand.grid(lon = grid$Lon[1,], lat = grid$Lat[,1])
+  # g   = SpatialPixels(SpatialPoints(pts),tolerance = 0.01)
+  # g   = as(g, "SpatialGrid")
+  # gridded(g) = T
 
-  x <- grid$Lon
-  y <- grid$Lat
-  points <- SpatialPoints(data.frame(x,y))
+  g = data.frame(lon = c(grid$Lon), lat = c(grid$Lat), emiss = rep(0,length(lat)))
+  coordinates(g) = ~lon+lat
 
-  Spixel <- sp::SpatialPixels(points)
-  # g <- SpatialGrid(p2)
-
-  # g <- sp::over(g,spobj, fn=sum)
-  # return(g)
-  return(Spixel)
+  em <- sp::over(p,g,fn=sum)
+  return(em)
 }
 
 # apt do sergio: http://rpubs.com/djxhie/autooilp3
@@ -42,15 +44,11 @@ pointToGrid <- function(p = list(x=-24.67123,y=-47.26636),grid,verbose = T){
 #
 # x = "SpatialPoints", y = "SpatialGrid"
 # xx
-#
 # x = "SpatialPoints", y = "SpatialGridDataFrame"
 # xx
-#
 # x = "SpatialPoints", y = "SpatialPixels"
 # xx
-#
 # x = "SpatialPoints", y = "SpatialPixelsDataFrame"
 # xx
-#
 # x = "SpatialPolygons", y = "SpatialGridDataFrame"
 # xx

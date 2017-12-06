@@ -4,7 +4,8 @@
 \alias{pointToGrid}
 \title{create a point source}
 \usage{
-pointToGrid(p = list(x = -24.67123, y = -47.26636), grid, verbose = T)
+pointToGrid(p = list(lat = -24.67123, lon = -47.26636, z = 100, e = 666),
+  grid, verbose = T)
 }
 \arguments{
 \item{p}{list of points}
