@@ -12,6 +12,8 @@
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param verbose display adicional information
 #'
+#' @note Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
+#'
 #' @note the list of territorys must be in the same order as defined in vehicles and total emission.
 #'
 #' @seealso \code{\link{totalEmission}} and \code{\link{territory}}
@@ -33,7 +35,7 @@
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
 #'                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 #' names(EmissionFactors) <- c("CO")
-#' EmissionFactors["CO"]  <- rep(0.1,8)
+#' EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
 #'
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
@@ -74,10 +76,13 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
   VAR_e[is.na(VAR_e)]     <- 0
 
   dx <- grid$DX
+  dx = set_units(dx,km)
 
   if(aerosol){
     ##  ug m^-2 s^-1
-    VAR_e = 10^6 * VAR_e / ( (dx * 1000)^2 * 60*60)
+    dx    = set_units(dx,m)
+    VAR_e = set_units(VAR_e,ug)
+    VAR_e = VAR_e / ( dx^2 * 60*60)
   }
   else{
     #  mol km^-2 hr^-1

@@ -85,5 +85,6 @@ vehicles <- function(total_v,territory_name,distribution,category,type,fuel,vnam
   if(verbose){
     print(veh)
   }
+  veh$Use <- set_units(veh$Use,km/d)
   return(veh)
 }

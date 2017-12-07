@@ -38,6 +38,7 @@ rasterToGrid <- function(r,grid,verbose = T){
 
   if(verbose)
     print(paste("Grid output:",col,"columns",rol,"rows"))
+  # dimensionless weights
   return(X)
 }
 
