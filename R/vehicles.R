@@ -82,9 +82,9 @@ vehicles <- function(total_v,territory_name,distribution,category,type,fuel,vnam
   if(!is.na(vnames[1])){
     row.names(veh) <- vnames
   }
+  veh$Use <- set_units(veh$Use,km/d)
   if(verbose){
     print(veh)
   }
-  veh$Use <- set_units(veh$Use,km/d)
   return(veh)
 }

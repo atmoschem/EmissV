@@ -13,6 +13,8 @@
 #' @param pol pollutant name in ef
 #' @param verbose display adicional information
 #'
+#' @note the units can be used
+#'
 #' @seealso \code{\link{territory}}
 #'
 #' @export
@@ -33,10 +35,11 @@
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
 #'                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 #' names(EmissionFactors) <- c("CO","HC")
-#' EmissionFactors["CO"]  <- rep(0.1,8)
-#' EmissionFactors["HC"]  <- rep(0.15,8)
+#' # set the correct units
+#' EmissionFactors$CO <- set_units(rep(0.1,8),g/km)
+#' EmissionFactors$HC <- set_units(rep(0.15,8),g/km)
 #'
-#' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","HC"),verbose = T)
+#' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","HC"))
 #'
 #'}
 
@@ -56,7 +59,13 @@ totalEmission <- function(v,ef,pol,verbose = T){
     }
 
     if(verbose){
-      print(paste("Total of",pol[i],":",sum(as.numeric(total))))
+      if(class(total) == "units"){
+        y <- make_unit("y")
+        install_conversion_constant("g/d", "t/y", 365/1000000 )
+        total_t_y <- set_units(total,with(ud_units, t/y))
+        print(paste("Total of",pol[i],":",sum(total_t_y),deparse_unit(total_t_y)))
+      }else
+        print(paste("Total of",pol[i],":",sum(total)))
     }
     assign(pol[i],total)
   }

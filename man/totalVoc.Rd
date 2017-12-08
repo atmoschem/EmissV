@@ -62,5 +62,5 @@ VOC <- totalVoc(veiculos,EF_voc,pol = voc[12])
 }
 }
 \seealso{
-\code{\link{totalEmission}} and \code{\link{vehicle}}
+\code{\link{totalEmission}} and \code{\link{vehicles}}
 }

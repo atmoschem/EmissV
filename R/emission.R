@@ -40,22 +40,20 @@
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
 #' grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-#' shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+#' shape  <- st_read(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
 #' raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 #'
 #' SP     <- territory(shape[22,1],raster,grid)
-#' MG     <- territory(shape[12,1],raster,grid)
 #' RJ     <- territory(shape[17,1],raster,grid)
-#' SC     <- territory(shape[21,1],raster,grid)
-#' PR     <- territory(shape[25,1],raster,grid)
 #'
-#' sudoeste <- list(SP = SP, RJ = RJ, MG = MG, PR = PR, SC = SC)
+#' sudoeste <- list(SP = SP, RJ = RJ)
 #'
 #' e_CO   <- emission(TOTAL,"CO",sudoeste,grid)
 #'}
 
 emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T){
-  library(sp)
+  MOL <- make_unit("MOL")
+  install_conversion_constant("g", "MOL", 1/mm)
 
   if(verbose)
     print(paste("calculating emissions for ",pol," ...",sep=""))

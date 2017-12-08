@@ -26,6 +26,8 @@ emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 Combine territorial data and total emissions to model output
 }
 \note{
+Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
+
 the list of territorys must be in the same order as defined in vehicles and total emission.
 }
 \examples{
@@ -44,21 +46,18 @@ EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 names(EmissionFactors) <- c("CO")
-EmissionFactors["CO"]  <- rep(0.1,8)
+EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
 
 TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 
 grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+shape  <- st_read(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
 raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 
 SP     <- territory(shape[22,1],raster,grid)
-MG     <- territory(shape[12,1],raster,grid)
 RJ     <- territory(shape[17,1],raster,grid)
-SC     <- territory(shape[21,1],raster,grid)
-PR     <- territory(shape[25,1],raster,grid)
 
-sudoeste <- list(SP = SP, RJ = RJ, MG = MG, PR = PR, SC = SC)
+sudoeste <- list(SP = SP, RJ = RJ)
 
 e_CO   <- emission(TOTAL,"CO",sudoeste,grid)
 }

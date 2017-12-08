@@ -13,7 +13,7 @@
 #'
 #' @note the same ef can be used to totalEmission and voc
 #'
-#' @seealso \code{\link{totalEmission}} and \code{\link{vehicle}}
+#' @seealso \code{\link{totalEmission}} and \code{\link{vehicles}}
 #'
 #' @export
 #'
