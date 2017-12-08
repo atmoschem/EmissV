@@ -1,9 +1,20 @@
 Package: EmissV
 Title: Top-down methods to create vehicular emissions.
-Version: 0.63
-Authors@R: person(given = "Daniel", family = "Schuch", email = "underschuch@gmail.com", role = c("aut", "cre"))
+Version: 0.63.1
+Authors@R: c(
+  person(given = "Daniel",
+         family = "Schuch",
+         role = c("aut", "cre"),
+         email = "underschuch@gmail.com",
+         comment = c(ORCID = "0000-0001-5977-4519")),
+  person(given = "Sergio",
+         family = "Ibarra-Espinosa",
+         role = c("ctb"),
+         email = "sergio.ibarra@usp.br",
+         comment = c(ORCID = "0000-0002-3162-1905"))
+  ) 
 Description: Top-down methods to create vehicular emissions based on rasters and shapefiles.
-Depends: R (>= 3.4.2),ncdf4,raster,sf,sp,units
+Depends: R (>= 3.4.2), ncdf4, raster, sf, sp, units
 Suggests: eixport,vein
 URL: https://github.com/Schuch666/EmissV
 BugReports: https://github.com/Schuch666/EmissV/issues/
