@@ -16,6 +16,21 @@ shapeToGrid(s, grid, verbose = T)
 \description{
 under development (test)
 }
+\examples{
+\dontrun{
+# Do not run
+grid  <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
+d3 <- data.frame(x = as.numeric(grid$Lon),y = as.numeric(grid$Lat))
+d3 <- st_as_sf(d3, coords = c("x","y"))
+st_crs(d3) <- st_crs(4326)
+
+streets <- readRDS("D:/Downloads/streets.rds")
+streets <- streets[streets$highway != "residential", ]
+
+shapeToGrid(streets,d3)
+
+}
+}
 \seealso{
 \code{\link{newGrid}} and \code{\link{rasterToGrid}}
 }
