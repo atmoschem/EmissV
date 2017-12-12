@@ -7,29 +7,31 @@
 shapeToGrid(s, grid, verbose = T)
 }
 \arguments{
-\item{s}{input shape object}
+\item{s}{input sp object with projection}
 
 \item{grid}{grid object with the grid information}
 
-\item{verbose}{display adicional information}
+\item{verbose}{true for display adicional information}
 }
 \description{
-under development (test)
+create a distribution by a "Openstreetmap mystery file"
 }
 \examples{
 \dontrun{
 # Do not run
-grid  <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-d3 <- data.frame(x = as.numeric(grid$Lon),y = as.numeric(grid$Lat))
-d3 <- st_as_sf(d3, coords = c("x","y"))
-st_crs(d3) <- st_crs(4326)
 
-streets <- readRDS("D:/Downloads/streets.rds")
-streets <- streets[streets$highway != "residential", ]
+print("chose the Openstreetmap file (.rds)")
+roads <- readRDS(file.choose())
+roads <- as_Spatial(st_geometry(roads[roads$highway != "residential", ]))
 
-shapeToGrid(streets,d3)
+d2    <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
 
+roadLength <- shapeToGrid(roads,d2,return_raster=T)
+
+spplot(roadLength, scales = list(draw=TRUE), xlab="x", ylab="y",
+       sp.layout=list("sp.lines", roads))
 }
+
 }
 \seealso{
 \code{\link{newGrid}} and \code{\link{rasterToGrid}}
