@@ -63,18 +63,22 @@
 
 totalVOC <- function(v,ef,pol,verbose=T){
 
+  MOL <- units::make_unit("MOL")
+
   voc_names <- c("eth","hc3","hc5","hc8","ol2",
                  "olt","oli","iso","tol","xyl",
                  "ket","ch3oh","ald")
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
-  use        <- v$Use
+  use_inv    <- units::set_units(1,d/km)
+  use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
     print(paste0(pol," is not in suported VOC speciation"))
     print("The specie list contains:")
     print(voc_names)
-    return(NA * TOTAL_veic[1,])
+    total = units::set_units(NA * TOTAL_veic[1,],MOL/d)
+    return(total)
   }
   # data from ??
   cov_table <- matrix(c(0.025000, 0.000000, 0.282625, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000,
@@ -177,6 +181,9 @@ totalVOC <- function(v,ef,pol,verbose=T){
            VOC_vap_d * cov_table[pol,"D. VAPORS" ] +
            VOC_liq_d * cov_table[pol,"D. LIQUID" ] +
            VOC_exa_d * cov_table[pol,"D. EXHAUST"]
+
+    uni <- units::set_units(1,MOL/d)
+    COV <- COV * uni
 
     return(COV)
   }
