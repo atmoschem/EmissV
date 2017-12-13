@@ -31,11 +31,17 @@
 #'                      type = c("LDV", "LDV", "LDV","TRUCKS",
 #'                               "BUS","BUS","MOTO", "MOTO"),
 #'                      fuel = c("E25", "E100", "FLEX","B5",
-#'                               "B5","B5","E25", "FLEX"))
+#'                               "B5","B5","E25", "FLEX"),
+#'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+#'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+#'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 #'
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 #' names(EmissionFactors) <- c("CO")
 #' EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
+#' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+#'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+#'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 #'
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
@@ -53,8 +59,6 @@
 #'}
 
 emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T){
-  MOL <- units::make_unit("MOL")
-  units::install_conversion_constant("g", "MOL", 1/mm)
 
   if(verbose)
     if(aerosol){
@@ -68,34 +72,43 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
     print(paste(pol,"not found in total !"))
     stop()
   }
-  var     <- unlist(total[n])
-  unidade <- ????
+
+  var <- total[[n]]
+
+  # get the units (in order to work with raster)
+  unidade <- total[[1]][1]/as.numeric(total[[1]][[1]])
 
   for(i in 1:length(territorys)){
-    territorys[[i]] = territorys[[i]] * var[i]
+    territorys[[i]] = territorys[[i]] * var[[i]]
   }
   territorys <- unname(territorys)
+
   VAR_e  <- do.call(sp::merge,territorys)
 
   VAR_e[is.na(VAR_e)]     <- 0
 
+  VAR_e <- rasterToGrid(VAR_e,grid,verbose = F)
+
+  # put the units (to back the unit)
+  VAR_e <- VAR_e * unidade
+
   dx <- grid$DX
   dx =  units::set_units(dx,km)
 
-  VAR_e_test <- rasterToGrid(VAR_e,grid,verbose = F)
-
-  # if(aerosol){
-  #   ##  ug m^-2 s^-1
-  #   dx    = units::set_units(dx,m)
-  #   VAR_e = units::set_units(VAR_e,ug)
-  #   VAR_e = VAR_e / ( dx^2 * 60*60)
-  # }
-  # else{
-  #   #  mol km^-2 hr^-1
-  #   VAR_e   =  VAR_e / (mm * dx^2) # mm = massa molar do poluente
-  # }
-
-  VAR_e   =  VAR_e / (mm * dx^2) # mm = massa molar do poluente
+  if(aerosol){
+    ##  ug m^-2 s^-1
+    dx    = units::set_units(dx,m)
+    VAR_e = units::set_units(VAR_e,ug/s)
+    VAR_e = VAR_e / dx^2
+  }
+  else{
+    #  mol km^-2 hr^-1
+    VAR_e   =  VAR_e / dx^2
+    VAR_e   =  units::set_units(VAR_e,g/(h*km^2))
+    MOL <- units::make_unit("MOL") # new unit MOL
+    units::install_conversion_constant("g", "MOL", as.numeric(1/mm)) # new conversion
+    VAR_e = with(ud_units, MOL / (h * km^2)) # make the conversion
+  }
 
   return(VAR_e)
 }

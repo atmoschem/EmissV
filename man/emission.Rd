@@ -42,11 +42,17 @@ veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
                      type = c("LDV", "LDV", "LDV","TRUCKS",
                               "BUS","BUS","MOTO", "MOTO"),
                      fuel = c("E25", "E100", "FLEX","B5",
-                              "B5","B5","E25", "FLEX"))
+                              "B5","B5","E25", "FLEX"),
+                     vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+                               "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+                               "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 
 EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 names(EmissionFactors) <- c("CO")
 EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
+rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+                               "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+                               "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 
 TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 

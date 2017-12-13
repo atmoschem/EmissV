@@ -39,7 +39,7 @@ territory <- function(s,r,grid = NA,verbose = T){
     sp     <- raster::crop(sp / sp_soma ,box)
     sp_r   <- raster::cellStats(sp,"sum")
     if(verbose)
-      print(paste("fraction =",sp_r))
+      print(paste("fraction of territory inside the domain =",sp_r))
     return(sp)
   }
   return(sp)
