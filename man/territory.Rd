@@ -22,7 +22,7 @@ Create a subset of a raster by a shape and return a new masked raster. If grid a
 \dontrun{
 # Do not run
 
-shape  <- read_sf(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
 shape  <- shape[22,1] # subset for Sao Paulo - BR
 raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
