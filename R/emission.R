@@ -40,14 +40,16 @@
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
 #' grid   <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-#' shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
+#' shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 #' raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 #'
 #' SP     <- territory(shape[22,1],raster,grid)
 #' RJ     <- territory(shape[17,1],raster,grid)
 #' MG     <- territory(shape[12,1],raster,grid)
 #'
-#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid)
+#' mm_CO  <- 28 # Molar mass of CO
+#'
+#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm_CO)
 #'}
 
 emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T){
@@ -55,14 +57,19 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
   units::install_conversion_constant("g", "MOL", 1/mm)
 
   if(verbose)
-    print(paste("calculating emissions for ",pol," ...",sep=""))
+    if(aerosol){
+      print(paste("calculating emissions for ",pol," as aerosol"," ...",sep=""))
+    }else{
+      print(paste("calculating emissions for ",pol,", using molar mass = ",mm," ...",sep=""))
+    }
 
   n <- which(names(total) == pol)
   if(length(n) == 0){
     print(paste(pol,"not found in total !"))
     stop()
   }
-  var <- unlist(total[n])
+  var     <- unlist(total[n])
+  unidade <- ????
 
   for(i in 1:length(territorys)){
     territorys[[i]] = territorys[[i]] * var[i]
@@ -75,16 +82,20 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
   dx <- grid$DX
   dx =  units::set_units(dx,km)
 
-  if(aerosol){
-    ##  ug m^-2 s^-1
-    dx    = units::set_units(dx,m)
-    VAR_e = units::set_units(VAR_e,ug)
-    VAR_e = VAR_e / ( dx^2 * 60*60)
-  }
-  else{
-    #  mol km^-2 hr^-1
-    VAR_e   =  VAR_e / (mm * dx^2) # mm = massa molar do poluente
-  }
+  VAR_e_test <- rasterToGrid(VAR_e,grid,verbose = F)
 
-  return(rasterToGrid(VAR_e,grid,verbose = F))
+  # if(aerosol){
+  #   ##  ug m^-2 s^-1
+  #   dx    = units::set_units(dx,m)
+  #   VAR_e = units::set_units(VAR_e,ug)
+  #   VAR_e = VAR_e / ( dx^2 * 60*60)
+  # }
+  # else{
+  #   #  mol km^-2 hr^-1
+  #   VAR_e   =  VAR_e / (mm * dx^2) # mm = massa molar do poluente
+  # }
+
+  VAR_e   =  VAR_e / (mm * dx^2) # mm = massa molar do poluente
+
+  return(VAR_e)
 }

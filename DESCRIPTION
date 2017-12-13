@@ -14,7 +14,7 @@ Authors@R: c(
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
 Description: Top-down methods to create vehicular emissions based on rasters and shapefiles.
-Depends: R (>= 3.4.2), raster, sp, units
+Depends: R (>= 3.4.2), raster, sp, units, rgdal
 Imports: ncdf4, maptools, spatstat, methods
 Suggests: eixport,vein
 Enhances: data.table, sf

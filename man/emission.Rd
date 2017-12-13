@@ -51,14 +51,16 @@ EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
 TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 
 grid   <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
+shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 
 SP     <- territory(shape[22,1],raster,grid)
 RJ     <- territory(shape[17,1],raster,grid)
 MG     <- territory(shape[12,1],raster,grid)
 
-e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid)
+mm_CO  <- 28 # Molar mass of CO
+
+e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm_CO)
 }
 }
 \seealso{
