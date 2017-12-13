@@ -49,7 +49,8 @@ rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicle
                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 names(EmissionFactors) <- c("CO","HC")
-# set the correct units
+
+# assigns values and set the correct units
 EmissionFactors$CO <- set_units(rep(0.1,8),g/km)
 EmissionFactors$HC <- set_units(rep(0.15,8),g/km)
 

@@ -62,6 +62,20 @@
 #'}
 
 totalVOC <- function(v,ef,pol,verbose=T){
+
+  voc_names <- c("eth","hc3","hc5","hc8","ol2",
+                 "olt","oli","iso","tol","xyl",
+                 "ket","ch3oh","ald")
+
+  TOTAL_veic <- as.matrix(v[5:ncol(v)])
+  use        <- v$Use
+
+  if(!(pol %in% voc_names)){
+    print(paste0(pol," is not in suported VOC speciation"))
+    print("The specie list contains:")
+    print(voc_names)
+    return(NA * TOTAL_veic[1,])
+  }
   # data from ??
   cov_table <- matrix(c(0.025000, 0.000000, 0.282625, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000,
                         0.240000, 0.213150, 0.435206, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.048995,
@@ -77,15 +91,10 @@ totalVOC <- function(v,ef,pol,verbose=T){
                         0.000000, 0.000000, 0.001841, 0.002200, 0.002200, 0.005539, 0.000000, 0.000000, 0.000003,
                         0.000000, 0.059507, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000),
                       ncol = 9, byrow = T)
-  cov_table <- as.data.frame(cov_table,row.names = c("eth","hc3","hc5","hc8","ol2",
-                                                     "olt","oli","iso","tol","xyl",
-                                                     "ket","ch3oh","ald"))
+  cov_table <- as.data.frame(cov_table,row.names = voc_names)
   names(cov_table) <- c("G. VAPORS","G. LIQUID","G. EXHAUST",
                         "A. VAPORS","A. LIQUID","A. EXHAUST",
                         "D. VAPORS","D. LIQUID","D. EXHAUST")
-
-  TOTAL_veic <- as.matrix(v[5:ncol(v)])
-  use        <- v$Use
 
   # total of VOCs by:
   # Vapors

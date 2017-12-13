@@ -54,6 +54,8 @@ names(EF_voc) <-  c("voc_vap_g","voc_vap_e","voc_vap_d",
                     "voc_liq_g","voc_liq_e","voc_liq_d",
                     "voc_exa_g","voc_exa_e","voc_exa_d")
 
+# usar set_units(c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00),g/km) !!
+
 EF_voc["voc_vap_g"]  <- c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00)
 EF_voc["voc_vap_e"]  <- c(0.00, 0.25,0.12, 0.00,0.00,0.00,0.00,0.00)
 EF_voc["voc_vap_d"]  <- c(0.00, 0.00,0.00, 0.00,0.00,0.00,0.00,0.00)
@@ -64,7 +66,7 @@ EF_voc["voc_exa_g"]  <- c(0.425,0.00,0.217,0.00,0.00,0.00,1.08,0.00)
 EF_voc["voc_exa_e"]  <- c(0.00, 1.30,0.217,0.00,0.00,0.00,0.00,1.08)
 EF_voc["voc_exa_d"]  <- c(0.00, 0.00,0.00, 2.05,0.00,0.00,0.00,0.00)
 
-VOC <- totalVOC(veiculos,EF_voc,pol = voc[12])
+VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
 }
 }
 \seealso{

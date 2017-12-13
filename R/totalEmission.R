@@ -41,7 +41,8 @@
 #'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
 #'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 #' names(EmissionFactors) <- c("CO","HC")
-#' # set the correct units
+#'
+#' # assigns values and set the correct units
 #' EmissionFactors$CO <- set_units(rep(0.1,8),g/km)
 #' EmissionFactors$HC <- set_units(rep(0.15,8),g/km)
 #'
@@ -53,27 +54,37 @@ totalEmission <- function(v,ef,pol,verbose = T){
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
   use        <- v$Use
+  ef_names   <- names(ef)
 
   for(i in 1:length(pol)){
-    fe_p       <- ef[,pol[i]]
+    if(!is.element(pol[i], ef_names)){
+      print(paste0(pol[i]," not found in emission factor!"))
+      print("The emissions factors contains:")
+      print(ef_names)
+      total = units::set_units(NA * TOTAL_veic[1,],g/d)
+      assign(pol[i],total)
+    }
+    else{
+      fe_p       <- ef[,pol[i]]
 
-    total =  TOTAL_veic[1,] * use[1] * fe_p[1]
-    if(nrow(v) >= 2){
-      for(j in 2:nrow(v)){
-        total   = total + TOTAL_veic[j,] * use[j] * fe_p[j]
+      total =  TOTAL_veic[1,] * use[1] * fe_p[1]
+      if(nrow(v) >= 2){
+        for(j in 2:nrow(v)){
+          total   = total + TOTAL_veic[j,] * use[j] * fe_p[j]
+        }
       }
-    }
 
-    if(verbose){
-      if(class(total) == "units"){
-        y <- units::make_unit("y")
-        units::install_conversion_constant("g/d", "t/y", 365/1000000 )
-        total_t_y <- units::set_units(total,with(units::ud_units, t/y))
-        print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
-      }else
-        print(paste("Total of",pol[i],":",sum(total)))
+      if(verbose){
+        if(class(total) == "units"){
+          y <- units::make_unit("y")
+          units::install_conversion_constant("g/d", "t/y", 365/1000000 )
+          total_t_y <- units::set_units(total,with(units::ud_units, t/y))
+          print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
+        }else
+          print(paste("Total of",pol[i],":",sum(total)))
+      }
+      assign(pol[i],total)
     }
-    assign(pol[i],total)
   }
   TOTAL <- mget(pol)
 
