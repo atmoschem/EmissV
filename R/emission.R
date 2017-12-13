@@ -22,38 +22,37 @@
 #'
 #' @examples \dontrun{
 #' # Do not run
-#' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
-#'                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
-#'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260, 0.0290, 0.0008, 0.1181, 0.0086),
-#'                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5","CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
-#'                      type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
-#'                      fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
-#'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-#'                                 "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+#' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
+#'                      territory_name = c("SP", "RJ", "MG"),
+#'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
+#'                                        0.0290, 0.0008, 0.1181, 0.0086),
+#'                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
+#'                                    "CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
+#'                      type = c("LDV", "LDV", "LDV","TRUCKS",
+#'                               "BUS","BUS","MOTO", "MOTO"),
+#'                      fuel = c("E25", "E100", "FLEX","B5",
+#'                               "B5","B5","E25", "FLEX"))
 #'
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
-#' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-#'                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 #' names(EmissionFactors) <- c("CO")
 #' EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
 #'
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
-#' grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-#' shape  <- st_read(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
-#' raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+#' grid   <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
+#' shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
+#' raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 #'
 #' SP     <- territory(shape[22,1],raster,grid)
 #' RJ     <- territory(shape[17,1],raster,grid)
+#' MG     <- territory(shape[12,1],raster,grid)
 #'
-#' sudoeste <- list(SP = SP, RJ = RJ)
-#'
-#' e_CO   <- emission(TOTAL,"CO",sudoeste,grid)
+#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid)
 #'}
 
 emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T){
-  MOL <- make_unit("MOL")
-  install_conversion_constant("g", "MOL", 1/mm)
+  MOL <- units::make_unit("MOL")
+  units::install_conversion_constant("g", "MOL", 1/mm)
 
   if(verbose)
     print(paste("calculating emissions for ",pol," ...",sep=""))
@@ -74,12 +73,12 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
   VAR_e[is.na(VAR_e)]     <- 0
 
   dx <- grid$DX
-  dx = set_units(dx,km)
+  dx =  units::set_units(dx,km)
 
   if(aerosol){
     ##  ug m^-2 s^-1
-    dx    = set_units(dx,m)
-    VAR_e = set_units(VAR_e,ug)
+    dx    = units::set_units(dx,m)
+    VAR_e = units::set_units(VAR_e,ug)
     VAR_e = VAR_e / ( dx^2 * 60*60)
   }
   else{

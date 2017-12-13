@@ -24,16 +24,22 @@
 #'
 #' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
 #'                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
-#'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260, 0.0290, 0.0008, 0.1181, 0.0086),
-#'                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5","CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
-#'                      type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
-#'                      fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
-#'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-#'                                 "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+#'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
+#'                                        0.0290, 0.0008, 0.1181, 0.0086),
+#'                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
+#'                                    "CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
+#'                      type = c("LDV", "LDV", "LDV","TRUCKS",
+#'                               "BUS","BUS","MOTO", "MOTO"),
+#'                      fuel = c("E25", "E100", "FLEX","B5",
+#'                               "B5","B5","E25", "FLEX"),
+#'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+#'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+#'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 #'
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 2,nrow = 8))
-#' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex","Diesel trucks",
-#'                                "Diesel urban busses","Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+#' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+#'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+#'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 #' names(EmissionFactors) <- c("CO","HC")
 #' # set the correct units
 #' EmissionFactors$CO <- set_units(rep(0.1,8),g/km)
@@ -60,10 +66,10 @@ totalEmission <- function(v,ef,pol,verbose = T){
 
     if(verbose){
       if(class(total) == "units"){
-        y <- make_unit("y")
-        install_conversion_constant("g/d", "t/y", 365/1000000 )
-        total_t_y <- set_units(total,with(ud_units, t/y))
-        print(paste("Total of",pol[i],":",sum(total_t_y),deparse_unit(total_t_y)))
+        y <- units::make_unit("y")
+        units::install_conversion_constant("g/d", "t/y", 365/1000000 )
+        total_t_y <- units::set_units(total,with(units::ud_units, t/y))
+        print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
       }else
         print(paste("Total of",pol[i],":",sum(total)))
     }

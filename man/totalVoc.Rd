@@ -17,9 +17,12 @@ totalVoc(v, ef, pol, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-cacule Volatile Organic Compounds (COVs) emited by the process of exaustao (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+cacule Volatile Organic Compounds (COVs) emited by the process of
+ exaustao (through the exhaust pipe), liquid (carter and evaporative) and
+ vapor (fuel transfer operations).
 
-Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
+ Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket,
+ ch3oh and ald
 }
 \note{
 the same ef can be used to totalEmission and voc
@@ -30,19 +33,25 @@ the same ef can be used to totalEmission and voc
 
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
-                     distribution = c( 0.4253, 0.0320, 0.3602, 0.0260, 0.0290, 0.0008, 0.1181, 0.0086),
-                     category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5","CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
-                     type = c("LDV", "LDV", "LDV","TRUCKS","BUS","BUS","MOTO", "MOTO"),
-                     fuel = c("E25", "E100", "FLEX","B5","B5","B5","E25", "FLEX"),
-                     vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex",
-                                "Diesel trucks","Diesel urban busses","Diesel intercity busses",
-                                "Gasohol motorcycles","Flex motorcycles"))
+                     distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
+                                       0.0290, 0.0008, 0.1181, 0.0086),
+                     category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
+                                   "CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
+                     type = c("LDV", "LDV", "LDV","TRUCKS",
+                              "BUS","BUS","MOTO", "MOTO"),
+                     fuel = c("E25", "E100", "FLEX","B5",
+                              "B5","B5","E25", "FLEX"),
+                     vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 
 voc = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
 
 EF_voc <- as.data.frame.matrix(matrix(NA,ncol = 9,nrow = 8,byrow = T),
-                               row.names = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol","Light Duty Vehicles Flex",
-                                             "Diesel trucks","Diesel urban busses","Diesel intercity busses",
+                               row.names = c("Light duty Vehicles Gasohol",
+                                             proj4string"Light Duty Vehicles Ethanol",
+                                             "Light Duty Vehicles Flex","Diesel trucks",
+                                             "Diesel urban busses","Diesel intercity busses",
                                              "Gasohol motorcycles","Flex motorcycles"),
                                names = c("voc_vap_g","voc_vap_e","voc_vap_d",
                                          "voc_liq_g","voc_liq_e","voc_liq_d",

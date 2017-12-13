@@ -4,12 +4,14 @@
 \alias{shapeToGrid}
 \title{Transform a shape into a grinded output}
 \usage{
-shapeToGrid(s, grid, verbose = T)
+shapeToGrid(s, grid, as_raster = F, verbose = T)
 }
 \arguments{
 \item{s}{input sp object with projection}
 
 \item{grid}{grid object with the grid information}
+
+\item{as_raster}{output format, TRUE for raster, FALSE for matrix}
 
 \item{verbose}{true for display adicional information}
 }
@@ -26,7 +28,7 @@ roads <- as_Spatial(st_geometry(roads[roads$highway != "residential", ]))
 
 d2    <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
 
-roadLength <- shapeToGrid(roads,d2,return_raster=T)
+roadLength <- shapeToGrid(roads,d2,as_raster=T)
 
 spplot(roadLength, scales = list(draw=TRUE), xlab="lat", ylab="lon",main="Length of roads",
        sp.layout=list("sp.lines", roads))

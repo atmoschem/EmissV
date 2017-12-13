@@ -20,12 +20,12 @@ newGrid <- function(file,levels = 1,verbose = T){
   if(!is.na(file)){
     if(verbose)
       print(paste("New grid from:",file))
-    wrf <- nc_open(file)
-    lat <- ncvar_get(wrf,varid = "XLAT")
-    lon <- ncvar_get(wrf,varid = "XLONG")
-    time<- ncvar_get(wrf,varid = "Times")
-    dx  <- ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # km
-    nc_close(wrf)
+    wrf <- ncdf4::nc_open(file)
+    lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
+    lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
+    time<- ncdf4::ncvar_get(wrf,varid = "Times")
+    dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # km
+    ncdf4::nc_close(wrf)
     OUT <- list(Times = time, Lat = lat, Lon = lon, Horizontal = dim(lat), Levels = levels, DX = dx)
     return(OUT)
   }

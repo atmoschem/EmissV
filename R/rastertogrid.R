@@ -29,9 +29,9 @@ rasterToGrid <- function(r,grid,verbose = T){
   r.lon <- range(grid$Lon)
   box   <- raster::raster(nrows=rol,ncols=col,
                           xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                          crs=sf::st_crs(proj4string(r)))
+                          crs=sp::proj4string(r))
 
-  X    <- resample(r,box,method = "bilinear")
+  X    <- raster::resample(r,box,method = "bilinear")
   X    <- raster::flip(X,2)
   X    <- raster::t(X)
   X    <- raster::as.matrix(X)
