@@ -1,11 +1,8 @@
 #'Total VOCs emissions
 #'
-#'@description cacule Volatile Organic Compounds (COVs) emited by the process of
-#'  exaustao (through the exhaust pipe), liquid (carter and evaporative) and
-#'  vapor (fuel transfer operations).
+#'@description cacule Volatile Organic Compounds (COVs) emited by the process of exaustao (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
 #'
-#'  Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket,
-#'  ch3oh and ald
+#'  Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 #'
 #'@format Return a list with the daily total emission by territory.
 #'
@@ -39,15 +36,17 @@
 #'
 #' voc = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
 #'
-#' EF_voc <- as.data.frame.matrix(matrix(NA,ncol = 9,nrow = 8,byrow = T),
-#'                                row.names = c("Light duty Vehicles Gasohol",
-#'                                              proj4string"Light Duty Vehicles Ethanol",
-#'                                              "Light Duty Vehicles Flex","Diesel trucks",
-#'                                              "Diesel urban busses","Diesel intercity busses",
-#'                                              "Gasohol motorcycles","Flex motorcycles"),
-#'                                names = c("voc_vap_g","voc_vap_e","voc_vap_d",
-#'                                          "voc_liq_g","voc_liq_e","voc_liq_d",
-#'                                          "voc_exa_g","voc_exa_e","voc_exa_d"))
+#' EF_voc <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = T),
+#'                         row.names = c("Light duty Vehicles Gasohol",
+#'                                       "Light Duty Vehicles Ethanol",
+#'                                       "Light Duty Vehicles Flex","Diesel trucks",
+#'                                       "Diesel urban busses","Diesel intercity busses",
+#'                                       "Gasohol motorcycles","Flex motorcycles"))
+#' names(EF_voc) <-  c("voc_vap_g","voc_vap_e","voc_vap_d",
+#'                     "voc_liq_g","voc_liq_e","voc_liq_d",
+#'                     "voc_exa_g","voc_exa_e","voc_exa_d")
+#'
+#' # usar set_units(c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00),g/km) !!
 #'
 #' EF_voc["voc_vap_g"]  <- c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00)
 #' EF_voc["voc_vap_e"]  <- c(0.00, 0.25,0.12, 0.00,0.00,0.00,0.00,0.00)
@@ -59,10 +58,10 @@
 #' EF_voc["voc_exa_e"]  <- c(0.00, 1.30,0.217,0.00,0.00,0.00,0.00,1.08)
 #' EF_voc["voc_exa_d"]  <- c(0.00, 0.00,0.00, 2.05,0.00,0.00,0.00,0.00)
 #'
-#' VOC <- totalVoc(veiculos,EF_voc,pol = voc[12])
+#' VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
 #'}
 
-totalVoc <- function(v,ef,pol,verbose=T){
+totalVOC <- function(v,ef,pol,verbose=T){
   # data from ??
   cov_table <- matrix(c(0.025000, 0.000000, 0.282625, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000,
                         0.240000, 0.213150, 0.435206, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.048995,
@@ -78,7 +77,9 @@ totalVoc <- function(v,ef,pol,verbose=T){
                         0.000000, 0.000000, 0.001841, 0.002200, 0.002200, 0.005539, 0.000000, 0.000000, 0.000003,
                         0.000000, 0.059507, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000),
                       ncol = 9, byrow = T)
-  cov_table <- as.data.frame(cov_table,row.names = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald"))
+  cov_table <- as.data.frame(cov_table,row.names = c("eth","hc3","hc5","hc8","ol2",
+                                                     "olt","oli","iso","tol","xyl",
+                                                     "ket","ch3oh","ald"))
   names(cov_table) <- c("G. VAPORS","G. LIQUID","G. EXHAUST",
                         "A. VAPORS","A. LIQUID","A. EXHAUST",
                         "D. VAPORS","D. LIQUID","D. EXHAUST")
