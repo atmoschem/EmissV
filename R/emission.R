@@ -110,7 +110,7 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
     install_conversion_constant("d","h",24)   # new conversion
     VAR_e   =  units::set_units(VAR_e,g/h)
     # VAR_e   <- units::set_units(VAR_e,MOL/h)     # brute force conversion!
-    VAR_e   =  VAR_e * MOL / (mm * set_units(1,g)) # <<-- bfc !
+    VAR_e   =  VAR_e * MOL / (mm * units::set_units(1,g)) # <<-- bfc !
     VAR_e   =  VAR_e / dx^2
   }
 
