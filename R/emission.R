@@ -22,8 +22,8 @@
 #'
 #' @examples \dontrun{
 #' # Do not run
-#' # DETRAN data for 2016
 #'
+#' # DETRAN 2016 data and SP vahicle distribution
 #' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
 #'                      territory_name = c("SP", "RJ", "MG"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
@@ -35,14 +35,15 @@
 #'                      fuel = c("E25", "E100", "FLEX","B5",
 #'                               "B5","B5","E25", "FLEX"),
 #'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
-#'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-#'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+#'                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+#'                                 "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
 #'
+#' # values calculated from CETESB 2015 with
+#' # weighted.mean( emissions by type and year, DETRAN frota by type and year)
+#' # for Sao Paulo
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 #' names(EmissionFactors) <- c("CO")
-#' # values calculated with weighted.mean( CETESB emissions , DETRAN frota ) for Sao Paulo
 #' EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
-#'
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
 #'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
 #'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
