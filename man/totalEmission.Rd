@@ -29,6 +29,7 @@ the units can be used
 \examples{
 \dontrun{
 # Do not run
+# DETRAN 2016 data
 
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
@@ -50,9 +51,10 @@ rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicle
                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
 names(EmissionFactors) <- c("CO","HC")
 
+# values calculated with weighted.mean( CETESB emissions , DETRAN frota ) for Sao Paulo
 # assigns values and set the correct units
-EmissionFactors$CO <- set_units(rep(0.1,8),g/km)
-EmissionFactors$HC <- set_units(rep(0.15,8),g/km)
+EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
+EmissionFactors$HC <- set_units(c(0.23,1.11,0.073,0.10,0.20,0.31,0.28,0.28),g/km)
 
 TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","HC"))
 

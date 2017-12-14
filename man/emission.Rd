@@ -33,6 +33,8 @@ the list of territorys must be in the same order as defined in vehicles and tota
 \examples{
 \dontrun{
 # Do not run
+# DETRAN data for 2016
+
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
                      territory_name = c("SP", "RJ", "MG"),
                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
@@ -49,7 +51,9 @@ veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
 
 EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 names(EmissionFactors) <- c("CO")
-EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
+# values calculated with weighted.mean( CETESB emissions , DETRAN frota ) for Sao Paulo
+EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
+
 rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
@@ -64,9 +68,7 @@ SP     <- territory(shape[22,1],raster,grid)
 RJ     <- territory(shape[17,1],raster,grid)
 MG     <- territory(shape[12,1],raster,grid)
 
-mm_CO  <- 28 # Molar mass of CO
-
-e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm_CO)
+e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,28)
 }
 }
 \seealso{

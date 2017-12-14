@@ -27,6 +27,7 @@ the same ef can be used to totalEmission and voc
 \examples{
 \dontrun{
 # Do not run
+# DETRAN 2016 data
 
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
