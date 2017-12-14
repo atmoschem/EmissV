@@ -17,8 +17,8 @@
 #' raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 #' grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 #' SP     <- territory(shape,raster,grid)
-#' plot(SP,main = "Sao Paulo Metropolitan Area", xlab="Lon",ylab="Lat",
-#'      col = heat.colors(12, alpha = 1))
+#' spplot(SP, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="Sao Paulo Metropolitan Area")
+#'
 #'}
 
 territory <- function(s,r,grid = NA,verbose = T){

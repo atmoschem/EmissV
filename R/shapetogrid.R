@@ -15,6 +15,7 @@
 #' @examples \dontrun{
 #' # Do not run
 #'
+#' library(sf)
 #' print("chose the Openstreetmap file (.rds)")
 #' roads <- readRDS(file.choose())
 #' roads <- as_Spatial(st_geometry(roads[roads$highway != "residential", ]))
