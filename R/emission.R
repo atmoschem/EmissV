@@ -43,12 +43,6 @@
 #' # for Sao Paulo
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 #' names(EmissionFactors) <- c("CO")
-<<<<<<< HEAD
-=======
-#' # values calculated from CETESB 2015 with
-#' # weighted.mean( emissions by type and year, DETRAN frota by type and year)
-#' # for Sao Paulo
->>>>>>> 62d8181f93764c30191d901a34fb6cfdb26e78b9
 #' EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
 #'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
