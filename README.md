@@ -11,10 +11,10 @@ functions:
 - pointsToGrid: Transform points to a grinded output
 - rasterToGrid: Transform a raster into a grinded output
 - shapeToGrid: Transform a shape into a grinded output
-- streetDist: Distribution by OpenStreetnMap street
-- territory: Process georeferenced and geopolitical information
+- streetDist: Distribution by OpenStreetnMap streets
+- territory: Subset a raster with a shape (and grid)
 - totalEmission: total emissions
-- totalVoc: total VOCs emission
+- totalVOC: total VOCs emission
 - emission:	Emissions to atmospheric models
 
 # to install
