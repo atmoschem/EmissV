@@ -22,6 +22,8 @@
 #'
 #' @examples \dontrun{
 #' # Do not run
+#' # DETRAN data for 2016
+#'
 #' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
 #'                      territory_name = c("SP", "RJ", "MG"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
@@ -38,7 +40,9 @@
 #'
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 #' names(EmissionFactors) <- c("CO")
-#' EmissionFactors["CO"]  <- set_units(rep(0.1,8),g/km)
+#' # values calculated with weighted.mean( CETESB emissions , DETRAN frota ) for Sao Paulo
+#' EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
+#'
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
 #'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
 #'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
@@ -53,9 +57,7 @@
 #' RJ     <- territory(shape[17,1],raster,grid)
 #' MG     <- territory(shape[12,1],raster,grid)
 #'
-#' mm_CO  <- 28 # Molar mass of CO
-#'
-#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm_CO)
+#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,28)
 #'}
 
 emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T){
@@ -103,11 +105,13 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
   }
   else{
     #  mol km^-2 hr^-1
-    VAR_e   =  VAR_e / dx^2
-    VAR_e   =  units::set_units(VAR_e,g/(h*km^2))
     MOL <- units::make_unit("MOL") # new unit MOL
-    units::install_conversion_constant("g", "MOL", as.numeric(1/mm)) # new conversion
-    VAR_e = with(ud_units, MOL / (h * km^2)) # make the conversion
+    install_conversion_constant("MOL","g",mm) # new conversion
+    install_conversion_constant("d","h",24)   # new conversion
+    VAR_e   =  units::set_units(VAR_e,g/h)
+    # VAR_e   <- units::set_units(VAR_e,MOL/h)     # brute force conversion!
+    VAR_e   =  VAR_e * MOL / (mm * set_units(1,g)) # <<-- bfc !
+    VAR_e   =  VAR_e / dx^2
   }
 
   return(VAR_e)
