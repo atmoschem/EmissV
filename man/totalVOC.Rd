@@ -27,8 +27,8 @@ the same ef can be used to totalEmission and voc
 \examples{
 \dontrun{
 # Do not run
-# DETRAN 2016 data
 
+# DETRAN 2016 data and SP vahicle distribution
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
@@ -54,8 +54,6 @@ EF_voc <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = T),
 names(EF_voc) <-  c("voc_vap_g","voc_vap_e","voc_vap_d",
                     "voc_liq_g","voc_liq_e","voc_liq_d",
                     "voc_exa_g","voc_exa_e","voc_exa_d")
-
-# usar set_units(c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00),g/km) !!
 
 EF_voc["voc_vap_g"]  <- c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00)
 EF_voc["voc_vap_e"]  <- c(0.00, 0.25,0.12, 0.00,0.00,0.00,0.00,0.00)

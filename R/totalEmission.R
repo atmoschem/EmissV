@@ -13,16 +13,16 @@
 #' @param pol pollutant name in ef
 #' @param verbose display adicional information
 #'
-#' @note the units can be used
+#' @note the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
 #'
-#' @seealso \code{\link{rasterToGrid}}, \code{\link{shapeToGrid}} and \code{\link{emissions}}
+#' @seealso \code{\link{rasterToGrid}}, \code{\link{shapeToGrid}} and \code{\link{emission}}
 #'
 #' @export
 #'
 #' @examples \dontrun{
 #' # Do not run
-#' # DETRAN 2016 data
 #'
+#' # DETRAN 2016 data and SP vahicle distribution
 #' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
 #'                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
@@ -41,14 +41,15 @@
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
 #'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
 #'                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
-#' names(EmissionFactors) <- c("CO","HC")
+#' names(EmissionFactors) <- c("CO","PM")
 #'
-#' # values calculated with weighted.mean( CETESB emissions , DETRAN frota ) for Sao Paulo
-#' # assigns values and set the correct units
+#' # values calculated from CETESB 2015 with
+#' # weighted.mean( emissions by type and year, DETRAN frota by type and year)
+#' # for Sao Paulo
 #' EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
-#' EmissionFactors$HC <- set_units(c(0.23,1.11,0.073,0.10,0.20,0.31,0.28,0.28),g/km)
+#' EmissionFactors$PM <- set_units(c(0.0013,0.0,0.0010,0.0612,0.1052,0.1693,0.0,0.0),g/km)
 #'
-#' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","HC"))
+#' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","PM"))
 #'
 #'}
 
