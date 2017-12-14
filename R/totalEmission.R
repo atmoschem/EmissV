@@ -15,7 +15,7 @@
 #'
 #' @note the units can be used
 #'
-#' @seealso \code{\link{territory}}
+#' @seealso \code{\link{rasterToGrid}}, \code{\link{shapeToGrid}} and \code{\link{emissions}}
 #'
 #' @export
 #'

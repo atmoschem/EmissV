@@ -66,7 +66,7 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
     if(aerosol){
       print(paste("calculating emissions for ",pol," as aerosol"," ...",sep=""))
     }else{
-      print(paste("calculating emissions for ",pol,", using molar mass = ",mm," ...",sep=""))
+      print(paste("calculating emissions for ",pol," using molar mass = ",mm," ...",sep=""))
     }
 
   n <- which(names(total) == pol)
@@ -109,7 +109,7 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
     install_conversion_constant("MOL","g",mm) # new conversion
     install_conversion_constant("d","h",24)   # new conversion
     VAR_e   =  units::set_units(VAR_e,g/h)
-    # VAR_e   <- units::set_units(VAR_e,MOL/h)     # brute force conversion!
+    # VAR_e   <- units::set_units(VAR_e,MOL/h)            # brute force conversion!
     VAR_e   =  VAR_e * MOL / (mm * units::set_units(1,g)) # <<-- bfc !
     VAR_e   =  VAR_e / dx^2
   }

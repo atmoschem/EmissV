@@ -19,7 +19,7 @@
 newGrid <- function(file,levels = 1,verbose = T){
   if(!is.na(file)){
     if(verbose)
-      print(paste("New grid from:",file))
+      print(paste("Grid information from:",file))
     wrf <- ncdf4::nc_open(file)
     lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
     lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
