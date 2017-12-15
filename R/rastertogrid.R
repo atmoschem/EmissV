@@ -32,19 +32,12 @@ rasterToGrid <- function(r,grid,verbose = T){
                           crs=sp::proj4string(r))
 
   total<- cellStats(r,"sum")
-<<<<<<< HEAD
+
   X    <- raster::resample(r,box,method = "bilinear") # non-conservative transformation
   X    <- raster::flip(X,2)
   X    <- raster::t(X)
   X    <- raster::as.matrix(X)
   X    <- X * total/sum(X) # to conserve mass
-=======
-  X    <- raster::resample(r,box,method = "bilinear") # not preserve mass
-  X    <- raster::flip(X,2)
-  X    <- raster::t(X)
-  X    <- raster::as.matrix(X)
-  X    <- X * total/sum(X)
->>>>>>> 4102800af8015b056ddb6c731f64d34f84acc310
 
   if(verbose)
     print(paste("Grid output:",col,"columns",rol,"rows"))
