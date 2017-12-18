@@ -13,10 +13,6 @@ functions:
 - rasterSource: distribution of emissions by a georeferenced image
 - lineSource: distribution of emissions by line vectors
 - streetDist: distribution by OpenStreetnMap street (in progress)
-- areaSource: distribution of emissions by region
-- totalEmission: total emissions
-- totalVOC: total VOCs emission
-- emission:	Emissions to atmospheric models
 
 # to install
 
