@@ -2,17 +2,18 @@
 
 ## Top-down methods to create vehicular emissions.
 
-Collection of methods for create veicular emissions (by a top-down approach) for air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
+Methods for create veicular emissions (by a top-down approach) for air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
 functions:
 
-- vehicles: tool to set-up vehicle
-- newGrid: grid set-up based on a NetCDF file
-- pointsToGrid: Transform points to a grinded output
-- rasterToGrid: Transform a raster into a grinded output
-- shapeToGrid: Transform a shape into a grinded output
-- streetDist: Distribution by OpenStreetnMap streets
-- territory: Subset a raster with a shape (and grid)
+- vehicles: tool to set-up vehicle data.table
+- gridInfo: read grid information from a NetCDF file
+- pointSource: emissions from point sources (in progress)
+- plumeRise: calculate plume rise
+- rasterSource: distribution of emissions by a georeferenced image
+- lineSource: distribution of emissions by line vectors
+- streetDist: distribution by OpenStreetnMap street
+- areaSource: distribution of emissions by region
 - totalEmission: total emissions
 - totalVOC: total VOCs emission
 - emission:	Emissions to atmospheric models
