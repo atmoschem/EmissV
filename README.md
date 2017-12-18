@@ -18,7 +18,6 @@ functions:
 - totalVOC: total VOCs emission
 - emission: Emissions to atmospheric models
 
-
 # to install
 
 ```{r eval=F}
