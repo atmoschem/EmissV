@@ -1,4 +1,4 @@
-#' create a point source
+#' emissions from point sources
 #'
 #' @description Transform a set of points into a grinded output
 #'
@@ -8,8 +8,8 @@
 #'
 #' @export
 #'
-#' @seealso \code{\link{newGrid}} and \code{\link{rasterToGrid}}
+#' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
-pointToGrid <- function(p = list(lat=-24.67123,lon=-47.26636,z = 100, e = 666),grid,verbose = T){
+pointSource <- function(p = list(lat=-24.67123,lon=-47.26636,z = 100, e = 666),grid,verbose = T){
   return(NA)
 }

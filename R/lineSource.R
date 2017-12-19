@@ -1,4 +1,4 @@
-#' Transform a shape into a grinded output
+#' distribution of emissions by line vectors
 #'
 #' @description create a distribution by a "Openstreetmap mystery file"
 #'
@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @seealso \code{\link{newGrid}} and \code{\link{rasterToGrid}}
+#' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
 #'
 #' @examples \dontrun{
@@ -20,9 +20,9 @@
 #' roads <- readRDS(file.choose())
 #' roads <- as_Spatial(st_geometry(roads[roads$highway != "residential", ]))
 #'
-#' d2    <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
+#' d2    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
 #'
-#' roadLength <- shapeToGrid(roads,d2,as_raster=T)
+#' roadLength <- lineSource(roads,d2,as_raster=T)
 #'
 #' spplot(roadLength, scales = list(draw=TRUE), xlab="lat", ylab="lon",main="Length of roads",
 #'        sp.layout=list("sp.lines", roads))
@@ -32,7 +32,7 @@
 # algorithm source:
 # https://gis.stackexchange.com/questions/119993/convert-line-shapefile-to-raster-value-total-length-of-lines-within-cell
 
-shapeToGrid <- function(s,grid,as_raster = F,verbose = T){
+lineSource <- function(s,grid,as_raster = F,verbose = T){
 
   print("take a coffee, this function may take a few minutes ...")
 

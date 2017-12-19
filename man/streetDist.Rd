@@ -33,7 +33,7 @@ library(sf)
 streets <- st_read("path")
 streets <- streets[streets$highway != "residential", ]
 # Grid
-grid  <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
+grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 names(grid)
 d3 <- data.frame(x = as.numeric(grid$Lon),
                  y = as.numeric(grid$Lat))

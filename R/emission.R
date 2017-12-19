@@ -1,12 +1,12 @@
 #' Emissions to atmospheric models
 #'
-#' @description Combine territorial data and total emissions to model output
+#' @description Combine area sourses and total emissions to model output
 #'
 #' @format matrix of emission
 #'
 #' @param total list of total emission
 #' @param pol pollutant name
-#' @param territorys list of territory outputs
+#' @param area list of area sources
 #' @param grid grid information
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
@@ -14,9 +14,9 @@
 #'
 #' @note Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 #'
-#' @note the list of territorys must be in the same order as defined in vehicles and total emission.
+#' @note the list of area must be in the same order as defined in vehicles and total emission.
 #'
-#' @seealso \code{\link{totalEmission}} and \code{\link{territory}}
+#' @seealso \code{\link{totalEmission}} and \code{\link{areaSource}}
 #'
 #' @export
 #'
@@ -25,7 +25,7 @@
 #'
 #' # DETRAN 2016 data and SP vahicle distribution
 #' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
-#'                      territory_name = c("SP", "RJ", "MG"),
+#'                      area_name = c("SP", "RJ", "MG"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
 #'                                        0.0290, 0.0008, 0.1181, 0.0086),
 #'                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
@@ -50,18 +50,18 @@
 #'
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
-#' grid   <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
+#' grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
 #' shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 #' raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 #'
-#' SP     <- territory(shape[22,1],raster,grid)
-#' RJ     <- territory(shape[17,1],raster,grid)
-#' MG     <- territory(shape[12,1],raster,grid)
+#' SP     <- areaSource(shape[22,1],raster,grid)
+#' RJ     <- areaSource(shape[17,1],raster,grid)
+#' MG     <- areaSource(shape[12,1],raster,grid)
 #'
-#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,28)
+#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm=28)
 #'}
 
-emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T){
+emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
 
   if(verbose)
     if(aerosol){
@@ -81,16 +81,16 @@ emission <- function(total,pol,territorys,grid, mm = 1, aerosol = F, verbose = T
   # get the units (in order to work with raster)
   unidade <- total[[1]][1]/as.numeric(total[[1]][[1]])
 
-  for(i in 1:length(territorys)){
-    territorys[[i]] = territorys[[i]] * var[[i]]
+  for(i in 1:length(area)){
+    area[[i]] = area[[i]] * var[[i]]
   }
-  territorys <- unname(territorys)
+  area <- unname(area)
 
-  VAR_e  <- do.call(sp::merge,territorys)
+  VAR_e  <- do.call(sp::merge,area)
 
   VAR_e[is.na(VAR_e)]     <- 0
 
-  VAR_e <- rasterToGrid(VAR_e,grid,verbose = F)
+  VAR_e <- rasterSource(VAR_e,grid,verbose = F)
 
   # put the units (to back the unit)
   VAR_e <- VAR_e * unidade

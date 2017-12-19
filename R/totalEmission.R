@@ -2,7 +2,7 @@
 #'
 #' @description caculate the total emission with:
 #'
-#'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) (*Deterioration_Factors(n)) )
+#'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )
 #'
 #' where n is the type of the veicle
 #'
@@ -15,7 +15,7 @@
 #'
 #' @note the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
 #'
-#' @seealso \code{\link{rasterToGrid}}, \code{\link{shapeToGrid}} and \code{\link{emission}}
+#' @seealso \code{\link{rasterSource}}, \code{\link{lineSource}} and \code{\link{emission}}
 #'
 #' @export
 #'
@@ -24,7 +24,7 @@
 #'
 #' # DETRAN 2016 data and SP vahicle distribution
 #' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
-#'                      territory_name = c("SP", "RJ", "MG", "PR", "SC"),
+#'                      area_name = c("SP", "RJ", "MG", "PR", "SC"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
 #'                                        0.0290, 0.0008, 0.1181, 0.0086),
 #'                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",

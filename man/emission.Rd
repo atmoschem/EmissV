@@ -5,14 +5,14 @@
 \title{Emissions to atmospheric models}
 \format{matrix of emission}
 \usage{
-emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
+emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
 }
 \arguments{
 \item{total}{list of total emission}
 
 \item{pol}{pollutant name}
 
-\item{territorys}{list of territory outputs}
+\item{area}{list of area sources}
 
 \item{grid}{grid information}
 
@@ -23,12 +23,12 @@ emission(total, pol, territorys, grid, mm = 1, aerosol = F, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-Combine territorial data and total emissions to model output
+Combine area sourses and total emissions to model output
 }
 \note{
 Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 
-the list of territorys must be in the same order as defined in vehicles and total emission.
+the list of area must be in the same order as defined in vehicles and total emission.
 }
 \examples{
 \dontrun{
@@ -36,7 +36,7 @@ the list of territorys must be in the same order as defined in vehicles and tota
 
 # DETRAN 2016 data and SP vahicle distribution
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
-                     territory_name = c("SP", "RJ", "MG"),
+                     area_name = c("SP", "RJ", "MG"),
                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
                                        0.0290, 0.0008, 0.1181, 0.0086),
                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
@@ -61,17 +61,17 @@ rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicle
 
 TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 
-grid   <- newGrid(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
+grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
 shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 
-SP     <- territory(shape[22,1],raster,grid)
-RJ     <- territory(shape[17,1],raster,grid)
-MG     <- territory(shape[12,1],raster,grid)
+SP     <- areaSource(shape[22,1],raster,grid)
+RJ     <- areaSource(shape[17,1],raster,grid)
+MG     <- areaSource(shape[12,1],raster,grid)
 
-e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,28)
+e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm=28)
 }
 }
 \seealso{
-\code{\link{totalEmission}} and \code{\link{territory}}
+\code{\link{totalEmission}} and \code{\link{areaSource}}
 }

@@ -1,4 +1,4 @@
-#' Create a grid set-up based on a NetCDF file
+#' read grid information from a NetCDF file
 #'
 #' @description Return a list contains information of a regular grid
 #'
@@ -12,11 +12,11 @@
 #'
 #' @examples \dontrun{
 #' # Do not run
-#' grid  <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
+#' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 #' grid
 #'}
 
-newGrid <- function(file,levels = 1,verbose = T){
+gridInfo <- function(file,levels = 1,verbose = T){
   if(!is.na(file)){
     if(verbose)
       print(paste("Grid information from:",file))

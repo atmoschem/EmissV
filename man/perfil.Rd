@@ -4,12 +4,12 @@
 \name{perfil}
 \alias{perfil}
 \title{Temporal profile for veicular emissions}
-\format{A list of dataframes for CO and NO for hour for day of the week.}
+\format{A list of dataframes for LDV and HDV for hour and  weekday.}
 \usage{
 data(perfil)
 }
 \description{
-List with two dataframes with temporal profile based on trafic count for Brazilian city of Sao Paulo. CO is from intencity of light vehicles and NO from intencity of heavy vehicles.
+List with two dataframes with temporal profile based on trafic count for Brazilian city of Sao Paulo. LDV is for light vehicles and HDV for intencity of heavy vehicles.
 }
 \note{
 The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = houry emission.
@@ -22,16 +22,16 @@ The profile is normalized by days (but is balanced for a complete week) so diary
 data(perfil)
 
 # see a plot
-plot(perfil$co[,1],ty = "b",ylim = c(0,.1),ylab="Intensity",xlab="hour",axe = F,pch= 1)
+plot(perfil$LDV[,1],ty = "b",ylim = c(0,.1),ylab="Intensity",xlab="hour",axe = F,pch= 1)
 axis(1,at=0.5+c(0,6,12,18,24),labels = c("00:00","06:00","12:00","18:00","00:00"))
 axis(2)
 box()
 for(i in 2:7){
- lines(perfil$co[,i],ty = "b",pch = i)
+ lines(perfil$LDV[,i],ty = "b",pch = i)
 }
 title("Daylly Profile (EmissV)")
 for(i in 1:7){
- lines(perfil$no[,i],ty = "b",pch = i,col = "darkgray")
+ lines(perfil$HDV[,i],ty = "b",pch = i,col = "darkgray")
 }
 legend("topleft",legend = c("seg","ter","qua","qui","sex","sab","dom",
                             "seg","ter","qua","qui","sex","sab","dom"),

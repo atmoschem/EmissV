@@ -1,4 +1,4 @@
-#' Transform a raster into a grinded output
+#' distribution of emissions by a georeferenced image
 #'
 #' @description Returns a matrix
 #'
@@ -6,7 +6,7 @@
 #' @param grid grid object with the grid information
 #' @param verbose display adicional information
 #'
-#' @seealso \code{\link{newGrid}} and \code{\link{shapeToGrid}}
+#' @seealso \code{\link{gridInfo}} and \code{\link{lineSource}}
 #'
 #' @source exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 #'
@@ -14,14 +14,14 @@
 #'
 #' @examples \dontrun{
 #' # Do not run
-#' grid  <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
+#' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' x     <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
-#' test  <- rasterToGrid(x,grid)
+#' test  <- rasterSource(x,grid)
 #' image(test)
 #' title("Persistent Nocturnal Lights from DMSP")
 #'}
 
-rasterToGrid <- function(r,grid,verbose = T){
+rasterSource <- function(r,grid,verbose = T){
 
   col   <- grid$Horizontal[1]
   rol   <- grid$Horizontal[2]

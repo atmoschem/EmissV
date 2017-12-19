@@ -1,11 +1,13 @@
-#' Subset a raster with a shape (and grid)
+#' distribution of emissions by region
 #'
-#' @description Create a subset of a raster by a shape and return a new masked raster. If grid argument is used return in grid format and the fraction within the grid.
+#' @description Create the spetial distribution by a raster kasked by shape/model grid information.
 #'
 #' @param s input shape object
 #' @param r input raster object
 #' @param grid grid with the output format
 #' @param verbose display adicional data
+#'
+#' @format a raster
 #'
 #' @export
 #'
@@ -15,15 +17,15 @@
 #' shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
 #' shape  <- shape[22,1] # subset for Sao Paulo - BR
 #' raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
-#' grid   <- newGrid(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-#' SP     <- territory(shape,raster,grid)
+#' grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
+#' SP     <- areaSource(shape,raster,grid)
 #' spplot(SP, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="Sao Paulo Metropolitan Area")
 #'
 #'}
 
-territory <- function(s,r,grid = NA,verbose = T){
+areaSource <- function(s,r,grid = NA,verbose = T){
   if(verbose){
-    print("processing territory's frontier ... ")
+    print("processing area ... ")
   }
 
   sp       <- raster::mask(r,sp::spTransform(s,sp::CRS(sp::proj4string(r))))
@@ -39,7 +41,7 @@ territory <- function(s,r,grid = NA,verbose = T){
     sp     <- raster::crop(sp / sp_soma ,box)
     sp_r   <- raster::cellStats(sp,"sum")
     if(verbose)
-      print(paste("fraction of territory inside the domain =",sp_r))
+      print(paste("fraction of area inside the domain =",sp_r))
     return(sp)
   }
   return(sp)

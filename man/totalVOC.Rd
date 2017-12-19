@@ -2,7 +2,7 @@
 % Please edit documentation in R/totalvoc.R
 \name{totalVOC}
 \alias{totalVOC}
-\title{Total VOCs emissions}
+\title{Calculate Total VOCs emissions}
 \format{Return a list with the daily total emission by territory.}
 \usage{
 totalVOC(v, ef, pol, verbose = T)
@@ -30,7 +30,7 @@ the same ef can be used to totalEmission and voc
 
 # DETRAN 2016 data and SP vahicle distribution
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
-                     territory_name = c("SP", "RJ", "MG", "PR", "SC"),
+                     area_name = c("SP", "RJ", "MG", "PR", "SC"),
                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
                                        0.0290, 0.0008, 0.1181, 0.0086),
                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",

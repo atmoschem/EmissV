@@ -2,16 +2,16 @@
 % Please edit documentation in R/vehicles.R
 \name{vehicles}
 \alias{vehicles}
-\title{Vehicles by territory}
+\title{tool to set-up vehicle data.table}
 \format{data.frame with lines by vehicle category and columns for category, type, Fuel, use and a adictional column for eath territory.}
 \usage{
-vehicles(total_v, territory_name, distribution, category, type, fuel,
-  vnames = NA, verbose = T)
+vehicles(total_v, area_name, distribution, category, type, fuel, vnames = NA,
+  verbose = T)
 }
 \arguments{
-\item{total_v}{total of vehicles by territory (territory length)}
+\item{total_v}{total of vehicles by area (area length)}
 
-\item{territory_name}{territory names (territory length)}
+\item{area_name}{area names (area length)}
 
 \item{distribution}{distribution of vehicles by category (category length)}
 
@@ -37,7 +37,7 @@ return a data.frame with veicle information. types argument define the diary use
 - MOTO (motorcycles and other vehicles) 140 km / day
 }
 \note{
-total_v and territory_name must have the same length.
+total_v and area_name must have the same length.
 
 distribution, category, type, fuel and vnames (if used) must have the same length.
 }
@@ -47,7 +47,7 @@ distribution, category, type, fuel and vnames (if used) must have the same lengt
 
 # DETRAN 2016 data and SP vahicle distribution
 veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
-                     territory_name = c("SP", "RJ", "MG", "PR", "SC"),
+                     area_name = c("SP", "RJ", "MG", "PR", "SC"),
                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
                                        0.0290, 0.0008, 0.1181, 0.0086),
                      category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
@@ -63,5 +63,5 @@ veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282, 6523727, 4312896),
 }
 }
 \seealso{
-\code{\link{territory}} and  \code{\link{totalEmission}}
+\code{\link{areaSource}} and  \code{\link{totalEmission}}
 }
