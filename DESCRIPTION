@@ -15,7 +15,7 @@ Authors@R: c(
   )
 Description: Top-down methods to create vehicular emissions based on rasters and shapefiles.
 Depends: R (>= 3.4.2), raster, sp, units, rgdal, maptools, spatstat
-Imports: ncdf4
+Imports: ncdf4 
 Suggests: eixport,vein
 Enhances: data.table, sf
 License: MIT + file LICENSE
