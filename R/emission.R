@@ -24,7 +24,7 @@
 #' # Do not run
 #'
 #' # DETRAN 2016 data and SP vahicle distribution
-#' veiculos <- vehicles(total_v = c(25141442, 5736428, 9147282),
+#' veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988),
 #'                      area_name = c("SP", "RJ", "MG"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
 #'                                        0.0290, 0.0008, 0.1181, 0.0086),
