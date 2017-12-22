@@ -63,6 +63,10 @@
 totalVOC <- function(v,ef,pol,verbose=T){
 
   MOL <- units::make_unit("MOL")
+  y   <- units::make_unit("y")
+  units::install_conversion_constant("MOL/d", "MOL/y", 365 )
+  units::install_conversion_constant("g/d", "t/y", 365/1000000 )
+
 
   voc_names <- c("eth","hc3","hc5","hc8","ol2",
                  "olt","oli","iso","tol","xyl",
@@ -166,10 +170,17 @@ totalVOC <- function(v,ef,pol,verbose=T){
       VOC_liq_d   = VOC_liq_d + TOTAL_veic[j,] * use[j] * ef_liq[j]
     }
   }
+  if(verbose){
+    total <- VOC_vap_g + VOC_liq_g + VOC_exa_g + VOC_vap_e + VOC_liq_e +
+      VOC_exa_e + VOC_vap_d + VOC_liq_d + VOC_exa_d
+    uni2  <- units::set_units(1,g/d)
+    total <- total * uni2
+
+    total_t_y <- units::set_units(total, t/y)
+    print(paste("TOTAL VOC:",sum(total_t_y),units::deparse_unit(total_t_y)))
+  }
 
   split_cov <- function(pol,verbose = T){
-    if(verbose)
-      print(paste("VOC split:",pol))
 
     COV <- VOC_vap_g * cov_table[pol,"G. VAPORS" ] +
            VOC_liq_g * cov_table[pol,"G. LIQUID" ] +
@@ -181,9 +192,12 @@ totalVOC <- function(v,ef,pol,verbose=T){
            VOC_liq_d * cov_table[pol,"D. LIQUID" ] +
            VOC_exa_d * cov_table[pol,"D. EXHAUST"]
 
-    uni <- units::set_units(1,MOL/d)
-    COV <- COV * uni
-
+    uni   <- units::set_units(1,MOL/d)
+    COV   <- COV * uni
+    if(verbose){
+      COV2 <- units::set_units(COV,MOL/y)
+      print(paste(pol,sum(COV2),units::deparse_unit(COV2)))
+    }
     return(COV)
   }
 
