@@ -12,7 +12,7 @@ emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
 
 \item{pol}{pollutant name}
 
-\item{area}{list of area sources}
+\item{area}{list of area sources or matrix with a spatial distribution}
 
 \item{grid}{grid information}
 
