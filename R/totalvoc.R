@@ -177,7 +177,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
     total <- total * uni2
 
     total_t_y <- units::set_units(total, t/y)
-    print(paste("TOTAL VOC:",sum(total_t_y),units::deparse_unit(total_t_y)))
+    print(paste("Total VOC:",sum(total_t_y),units::deparse_unit(total_t_y)))
   }
 
   split_cov <- function(pol,verbose = T){

@@ -5,7 +5,7 @@
 \title{distribution of emissions by region}
 \format{a raster}
 \usage{
-areaSource(s, r, grid = NA, verbose = T)
+areaSource(s, r, grid = NA, name = "", verbose = T)
 }
 \arguments{
 \item{s}{input shape object}

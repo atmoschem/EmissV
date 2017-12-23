@@ -6,13 +6,15 @@
 #'
 #' @param total list of total emission
 #' @param pol pollutant name
-#' @param area list of area sources
+#' @param area list of area sources or matrix with a spatial distribution
 #' @param grid grid information
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param verbose display adicional information
 #'
 #' @note Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
+#'
+#' @note for matrices just the first value of total is used
 #'
 #' @note the list of area must be in the same order as defined in vehicles and total emission.
 #'
@@ -78,22 +80,28 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
 
   var <- total[[n]]
 
-  # get the units (in order to work with raster)
-  unidade <- total[[1]][1]/as.numeric(total[[1]][[1]])
+  if(is.list(area)){
+    # get the units (in order to work with raster)
+    unidade <- total[[1]][1]/as.numeric(total[[1]][[1]])
 
-  for(i in 1:length(area)){
-    area[[i]] = area[[i]] * var[[i]]
+    for(i in 1:length(area)){
+      area[[i]] = area[[i]] * var[[i]]
+    }
+    area <- unname(area)
+
+    VAR_e  <- do.call(sp::merge,area)
+
+    VAR_e[is.na(VAR_e)]     <- 0
+
+    VAR_e <- rasterSource(VAR_e,grid,verbose = F)
+
+    # put the units (to back the unit)
+    VAR_e <- VAR_e * unidade
   }
-  area <- unname(area)
-
-  VAR_e  <- do.call(sp::merge,area)
-
-  VAR_e[is.na(VAR_e)]     <- 0
-
-  VAR_e <- rasterSource(VAR_e,grid,verbose = F)
-
-  # put the units (to back the unit)
-  VAR_e <- VAR_e * unidade
+  if(is.matrix(area)){
+    VAR_e               <- area * var[[1]]
+    VAR_e[is.na(VAR_e)] <- 0
+  }
 
   dx <- grid$DX
   dx =  units::set_units(dx,km)

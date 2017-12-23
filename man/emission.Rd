@@ -12,7 +12,7 @@ emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
 
 \item{pol}{pollutant name}
 
-\item{area}{list of area sources}
+\item{area}{list of area sources or matrix with a spatial distribution}
 
 \item{grid}{grid information}
 
@@ -27,6 +27,8 @@ Combine area sourses and total emissions to model output
 }
 \note{
 Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
+
+for matrices just the first value of total is used
 
 the list of area must be in the same order as defined in vehicles and total emission.
 }

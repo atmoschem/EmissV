@@ -23,9 +23,10 @@
 #'
 #'}
 
-areaSource <- function(s,r,grid = NA,verbose = T){
+areaSource <- function(s,r,grid = NA,name = "",verbose = T){
   if(verbose){
-    print("processing area ... ")
+    if(name != "") name = paste0(name," ")
+    print(paste("processing ",name,"area ... ",sep = ""))
   }
 
   sp       <- raster::mask(r,sp::spTransform(s,sp::CRS(sp::proj4string(r))))
