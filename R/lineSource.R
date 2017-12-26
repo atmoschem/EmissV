@@ -40,8 +40,8 @@ lineSource <- function(s,grid,as_raster = F,verbose = T){
   roadsPSP <- spatstat::as.psp(as(s, 'SpatialLines'))
 
   if(verbose) print("Calculating lengths per cell (2 of 3) ...")
-  n.lat <- grid$Horizontal[1]
-  n.lon <- grid$Horizontal[2]
+  n.lat <- grid$Horizontal[2]
+  n.lon <- grid$Horizontal[1]
   roadLengthIM <- spatstat::pixellate.psp(roadsPSP, dimyx=c(n.lat,n.lon))
 
   if(verbose) print("Converting pixel image to raster in meters (3 of 3) ...")
@@ -54,6 +54,6 @@ lineSource <- function(s,grid,as_raster = F,verbose = T){
   roadLength <- raster::t(roadLength)
   roadLength <- raster::as.matrix(roadLength)
   if(verbose)
-    print(paste("Grid output:",n.lat,"columns",n.lon,"rows"))
+    print(paste("Grid output:",n.lon,"columns",n.lat,"rows"))
   return(roadLength/sum(roadLength))
 }
