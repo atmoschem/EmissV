@@ -14,6 +14,8 @@ areaSource(s, r, grid = NA, name = "", verbose = T)
 
 \item{grid}{grid with the output format}
 
+\item{name}{display name}
+
 \item{verbose}{display adicional data}
 }
 \description{

@@ -5,6 +5,7 @@
 #' @param s input shape object
 #' @param r input raster object
 #' @param grid grid with the output format
+#' @param name display name
 #' @param verbose display adicional data
 #'
 #' @format a raster
