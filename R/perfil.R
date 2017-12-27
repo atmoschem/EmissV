@@ -24,11 +24,11 @@
 #' for(i in 1:7){
 #'  lines(perfil$HDV[,i],ty = "b",pch = i,col = "darkgray")
 #' }
-#' legend("topleft",legend = c("seg","ter","qua","qui","sex","sab","dom",
-#'                             "seg","ter","qua","qui","sex","sab","dom"),
+#' legend("topleft",legend = c("Sun","Mon","Tue","Wed","Thu","Fri","Sat",
+#'                             "Sun","Mon","Tue","Wed","Thu","Fri","Sat"),
 #'       pch=c(1:7,1:7),lty=c(rep(1,7),rep(2,7)),
 #'       col=c(rep("black",7),rep("darkgray",7)),
-#'       bty="n",ncol = 2,title = c("CO               NO"))
+#'       bty="n",ncol = 2,title = c("LDV               HDV"))
 #'}
 #'
 #' @usage data(perfil)
