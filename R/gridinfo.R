@@ -27,7 +27,14 @@ gridInfo <- function(file = file.choose(),levels = 1,verbose = T){
     ncdf4::nc_close(wrf)
     lx  <- range(lon)
     ly  <- range(lat)
-    OUT <- list(Times = time, Lat = lat, Lon = lon, Horizontal = dim(lat), Levels = levels, DX = dx,
-                xlim = lx, Ylim = ly, File = file)
+
+    # f   <- lines(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
+    #              y = c(ly[2],ly[2],ly[1],ly[1],ly[2]))
+
+    OUT <- list(Times = time, Lat = lat, Lon = lon, Horizontal = dim(lat),
+                Levels = levels, DX = dx,xlim = lx, Ylim = ly, File = file,
+                box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
+                           y = c(ly[2],ly[2],ly[1],ly[1],ly[2]))
+    )
     return(OUT)
 }
