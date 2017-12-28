@@ -14,7 +14,7 @@ gridInfo(file, levels = 1, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-Return a list contains information of a regular grid
+Return a list contains information of a regular grid / domain
 }
 \note{
 its works with some wrf files (inicial condictions and emission) for now.
