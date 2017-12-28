@@ -1,6 +1,6 @@
 #' read grid information from a NetCDF file
 #'
-#' @description Return a list contains information of a regular grid
+#' @description Return a list contains information of a regular grid / domain
 #'
 #' @param file file name/path to a wrfinput of wrfchemi file
 #' @param levels number of levels
@@ -16,8 +16,7 @@
 #' grid
 #'}
 
-gridInfo <- function(file,levels = 1,verbose = T){
-  if(!is.na(file)){
+gridInfo <- function(file = file.choose(),levels = 1,verbose = T){
     if(verbose)
       print(paste("Grid information from:",file))
     wrf <- ncdf4::nc_open(file)
@@ -26,8 +25,9 @@ gridInfo <- function(file,levels = 1,verbose = T){
     time<- ncdf4::ncvar_get(wrf,varid = "Times")
     dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # km
     ncdf4::nc_close(wrf)
-    OUT <- list(Times = time, Lat = lat, Lon = lon, Horizontal = dim(lat), Levels = levels, DX = dx)
+    lx  <- range(lon)
+    ly  <- range(lat)
+    OUT <- list(Times = time, Lat = lat, Lon = lon, Horizontal = dim(lat), Levels = levels, DX = dx,
+                xlim = lx, Ylim = ly, File = file)
     return(OUT)
-  }
-  print("em desenvolvimento!")
 }

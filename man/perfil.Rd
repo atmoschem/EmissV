@@ -21,7 +21,7 @@ The profile is normalized by days (but is balanced for a complete week) so diary
 # load the data
 data(perfil)
 
-# see a plot
+# see a bw plot
 plot(perfil$LDV[,1],ty = "b",ylim = c(0,.1),ylab="Intensity",xlab="hour",axe = F,pch= 1)
 axis(1,at=0.5+c(0,6,12,18,24),labels = c("00:00","06:00","12:00","18:00","00:00"))
 axis(2)

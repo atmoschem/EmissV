@@ -4,7 +4,7 @@
 \alias{gridInfo}
 \title{read grid information from a NetCDF file}
 \usage{
-gridInfo(file, levels = 1, verbose = T)
+gridInfo(file = file.choose(), levels = 1, verbose = T)
 }
 \arguments{
 \item{file}{file name/path to a wrfinput of wrfchemi file}
@@ -14,7 +14,7 @@ gridInfo(file, levels = 1, verbose = T)
 \item{verbose}{display adicional information}
 }
 \description{
-Return a list contains information of a regular grid
+Return a list contains information of a regular grid / domain
 }
 \note{
 its works with some wrf files (inicial condictions and emission) for now.
