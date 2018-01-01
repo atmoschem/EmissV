@@ -1,6 +1,6 @@
-#' distribution of emissions by line vectors
+#' distribution of emissions by streets
 #'
-#' @description create a distribution by a "Openstreetmap mystery file"
+#' @description create a distribution from sp spatial lines data frame
 #'
 #' @param s a SpatialLinesDataFrame object
 #' @param grid grid object with the grid information
@@ -15,11 +15,7 @@
 #' @examples \dontrun{
 #' # Do not run
 #'
-#' library(sf)
-#' print("chose the Openstreetmap file (.rds)")
-#' roads <- readRDS(file.choose())
-#' roads <- as_Spatial(st_geometry(roads[roads$highway != "residential", ]))
-#'
+#' roads <- readRDS(paste(system.file("extdata", package = "EmissV"),"/streets.rds",sep=""))
 #' d2    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
 #'
 #' roadLength <- lineSource(roads,d2,as_raster=T)
@@ -46,9 +42,10 @@ lineSource <- function(s,grid,as_raster = F,verbose = T){
   roadsPSP <- spatstat::as.psp(as(s, 'SpatialLines'))
 
   if(verbose) print("Calculating lengths per cell (3 of 4) ...")
-  n.lat <- grid$Horizontal[2]
-  n.lon <- grid$Horizontal[1]
-  roadLengthIM <- spatstat::pixellate.psp(roadsPSP, dimyx=c(n.lat,n.lon))
+  n.lat        <- grid$Horizontal[2]
+  n.lon        <- grid$Horizontal[1]
+  limites      <- spatstat::owin(xrange=c(grid$xlim[1],grid$xlim[2]), yrange=c(grid$Ylim[1],grid$Ylim[2]))
+  roadLengthIM <- spatstat::pixellate.psp(roadsPSP, W=limites,dimyx=c(n.lat,n.lon))
 
   if(verbose) print("Converting pixel image to raster in meters (4 of 4) ...")
   roadLength <- raster::raster(roadLengthIM, crs=sp::proj4string(s))

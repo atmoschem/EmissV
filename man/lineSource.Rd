@@ -2,7 +2,7 @@
 % Please edit documentation in R/lineSource.R
 \name{lineSource}
 \alias{lineSource}
-\title{distribution of emissions by line vectors}
+\title{distribution of emissions by streets}
 \usage{
 lineSource(s, grid, as_raster = F, verbose = T)
 }
@@ -16,17 +16,13 @@ lineSource(s, grid, as_raster = F, verbose = T)
 \item{verbose}{true for display adicional information}
 }
 \description{
-create a distribution by a "Openstreetmap mystery file"
+create a distribution from sp spatial lines data frame
 }
 \examples{
 \dontrun{
 # Do not run
 
-library(sf)
-print("chose the Openstreetmap file (.rds)")
-roads <- readRDS(file.choose())
-roads <- as_Spatial(st_geometry(roads[roads$highway != "residential", ]))
-
+roads <- readRDS(paste(system.file("extdata", package = "EmissV"),"/streets.rds",sep=""))
 d2    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
 
 roadLength <- lineSource(roads,d2,as_raster=T)
