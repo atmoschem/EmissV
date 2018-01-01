@@ -2,7 +2,7 @@
 #'
 #' @description create a distribution by a "Openstreetmap mystery file"
 #'
-#' @param s input sp object with projection
+#' @param s a SpatialLinesDataFrame object
 #' @param grid grid object with the grid information
 #' @param as_raster output format, TRUE for raster, FALSE for matrix
 #' @param verbose true for display adicional information
@@ -36,15 +36,21 @@ lineSource <- function(s,grid,as_raster = F,verbose = T){
 
   print("take a coffee, this function may take a few minutes ...")
 
-  if(verbose) print("converting to a line segment pattern object with maptools (1 of 3) ...")
+  if(verbose) print("Croping data for domain (1 of 4) ...")
+  x   <- grid$Box$x
+  y   <- grid$Box$y
+  box <- bbox(SpatialPoints(cbind(x,y)))
+  s   <- crop(s,box)
+
+  if(verbose) print("converting to a line segment pattern object with maptools (2 of 4) ...")
   roadsPSP <- spatstat::as.psp(as(s, 'SpatialLines'))
 
-  if(verbose) print("Calculating lengths per cell (2 of 3) ...")
+  if(verbose) print("Calculating lengths per cell (3 of 4) ...")
   n.lat <- grid$Horizontal[2]
   n.lon <- grid$Horizontal[1]
   roadLengthIM <- spatstat::pixellate.psp(roadsPSP, dimyx=c(n.lat,n.lon))
 
-  if(verbose) print("Converting pixel image to raster in meters (3 of 3) ...")
+  if(verbose) print("Converting pixel image to raster in meters (4 of 4) ...")
   roadLength <- raster::raster(roadLengthIM, crs=sp::proj4string(s))
 
   if(as_raster) return(roadLength)

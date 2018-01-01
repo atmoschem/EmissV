@@ -7,7 +7,7 @@
 lineSource(s, grid, as_raster = F, verbose = T)
 }
 \arguments{
-\item{s}{input sp object with projection}
+\item{s}{a SpatialLinesDataFrame object}
 
 \item{grid}{grid object with the grid information}
 
