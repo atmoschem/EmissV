@@ -1,3 +1,6 @@
+## EmissV 0.662 (2018-01-01)
+- Updates on lineSource and exemple data added
+
 ## EmissV 0.661 (2017-12-18)
 - New function names and future work
 
