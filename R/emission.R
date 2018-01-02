@@ -56,9 +56,9 @@
 #' shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 #' raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 #'
-#' SP     <- areaSource(shape[22,1],raster,grid)
-#' RJ     <- areaSource(shape[17,1],raster,grid)
-#' MG     <- areaSource(shape[12,1],raster,grid)
+#' SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
+#' RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
+#' MG     <- areaSource(shape[12,1],raster,grid,name = "MG")
 #'
 #' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm=28)
 #'}
@@ -69,7 +69,11 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
     if(aerosol){
       print(paste("calculating emissions for ",pol," as aerosol"," ...",sep=""))
     }else{
-      print(paste("calculating emissions for ",pol," using molar mass = ",mm," ...",sep=""))
+      if(mm == 1){
+        print(paste("calculating emissions for ",pol," ...",sep=""))
+      }else{
+        print(paste("calculating emissions for ",pol," using molar mass = ",mm," ...",sep=""))
+      }
     }
 
   n <- which(names(total) == pol)
