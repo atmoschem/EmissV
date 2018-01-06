@@ -27,7 +27,7 @@ Calculate the spatial distribution by a raster kasked by shape/model grid inform
 \dontrun{
 # Do not run
 
-shape  <- readOGR(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+shape  <- shapefile(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
 shape  <- shape[22,1] # subset for Sao Paulo - BR
 raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
