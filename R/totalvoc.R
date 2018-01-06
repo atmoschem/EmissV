@@ -75,7 +75,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
                  "ket","ch3oh","ald")
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
-  use_inv    <- units::set_units(1,units::parse_unit("d/km"))
+  use_inv    <- units::set_units(1,units::parse_unit("d km-1"))
   use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
@@ -175,7 +175,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
   if(verbose){
     total <- VOC_vap_g + VOC_liq_g + VOC_exa_g + VOC_vap_e + VOC_liq_e +
       VOC_exa_e + VOC_vap_d + VOC_liq_d + VOC_exa_d
-    uni2  <- units::set_units(1,units::parse_unit("g/d"))
+    uni2  <- units::set_units(1,units::parse_unit("g d-1"))
     total <- total * uni2
 
     total_t_y <- units::set_units(total, t/y)
