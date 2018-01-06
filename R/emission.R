@@ -55,7 +55,7 @@
 #' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 #'
 #' grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-#' shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
+#' shape  <- shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 #' raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 #'
 #' SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
@@ -117,7 +117,7 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
     ##  ug m^-2 s^-1
     # dx    = units::set_units(dx,m)
     dx    = units::set_units(dx,units::parse_unit("m"))
-    VAR_e = units::set_units(VAR_e,units::parse_unit("ug/s"))
+    VAR_e = units::set_units(VAR_e,units::parse_unit("ug s-1"))
     VAR_e = VAR_e / dx^2
   }
   else{
@@ -125,8 +125,8 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
     MOL <- units::make_unit("MOL") # new unit MOL
     install_conversion_constant("MOL","g",mm) # new conversion
     install_conversion_constant("d","h",24)   # new conversion
-    VAR_e   =  units::set_units(VAR_e,units::parse_unit("g/h"))
-    # VAR_e   <- units::set_units(VAR_e,MOL/h)            # brute force conversion!
+    VAR_e   =  units::set_units(VAR_e,units::parse_unit("g h-1"))
+    # VAR_e   <- units::set_units(VAR_e,MOL/h)                                 # brute force conversion!
     VAR_e   =  VAR_e * MOL / (mm * units::set_units(1,units::parse_unit("g"))) # <<-- bfc !
     VAR_e   =  VAR_e / dx^2
   }

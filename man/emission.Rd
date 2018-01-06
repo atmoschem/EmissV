@@ -64,7 +64,7 @@ rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicle
 TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 
 grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-shape  <- readOGR(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
+shape  <- shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
 raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 
 SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
