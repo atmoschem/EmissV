@@ -8,21 +8,21 @@
 totalVOC(v, ef, pol, verbose = T)
 }
 \arguments{
-\item{v}{dataframe with the vehicle data}
+\item{v}{data frame with the vehicle data}
 
 \item{ef}{emission factors}
 
 \item{pol}{pollutant name in ef}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-cacule Volatile Organic Compounds (COVs) emited by the process of exaustao (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
+Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
 
  Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 }
 \note{
-the same ef can be used to totalEmission and voc
+The same ef can be used to totalEmission and voc
 }
 \examples{
 \dontrun{

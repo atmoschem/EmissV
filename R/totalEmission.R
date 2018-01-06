@@ -1,6 +1,6 @@
 #' Calculate total emissions
 #'
-#' @description caculate the total emission with:
+#' @description Caculate the total emission with:
 #'
 #'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )
 #'
@@ -11,13 +11,15 @@
 #' @param v dataframe with the vehicle data
 #' @param ef emission factors
 #' @param pol pollutant name in ef
-#' @param verbose display adicional information
+#' @param verbose display additional information
 #'
 #' @note the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
 #'
 #' @seealso \code{\link{rasterSource}}, \code{\link{lineSource}} and \code{\link{emission}}
 #'
 #' @export
+#'
+#' @import units
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -63,7 +65,7 @@ totalEmission <- function(v,ef,pol,verbose = T){
       print(paste0(pol[i]," not found in emission factor!"))
       print("The emissions factors contains:")
       print(ef_names)
-      total = units::set_units(NA * TOTAL_veic[1,],g/d)
+      total = units::set_units(NA * TOTAL_veic[1,],units::parse_unit("g/d"))
       assign(pol[i],total)
     }
     else{

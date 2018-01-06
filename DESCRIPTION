@@ -1,6 +1,6 @@
 Package: EmissV
 Title: Top-down methods to create vehicular emissions
-Version: 0.662
+Version: 0.663
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -14,10 +14,9 @@ Authors@R: c(
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
 Description: Top-down methods to create vehicular emissions based on rasters and shapefiles.
-Depends: R (>= 3.4.2), raster, sp, units, rgdal, maptools, spatstat
-Imports: ncdf4 
-Suggests: eixport,vein
-Enhances: data.table, sf
+Depends: R (>= 3.4.2), raster, sp, units
+Imports: ncdf4, spatstat, maptools, methods, rgdal, rgeos, sf, data.table
+Suggests: eixport
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

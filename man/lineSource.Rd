@@ -2,30 +2,30 @@
 % Please edit documentation in R/lineSource.R
 \name{lineSource}
 \alias{lineSource}
-\title{distribution of emissions by streets}
+\title{Distribution of emissions by streets}
 \usage{
 lineSource(s, grid, as_raster = F, verbose = T)
 }
 \arguments{
-\item{s}{a SpatialLinesDataFrame of SpatialLines object}
+\item{s}{SpatialLinesDataFrame of SpatialLines object}
 
 \item{grid}{grid object with the grid information}
 
 \item{as_raster}{output format, TRUE for raster, FALSE for matrix}
 
-\item{verbose}{true for display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-create a distribution from sp spatial lines data frame or spatial lines
+Create a distribution from sp spatial lines data frame or spatial lines
 }
 \examples{
 \dontrun{
 # Do not run
 
 roads <- readRDS(paste(system.file("extdata", package = "EmissV"),"/streets.rds",sep=""))
-d2    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
+d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))
 
-roadLength <- lineSource(roads,d2,as_raster=T)
+roadLength <- lineSource(roads,d3,as_raster=T)
 
 spplot(roadLength, scales = list(draw=TRUE), xlab="lat", ylab="lon",main="Length of roads",
        sp.layout=list("sp.lines", roads))

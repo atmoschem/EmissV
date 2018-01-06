@@ -2,8 +2,8 @@
 % Please edit documentation in R/vehicles.R
 \name{vehicles}
 \alias{vehicles}
-\title{tool to set-up vehicle data.table}
-\format{data.frame with lines by vehicle category and columns for category, type, Fuel, use and a adictional column for eath territory.}
+\title{Tool to set-up vehicle data table}
+\format{data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.}
 \usage{
 vehicles(total_v, area_name, distribution, category, type, fuel, vnames = NA,
   verbose = T)
@@ -21,12 +21,12 @@ vehicles(total_v, area_name, distribution, category, type, fuel, vnames = NA,
 
 \item{fuel}{fuel type by category (category length)}
 
-\item{vnames}{name of eath vehicle categoy (category length / NA)}
+\item{vnames}{name of each vehicle categoy (category length / NA)}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-return a data.frame with veicle information. types argument define the diary use:
+Return a data frame with vehicle information. Types argument defines the diary use:
 
 - LDV (Light duty Vehicles) 41 km / day
 

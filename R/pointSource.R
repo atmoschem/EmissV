@@ -1,10 +1,10 @@
-#' emissions from point sources
+#' Emissions from point sources
 #'
 #' @description Transform a set of points into a grinded output
 #'
 #' @param p list of points
 #' @param grid grid object with the grid information
-#' @param verbose display adicional information
+#' @param verbose display additional information
 #'
 #' @export
 #'

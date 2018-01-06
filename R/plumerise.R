@@ -1,10 +1,10 @@
 #' Calculate plume rise from Brigs (1975) formulation.
 #'
-#' @description return plume rise
+#' @description Return plume rise height
 #'
-#' @format a numeric value in (units) meters
+#' @format numeric value in (units) meters
 #'
-#' @param verbose display adicional information
+#' @param verbose display additional information
 #'
 #' @export
 #'

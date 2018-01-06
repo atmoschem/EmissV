@@ -1,6 +1,6 @@
-#' tool to set-up vehicle data.table
+#' Tool to set-up vehicle data table
 #'
-#' @description return a data.frame with veicle information. types argument define the diary use:
+#' @description Return a data frame with vehicle information. Types argument defines the diary use:
 #'
 #' - LDV (Light duty Vehicles) 41 km / day
 #'
@@ -14,7 +14,7 @@
 #'
 #' @note distribution, category, type, fuel and vnames (if used) must have the same length.
 #'
-#' @format data.frame with lines by vehicle category and columns for category, type, Fuel, use and a adictional column for eath territory.
+#' @format data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.
 #'
 #' @param total_v total of vehicles by area (area length)
 #' @param area_name area names (area length)
@@ -22,12 +22,14 @@
 #' @param category category (category length)
 #' @param type type of vehicle by category (category length)
 #' @param fuel fuel type by category (category length)
-#' @param vnames name of eath vehicle categoy (category length / NA)
-#' @param verbose display adicional information
+#' @param vnames name of each vehicle categoy (category length / NA)
+#' @param verbose display additional information
 #'
 #' @seealso \code{\link{areaSource}} and  \code{\link{totalEmission}}
 #'
 #' @export
+#'
+#' @import units
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -88,7 +90,7 @@ vehicles <- function(total_v,area_name,distribution,category,type,fuel,vnames = 
   if(!is.na(vnames[1])){
     row.names(veh) <- vnames
   }
-  veh$Use <- units::set_units(veh$Use,km/d)
+  veh$Use <- units::set_units(veh$Use,units::parse_unit("km/d"))
   if(verbose){
     print(veh)
   }

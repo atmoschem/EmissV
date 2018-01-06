@@ -2,7 +2,7 @@
 % Please edit documentation in R/emission.R
 \name{emission}
 \alias{emission}
-\title{Emissions to atmospheric models}
+\title{Emissions in the format for atmospheric models}
 \format{matrix of emission}
 \usage{
 emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
@@ -20,17 +20,17 @@ emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
 
 \item{aerosol}{TRUE for aerosols and FALSE (defoult) for gazes}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-Combine area sourses and total emissions to model output
+Combine area sources and total emissions to model output
 }
 \note{
-Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
-
-for matrices just the first value of total is used
+Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 
 the list of area must be in the same order as defined in vehicles and total emission.
+
+just WRF-Chem is suported by now
 }
 \examples{
 \dontrun{

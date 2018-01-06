@@ -1,16 +1,19 @@
-#' distribution of emissions by region
+#' Distribution of emissions by area
 #'
-#' @description Create the spetial distribution by a raster kasked by shape/model grid information.
+#' @description Calculate the spatial distribution by a raster kasked by shape/model grid information.
 #'
 #' @param s input shape object
 #' @param r input raster object
 #' @param grid grid with the output format
-#' @param name display name
-#' @param verbose display adicional data
+#' @param name area name
+#' @param as_frac return a fraction instead of a raster
+#' @param verbose display additional data
 #'
 #' @format a raster
 #'
 #' @export
+#'
+#' @import raster sp
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -24,7 +27,7 @@
 #'
 #'}
 
-areaSource <- function(s,r,grid = NA,name = "",verbose = T){
+areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
   if(verbose){
     if(name != "") name = paste0(name," ")
     print(paste("processing ",name,"area ... ",sep = ""))
@@ -45,7 +48,9 @@ areaSource <- function(s,r,grid = NA,name = "",verbose = T){
     if(verbose)
       # print(paste("processing ",name,"area ... ",sep = ""))
       print(paste("fraction of ",name,"area inside the domain = ",sp_r, sep =""))
+    if(as_frac) return(sp_r)
     return(sp)
   }
+  if(as_frac) return(sp_r)
   return(sp)
 }

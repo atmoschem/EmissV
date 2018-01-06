@@ -2,7 +2,7 @@
 % Please edit documentation in R/pointSource.R
 \name{pointSource}
 \alias{pointSource}
-\title{emissions from point sources}
+\title{Emissions from point sources}
 \usage{
 pointSource(p = list(lat = -24.67123, lon = -47.26636, z = 100, e = 666),
   grid, verbose = T)
@@ -12,7 +12,7 @@ pointSource(p = list(lat = -24.67123, lon = -47.26636, z = 100, e = 666),
 
 \item{grid}{grid object with the grid information}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
 Transform a set of points into a grinded output

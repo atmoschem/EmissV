@@ -1,6 +1,6 @@
-#' Emissions to atmospheric models
+#' Emissions in the format for atmospheric models
 #'
-#' @description Combine area sourses and total emissions to model output
+#' @description Combine area sources and total emissions to model output
 #'
 #' @format matrix of emission
 #'
@@ -10,17 +10,19 @@
 #' @param grid grid information
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
-#' @param verbose display adicional information
+#' @param verbose display additional information
 #'
-#' @note Is a god practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
-#'
-#' @note for matrices just the first value of total is used
+#' @note Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 #'
 #' @note the list of area must be in the same order as defined in vehicles and total emission.
+#'
+#' @note just WRF-Chem is suported by now
 #'
 #' @seealso \code{\link{totalEmission}} and \code{\link{areaSource}}
 #'
 #' @export
+#'
+#' @import units raster
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -108,12 +110,14 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
   }
 
   dx <- grid$DX
-  dx =  units::set_units(dx,km)
+  dx <- dx*units::parse_unit("km")
+  # dx =  units::set_units(dx,km)
 
   if(aerosol){
     ##  ug m^-2 s^-1
-    dx    = units::set_units(dx,m)
-    VAR_e = units::set_units(VAR_e,ug/s)
+    # dx    = units::set_units(dx,m)
+    dx    = units::set_units(dx,units::parse_unit("m"))
+    VAR_e = units::set_units(VAR_e,units::parse_unit("ug/s"))
     VAR_e = VAR_e / dx^2
   }
   else{
@@ -121,9 +125,9 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
     MOL <- units::make_unit("MOL") # new unit MOL
     install_conversion_constant("MOL","g",mm) # new conversion
     install_conversion_constant("d","h",24)   # new conversion
-    VAR_e   =  units::set_units(VAR_e,g/h)
+    VAR_e   =  units::set_units(VAR_e,units::parse_unit("g/h"))
     # VAR_e   <- units::set_units(VAR_e,MOL/h)            # brute force conversion!
-    VAR_e   =  VAR_e * MOL / (mm * units::set_units(1,g)) # <<-- bfc !
+    VAR_e   =  VAR_e * MOL / (mm * units::set_units(1,units::parse_unit("g"))) # <<-- bfc !
     VAR_e   =  VAR_e / dx^2
   }
 

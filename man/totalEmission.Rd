@@ -14,10 +14,10 @@ totalEmission(v, ef, pol, verbose = T)
 
 \item{pol}{pollutant name in ef}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-caculate the total emission with:
+Caculate the total emission with:
 
   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )
 

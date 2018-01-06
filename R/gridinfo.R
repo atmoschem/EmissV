@@ -1,19 +1,21 @@
-#' read grid information from a NetCDF file
+#' Read grid information from a NetCDF file
 #'
-#' @description Return a list contains information of a regular grid / domain
+#' @description Return a list containing information of a regular grid / domain
 #'
 #' @param file file name/path to a wrfinput of wrfchemi file
 #' @param levels number of levels
-#' @param verbose display adicional information
+#' @param verbose display additional information
 #'
-#' @note its works with some wrf files (inicial condictions and emission) for now.
+#' @note just WRF-Chem is suported by now
+#'
+#' @import ncdf4
 #'
 #' @export
 #'
 #' @examples \dontrun{
 #' # Do not run
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-#' grid
+#' names(grid)
 #'}
 
 gridInfo <- function(file = file.choose(),levels = 1,verbose = T){

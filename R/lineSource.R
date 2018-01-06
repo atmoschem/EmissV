@@ -1,13 +1,17 @@
-#' distribution of emissions by streets
+#' Distribution of emissions by streets
 #'
-#' @description create a distribution from sp spatial lines data frame or spatial lines
+#' @description Create a distribution from sp spatial lines data frame or spatial lines
 #'
-#' @param s a SpatialLinesDataFrame of SpatialLines object
+#' @param s SpatialLinesDataFrame of SpatialLines object
 #' @param grid grid object with the grid information
 #' @param as_raster output format, TRUE for raster, FALSE for matrix
-#' @param verbose true for display adicional information
+#' @param verbose display additional information
 #'
 #' @export
+#'
+#' @importFrom methods as
+#' @importFrom spatstat owin pixellate.psp as.psp
+#' @import maptools raster
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
@@ -16,9 +20,9 @@
 #' # Do not run
 #'
 #' roads <- readRDS(paste(system.file("extdata", package = "EmissV"),"/streets.rds",sep=""))
-#' d2    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d02"))
+#' d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))
 #'
-#' roadLength <- lineSource(roads,d2,as_raster=T)
+#' roadLength <- lineSource(roads,d3,as_raster=T)
 #'
 #' spplot(roadLength, scales = list(draw=TRUE), xlab="lat", ylab="lon",main="Length of roads",
 #'        sp.layout=list("sp.lines", roads))
@@ -32,13 +36,13 @@ lineSource <- function(s,grid,as_raster = F,verbose = T){
 
   print("take a coffee, this function may take a few minutes ...")
 
-  if(verbose) print("Croping data for domain (1 of 4) ...")
+  if(verbose) print("cropping data for domain (1 of 4) ...")
   x   <- grid$Box$x
   y   <- grid$Box$y
-  box <- bbox(SpatialPoints(cbind(x,y)))
-  s   <- crop(s,box)
+  box <- sp::bbox(sp::SpatialPoints(cbind(x,y)))
+  s   <- raster::crop(s,box)
 
-  if(verbose) print("converting to a line segment pattern object with maptools (2 of 4) ...")
+  if(verbose) print("converting to a line segment pattern object (2 of 4) ...")
   roadsPSP <- spatstat::as.psp(as(s, 'SpatialLines'))
 
   if(verbose) print("Calculating lengths per cell (3 of 4) ...")

@@ -2,9 +2,9 @@
 % Please edit documentation in R/rasterSource.R
 \name{rasterSource}
 \alias{rasterSource}
-\title{distribution of emissions by a georeferenced image}
+\title{Distribution of emissions by a georeferenced image}
 \source{
-exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+Exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 }
 \usage{
 rasterSource(r, grid, verbose = T)
@@ -14,7 +14,7 @@ rasterSource(r, grid, verbose = T)
 
 \item{grid}{grid object with the grid information}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
 Returns a matrix

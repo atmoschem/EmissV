@@ -2,7 +2,7 @@
 % Please edit documentation in R/gridinfo.R
 \name{gridInfo}
 \alias{gridInfo}
-\title{read grid information from a NetCDF file}
+\title{Read grid information from a NetCDF file}
 \usage{
 gridInfo(file = file.choose(), levels = 1, verbose = T)
 }
@@ -11,18 +11,18 @@ gridInfo(file = file.choose(), levels = 1, verbose = T)
 
 \item{levels}{number of levels}
 
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-Return a list contains information of a regular grid / domain
+Return a list containing information of a regular grid / domain
 }
 \note{
-its works with some wrf files (inicial condictions and emission) for now.
+just WRF-Chem is suported by now
 }
 \examples{
 \dontrun{
 # Do not run
 grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-grid
+names(grid)
 }
 }

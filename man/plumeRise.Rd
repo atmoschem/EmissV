@@ -3,15 +3,15 @@
 \name{plumeRise}
 \alias{plumeRise}
 \title{Calculate plume rise from Brigs (1975) formulation.}
-\format{a numeric value in (units) meters}
+\format{numeric value in (units) meters}
 \usage{
 plumeRise(verbose = T)
 }
 \arguments{
-\item{verbose}{display adicional information}
+\item{verbose}{display additional information}
 }
 \description{
-return plume rise
+Return plume rise height
 }
 \examples{
 \dontrun{

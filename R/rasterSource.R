@@ -1,16 +1,18 @@
-#' distribution of emissions by a georeferenced image
+#' Distribution of emissions by a georeferenced image
 #'
 #' @description Returns a matrix
 #'
 #' @param r input raster object
 #' @param grid grid object with the grid information
-#' @param verbose display adicional information
+#' @param verbose display additional information
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{lineSource}}
 #'
-#' @source exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+#' @source Exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 #'
 #' @export
+#'
+#' @import raster
 #'
 #' @examples \dontrun{
 #' # Do not run

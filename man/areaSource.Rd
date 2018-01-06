@@ -2,10 +2,10 @@
 % Please edit documentation in R/areaSouce.R
 \name{areaSource}
 \alias{areaSource}
-\title{distribution of emissions by region}
+\title{Distribution of emissions by area}
 \format{a raster}
 \usage{
-areaSource(s, r, grid = NA, name = "", verbose = T)
+areaSource(s, r, grid = NA, name = "", as_frac = F, verbose = T)
 }
 \arguments{
 \item{s}{input shape object}
@@ -14,12 +14,14 @@ areaSource(s, r, grid = NA, name = "", verbose = T)
 
 \item{grid}{grid with the output format}
 
-\item{name}{display name}
+\item{name}{area name}
 
-\item{verbose}{display adicional data}
+\item{as_frac}{return a fraction instead of a raster}
+
+\item{verbose}{display additional data}
 }
 \description{
-Create the spetial distribution by a raster kasked by shape/model grid information.
+Calculate the spatial distribution by a raster kasked by shape/model grid information.
 }
 \examples{
 \dontrun{

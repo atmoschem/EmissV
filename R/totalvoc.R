@@ -1,21 +1,23 @@
 #' Calculate Total VOCs emissions
 #'
-#'@description cacule Volatile Organic Compounds (COVs) emited by the process of exaustao (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
+#'@description Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
 #'
 #'  Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 #'
 #'@format Return a list with the daily total emission by territory.
 #'
-#'@param v dataframe with the vehicle data
+#'@param v data frame with the vehicle data
 #'@param ef emission factors
 #'@param pol pollutant name in ef
-#'@param verbose display adicional information
+#'@param verbose display additional information
 #'
-#'@note the same ef can be used to totalEmission and voc
+#'@note The same ef can be used to totalEmission and voc
 #'
 #'@seealso \code{\link{totalEmission}} and \code{\link{vehicles}}
 #'
 #'@export
+#'
+#'@importFrom units parse_unit
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -73,14 +75,14 @@ totalVOC <- function(v,ef,pol,verbose=T){
                  "ket","ch3oh","ald")
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
-  use_inv    <- units::set_units(1,d/km)
+  use_inv    <- units::set_units(1,units::parse_unit("d/km"))
   use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
     print(paste0(pol," is not in suported VOC speciation"))
     print("The specie list contains:")
     print(voc_names)
-    total = units::set_units(NA * TOTAL_veic[1,],MOL/d)
+    total = units::set_units(NA * TOTAL_veic[1,],MOL/units::parse_unit("d"))
     return(total)
   }
   # data from ??
@@ -173,7 +175,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
   if(verbose){
     total <- VOC_vap_g + VOC_liq_g + VOC_exa_g + VOC_vap_e + VOC_liq_e +
       VOC_exa_e + VOC_vap_d + VOC_liq_d + VOC_exa_d
-    uni2  <- units::set_units(1,g/d)
+    uni2  <- units::set_units(1,units::parse_unit("g/d"))
     total <- total * uni2
 
     total_t_y <- units::set_units(total, t/y)
@@ -192,7 +194,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
            VOC_liq_d * cov_table[pol,"D. LIQUID" ] +
            VOC_exa_d * cov_table[pol,"D. EXHAUST"]
 
-    uni   <- units::set_units(1,MOL/d)
+    uni   <- units::set_units(1,MOL/units::parse_unit("d"))
     COV   <- COV * uni
     if(verbose){
       COV2 <- units::set_units(COV,MOL/y)

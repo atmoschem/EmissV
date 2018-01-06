@@ -1,10 +1,10 @@
 #' Temporal profile for veicular emissions
 #'
-#' @description List with two dataframes with temporal profile based on trafic count for Brazilian city of Sao Paulo. LDV is for light vehicles and HDV for intencity of heavy vehicles.
+#' @description List with two data frames with temporal profile based on traffic count for Brazilian city Sao Paulo. LDV is for light vehicles and HDV for intencity of heavy vehicles.
 #'
-#' @format A list of dataframes for LDV and HDV for hour and  weekday.
+#' @format A list of data frames for LDV and HDV for hour and weekday.
 #'
-#' @note The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = houry emission.
+#' @note The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = hourly emission.
 #'
 #' @examples \dontrun{
 #' # Do not run

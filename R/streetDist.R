@@ -13,6 +13,10 @@
 #' @export
 #' @author Sergio Ibarra
 #'
+#' @import sf
+#' @importFrom data.table data.table
+#' @importFrom units parse_unit
+#'
 #' @examples \dontrun{
 #' # Do not run
 #' library(sf)
@@ -40,6 +44,8 @@ streetDist <- function(emission = NULL,
                        grid = NULL, # grid sf
                        osm = NULL,  #streets OSM motorway trunk primary secondary tertiary
                        epsg = NULL){ #sem perfil por enquanto
+  .SD = NULL
+  id  = NULL
   dist <- dist/sum(dist)
   grido <- grid
   if(exists("epsg")){
