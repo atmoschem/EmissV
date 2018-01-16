@@ -23,6 +23,6 @@ functions:
 ```{r eval=F}
 #install.packages("devtools")
 library(devtools)
-install_github("Schuch666/EmissV")
+install_github("atmoschem/EmissV")
 library(EmissV)
 ```
