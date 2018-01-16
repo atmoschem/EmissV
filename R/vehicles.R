@@ -29,7 +29,7 @@
 #'
 #' @export
 #'
-#' @import units
+#' @import  units
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -90,7 +90,7 @@ vehicles <- function(total_v,area_name,distribution,category,type,fuel,vnames = 
   if(!is.na(vnames[1])){
     row.names(veh) <- vnames
   }
-  veh$Use <- units::set_units(veh$Use,units::parse_unit("km d-1"))
+  veh$Use <- veh$Use*units::parse_unit("km d-1")
   if(verbose){
     print(veh)
   }

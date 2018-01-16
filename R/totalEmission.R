@@ -1,27 +1,27 @@
 #' Calculate total emissions
 #'
-#' @description Caculate the total emission with:
+#'@description Caculate the total emission with:
 #'
 #'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )
 #'
 #' where n is the type of the veicle
 #'
-#' @format Return a list with the daily total emission by territory.
+#'@format Return a list with the daily total emission by territory.
 #'
-#' @param v dataframe with the vehicle data
-#' @param ef emission factors
-#' @param pol pollutant name in ef
-#' @param verbose display additional information
+#'@param v dataframe with the vehicle data
+#'@param ef emission factors
+#'@param pol pollutant name in ef
+#'@param verbose display additional information
 #'
-#' @note the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
+#'@note the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
 #'
-#' @seealso \code{\link{rasterSource}}, \code{\link{lineSource}} and \code{\link{emission}}
+#'@seealso \code{\link{rasterSource}}, \code{\link{lineSource}} and \code{\link{emission}}
 #'
-#' @export
+#'@export
 #'
-#' @import units
+#'@importFrom units make_unit install_conversion_constant set_units deparse_unit
 #'
-#' @examples \dontrun{
+#'@examples \dontrun{
 #' # Do not run
 #'
 #' # DETRAN 2016 data and SP vahicle distribution

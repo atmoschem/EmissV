@@ -17,9 +17,9 @@
 #'
 #'@export
 #'
-#'@importFrom units parse_unit
+#'@importFrom units  make_unit install_conversion_constant set_units deparse_unit
 #'
-#' @examples \dontrun{
+#'@examples \dontrun{
 #' # Do not run
 #'
 #' # DETRAN 2016 data and SP vahicle distribution

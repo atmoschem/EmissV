@@ -13,10 +13,9 @@
 #' @export
 #' @author Sergio Ibarra
 #'
-#' @import sf
 #' @importFrom data.table data.table
-#' @importFrom units parse_unit
-#'
+#' @import units
+#' @importFrom sf st_sf st_dimension st_transform st_length st_cast st_intersection
 #' @examples \dontrun{
 #' # Do not run
 #' library(sf)
@@ -49,8 +48,8 @@ streetDist <- function(emission = NULL,
   dist <- dist/sum(dist)
   grido <- grid
   if(exists("epsg")){
-    osm <- st_transform(osm, epsg)
-    grid <- st_transform(grid, epsg)
+    osm <- sf::st_transform(osm, epsg)
+    grid <- sf::st_transform(grid, epsg)
     osm$LKM <- sf::st_length(osm)
     #motorway
     osm_m <- osm[osm$highway == "motorway" |
@@ -73,8 +72,8 @@ streetDist <- function(emission = NULL,
                     osm$highway == "tertiary_link", ]
     osm_te$x <- emission*dist[5]*osm_te$LKM/sum(osm_te$LKM, na.rm = T)
     osm_all <- rbind(osm_m, osm_t, osm_p, osm_s, osm_te)
-    osmgrid <- st_intersection(osm_all, grid)
-    osmgrid$LKM2 <- st_length(st_cast(osmgrid[st_dimension(osmgrid) == 1,]))
+    osmgrid <- sf::st_intersection(osm_all, grid)
+    osmgrid$LKM2 <- sf::st_length(sf::st_cast(osmgrid[sf::st_dimension(osmgrid) == 1,]))
     osmgridg <- data.table::data.table(osmgrid)
     osmgridg$x <- as.numeric(osmgridg$x) * as.numeric(osmgridg$LKM2/osmgridg$LKM)
     dfm <- osmgridg[, lapply(.SD, sum, na.rm=TRUE),
@@ -82,7 +81,7 @@ streetDist <- function(emission = NULL,
                     .SDcols = "x" ]
     gx <- data.frame(id = grid$id)
     gx <- merge(gx, dfm, by="id", all.x = T)
-    gx <- st_transform(st_sf(gx, geometry = grid$geometry), st_crs(grido))
+    gx <- sf::st_transform(st_sf(gx, geometry = grid$geometry), sf::st_crs(grido))
   } else {
     osm$LKM <- sf::st_length(osm)
     #motorway
@@ -116,7 +115,7 @@ streetDist <- function(emission = NULL,
                     .SDcols = "x" ]
     gx <- data.frame(id = grid$id)
     gx <- merge(gx, dfm, by="id", all.x = T)
-    gx <- st_sf(gx, geometry = grid$geometry)
+    gx <- sf::st_sf(gx, geometry = grid$geometry)
   }
   return(gx)
 }
