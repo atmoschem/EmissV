@@ -4,6 +4,8 @@ r:
   - release
   #- devel
   #- oldrel
+
+r_github_packages: atmoschem/eixport
   
 pandoc: false
 warnings_are_errors: true
