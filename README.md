@@ -19,11 +19,37 @@ functions:
 - totalVOC: total VOCs emission
 - emission: Emissions to atmospheric models
 
+## Packages needed
+- [raster](http://cran.r-project.org/package=raster)
+- [sp](https://github.com/edzer/sp/)
+- [ncdf4](http://cran.r-project.org/package=ncdf4)
+- [units](https://github.com/edzer/units/)
+- [data.table](https://cran.r-project.org/package=data.table)
+- [sf](https://github.com/r-spatial/sf)
+- [spatstat](https://cran.r-project.org/package=spatstat)
+- [maptools](https://cran.r-project.org/package=maptools)
+
+The packages spatsts, maptools and sf will be removed son.
+
+## Libraries for Ubuntu
+before install in Ubuntu system, install the following libraries:
+
+```bash
+  sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+  sudo apt-get --yes --force-yes update -qq
+  # units/udunits2 dependency:
+  sudo apt-get install --yes libudunits2-dev
+  # sf dependencies:
+  sudo apt-get install --yes libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+  # netcdf dependenciy:
+  sudo apt-get install --yes libnetcdf-dev netcdf-bin
+```
+
 # to install
 
 ```{r eval=F}
 #install.packages("devtools")
 library(devtools)
-install_github("atmoschem/EmissV")
+devtools::install_github("atmoschem/EmissV")
 library(EmissV)
 ```
