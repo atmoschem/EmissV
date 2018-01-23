@@ -40,7 +40,7 @@ before install in Ubuntu system, install the following libraries:
   # units/udunits2 dependency:
   sudo apt-get install --yes libudunits2-dev
   # sf dependencies:
-  sudo apt-get install --yes libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+  sudo apt-get install --yes libgdal-dev libgeos-dev libproj-dev
   # netcdf dependenciy:
   sudo apt-get install --yes libnetcdf-dev netcdf-bin
 ```
