@@ -45,6 +45,13 @@ before install in Ubuntu system, install the following libraries:
   sudo apt-get install --yes libnetcdf-dev netcdf-bin
 ```
 
+
+## Libraries for Fedora
+
+```bash
+  sudo dnf install gdal-devel proj-devel proj-epsg proj-nad geos-devel udunits2-devel
+```
+
 # to install
 
 ```{r eval=F}
