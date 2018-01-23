@@ -49,7 +49,9 @@ before install in Ubuntu system, install the following libraries:
 ## Libraries for Fedora
 
 ```bash
-  sudo dnf install gdal-devel proj-devel proj-epsg proj-nad geos-devel udunits2-devel
+  sudo dnf update
+  sudo yum install gdal-devel proj-devel proj-epsg proj-nad geos-devel udunits2-devel
+  sudo yum install netcdf-devel
 ```
 
 # to install
