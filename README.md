@@ -41,7 +41,7 @@ before install in Ubuntu system, install the following libraries:
   sudo apt-get install --yes libudunits2-dev
   # sf dependencies:
   sudo apt-get install --yes libgdal-dev libgeos-dev libproj-dev
-  # netcdf dependenciy:
+  # netcdf dependencies:
   sudo apt-get install --yes libnetcdf-dev netcdf-bin
 ```
 
