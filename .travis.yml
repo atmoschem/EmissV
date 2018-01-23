@@ -1,13 +1,20 @@
 language: r
 cache: packages
 r:
-  - oldrel
   - release
-  - devel
+  #- devel
+  #- oldrel
+  
+pandoc: false
   
 before_install:
-  - tlmgr install index
+  # units/udunits2 dependency:
+  - sudo apt-get install --yes libudunits2-dev
+  # sf dependencies:
+  - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+  - sudo apt-get update
+  - sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
 script:
-- R CMD build .
-- R CMD check *tar.gz
+  - R CMD build .
+  - R CMD check *tar.gz
