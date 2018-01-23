@@ -16,7 +16,7 @@ before_install:
   # units/udunits2 dependency:
   - sudo apt-get install --yes libudunits2-dev
   # sf dependencies:
-  - sudo apt-get install --yes libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+  - sudo apt-get install --yes libgdal-dev libgeos-dev libproj-dev
   # netcdf
   - sudo apt-get install --yes libnetcdf-dev netcdf-bin
 
