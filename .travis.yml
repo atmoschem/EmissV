@@ -11,7 +11,7 @@ before_install:
   # units/udunits2 dependency:
   - sudo apt-get install --yes libudunits2-dev
   # sf dependencies:
-  - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
+  - sudo add-apt-repository --yes ppa:ubuntugis/ubuntugis-unstable
   - sudo apt-get update
   - sudo apt-get install --yes libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
