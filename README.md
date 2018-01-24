@@ -29,7 +29,7 @@ functions:
 - [spatstat](https://cran.r-project.org/package=spatstat)
 - [maptools](https://cran.r-project.org/package=maptools)
 
-The packages [spatsts](https://cran.r-project.org/package=spatstat), [maptools](https://cran.r-project.org/package=maptools) and [sp](https://github.com/edzer/sp/) will be removed son.
+The dependency of the packages [spatsts](https://cran.r-project.org/package=spatstat), [maptools](https://cran.r-project.org/package=maptools) and [sp](https://github.com/edzer/sp/) will be removed son.
 
 ## Libraries for Ubuntu
 before install in Ubuntu system, install the following libraries:
