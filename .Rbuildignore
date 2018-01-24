@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ## Ignore travis config file
 ^\.travis\.yml$
+^appveyor.yml$
