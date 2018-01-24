@@ -1,5 +1,5 @@
 # EmissV
-[![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV)
+[![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/atmoschem/EmissV?branch=master&svg=true)](https://ci.appveyor.com/project/atmoschem/EmissV)
 
 ## Top-down methods to create vehicular emissions.
 
