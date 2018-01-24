@@ -39,7 +39,7 @@ before install in Ubuntu system, install the following libraries:
   sudo apt-get --yes --force-yes update -qq
   # units/udunits2 dependency:
   sudo apt-get install --yes libudunits2-dev
-  # sf dependencies:
+  # sf dependencies (without libudunits2-dev):
   sudo apt-get install --yes libgdal-dev libgeos-dev libproj-dev
   # netcdf dependencies:
   sudo apt-get install --yes libnetcdf-dev netcdf-bin
