@@ -10,7 +10,7 @@ functions:
 - vehicles: tool to set-up vehicle data.table
 - gridInfo: read grid information from a NetCDF file
 - pointSource: emissions from point sources (in progress)
-- plumeRise: calculate plume rise
+- plumeRise: calculate plume rise (in progress)
 - rasterSource: distribution of emissions by a georeferenced image
 - lineSource: distribution of emissions by line vectors
 - streetDist: distribution by OpenStreetnMap street (in progress)
