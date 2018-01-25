@@ -32,7 +32,7 @@ functions:
 The dependency of the packages [spatsts](https://cran.r-project.org/package=spatstat), [maptools](https://cran.r-project.org/package=maptools) and [sp](https://github.com/edzer/sp/) will be removed son.
 
 ## Libraries for Ubuntu
-before install in Ubuntu system, install the following libraries:
+The following libraries are required for installation on ubuntu:
 
 ```bash
   sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
