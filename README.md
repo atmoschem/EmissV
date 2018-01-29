@@ -58,7 +58,6 @@ The following libraries are required for installation on ubuntu:
 
 ```{r eval=F}
 #install.packages("devtools")
-library(devtools)
 devtools::install_github("atmoschem/EmissV")
 library(EmissV)
 ```
