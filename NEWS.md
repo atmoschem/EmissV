@@ -1,3 +1,6 @@
+## EmissV 0.664.1 (2018-01-31)
+- Updates on units usage
+
 ## EmissV 0.662 (2018-01-01)
 - Updates on lineSource and exemple data added
 

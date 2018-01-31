@@ -46,7 +46,6 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
     sp     <- raster::crop(sp / sp_soma ,box)
     sp_r   <- raster::cellStats(sp,"sum")
     if(verbose)
-      # print(paste("processing ",name,"area ... ",sep = ""))
       print(paste("fraction of ",name,"area inside the domain = ",sp_r, sep =""))
     if(as_frac) return(sp_r)
     return(sp)

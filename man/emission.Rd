@@ -56,6 +56,7 @@ veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988),
 # for Sao Paulo
 EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 names(EmissionFactors) <- c("CO")
+library(units)
 EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
 rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",

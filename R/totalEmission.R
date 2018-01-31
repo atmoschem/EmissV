@@ -19,7 +19,7 @@
 #'
 #'@export
 #'
-#'@importFrom units make_unit install_conversion_constant set_units deparse_unit
+#'@import units
 #'
 #'@examples \dontrun{
 #' # Do not run
@@ -65,7 +65,7 @@ totalEmission <- function(v,ef,pol,verbose = T){
       print(paste0(pol[i]," not found in emission factor!"))
       print("The emissions factors contains:")
       print(ef_names)
-      total = units::set_units(NA * TOTAL_veic[1,],units::parse_unit("g/d"))
+      total = units::set_units(NA * TOTAL_veic[1,],units::as_units("g/d"))
       assign(pol[i],total)
     }
     else{
@@ -80,9 +80,10 @@ totalEmission <- function(v,ef,pol,verbose = T){
 
       if(verbose){
         if(class(total) == "units"){
+          units::install_symbolic_unit("y")
           y <- units::make_unit("y")
           units::install_conversion_constant("g/d", "t/y", 365/1000000 )
-          total_t_y <- units::set_units(total,with(units::ud_units, t/y))
+          total_t_y <- units::set_units(total,"t/y")
           print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
         }else
           print(paste("Total of",pol[i],":",sum(total)))

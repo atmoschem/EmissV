@@ -47,6 +47,7 @@
 #' # for Sao Paulo
 #' EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 #' names(EmissionFactors) <- c("CO")
+#' library(units)
 #' EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
 #' rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
 #'                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
@@ -110,24 +111,21 @@ emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
   }
 
   dx <- grid$DX
-  dx <- dx*units::parse_unit("km")
+  dx <- dx*units::as_units("km")
   # dx =  units::set_units(dx,km)
 
   if(aerosol){
     ##  ug m^-2 s^-1
-    # dx    = units::set_units(dx,m)
-    dx    = units::set_units(dx,units::parse_unit("m"))
-    VAR_e = units::set_units(VAR_e,units::parse_unit("ug s-1"))
+    dx    = units::set_units(dx,"m")
+    VAR_e = units::set_units(VAR_e,"ug/s")
     VAR_e = VAR_e / dx^2
   }
   else{
     #  mol km^-2 hr^-1
-    MOL <- units::make_unit("MOL") # new unit MOL
-    install_conversion_constant("MOL","g",mm) # new conversion
-    install_conversion_constant("d","h",24)   # new conversion
-    VAR_e   =  units::set_units(VAR_e,units::parse_unit("g h-1"))
-    # VAR_e   <- units::set_units(VAR_e,MOL/h)                                 # brute force conversion!
-    VAR_e   =  VAR_e * MOL / (mm * units::set_units(1,units::parse_unit("g"))) # <<-- bfc !
+    units::install_symbolic_unit("MOL")
+    MOL <- units::make_unit("MOL")                   # new unit MOL
+    install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
+    VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
   }
 

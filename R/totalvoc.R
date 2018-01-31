@@ -17,7 +17,7 @@
 #'
 #'@export
 #'
-#'@importFrom units  make_unit install_conversion_constant set_units deparse_unit
+#'@importFrom units  make_unit install_conversion_constant set_units deparse_unit as_units
 #'
 #'@examples \dontrun{
 #' # Do not run
@@ -49,15 +49,15 @@
 #'                     "voc_liq_g","voc_liq_e","voc_liq_d",
 #'                     "voc_exa_g","voc_exa_e","voc_exa_d")
 #'
-#' EF_voc["voc_vap_g"]  <- c(0.23, 0.00,0.12, 0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_vap_e"]  <- c(0.00, 0.25,0.12, 0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_vap_d"]  <- c(0.00, 0.00,0.00, 0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_liq_g"]  <- c(2.00, 0.00,0.875,0.00,0.00,0.00,1.20,0.00)
-#' EF_voc["voc_liq_e"]  <- c(0.00, 1.50,0.875,0.00,0.00,0.00,0.00,1.20)
-#' EF_voc["voc_liq_d"]  <- c(0.00, 0.00,0.00, 0.00,0.00,0.00,0.00,0.00)
+#' EF_voc["voc_vap_g"]  <- c(0.230,0.00,0.120,0.00,0.00,0.00,0.00,0.00)
+#' EF_voc["voc_vap_e"]  <- c(0.000,0.25,0.120,0.00,0.00,0.00,0.00,0.00)
+#' EF_voc["voc_vap_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
+#' EF_voc["voc_liq_g"]  <- c(2.000,0.00,0.875,0.00,0.00,0.00,1.20,0.00)
+#' EF_voc["voc_liq_e"]  <- c(0.000,1.50,0.875,0.00,0.00,0.00,0.00,1.20)
+#' EF_voc["voc_liq_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
 #' EF_voc["voc_exa_g"]  <- c(0.425,0.00,0.217,0.00,0.00,0.00,1.08,0.00)
-#' EF_voc["voc_exa_e"]  <- c(0.00, 1.30,0.217,0.00,0.00,0.00,0.00,1.08)
-#' EF_voc["voc_exa_d"]  <- c(0.00, 0.00,0.00, 2.05,0.00,0.00,0.00,0.00)
+#' EF_voc["voc_exa_e"]  <- c(0.000,1.30,0.217,0.00,0.00,0.00,0.00,1.08)
+#' EF_voc["voc_exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
 #'
 #' VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
 #'}
@@ -75,14 +75,14 @@ totalVOC <- function(v,ef,pol,verbose=T){
                  "ket","ch3oh","ald")
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
-  use_inv    <- units::set_units(1,units::parse_unit("d km-1"))
+  use_inv    <- units::set_units(1,units::as_units("d km-1"))
   use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
     print(paste0(pol," is not in suported VOC speciation"))
     print("The specie list contains:")
     print(voc_names)
-    total = units::set_units(NA * TOTAL_veic[1,],MOL/units::parse_unit("d"))
+    total = units::set_units(NA * TOTAL_veic[1,],MOL/units::as_units("d"))
     return(total)
   }
   # data from ??
@@ -175,7 +175,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
   if(verbose){
     total <- VOC_vap_g + VOC_liq_g + VOC_exa_g + VOC_vap_e + VOC_liq_e +
       VOC_exa_e + VOC_vap_d + VOC_liq_d + VOC_exa_d
-    uni2  <- units::set_units(1,units::parse_unit("g d-1"))
+    uni2  <- units::set_units(1,units::as_units("g d-1"))
     total <- total * uni2
 
     total_t_y <- units::set_units(total, t/y)
@@ -194,7 +194,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
            VOC_liq_d * cov_table[pol,"D. LIQUID" ] +
            VOC_exa_d * cov_table[pol,"D. EXHAUST"]
 
-    uni   <- units::set_units(1,MOL/units::parse_unit("d"))
+    uni   <- units::set_units(1,MOL/units::as_units("d"))
     COV   <- COV * uni
     if(verbose){
       COV2 <- units::set_units(COV,MOL/y)
