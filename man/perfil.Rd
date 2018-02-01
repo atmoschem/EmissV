@@ -4,12 +4,14 @@
 \name{perfil}
 \alias{perfil}
 \title{Temporal profile for veicular emissions}
-\format{A list of data frames for LDV and HDV for hour and weekday.}
+\format{A list of data frames by hour and weekday.}
 \usage{
 data(perfil)
 }
 \description{
-List with two data frames with temporal profile based on traffic count for Brazilian city Sao Paulo. LDV is for light vehicles and HDV for intencity of heavy vehicles.
+List with data frames with temporal profile based on traffic count for Brazilian city Sao Paulo.
+
+LDV is for light vehicles and HDV for intencity of heavy vehicles.
 }
 \note{
 The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = hourly emission.
@@ -21,24 +23,25 @@ The profile is normalized by days (but is balanced for a complete week) so diary
 # load the data
 data(perfil)
 
-# see a bw plot
-plot(perfil$LDV[,1],ty = "b",ylim = c(0,.1),ylab="Intensity",xlab="hour",axe = F,pch= 1)
+# function to simple view
+plot.perfil <- function(per = perfil$LDV, text="", color = "#0000FFBB"){
+plot(per[,1],ty = "l", ylim = range(per),axe = F,xlab = "hour",ylab = "Intensity",main = text,col=color)
+for(i in 2:7){
+lines(per[,i],col = color)
+}
+for(i in 1:7){
+points(per[,i],col = "black", pch = 20)
+}
 axis(1,at=0.5+c(0,6,12,18,24),labels = c("00:00","06:00","12:00","18:00","00:00"))
 axis(2)
 box()
-for(i in 2:7){
- lines(perfil$LDV[,i],ty = "b",pch = i)
-}
-title("Daylly Profile (EmissV)")
-for(i in 1:7){
- lines(perfil$HDV[,i],ty = "b",pch = i,col = "darkgray")
-}
-legend("topleft",legend = c("Sun","Mon","Tue","Wed","Thu","Fri","Sat",
-                            "Sun","Mon","Tue","Wed","Thu","Fri","Sat"),
-      pch=c(1:7,1:7),lty=c(rep(1,7),rep(2,7)),
-      col=c(rep("black",7),rep("darkgray",7)),
-      bty="n",ncol = 2,title = c("LDV               HDV"))
 }
 
+# view all profiles in perfil data
+for(i in 1:length(names(perfil))){
+print(paste("profile",i,names(perfil)[i]))
+plot.perfil(perfil[[i]],names(perfil)[i])
+}
+}
 }
 \keyword{datasets}
