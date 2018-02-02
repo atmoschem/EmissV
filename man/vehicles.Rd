@@ -5,8 +5,8 @@
 \title{Tool to set-up vehicle data table}
 \format{data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.}
 \usage{
-vehicles(total_v, area_name, distribution, category, type, fuel, vnames = NA,
-  verbose = T)
+vehicles(total_v, area_name = names(total_v), distribution, category, type,
+  fuel, vnames = NA, verbose = T)
 }
 \arguments{
 \item{total_v}{total of vehicles by area (area length)}
@@ -58,7 +58,8 @@ veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
                               "B5","B5","E25", "FLEX"),
                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+                                "Diesel intercity busses","Gasohol motorcycles",
+                                "Flex motorcycles"))
 
 }
 }

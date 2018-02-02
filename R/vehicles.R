@@ -47,11 +47,14 @@
 #'                               "B5","B5","E25", "FLEX"),
 #'                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
 #'                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-#'                                 "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+#'                                 "Diesel intercity busses","Gasohol motorcycles",
+#'                                 "Flex motorcycles"))
 #'
 #'}
 
-vehicles <- function(total_v,area_name,distribution,category,type,fuel,vnames = NA,verbose = T)
+vehicles <- function(total_v,area_name = names(total_v),
+                     distribution,category,type,fuel,vnames = NA,
+                     verbose = T)
   {
 
   frota <- data.frame(
