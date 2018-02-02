@@ -17,7 +17,7 @@
 #'
 #'@export
 #'
-#'@importFrom units  make_unit install_conversion_constant set_units deparse_unit as_units
+#'@import units
 #'
 #'@examples \dontrun{
 #' # Do not run
@@ -66,18 +66,19 @@
 
 totalVOC <- function(v,ef,pol,verbose=T){
 
+  units::install_symbolic_unit("MOL")
+  units::install_symbolic_unit("y")
   MOL <- units::make_unit("MOL")
   y   <- units::make_unit("y")
   units::install_conversion_constant("MOL/d", "MOL/y", 365 )
   units::install_conversion_constant("g/d", "t/y", 365/1000000 )
-
 
   voc_names <- c("eth","hc3","hc5","hc8","ol2",
                  "olt","oli","iso","tol","xyl",
                  "ket","ch3oh","ald")
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
-  use_inv    <- units::set_units(1,units::as_units("d km-1"))
+  use_inv    <- 1 * units::as_units("d km-1", mode = "standard")
   use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
@@ -177,14 +178,14 @@ totalVOC <- function(v,ef,pol,verbose=T){
   if(verbose){
     total <- VOC_vap_g + VOC_liq_g + VOC_exa_g + VOC_vap_e + VOC_liq_e +
       VOC_exa_e + VOC_vap_d + VOC_liq_d + VOC_exa_d
-    uni2  <- units::set_units(1,units::as_units("g d-1"))
+    uni2  <- units::set_units(1,"g d-1")
     total <- total * uni2
 
-    total_t_y <- units::set_units(total, t/y)
+    total_t_y <- units::set_units(total, "t/y")
     print(paste("Total VOC:",sum(total_t_y),units::deparse_unit(total_t_y)))
   }
 
-  split_cov <- function(pol,verbose = T){
+  split_cov <- function(pol,verb = verbose){
 
     COV <- VOC_vap_g * cov_table[pol,"G. VAPORS" ] +
            VOC_liq_g * cov_table[pol,"G. LIQUID" ] +
@@ -196,10 +197,10 @@ totalVOC <- function(v,ef,pol,verbose=T){
            VOC_liq_d * cov_table[pol,"D. LIQUID" ] +
            VOC_exa_d * cov_table[pol,"D. EXHAUST"]
 
-    uni   <- units::set_units(1,MOL/units::as_units("d"))
+    uni   <- units::as_units(1,"MOL/d")
     COV   <- COV * uni
-    if(verbose){
-      COV2 <- units::set_units(COV,MOL/y)
+    if(verb){
+      COV2 <- units::set_units(COV,"MOL/y",check_is_valid = F)
       print(paste(pol,sum(COV2),units::deparse_unit(COV2)))
     }
     return(COV)
