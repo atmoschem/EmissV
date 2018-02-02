@@ -27,12 +27,15 @@ Calculate the spatial distribution by a raster kasked by shape/model grid inform
 \dontrun{
 # Do not run
 
-shape  <- shapefile(paste(system.file("extdata", package = "EmissV"),"/BR.shp",sep=""),verbose = F)
+shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
+                            "/BR.shp",sep=""),verbose = F)
 shape  <- shape[22,1] # subset for Sao Paulo - BR
-raster <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
+                         "/sample.tiff",sep=""))
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-SP     <- areaSource(shape,raster,grid)
-spplot(SP, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="Sao Paulo Metropolitan Area")
+SP     <- areaSource(shape,raster,grid,name = "SPMA")
+sp::spplot(SP, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",
+           main="Sao Paulo Metropolitan Area")
 
 }
 }

@@ -49,24 +49,25 @@ veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988),
                               "B5","B5","E25", "FLEX"),
                      vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-                                "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+                                "Diesel intercity busses","Gasohol motorcycles",
+                                "Flex motorcycles"))
 
 # values calculated from CETESB 2015 with
 # weighted.mean( emissions by type and year, DETRAN frota by type and year)
 # for Sao Paulo
 EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 1,nrow = 8))
 names(EmissionFactors) <- c("CO")
-library(units)
-EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
+EmissionFactors$CO <- units::set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
 rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
                                "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-                               "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+                               "Diesel intercity busses","Gasohol motorcycles",
+                               "Flex motorcycles")
 
 TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
 
 grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-shape  <- shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"),verbose = F)
-raster <- raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
+shape  <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
+raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
 
 SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")

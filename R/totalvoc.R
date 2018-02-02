@@ -59,6 +59,8 @@
 #' EF_voc["voc_exa_e"]  <- c(0.000,1.30,0.217,0.00,0.00,0.00,0.00,1.08)
 #' EF_voc["voc_exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
 #'
+#' print(EF_voc)
+#'
 #' VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
 #'}
 

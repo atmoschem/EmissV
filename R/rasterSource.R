@@ -1,6 +1,8 @@
 #' Distribution of emissions by a georeferenced image
 #'
-#' @description Returns a matrix
+#' @description Calculate the spatial distribution by a raster
+#'
+#' @return Returns a matrix
 #'
 #' @param r input raster object
 #' @param grid grid object with the grid information
@@ -17,10 +19,9 @@
 #' @examples \dontrun{
 #' # Do not run
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-#' x     <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+#' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 #' test  <- rasterSource(x,grid)
-#' image(test)
-#' title("Persistent Nocturnal Lights from DMSP")
+#' image(test, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'}
 
 rasterSource <- function(r,grid,verbose = T){

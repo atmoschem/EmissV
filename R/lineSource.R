@@ -24,8 +24,8 @@
 #'
 #' roadLength <- lineSource(roads,d3,as_raster=T)
 #'
-#' spplot(roadLength, scales = list(draw=TRUE), xlab="lat", ylab="lon",main="Length of roads",
-#'        sp.layout=list("sp.lines", roads))
+#' sp::spplot(roadLength, scales = list(draw=TRUE), xlab="lat", ylab="lon",main="Length of roads",
+#'            sp.layout=list("sp.lines", roads))
 #' }
 #'
 

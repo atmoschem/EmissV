@@ -16,17 +16,19 @@ rasterSource(r, grid, verbose = T)
 
 \item{verbose}{display additional information}
 }
-\description{
+\value{
 Returns a matrix
+}
+\description{
+Calculate the spatial distribution by a raster
 }
 \examples{
 \dontrun{
 # Do not run
 grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-x     <- raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
 test  <- rasterSource(x,grid)
-image(test)
-title("Persistent Nocturnal Lights from DMSP")
+image(test, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 }
 }
 \seealso{

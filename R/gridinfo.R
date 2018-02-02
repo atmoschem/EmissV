@@ -14,8 +14,18 @@
 #'
 #' @examples \dontrun{
 #' # Do not run
-#' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-#' names(grid)
+#' grid_d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
+#' names(grid_d1)
+#' grid_d2 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
+#' grid_d3 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d03",sep=""))
+#' shape   <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
+#' plot(shape); axis(1); axis(2); box(); grid()
+#' lines(grid_d1$Box, col = "red")
+#' text(grid_d1$xlim[2],grid_d1$Ylim[1],"d1",pos=4, offset = 0.5)
+#' lines(grid_d2$Box, col = "red")
+#' text(grid_d2$xlim[2],grid_d2$Ylim[1],"d2",pos=4, offset = 0.5)
+#' lines(grid_d3$Box, col = "red")
+#' text(grid_d3$xlim[1],grid_d3$Ylim[2],"d3",pos=2, offset = 0.0)
 #'}
 
 gridInfo <- function(file = file.choose(),levels = 1,verbose = T){
