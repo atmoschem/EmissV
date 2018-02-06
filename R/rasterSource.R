@@ -34,17 +34,16 @@ rasterSource <- function(r,grid,verbose = T){
                           xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
                           crs=sp::proj4string(r))
 
-  total<- cellStats(r,"sum")
+  total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
 
   X    <- raster::resample(r,box,method = "bilinear") # non-conservative transformation
   X    <- raster::flip(X,2)
   X    <- raster::t(X)
   X    <- raster::as.matrix(X)
-  X    <- X * total/sum(X) # to conserve mass
+  X    <- X * total_box/sum(X) # to conserve mass
 
   if(verbose)
     print(paste("Grid output:",col,"columns",rol,"rows"))
-  # dimensionless weights
   return(X)
 }
 
