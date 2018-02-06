@@ -29,7 +29,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="/index.html">
+  <a href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -70,6 +70,7 @@
 <p>Methods for create veicular emissions (by a top-down approach) for air quality models like <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
 <p>functions:</p>
 <ul>
+<li>read: read global inventories in netcdf format</li>
 <li>vehicles: tool to set-up vehicle data.table</li>
 <li>gridInfo: read grid information from a NetCDF file</li>
 <li>pointSource: emissions from point sources (in progress)</li>
@@ -122,7 +123,9 @@
 <div id="to-install" class="section level1">
 <h1 class="hasAnchor">
 <a href="#to-install" class="anchor"></a>to install</h1>
-<p><code>{r eval=F} #install.packages("devtools") devtools::install_github("atmoschem/EmissV") library(EmissV)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"atmoschem/EmissV"</span>)
+<span class="kw">library</span>(EmissV)</code></pre></div>
 </div>
 
   </div>
@@ -157,7 +160,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
