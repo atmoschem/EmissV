@@ -21,6 +21,9 @@ functions:
 - emission: Emissions to atmospheric models
 
 ## Packages needed
+
+EmissV uses functions from this packages and this packages will be installed automatically.
+
 - [raster](http://cran.r-project.org/package=raster)
 - [sp](https://github.com/edzer/sp/)
 - [ncdf4](http://cran.r-project.org/package=ncdf4)
