@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Distribution of emissions by streets — lineSource â€¢ EmissV</title>
+<title>Read netcdf (.nc) data from global inventaries — read â€¢ EmissV</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -83,29 +83,29 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Distribution of emissions by streets</h1>
+    <h1>Read netcdf (.nc) data from global inventaries</h1>
     </div>
 
     
-    <p>Create a distribution from sp spatial lines data frame or spatial lines</p>
+    <p>Read data from global inventoris</p>
     
 
-    <pre class="usage"><span class='fu'>lineSource</span>(<span class='no'>s</span>, <span class='no'>grid</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>read</span>(<span class='no'>file</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"EDGAR 4.3.1"</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>s</th>
-      <td><p>SpatialLinesDataFrame of SpatialLines object</p></td>
+      <th>file</th>
+      <td><p>input file</p></td>
     </tr>
     <tr>
-      <th>grid</th>
-      <td><p>grid object with the grid information</p></td>
+      <th>version</th>
+      <td><p>inventorie information</p></td>
     </tr>
     <tr>
       <th>as_raster</th>
-      <td><p>output format, TRUE for raster, FALSE for matrix</p></td>
+      <td><p>return a raster (defoult) or matrix</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -113,30 +113,43 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p>read abbout EDGAR at http://edgar.jrc.ec.europa.eu</p>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Matrix or raster</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='gridInfo.html'>gridInfo</a></code> and <code><a href='rasterSource.html'>rasterSource</a></code></p>
+    <p><code><a href='rasterSource.html'>rasterSource</a></code> and <code><a href='gridInfo.html'>gridInfo</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Do not run</span>
-
-<span class='no'>roads</span> <span class='kw'>&lt;-</span> <span class='fu'>readRDS</span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/streets.rds"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='no'>d3</span>    <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste0</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d03"</span>))
-
-<span class='no'>roadLength</span> <span class='kw'>&lt;-</span> <span class='fu'>lineSource</span>(<span class='no'>roads</span>,<span class='no'>d3</span>,<span class='kw'>as_raster</span><span class='kw'>=</span><span class='no'>T</span>)
-
-<span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>roadLength</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"lat"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"lon"</span>,<span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Length of roads"</span>,
-           <span class='kw'>sp.layout</span><span class='kw'>=</span><span class='fu'>list</span>(<span class='st'>"sp.lines"</span>, <span class='no'>roads</span>))
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='no'>d1</span>     <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+<span class='no'>d2</span>     <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d02"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+<span class='fu'>print</span>(<span class='st'>"download and untar EDGAR data from:"</span>)
+<span class='fu'>print</span>(<span class='st'>"http://edgar.jrc.ec.europa.eu/gallery.php?release=v431_v2&amp;substance=NOx&amp;sector=TRO"</span>)
+<span class='no'>nox</span>    <span class='kw'>&lt;-</span> <span class='fu'>read</span>(<span class='st'>"v431_v2_REFERENCE_NOx_2010_10_TRO.0.1x0.1.nc"</span>)
+<span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>nox</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,<span class='kw'>main</span><span class='kw'>=</span><span class='st'>"NOx emissions from EDGAR"</span>)
+<span class='no'>nox_d1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rasterSource.html'>rasterSource</a></span>(<span class='no'>nox</span>,<span class='no'>d1</span>)
+<span class='no'>nox_d2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rasterSource.html'>rasterSource</a></span>(<span class='no'>nox</span>,<span class='no'>d2</span>)
+<span class='fu'>image</span>(<span class='no'>nox_d1</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"NOx emissions from transport from EDGAR 3.4.1 for d1"</span>)
+<span class='fu'>image</span>(<span class='no'>nox_d2</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"NOx emissions from transport from EDGAR 3.4.1 for d2"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
