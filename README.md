@@ -7,6 +7,7 @@ Methods for create veicular emissions (by a top-down approach) for air quality m
 
 functions:
 
+- read: read global inventories in netcdf format
 - vehicles: tool to set-up vehicle data.table
 - gridInfo: read grid information from a NetCDF file
 - pointSource: emissions from point sources (in progress)
