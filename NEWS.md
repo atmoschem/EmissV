@@ -1,3 +1,6 @@
+## EmissV 0.664.1 (2018-02-07)
+- function to 'read()' global inventories in NetCDF
+
 ## EmissV 0.664.1 (2018-01-31)
 - Updates on units usage
 - add profiles in data(perfil)
