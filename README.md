@@ -3,7 +3,7 @@
 
 ## Top-down methods to create vehicular emissions.
 
-Methods for create veicular emissions (by a top-down approach) for air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
+Methods for create veicular (and other) emissions by a top-down approach for use in air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
 functions:
 
@@ -19,6 +19,10 @@ functions:
 - totalEmission: total emissions
 - totalVOC: total VOCs emission
 - emission: Emissions to atmospheric models
+
+datasets:
+
+- perfil: vehicle counting profile for vehicular activity
 
 ## Packages needed
 
