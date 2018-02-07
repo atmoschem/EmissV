@@ -22,7 +22,7 @@ functions:
 
 ## Packages needed
 
-EmissV uses functions from this packages and this packages will be installed automatically.
+EmissV uses functions from this packages and will install automatically.
 
 - [raster](http://cran.r-project.org/package=raster)
 - [sp](https://github.com/edzer/sp/)
