@@ -4,18 +4,40 @@
 \alias{pointSource}
 \title{Emissions from point sources}
 \usage{
-pointSource(p = list(lat = -24.67123, lon = -47.26636, z = 100, e = 666),
-  grid, verbose = T)
+pointSource(emissions, grid, verbose = T)
 }
 \arguments{
-\item{p}{list of points}
+\item{emissions}{list of points}
 
 \item{grid}{grid object with the grid information}
 
 \item{verbose}{display additional information}
 }
+\value{
+a raster
+}
 \description{
 Transform a set of points into a grinded output
+}
+\note{
+just emissions at surface level for a while
+}
+\examples{
+\dontrun{
+# Do not run
+d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
+
+p = data.frame(lat      = c(-22,-22,-23.5),
+               lon      = c(-46,-48,-47  ),
+               z        = c(0  ,  0,  0  ),
+               emission = c(666,444,111  ) )
+
+p_emissions <- pointSource(emissions = p, grid = d1)
+
+spplot(p_emissions,scales = list(draw=TRUE), xlab="Lat", ylab="Lon",
+       main = "3 point sources for domain d1")
+}
+
 }
 \seealso{
 \code{\link{gridInfo}} and \code{\link{rasterSource}}
