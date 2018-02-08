@@ -90,14 +90,13 @@
     <p>Transform a set of points into a grinded output</p>
     
 
-    <pre class="usage"><span class='fu'>pointSource</span>(<span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>lat</span> <span class='kw'>=</span> -<span class='fl'>24.67123</span>, <span class='kw'>lon</span> <span class='kw'>=</span> -<span class='fl'>47.26636</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>e</span> <span class='kw'>=</span> <span class='fl'>666</span>),
-  <span class='no'>grid</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>pointSource</span>(<span class='no'>emissions</span>, <span class='no'>grid</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>p</th>
+      <th>emissions</th>
       <td><p>list of points</p></td>
     </tr>
     <tr>
@@ -110,19 +109,49 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a raster</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>just emissions at surface level for a while</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='gridInfo.html'>gridInfo</a></code> and <code><a href='rasterSource.html'>rasterSource</a></code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Do not run</span>
+<span class='no'>d1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+
+<span class='no'>p</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(<span class='kw'>lat</span>      <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>22</span>,-<span class='fl'>22</span>,-<span class='fl'>23.5</span>),
+               <span class='kw'>lon</span>      <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>46</span>,-<span class='fl'>48</span>,-<span class='fl'>47</span>  ),
+               <span class='kw'>z</span>        <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>  ,  <span class='fl'>0</span>,  <span class='fl'>0</span>  ),
+               <span class='kw'>emission</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>666</span>,<span class='fl'>444</span>,<span class='fl'>111</span>  ) )
+
+<span class='no'>p_emissions</span> <span class='kw'>&lt;-</span> <span class='fu'>pointSource</span>(<span class='kw'>emissions</span> <span class='kw'>=</span> <span class='no'>p</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='no'>d1</span>)
+
+<span class='fu'>spplot</span>(<span class='no'>p_emissions</span>,<span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,
+       <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"3 point sources for domain d1"</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#note">Note</a></li>
+
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

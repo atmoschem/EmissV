@@ -3,14 +3,14 @@
 
 ## Top-down methods to create vehicular emissions.
 
-Methods for create veicular (and other) emissions by a top-down approach for use in air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
+Methods for create veicular and other emissions by a top-down approach for use in air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
 functions:
 
 - read: read global inventories in netcdf format
 - vehicles: tool to set-up vehicle data.table
 - gridInfo: read grid information from a NetCDF file
-- pointSource: emissions from point sources (in progress)
+- pointSource: emissions from point sources
 - plumeRise: calculate plume rise (in progress)
 - rasterSource: distribution of emissions by a georeferenced image
 - lineSource: distribution of emissions by line vectors

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Top-down methods to create vehicular emissions • EmissV</title>
+<title>Top-down methods to create vehicular and other emissions • EmissV</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -67,13 +67,13 @@
 <div id="top-down-methods-to-create-vehicular-emissions-" class="section level2">
 <h2 class="hasAnchor">
 <a href="#top-down-methods-to-create-vehicular-emissions-" class="anchor"></a>Top-down methods to create vehicular emissions.</h2>
-<p>Methods for create veicular emissions (by a top-down approach) for air quality models like <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
+<p>Methods for create veicular and other emissions by a top-down approach for use in air quality models like <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
 <p>functions:</p>
 <ul>
 <li>read: read global inventories in netcdf format</li>
 <li>vehicles: tool to set-up vehicle data.table</li>
 <li>gridInfo: read grid information from a NetCDF file</li>
-<li>pointSource: emissions from point sources (in progress)</li>
+<li>pointSource: emissions from point sources</li>
 <li>plumeRise: calculate plume rise (in progress)</li>
 <li>rasterSource: distribution of emissions by a georeferenced image</li>
 <li>lineSource: distribution of emissions by line vectors</li>
@@ -82,6 +82,10 @@
 <li>totalEmission: total emissions</li>
 <li>totalVOC: total VOCs emission</li>
 <li>emission: Emissions to atmospheric models</li>
+</ul>
+<p>datasets:</p>
+<ul>
+<li>perfil: vehicle counting profile for vehicular activity</li>
 </ul>
 </div>
 <div id="packages-needed" class="section level2">
