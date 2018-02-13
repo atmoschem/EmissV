@@ -10,11 +10,11 @@ read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 read(file, version = "EDGAR 4.3.1", as_raster = T, verbose = T)
 }
 \arguments{
-\item{file}{input file}
+\item{file}{file name or names (variables are summed)}
 
 \item{version}{inventorie information}
 
-\item{as_raster}{return a raster (defoult) or matrix}
+\item{as_raster}{return a raster (defoult) or matrix (with units)}
 
 \item{verbose}{display additional information}
 }
