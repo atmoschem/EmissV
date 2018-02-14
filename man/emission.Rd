@@ -5,7 +5,8 @@
 \title{Emissions in the format for atmospheric models}
 \format{matrix of emission}
 \usage{
-emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
+emission(total, pol, area, grid, inventory = NULL, mm = 1, aerosol = F,
+  verbose = T)
 }
 \arguments{
 \item{total}{list of total emission}
@@ -15,6 +16,8 @@ emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
 \item{area}{list of area sources or matrix with a spatial distribution}
 
 \item{grid}{grid information}
+
+\item{inventory}{a inventory raster from read}
 
 \item{mm}{pollutant molar mass}
 
@@ -26,6 +29,8 @@ emission(total, pol, area, grid, mm = 1, aerosol = F, verbose = T)
 Combine area sources and total emissions to model output
 }
 \note{
+if Inventory is provided, the firsts tree arguments are not be used by the funciton.
+
 Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 
 the list of area must be in the same order as defined in vehicles and total emission.

@@ -33,11 +33,11 @@
 #' image(nox_d2, main = "NOx emissions from transport from EDGAR 3.4.1 for d2")
 #'}
 
-read <- function(file, version = "EDGAR 4.3.1", as_raster = T, verbose = T){
+read <- function(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
   ed   <- ncdf4::nc_open(file[1])
   name <- names(ed$var)
   var  <- ncdf4::ncvar_get(ed,name)
-  varold <- units::as_units(0.0 * var,"g m2 s-1")
+  varold <- units::as_units(0.0 * var,"g m-2 s-1")
   var  <- apply(var,1,rev)
   r    <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
 
@@ -46,7 +46,7 @@ read <- function(file, version = "EDGAR 4.3.1", as_raster = T, verbose = T){
   raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
 
   if(verbose)
-    print(paste0("reading ",name," (",version,") units are g m2 s-1 ..."))
+    print(paste0("reading ",name," (",version,") units are g m-2 s-1 ..."))
 
   for(i in 1:length(file)){
     print(file[i])
@@ -60,15 +60,13 @@ read <- function(file, version = "EDGAR 4.3.1", as_raster = T, verbose = T){
       names(r) <- name
       rz       <- rz + r
     }else{
-      var    <- units::set_units(1000 * var,"g m2 s-1")
+      var    <- units::set_units(1000 * var,"g m-2 s-1")
       varold <- varold + var
     }
   }
   if(as_raster){
     return(rz)
   }else{
-    print("converting to g km2 d-1 ...")
-    var <- units::set_units(var,"g km2 d-1")
     return(var)
   }
 }

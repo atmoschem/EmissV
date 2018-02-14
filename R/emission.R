@@ -8,9 +8,12 @@
 #' @param pol pollutant name
 #' @param area list of area sources or matrix with a spatial distribution
 #' @param grid grid information
+#' @param inventory a inventory raster from read
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param verbose display additional information
+#'
+#' @note if Inventory is provided, the firsts tree arguments are not be used by the funciton.
 #'
 #' @note Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 #'
@@ -67,7 +70,34 @@
 #' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm=28)
 #'}
 
-emission <- function(total,pol,area,grid, mm = 1, aerosol = F, verbose = T){
+emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F, verbose = T){
+
+  if(!is.null(inventory)){
+    if(verbose)
+      print("Using raster from inventory ... ")
+    # input is g m-2 s-1
+    if(class(inventory)[1]=="RasterLayer"){
+      VAR_e <- rasterSource(inventory,grid,verbose = verbose)
+    }else{
+      VAR_e <- inventory
+    }
+
+    if(aerosol){
+      ##  ug m-2 s-1
+      VAR_e = units::set_units(VAR_e,"ug m-2 s-1")
+    }
+    else{
+      ##  mol km-2 h-1
+      VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
+      units::install_symbolic_unit("MOL")
+      MOL <- units::make_unit("MOL")                           # new unit MOL
+      # install_conversion_constant("MOL","g",as.numeric(mm))  # new conversion
+      # VAR_e   =  units::set_units(VAR_e,"MOL km-2 h-1")      # n funcionou
+      conversao <- as_units(1/mm, "MOL g-1")
+      VAR_e     <- VAR_e * conversao
+    }
+    return(VAR_e)
+  }
 
   if(verbose)
     if(aerosol){
