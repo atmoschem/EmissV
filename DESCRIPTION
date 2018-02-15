@@ -1,6 +1,6 @@
 Package: EmissV
 Title: Top-down methods to create vehicular and other emissions
-Version: 0.664.1
+Version: 0.664.2
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",

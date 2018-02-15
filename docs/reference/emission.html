@@ -90,7 +90,8 @@
     <p>Combine area sources and total emissions to model output</p>
     
 
-    <pre class="usage"><span class='fu'>emission</span>(<span class='no'>total</span>, <span class='no'>pol</span>, <span class='no'>area</span>, <span class='no'>grid</span>, <span class='kw'>mm</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>aerosol</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>emission</span>(<span class='no'>total</span>, <span class='no'>pol</span>, <span class='no'>area</span>, <span class='no'>grid</span>, <span class='kw'>inventory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mm</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>aerosol</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -112,6 +113,10 @@
       <td><p>grid information</p></td>
     </tr>
     <tr>
+      <th>inventory</th>
+      <td><p>a inventory raster from read</p></td>
+    </tr>
+    <tr>
       <th>mm</th>
       <td><p>pollutant molar mass</p></td>
     </tr>
@@ -131,7 +136,8 @@
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory</p>
+    <p>if Inventory is provided, the firsts tree arguments are not be used by the funciton.</p>
+<p>Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory</p>
 <p>the list of area must be in the same order as defined in vehicles and total emission.</p>
 <p>just WRF-Chem is suported by now</p>
     
