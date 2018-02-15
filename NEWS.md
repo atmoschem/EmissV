@@ -1,3 +1,6 @@
+## EmissV 0.664.2 (2018-02-15)
+- function 'emissions()' integred with read() via Inventory argument
+
 ## EmissV 0.664.1 (2018-02-07)
 - function to 'read()' global inventories in NetCDF
 
