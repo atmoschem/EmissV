@@ -7,7 +7,7 @@
 read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 }
 \usage{
-read(file, version = "EDGAR 4.3.1", as_raster = T, verbose = T)
+read(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T)
 }
 \arguments{
 \item{file}{file name or names (variables are summed)}
