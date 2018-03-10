@@ -5,7 +5,7 @@
 
 Methods for create veicular and other emissions by a top-down approach for use in air quality models like [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
-![Emissions using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/example.jpg)
+![Emissions using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/example.jpg){ width=80% }
 
 functions:
 
