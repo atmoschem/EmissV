@@ -5,9 +5,11 @@
 \title{Calculate plume rise from Brigs (1975) formulation.}
 \format{numeric value in (units) meters}
 \usage{
-plumeRise(verbose = T)
+plumeRise(df, imax = 100, errmax = 0.1, verbose = T)
 }
 \arguments{
+\item{df}{data.frame with micrometeorological and source data}
+
 \item{verbose}{display additional information}
 }
 \description{
@@ -17,6 +19,11 @@ Return plume rise height
 \dontrun{
 # Do not run
 
+chimney <- matrix(c(1,1,1,1,1,1,1,1,1,1),ncol = 10, byrow = T)
+chimney<- data.frame(chimney)
+names(chimney) <- c("z","r","Ve","Te","h","ws","Temp","Ustar","Wstar","L")
+
+chimay <- plumeRise(chimney)
 
 }
 }
