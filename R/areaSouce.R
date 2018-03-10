@@ -25,7 +25,7 @@
 #'                          "/sample.tiff",sep=""))
 #' grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 #' SP     <- areaSource(shape,raster,grid,name = "SPMA")
-#' sp::spplot(SP, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",
+#' sp::spplot(SP, scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
 #'            main="Sao Paulo Metropolitan Area")
 #'
 #'}

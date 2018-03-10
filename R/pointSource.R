@@ -23,7 +23,7 @@
 #'
 #' p_emissions <- pointSource(emissions = p, grid = d1)
 #'
-#' spplot(p_emissions,scales = list(draw=TRUE), xlab="Lat", ylab="Lon",
+#' spplot(p_emissions,scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
 #'        main = "3 point sources for domain d1")
 #'}
 #'
