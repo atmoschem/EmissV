@@ -10,6 +10,10 @@ plumeRise(df, imax = 100, errmax = 0.1, verbose = T)
 \arguments{
 \item{df}{data.frame with micrometeorological and source data}
 
+\item{imax}{number of maximum interations}
+
+\item{errmax}{maximum error}
+
 \item{verbose}{display additional information}
 }
 \description{

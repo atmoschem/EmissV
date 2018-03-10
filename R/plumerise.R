@@ -5,6 +5,8 @@
 #' @format numeric value in (units) meters
 #'
 #' @param df data.frame with micrometeorological and source data
+#' @param imax number of maximum interations
+#' @param errmax maximum error
 #' @param verbose display additional information
 #'
 #' @export
@@ -62,7 +64,7 @@ plumeRise <- function(df, imax = 100, errmax = 0.1, verbose = T)
     deltaH <- (1.3 * Flu / (U * Ustar^2))^0.6
     for(i in 1:imax){
       old    <- deltaH
-      deltaH <- 1.3 * (Flu / (U * Ustar^2)) * (1 + Hs/DeltaH)^(2/3)
+      deltaH <- 1.3 * (Flu / (U * Ustar^2)) * (1 + Hs/deltaH)^(2/3)
       err    <- (deltaH - old )/old
       if(err <= errmax)
         i = imax

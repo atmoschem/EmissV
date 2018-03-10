@@ -1,5 +1,5 @@
 Package: EmissV
-Title: Top-down methods to create vehicular and other emissions
+Title: Vehicular EMISSions by Top-down methods
 Version: 0.664.2
 Authors@R: c(
   person(given = "Daniel",
@@ -13,7 +13,7 @@ Authors@R: c(
          email = "sergio.ibarra@usp.br",
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
-Description: Top-down methods to create vehicular and other emissions
+Description: Top-down methods to create vehicular and other emissions.
 Depends: R (>= 3.4.1)
 Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools
 Suggests: eixport
