@@ -95,7 +95,7 @@
     
 
     <pre class="usage"><span class='fu'>vehicles</span>(<span class='no'>total_v</span>, <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>names</span>(<span class='no'>total_v</span>), <span class='no'>distribution</span>, <span class='no'>category</span>, <span class='no'>type</span>,
-  <span class='no'>fuel</span>, <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+  <span class='no'>fuel</span>, <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -129,6 +129,10 @@
       <td><p>name of each vehicle categoy (category length / NA)</p></td>
     </tr>
     <tr>
+      <th>example</th>
+      <td><p>a simple example</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>display additional information</p></td>
     </tr>
@@ -152,6 +156,9 @@
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Do not run</span>
 
+<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>T</span>)
+
+<span class='co'># or the code for the same result</span>
 <span class='co'># DETRAN 2016 data and SP vahicle distribution</span>
 <span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>total_v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>27332101</span>, <span class='fl'>6377484</span>, <span class='fl'>10277988</span>, <span class='fl'>7140439</span>, <span class='fl'>4772160</span>),
                      <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"SP"</span>, <span class='st'>"RJ"</span>, <span class='st'>"MG"</span>, <span class='st'>"PR"</span>, <span class='st'>"SC"</span>),
@@ -167,7 +174,6 @@
                                 <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,<span class='st'>"Diesel urban busses"</span>,
                                 <span class='st'>"Diesel intercity busses"</span>,<span class='st'>"Gasohol motorcycles"</span>,
                                 <span class='st'>"Flex motorcycles"</span>))
-
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -30,31 +30,9 @@ the units (set_units("value",unit) where the recomended unit is g/d) must be use
 \dontrun{
 # Do not run
 
-# DETRAN 2016 data and SP vahicle distribution
-veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
-                     area_name = c("SP", "RJ", "MG", "PR", "SC"),
-                     distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
-                                       0.0290, 0.0008, 0.1181, 0.0086),
-                     category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
-                                   "CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F"),
-                     type = c("LDV", "LDV", "LDV","TRUCKS",
-                              "BUS","BUS","MOTO", "MOTO"),
-                     fuel = c("E25", "E100", "FLEX","B5",
-                              "B5","B5","E25", "FLEX"),
-                     vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
-                               "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-                               "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles"))
+veiculos <- vehicles(example = T)
 
-# values calculated from CETESB 2015 with
-# weighted.mean( emissions by type and year, DETRAN frota by type and year)
-# for Sao Paulo
-EmissionFactors <- as.data.frame.matrix(matrix(NA,ncol = 2,nrow = 8))
-rownames(EmissionFactors) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
-                               "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-                               "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
-names(EmissionFactors) <- c("CO","PM")
-EmissionFactors$CO <- set_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),g/km)
-EmissionFactors$PM <- set_units(c(0.0013,0.0,0.0010,0.0612,0.1052,0.1693,0.0,0.0),g/km)
+EmissionFactors <- emissionFactor(example = T)
 
 TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","PM"))
 

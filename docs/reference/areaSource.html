@@ -137,9 +137,13 @@
                          <span class='st'>"/sample.tiff"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
 <span class='no'>grid</span>   <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d02"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
 <span class='no'>SP</span>     <span class='kw'>&lt;-</span> <span class='fu'>areaSource</span>(<span class='no'>shape</span>,<span class='no'>raster</span>,<span class='no'>grid</span>,<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"SPMA"</span>)
-<span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>SP</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,
-           <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Sao Paulo Metropolitan Area"</span>)
 
+<span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>SP</span>,<span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>),<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lat"</span>,<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,
+           <span class='kw'>main</span><span class='kw'>=</span><span class='fu'>list</span>(<span class='kw'>label</span><span class='kw'>=</span><span class='st'>"Sao Paulo Metropolitan Area"</span>),
+           <span class='kw'>col.regions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"#031638"</span>,<span class='st'>"#001E48"</span>,<span class='st'>"#002756"</span>,<span class='st'>"#003062"</span>,
+                           <span class='st'>"#003A6E"</span>,<span class='st'>"#004579"</span>,<span class='st'>"#005084"</span>,<span class='st'>"#005C8E"</span>,
+                           <span class='st'>"#006897"</span>,<span class='st'>"#0074A1"</span>,<span class='st'>"#0081AA"</span>,<span class='st'>"#008FB3"</span>,
+                           <span class='st'>"#009EBD"</span>,<span class='st'>"#00AFC8"</span>,<span class='st'>"#00C2D6"</span>,<span class='st'>"#00E3F0"</span>))
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

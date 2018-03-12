@@ -131,29 +131,11 @@
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Do not run</span>
 
-<span class='co'># DETRAN 2016 data and SP vahicle distribution</span>
-<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>total_v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>27332101</span>, <span class='fl'>6377484</span>, <span class='fl'>10277988</span>, <span class='fl'>7140439</span>, <span class='fl'>4772160</span>),
-                     <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"SP"</span>, <span class='st'>"RJ"</span>, <span class='st'>"MG"</span>, <span class='st'>"PR"</span>, <span class='st'>"SC"</span>),
-                     <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='fl'>0.4253</span>, <span class='fl'>0.0320</span>, <span class='fl'>0.3602</span>, <span class='fl'>0.0260</span>,
-                                       <span class='fl'>0.0290</span>, <span class='fl'>0.0008</span>, <span class='fl'>0.1181</span>, <span class='fl'>0.0086</span>),
-                     <span class='kw'>category</span> <span class='kw'>=</span>  <span class='fu'>c</span>(<span class='st'>"LDV_E25"</span>,<span class='st'>"LDV_E100"</span>,<span class='st'>"LDV_F"</span>,<span class='st'>"TRUCKS_B5"</span>,
-                                   <span class='st'>"CBUS_B5"</span>,<span class='st'>"MBUS_B5"</span>,<span class='st'>"MOTO_E25"</span>,<span class='st'>"MOTO_F"</span>),
-                     <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"LDV"</span>, <span class='st'>"LDV"</span>, <span class='st'>"LDV"</span>,<span class='st'>"TRUCKS"</span>,
-                              <span class='st'>"BUS"</span>,<span class='st'>"BUS"</span>,<span class='st'>"MOTO"</span>, <span class='st'>"MOTO"</span>),
-                     <span class='kw'>fuel</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"E25"</span>, <span class='st'>"E100"</span>, <span class='st'>"FLEX"</span>,<span class='st'>"B5"</span>,
-                              <span class='st'>"B5"</span>,<span class='st'>"B5"</span>,<span class='st'>"E25"</span>, <span class='st'>"FLEX"</span>),
-                     <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Light duty Vehicles Gasohol"</span>,<span class='st'>"Light Duty Vehicles Ethanol"</span>,
-                                <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,<span class='st'>"Diesel urban busses"</span>,
-                                <span class='st'>"Diesel intercity busses"</span>,<span class='st'>"Gasohol motorcycles"</span>,<span class='st'>"Flex motorcycles"</span>))
+<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>exemples</span> <span class='kw'>=</span> <span class='no'>T</span>)
 
 <span class='no'>voc</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"eth"</span>,<span class='st'>"hc3"</span>,<span class='st'>"hc5"</span>,<span class='st'>"hc8"</span>,<span class='st'>"ol2"</span>,<span class='st'>"olt"</span>,<span class='st'>"oli"</span>,<span class='st'>"iso"</span>,<span class='st'>"tol"</span>,<span class='st'>"xyl"</span>,<span class='st'>"ket"</span>,<span class='st'>"ch3oh"</span>,<span class='st'>"ald"</span>)
-
 <span class='no'>EF_voc</span> <span class='kw'>&lt;-</span> <span class='fu'>as.data.frame</span>(<span class='fu'>matrix</span>(<span class='fl'>NA</span>,<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>9</span>,<span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>8</span>,<span class='kw'>byrow</span> <span class='kw'>=</span> <span class='no'>T</span>),
-                        <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Light duty Vehicles Gasohol"</span>,
-                                      <span class='st'>"Light Duty Vehicles Ethanol"</span>,
-                                      <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,
-                                      <span class='st'>"Diesel urban busses"</span>,<span class='st'>"Diesel intercity busses"</span>,
-                                      <span class='st'>"Gasohol motorcycles"</span>,<span class='st'>"Flex motorcycles"</span>))
+                        <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fu'>row.names</span>(<span class='no'>veiculos</span>))
 <span class='fu'>names</span>(<span class='no'>EF_voc</span>) <span class='kw'>&lt;-</span>  <span class='fu'>c</span>(<span class='st'>"voc_vap_g"</span>,<span class='st'>"voc_vap_e"</span>,<span class='st'>"voc_vap_d"</span>,
                     <span class='st'>"voc_liq_g"</span>,<span class='st'>"voc_liq_e"</span>,<span class='st'>"voc_liq_d"</span>,
                     <span class='st'>"voc_exa_g"</span>,<span class='st'>"voc_exa_e"</span>,<span class='st'>"voc_exa_d"</span>)

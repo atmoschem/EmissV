@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate total emissions — totalEmission â€¢ EmissV</title>
+<title>Tool to set-up emission factors — emissionFactor â€¢ EmissV</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -83,31 +83,34 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate total emissions</h1>
+    <h1>Tool to set-up emission factors</h1>
     </div>
 
     
-    <p>Caculate the total emission with:</p>
-<p>Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )</p>
-<p>where n is the type of the veicle</p>
+    <p>Return a data frame with vehicle information. Types argument defines the diary use:</p>
     
 
-    <pre class="usage"><span class='fu'>totalEmission</span>(<span class='no'>v</span>, <span class='no'>ef</span>, <span class='no'>pol</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>emissionFactor</span>(<span class='no'>ef</span>, <span class='kw'>poluttant</span> <span class='kw'>=</span> <span class='fu'>names</span>(<span class='no'>ef</span>), <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"g/km"</span>,
+  <span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>v</th>
-      <td><p>dataframe with the vehicle data</p></td>
-    </tr>
-    <tr>
       <th>ef</th>
-      <td><p>emission factors</p></td>
+      <td><p>a list with emission factors</p></td>
     </tr>
     <tr>
-      <th>pol</th>
-      <td><p>pollutant name in ef</p></td>
+      <th>poluttant</th>
+      <td><p>poluttant names</p></td>
+    </tr>
+    <tr>
+      <th>vnames</th>
+      <td><p>name of each vehicle categoy (optional)</p></td>
+    </tr>
+    <tr>
+      <th>example</th>
+      <td><p>TRUE to diaplay a simple example</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -117,26 +120,26 @@
     
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>Return a list with the daily total emission by territory.</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame</p>
+    <p>data frame</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='rasterSource.html'>rasterSource</a></code>, <code><a href='lineSource.html'>lineSource</a></code> and <code><a href='emission.html'>emission</a></code></p>
+    <p><code><a href='areaSource.html'>areaSource</a></code> and  <code><a href='totalEmission.html'>totalEmission</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Do not run</span>
 
-<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>T</span>)
+<span class='no'>EF</span> <span class='kw'>&lt;-</span> <span class='fu'>emissionFactor</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>T</span>)
 
-<span class='no'>EmissionFactors</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='emissionFactor.html'>emissionFactor</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>T</span>)
-
-<span class='no'>TOTAL</span> <span class='kw'>&lt;-</span> <span class='fu'>totalEmission</span>(<span class='no'>veiculos</span>,<span class='no'>EmissionFactors</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"CO"</span>,<span class='st'>"PM"</span>))
+<span class='co'># or the code for the same result</span>
+<span class='no'>EF</span> <span class='kw'>&lt;-</span> <span class='fu'>emissionFactor</span>(<span class='kw'>ef</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>CO</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1.75</span>,<span class='fl'>10.04</span>,<span class='fl'>0.39</span>,<span class='fl'>0.45</span>,<span class='fl'>0.77</span>,<span class='fl'>1.48</span>,<span class='fl'>1.61</span>,<span class='fl'>0.75</span>),
+                               <span class='kw'>PM</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.0013</span>,<span class='fl'>0.0</span>,<span class='fl'>0.0010</span>,<span class='fl'>0.0612</span>,<span class='fl'>0.1052</span>,<span class='fl'>0.1693</span>,<span class='fl'>0.0</span>,<span class='fl'>0.0</span>)),
+                     <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Light duty Vehicles Gasohol"</span>,<span class='st'>"Light Duty Vehicles Ethanol"</span>,
+                                <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,<span class='st'>"Diesel urban busses"</span>,
+                                <span class='st'>"Diesel intercity busses"</span>,<span class='st'>"Gasohol motorcycles"</span>,
+                                <span class='st'>"Flex motorcycles"</span>))
 
 <span class='co'># }</span></pre>
   </div>
@@ -146,8 +149,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#format">Format</a></li>
-
-      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
