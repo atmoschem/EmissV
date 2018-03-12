@@ -23,6 +23,7 @@
 #' @param type type of vehicle by category (category length)
 #' @param fuel fuel type by category (category length)
 #' @param vnames name of each vehicle categoy (category length / NA)
+#' @param example a simple example
 #' @param verbose display additional information
 #'
 #' @seealso \code{\link{areaSource}} and  \code{\link{totalEmission}}
@@ -34,6 +35,9 @@
 #' @examples \dontrun{
 #' # Do not run
 #'
+#' veiculos <- vehicles(example = T)
+#'
+#' # or the code for the same result
 #' # DETRAN 2016 data and SP vahicle distribution
 #' veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
 #'                      area_name = c("SP", "RJ", "MG", "PR", "SC"),
@@ -49,13 +53,30 @@
 #'                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
 #'                                 "Diesel intercity busses","Gasohol motorcycles",
 #'                                 "Flex motorcycles"))
-#'
 #'}
 
 vehicles <- function(total_v,area_name = names(total_v),
                      distribution,category,type,fuel,vnames = NA,
+                     example = F,
                      verbose = T)
   {
+  if(example == T){
+    cat("using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):\n")
+    total_v = c(27332101, 6377484, 10277988, 7140439, 4772160)
+    area_name = c("SP", "RJ", "MG", "PR", "SC")
+    distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
+                      0.0290, 0.0008, 0.1181, 0.0086)
+    category =  c("LDV_E25","LDV_E100","LDV_F","TRUCKS_B5",
+                  "CBUS_B5","MBUS_B5","MOTO_E25","MOTO_F")
+    type = c("LDV", "LDV", "LDV","TRUCKS",
+             "BUS","BUS","MOTO", "MOTO")
+    fuel = c("E25", "E100", "FLEX","B5",
+             "B5","B5","E25", "FLEX")
+    vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+               "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
+               "Diesel intercity busses","Gasohol motorcycles",
+               "Flex motorcycles")
+  }
 
   frota <- data.frame(
     Estados = area_name,

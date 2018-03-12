@@ -2,6 +2,7 @@
 
 export(areaSource)
 export(emission)
+export(emissionFactor)
 export(gridInfo)
 export(lineSource)
 export(plumeRise)

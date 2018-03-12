@@ -6,7 +6,7 @@
 \format{data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.}
 \usage{
 vehicles(total_v, area_name = names(total_v), distribution, category, type,
-  fuel, vnames = NA, verbose = T)
+  fuel, vnames = NA, example = F, verbose = T)
 }
 \arguments{
 \item{total_v}{total of vehicles by area (area length)}
@@ -22,6 +22,8 @@ vehicles(total_v, area_name = names(total_v), distribution, category, type,
 \item{fuel}{fuel type by category (category length)}
 
 \item{vnames}{name of each vehicle categoy (category length / NA)}
+
+\item{example}{a simple example}
 
 \item{verbose}{display additional information}
 }
@@ -45,6 +47,9 @@ distribution, category, type, fuel and vnames (if used) must have the same lengt
 \dontrun{
 # Do not run
 
+veiculos <- vehicles(example = T)
+
+# or the code for the same result
 # DETRAN 2016 data and SP vahicle distribution
 veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
                      area_name = c("SP", "RJ", "MG", "PR", "SC"),
@@ -60,7 +65,6 @@ veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
                                 "Diesel intercity busses","Gasohol motorcycles",
                                 "Flex motorcycles"))
-
 }
 }
 \seealso{

@@ -11,6 +11,7 @@ functions:
 
 - read: read global inventories in netcdf format
 - vehicles: tool to set-up vehicle data.table
+- emissionfactor: tool to set-up emission factors data.table
 - gridInfo: read grid information from a NetCDF file
 - pointSource: emissions from point sources
 - plumeRise: calculate plume rise (in progress)
@@ -25,6 +26,10 @@ functions:
 datasets:
 
 - perfil: vehicle counting profile for vehicular activity
+- cut of image of persistent lights of the Defense Meteorological Satellite Program (DMSP)
+- CETESB 2015 emission factors
+- DETRAN / CETESB flet distributil for 2016
+- shapefiles for Brasil states
 
 ## Packages needed
 
