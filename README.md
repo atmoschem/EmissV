@@ -11,7 +11,7 @@ functions:
 
 - read: read global inventories in netcdf format
 - vehicles: tool to set-up vehicle data.table
-- emissionfactor: tool to set-up emission factors data.table
+- emissionFactor: tool to set-up emission factors data.table
 - gridInfo: read grid information from a NetCDF file
 - pointSource: emissions from point sources
 - plumeRise: calculate plume rise (in progress)
