@@ -35,9 +35,9 @@ emissionFactor <- function(ef,poluttant = names(ef), vnames = NA,unit = "g/km",e
   if(example == T){
     cat("using a example emission factor (values calculated from CETESB 2015):\n")
     EF <- as.data.frame.matrix(matrix(NA,ncol = 2,nrow = 8))
-    rownames(EF) <- c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
-                      "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-                      "Diesel intercity busses","Gasohol motorcycles","Flex motorcycles")
+    rownames(EF) <- c("Light Duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+                      "Light Duty Vehicles Flex","Diesel Trucks","Diesel Urban Busses",
+                      "Diesel Intercity Busses","Gasohol Motorcycles","Flex Motorcycles")
     names(EF) <- c("CO","PM")
     EF$CO <- units::as_units(c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),"g/km")
     EF$PM <- units::as_units(c(0.0013,0.0,0.0010,0.0612,0.1052,0.1693,0.0,0.0),"g/km")

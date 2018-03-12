@@ -72,10 +72,9 @@ vehicles <- function(total_v,area_name = names(total_v),
              "BUS","BUS","MOTO", "MOTO")
     fuel = c("E25", "E100", "FLEX","B5",
              "B5","B5","E25", "FLEX")
-    vnames = c("Light duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
-               "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
-               "Diesel intercity busses","Gasohol motorcycles",
-               "Flex motorcycles")
+    vnames = c("Light Duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
+               "Light Duty Vehicles Flex","Diesel Trucks","Diesel Urban Busses",
+               "Diesel Intercity Busses","Gasohol Motorcycles","Flex Motorcycles")
   }
 
   frota <- data.frame(
