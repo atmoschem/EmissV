@@ -104,8 +104,11 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F, 
     }
     area <- unname(area)
 
-    VAR_e  <- do.call(sp::merge,area)
-
+    if(length(area) > 1){
+      VAR_e  <- do.call(sp::merge,area)
+    }else{
+      VAR_e  <- area[[1]]
+    }
     VAR_e[is.na(VAR_e)]     <- 0
 
     VAR_e <- rasterSource(VAR_e,grid,verbose = F)
