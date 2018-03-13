@@ -115,6 +115,9 @@ vehicles <- function(total_v,area_name = names(total_v),
   }
   veh$Use <- veh$Use*units::as_units("km d-1")
   if(verbose){
+    if(!example){
+      print("vehicles:")
+    }
     print(veh)
   }
   return(veh)

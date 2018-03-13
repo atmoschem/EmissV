@@ -58,7 +58,8 @@ emissionFactor <- function(ef,poluttant = names(ef), vnames = NA,unit = "g/km",e
     row.names(EF) <- vnames
   }
   if(verbose){
-    print(summary(EF))
+    print("Emission factors:")
+    print(EF)
   }
   return(EF)
 }
