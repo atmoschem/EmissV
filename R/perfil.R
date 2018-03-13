@@ -1,8 +1,6 @@
 #' Temporal profile for veicular emissions
 #'
-#' @description List with data frames with temporal profile based on traffic count for Brazilian city Sao Paulo.
-#'
-#' LDV is for light vehicles and HDV for intencity of heavy vehicles.
+#' @description set of houtly profiles that represent the mean activity for each day of the week. These profiles comes from traffic counts of toll stations located in São Paulo city, for summer and winters of 2012, 2013 and 2014.
 #'
 #' @format A list of data frames by hour and weekday.
 #'
