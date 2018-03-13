@@ -49,11 +49,11 @@
 totalVOC <- function(v,ef,pol,verbose=T){
 
   units::install_symbolic_unit("MOL")
-  units::install_symbolic_unit("y")
+  # units::install_symbolic_unit("y")
   MOL <- units::make_unit("MOL")
-  y   <- units::make_unit("y")
-  units::install_conversion_constant("MOL/d", "MOL/y", 365 )
-  units::install_conversion_constant("g/d", "t/y", 365/1000000 )
+  # y   <- units::make_unit("y")
+  units::install_conversion_constant("MOL/d", "MOL/year", 365 )
+  units::install_conversion_constant("g/d", "t/year", 365/1000000 )
 
   voc_names <- c("eth","hc3","hc5","hc8","ol2",
                  "olt","oli","iso","tol","xyl",
@@ -163,7 +163,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
     uni2  <- units::set_units(1,"g d-1")
     total <- total * uni2
 
-    total_t_y <- units::set_units(total, "t/y")
+    total_t_y <- units::set_units(total, "t/year")
     print(paste("Total VOC:",sum(total_t_y),units::deparse_unit(total_t_y)))
   }
 
@@ -182,7 +182,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
     uni   <- units::as_units(1,"MOL/d")
     COV   <- COV * uni
     if(verb){
-      COV2 <- units::set_units(COV,"MOL/y",check_is_valid = F)
+      COV2 <- units::set_units(COV,"MOL/year",check_is_valid = F)
       print(paste(pol,sum(COV2),units::deparse_unit(COV2)))
     }
     return(COV)

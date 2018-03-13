@@ -57,14 +57,11 @@ totalEmission <- function(v,ef,pol,verbose = T){
       }
 
       if(verbose){
-        if(class(total) == "units"){
-          units::install_symbolic_unit("y")
-          y <- units::make_unit("y")
-          units::install_conversion_constant("g/d", "t/y", 365/1000000 )
-          total_t_y <- units::set_units(total,"t/y")
-          print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
-        }else
-          print(paste("Total of",pol[i],":",sum(total)))
+        # units::install_symbolic_unit("y")
+        # y <- units::make_unit("y")
+        units::install_conversion_constant("g/d", "t/year", 365/1000000 )
+        total_t_y <- units::set_units(total,"t/year")
+        print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
       }
       assign(pol[i],total)
     }
