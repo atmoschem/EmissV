@@ -11,6 +11,7 @@
 #' @param inventory a inventory raster from read
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
+#' @param plot TRUE for plot the final emissions
 #' @param verbose display additional information
 #'
 #' @note if Inventory is provided, the firsts tree arguments are not be used by the funciton.
@@ -25,7 +26,7 @@
 #'
 #' @export
 #'
-#' @import units raster
+#' @import units raster sp
 #'
 #' @examples \dontrun{
 #' # Do not run
@@ -47,7 +48,8 @@
 #' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm=28)
 #'}
 
-emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F, verbose = T){
+emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
+                     plot = F, verbose = T){
 
   if(!is.null(inventory)){
     if(verbose)
@@ -67,11 +69,31 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F, 
       ##  mol km-2 h-1
       VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
       units::install_symbolic_unit("MOL")
-      MOL <- units::make_unit("MOL")                           # new unit MOL
-      # install_conversion_constant("MOL","g",as.numeric(mm))  # new conversion
-      # VAR_e   =  units::set_units(VAR_e,"MOL km-2 h-1")      # n funcionou
+      MOL <- units::make_unit("MOL")
       conversao <- as_units(1/mm, "MOL g-1")
       VAR_e     <- VAR_e * conversao
+    }
+
+    if(plot == T){
+      col   <- grid$Horizontal[1]
+      rol   <- grid$Horizontal[2]
+      r.lat <- range(grid$Lat)
+      r.lon <- range(grid$Lon)
+      r     <- raster::raster(nrows=rol,ncols=col,
+                              xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
+                              crs= "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+
+      raster::values(r) <- as.matrix(as.numeric(VAR_e),ncol = col,nrow = row,byrow = T)
+      r                 <- raster::flip(r,2)
+
+      a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
+                      main=list(label=paste("Emisions of", POL ,"[",deparse_unit(VAR_e),"]")),
+                      col.regions = c("#031638","#001E48","#002756","#003062",
+                                      "#003A6E","#004579","#005084","#005C8E",
+                                      "#006897","#0074A1","#0081AA","#008FB3",
+                                      "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+
+      print(a)
     }
     return(VAR_e)
   }
@@ -138,6 +160,28 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F, 
     install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
+  }
+
+  if(plot == T){
+    col   <- grid$Horizontal[1]
+    rol   <- grid$Horizontal[2]
+    r.lat <- range(grid$Lat)
+    r.lon <- range(grid$Lon)
+    r     <- raster::raster(nrows=rol,ncols=col,
+                            xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
+                            crs= "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+
+    raster::values(r) <- as.matrix(as.numeric(VAR_e),ncol = col,nrow = row,byrow = T)
+    r                 <- raster::flip(r,2)
+
+    a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
+                    main=list(label=paste("Emisions of", pol ,"[",deparse_unit(VAR_e),"]")),
+                    col.regions = c("#031638","#001E48","#002756","#003062",
+                                    "#003A6E","#004579","#005084","#005C8E",
+                                    "#006897","#0074A1","#0081AA","#008FB3",
+                                    "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+
+    print(a)
   }
 
   return(VAR_e)
