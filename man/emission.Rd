@@ -6,7 +6,7 @@
 \format{matrix of emission}
 \usage{
 emission(total, pol, area, grid, inventory = NULL, mm = 1, aerosol = F,
-  verbose = T)
+  plot = F, verbose = T)
 }
 \arguments{
 \item{total}{list of total emission}
@@ -22,6 +22,8 @@ emission(total, pol, area, grid, inventory = NULL, mm = 1, aerosol = F,
 \item{mm}{pollutant molar mass}
 
 \item{aerosol}{TRUE for aerosols and FALSE (defoult) for gazes}
+
+\item{plot}{TRUE for plot the final emissions}
 
 \item{verbose}{display additional information}
 }
