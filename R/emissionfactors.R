@@ -4,9 +4,10 @@
 #'
 #' @format data frame
 #'
-#' @param ef a list with emission factors
+#' @param ef list with emission factors
 #' @param poluttant poluttant names
 #' @param vnames name of each vehicle categoy (optional)
+#' @param unit tring with unit from unit package, for default is "g/km"
 #' @param example TRUE to diaplay a simple example
 #' @param verbose display additional information
 #'

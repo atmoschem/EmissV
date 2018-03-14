@@ -9,11 +9,13 @@ emissionFactor(ef, poluttant = names(ef), vnames = NA, unit = "g/km",
   example = F, verbose = T)
 }
 \arguments{
-\item{ef}{a list with emission factors}
+\item{ef}{list with emission factors}
 
 \item{poluttant}{poluttant names}
 
 \item{vnames}{name of each vehicle categoy (optional)}
+
+\item{unit}{tring with unit from unit package, for default is "g/km"}
 
 \item{example}{TRUE to diaplay a simple example}
 

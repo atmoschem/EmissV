@@ -1,6 +1,6 @@
 Package: EmissV
 Title: Vehicular EMISSions by Top-down methods
-Version: 0.664.2
+Version: 0.664.3
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",

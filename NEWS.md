@@ -1,3 +1,7 @@
+## EmissV 0.664.3 (2018-03-14)
+- plot output in 'emissions()'
+- JOSS paper version
+
 ## EmissV 0.664.2 (2018-02-15)
 - function 'emissions()' integred with read() via Inventory argument
 
