@@ -25,11 +25,11 @@ functions:
 
 datasets:
 
-- perfil: vehicle counting profile for vehicular activity
-- sample of an image of persistent lights of the Defense Meteorological Satellite Program (DMSP)
-- CETESB 2015 emission factors as example
-- DETRAN 2016 data and SP vahicle distribution as example
-- shapefiles for Brasil states
+- Perfil: vehicle counting profile for vehicular activity
+- Sample of an image of persistent lights of the Defense Meteorological Satellite Program (DMSP)
+- CETESB 2015 emission factors as ```r emissionFactor(example=T)```
+- DETRAN 2016 data and SP vahicle distribution as ```r vehicles(example=T)```
+- Shapefiles for Brasil states
 
 ## Packages needed
 
