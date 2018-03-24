@@ -26,9 +26,9 @@ functions:
 datasets:
 
 - perfil: vehicle counting profile for vehicular activity
-- cut of image of persistent lights of the Defense Meteorological Satellite Program (DMSP)
-- CETESB 2015 emission factors
-- DETRAN 2016 data and SP vahicle distribution
+- sample of an image of persistent lights of the Defense Meteorological Satellite Program (DMSP)
+- CETESB 2015 emission factors as example
+- DETRAN 2016 data and SP vahicle distribution as example
 - shapefiles for Brasil states
 
 ## Packages needed
