@@ -21,16 +21,14 @@
 #'
 #'@import units
 #'
-#'@examples \dontrun{
+#'@examples
 #' # Do not run
 #'
-#' veiculos <- vehicles(example = T)
+#' veiculos <- vehicles(example = TRUE)
 #'
-#' EmissionFactors <- emissionFactor(example = T)
+#' EmissionFactors <- emissionFactor(example = TRUE)
 #'
 #' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","PM"))
-#'
-#'}
 
 totalEmission <- function(v,ef,pol,verbose = T){
 

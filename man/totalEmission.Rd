@@ -27,16 +27,13 @@ where n is the type of the veicle
 the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
 }
 \examples{
-\dontrun{
 # Do not run
 
-veiculos <- vehicles(example = T)
+veiculos <- vehicles(example = TRUE)
 
-EmissionFactors <- emissionFactor(example = T)
+EmissionFactors <- emissionFactor(example = TRUE)
 
 TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","PM"))
-
-}
 }
 \seealso{
 \code{\link{rasterSource}}, \code{\link{lineSource}} and \code{\link{emission}}

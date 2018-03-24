@@ -4,6 +4,9 @@
 \alias{areaSource}
 \title{Distribution of emissions by area}
 \format{a raster}
+\source{
+Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
+}
 \usage{
 areaSource(s, r, grid = NA, name = "", as_frac = F, verbose = T)
 }
@@ -23,18 +26,21 @@ areaSource(s, r, grid = NA, name = "", as_frac = F, verbose = T)
 \description{
 Calculate the spatial distribution by a raster kasked by shape/model grid information.
 }
+\details{
+About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+}
 \examples{
-\dontrun{
 # Do not run
 
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
-                            "/BR.shp",sep=""),verbose = F)
+                            "/BR.shp",sep=""),verbose = FALSE)
 shape  <- shape[22,1] # subset for Sao Paulo - BR
 raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
-                         "/sample.tiff",sep=""))
+                         "/dmsp.tiff",sep=""))
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 SP     <- areaSource(shape,raster,grid,name = "SPMA")
 
+\dontrun{
 sp::spplot(SP,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
            main=list(label="Spatial Distribution by Lights for Sao Paulo Metropolitan Area"),
            col.regions = c("#031638","#001E48","#002756","#003062",
@@ -42,4 +48,5 @@ sp::spplot(SP,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
                            "#006897","#0074A1","#0081AA","#008FB3",
                            "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
 }
+
 }

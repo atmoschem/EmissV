@@ -15,15 +15,14 @@ set of houtly profiles that represent the mean activity for each day of the week
 The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = hourly emission.
 }
 \examples{
-\dontrun{
 # Do not run
 
 # load the data
 data(perfil)
-
+\dontrun{
 # function to simple view
 plot.perfil <- function(per = perfil$LDV, text="", color = "#0000FFBB"){
-  plot(per[,1],ty = "l", ylim = range(per),axe = F,
+  plot(per[,1],ty = "l", ylim = range(per),axe = FALSE,
        xlab = "hour",ylab = "Intensity",main = text,col=color)
   for(i in 2:7){
     lines(per[,i],col = color)

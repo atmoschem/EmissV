@@ -25,13 +25,12 @@ Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (th
 The same ef can be used to totalEmission and voc
 }
 \examples{
-\dontrun{
 # Do not run
 
-veiculos <- vehicles(exemples = T)
+veiculos <- vehicles(example = TRUE)
 
 voc = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
-EF_voc <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = T),
+EF_voc <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = TRUE),
                         row.names = row.names(veiculos))
 names(EF_voc) <-  c("voc_vap_g","voc_vap_e","voc_vap_d",
                     "voc_liq_g","voc_liq_e","voc_liq_d",
@@ -50,7 +49,6 @@ EF_voc["voc_exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
 print(EF_voc)
 
 VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
-}
 }
 \seealso{
 \code{\link{totalEmission}} and \code{\link{vehicles}}

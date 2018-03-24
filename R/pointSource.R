@@ -12,7 +12,7 @@
 #'
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Do not run
 #' d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #'
@@ -22,7 +22,7 @@
 #'                emission = c(666,444,111  ) )
 #'
 #' p_emissions <- pointSource(emissions = p, grid = d1)
-#'
+#' \dontrun{
 #' spplot(p_emissions,scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
 #'        main = "3 point sources for domain d1")
 #'}

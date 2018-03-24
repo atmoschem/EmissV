@@ -1,3 +1,10 @@
+## EmissV 0.664.5 (2018-03-24)
+- all external data was reduced from 28mb to less than 1mb
+- examples update
+- functions messages update
+- links for more data sources to be used
+- exemples tested, with the eception of plots and read (no extra data added)
+
 ## EmissV 0.664.3 (2018-03-14)
 - plot output in 'emissions()'
 - JOSS paper version

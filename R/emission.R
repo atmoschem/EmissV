@@ -28,25 +28,25 @@
 #'
 #' @import units raster sp
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Do not run
 #'
-#' veiculos <- vehicles(example = T)
+#' veiculos <- vehicles(example = TRUE)
 #'
-#' EmissionFactors <- emissionFactor(example = T)
+#' EmissionFactors <- emissionFactor(example = TRUE)
 #'
-#' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = T)
+#' TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = TRUE)
 #'
 #' grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
 #' shape  <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
-#' raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/sample.tiff"))
+#' raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff"))
 #'
 #' SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 #' RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
 #' MG     <- areaSource(shape[12,1],raster,grid,name = "MG")
 #'
 #' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ, MG = MG),grid,mm=28)
-#'}
+#'
 
 emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
                      plot = F, verbose = T){

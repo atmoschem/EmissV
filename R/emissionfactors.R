@@ -17,10 +17,10 @@
 #'
 #' @import  units
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Do not run
 #'
-#' EF <- emissionFactor(example = T)
+#' EF <- emissionFactor(example = TRUE)
 #'
 #' # or the code for the same result
 #' EF <- emissionFactor(ef = list(CO = c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),
@@ -30,7 +30,6 @@
 #'                                 "Diesel intercity busses","Gasohol motorcycles",
 #'                                 "Flex motorcycles"))
 #'
-#'}
 
 emissionFactor <- function(ef,poluttant = names(ef), vnames = NA,unit = "g/km",example = F,verbose = T){
   if(example == T){
@@ -59,7 +58,7 @@ emissionFactor <- function(ef,poluttant = names(ef), vnames = NA,unit = "g/km",e
     row.names(EF) <- vnames
   }
   if(verbose){
-    print("Emission factors:")
+    cat("Emission factors:\n")
     print(EF)
   }
   return(EF)

@@ -20,12 +20,14 @@ Return a list containing information of a regular grid / domain
 just WRF-Chem is suported by now
 }
 \examples{
-\dontrun{
 # Do not run
 grid_d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-names(grid_d1)
+\dontrun{
 grid_d2 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 grid_d3 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d03",sep=""))
+names(grid_d1)
+# for plot the shapes
+library(sp)
 shape   <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
 plot(shape); axis(1); axis(2); box(); grid()
 lines(grid_d1$Box, col = "red")
