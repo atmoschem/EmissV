@@ -32,10 +32,10 @@
 #'
 #' @import  units
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Do not run
 #'
-#' veiculos <- vehicles(example = T)
+#' veiculos <- vehicles(example = TRUE)
 #'
 #' # or the code for the same result
 #' # DETRAN 2016 data and SP vahicle distribution
@@ -53,7 +53,6 @@
 #'                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
 #'                                 "Diesel intercity busses","Gasohol motorcycles",
 #'                                 "Flex motorcycles"))
-#'}
 
 vehicles <- function(total_v,area_name = names(total_v),
                      distribution,category,type,fuel,vnames = NA,
@@ -116,7 +115,7 @@ vehicles <- function(total_v,area_name = names(total_v),
   veh$Use <- veh$Use*units::as_units("km d-1")
   if(verbose){
     if(!example){
-      print("vehicles:")
+      cat("vehicles:\n")
     }
     print(veh)
   }

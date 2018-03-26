@@ -5,6 +5,8 @@
 \title{Distribution of emissions by a georeferenced image}
 \source{
 Exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+
+Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
 }
 \usage{
 rasterSource(r, grid, verbose = T)
@@ -22,14 +24,18 @@ Returns a matrix
 \description{
 Calculate the spatial distribution by a raster
 }
+\details{
+About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+}
 \examples{
-\dontrun{
 # Do not run
 grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 test  <- rasterSource(x,grid)
+\dontrun{
 image(test, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 }
+
 }
 \seealso{
 \code{\link{gridInfo}} and \code{\link{lineSource}}

@@ -23,7 +23,6 @@ Transform a set of points into a grinded output
 just emissions at surface level for a while
 }
 \examples{
-\dontrun{
 # Do not run
 d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 
@@ -33,7 +32,7 @@ p = data.frame(lat      = c(-22,-22,-23.5),
                emission = c(666,444,111  ) )
 
 p_emissions <- pointSource(emissions = p, grid = d1)
-
+\dontrun{
 spplot(p_emissions,scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
        main = "3 point sources for domain d1")
 }

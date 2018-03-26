@@ -44,10 +44,9 @@ total_v and area_name must have the same length.
 distribution, category, type, fuel and vnames (if used) must have the same length.
 }
 \examples{
-\dontrun{
 # Do not run
 
-veiculos <- vehicles(example = T)
+veiculos <- vehicles(example = TRUE)
 
 # or the code for the same result
 # DETRAN 2016 data and SP vahicle distribution
@@ -65,7 +64,6 @@ veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
                                 "Light Duty Vehicles Flex","Diesel trucks","Diesel urban busses",
                                 "Diesel intercity busses","Gasohol motorcycles",
                                 "Flex motorcycles"))
-}
 }
 \seealso{
 \code{\link{areaSource}} and  \code{\link{totalEmission}}

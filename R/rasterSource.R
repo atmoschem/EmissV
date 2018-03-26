@@ -16,13 +16,18 @@
 #'
 #' @import raster
 #'
-#' @examples \dontrun{
+#' @examples
 #' # Do not run
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-#' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/sample.tiff",sep=""))
+#' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 #' test  <- rasterSource(x,grid)
+#' \dontrun{
 #' image(test, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'}
+#'
+#'@source Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
+#'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+
 
 rasterSource <- function(r,grid,verbose = T){
 

@@ -25,10 +25,9 @@ emissionFactor(ef, poluttant = names(ef), vnames = NA, unit = "g/km",
 Return a data frame with vehicle information. Types argument defines the diary use:
 }
 \examples{
-\dontrun{
 # Do not run
 
-EF <- emissionFactor(example = T)
+EF <- emissionFactor(example = TRUE)
 
 # or the code for the same result
 EF <- emissionFactor(ef = list(CO = c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),
@@ -38,7 +37,6 @@ EF <- emissionFactor(ef = list(CO = c(1.75,10.04,0.39,0.45,0.77,1.48,1.61,0.75),
                                 "Diesel intercity busses","Gasohol motorcycles",
                                 "Flex motorcycles"))
 
-}
 }
 \seealso{
 \code{\link{areaSource}} and  \code{\link{totalEmission}}
