@@ -5,14 +5,16 @@
 \title{Calculate plume rise from Brigs (1975) formulation.}
 \format{numeric value in (units) meters}
 \usage{
-plumeRise(df, imax = 100, errmax = 0.1, verbose = T)
+plumeRise(df, imax = 1000, ermax = 1/100, Hmax = T, verbose = T)
 }
 \arguments{
 \item{df}{data.frame with micrometeorological and source data}
 
-\item{imax}{number of maximum interations}
+\item{imax}{maximum number of iteractions}
 
-\item{errmax}{maximum error}
+\item{ermax}{maximum error}
+
+\item{Hmax}{use weil limit for plume rise, see details}
 
 \item{verbose}{display additional information}
 }
@@ -23,9 +25,9 @@ Return plume rise height
 \dontrun{
 # Do not run
 
-chimney <- matrix(c(1,1,1,1,1,1,1,1,1,1),ncol = 10, byrow = T)
+chimney <- matrix(c(20,0.5,12,400,4,280,100,1,3.6,2.8),ncol = 10, byrow = T)
 chimney<- data.frame(chimney)
-names(chimney) <- c("z","r","Ve","Te","h","ws","Temp","Ustar","Wstar","L")
+names(chimney) <- c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar")
 
 chimay <- plumeRise(chimney)
 
