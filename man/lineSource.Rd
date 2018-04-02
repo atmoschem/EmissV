@@ -22,6 +22,7 @@ lineSource(s, grid, as_raster = F, verbose = T)
 Create a distribution from sp spatial lines data frame or spatial lines
 }
 \examples{
+\dontrun{
 # Do not run
 library("osmar")
 roads <- osmar::get_osm(complete_file(),
@@ -32,7 +33,7 @@ roads <- osmar::as_sp(roads,what = "lines")
 d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))
 
 roadLength <- lineSource(roads,d3,as_raster=TRUE)
-\dontrun{
+
 sp::spplot(roadLength, scales = list(draw=TRUE), ylab="Lat", xlab="Lon",main="Length of roads",
            sp.layout=list("sp.lines", roads))
 }
