@@ -23,7 +23,7 @@
 #'
 #'}
 
-plumeRise <- function(df, imax = 1000, ermax = 1/100, Hmax = T, verbose = T)
+plumeRise <- function(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
 {
   g      <- 9.81      # m / s2
   rise   <- rep(0,nrow(df))
@@ -60,23 +60,22 @@ plumeRise <- function(df, imax = 1000, ermax = 1/100, Hmax = T, verbose = T)
         Wd     <- 0.4 * Wstar # downdrafts mean speed
         a      <- ( Flu / U*Wd^2 )^(3/5)
         b      <- 2 * Hs
-        deltaH <- b
-        for(i in 1:imax){
-          old    <- deltaH
-          deltaH <- a * (1 + b/old)^2
-          # deltaH <- old + 0.1 * (old^3 / 2* b) * ((1 + b/old)^2 / (2*b*(b + old)))
-          # deltaH<- old - 0.1 * (3*b + old)/(2 * old)
+        x      <- Hs / 2
+        i      <- 1
+        err    <- Inf
+        while(err > ermax & i <= imax){
+          i      <- i + 1
+          f      <- x^3 - a*(x^2) -2*a*b*x -a*(b^2)
+          fl     <- 3*(x^2) -2*a*x -2*a*b
+          old    <- x
+          deltaH <- x - (f/fl)
           err    <- abs( (deltaH - old )/old )
-          print(paste("OLD=",old))
-          print(paste("Dh=",deltaH))
-          print(paste("err=",err))
-          print("========================================")
-          # print(paste("Dh=",deltaH))
-          # if(err <= ermax){
-          #   print(paste(i,"iterações"))
-          #   print(paste("Dh=",deltaH))
-          #   i = imax
-          # }
+          x      <- deltaH
+          if(verbose){
+            print(paste("Dh old=",old))
+            print(paste("err=",err))
+            print("=====================================================")
+          }
         }
       }else
         # neutral

@@ -5,7 +5,7 @@
 \title{Calculate plume rise from Brigs (1975) formulation.}
 \format{numeric value in (units) meters}
 \usage{
-plumeRise(df, imax = 1000, ermax = 1/100, Hmax = T, verbose = T)
+plumeRise(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
 }
 \arguments{
 \item{df}{data.frame with micrometeorological and source data}
