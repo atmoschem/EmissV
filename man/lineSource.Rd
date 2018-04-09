@@ -24,10 +24,9 @@ Create a distribution from sp spatial lines data frame or spatial lines
 \examples{
 \dontrun{
 # Do not run
-library("osmar")
-roads <- osmar::get_osm(complete_file(),
-                          source = osmsource_file(paste(system.file("extdata",package="EmissV"),
-                                               "/streets.osm.xz",sep="")))
+roads <- osmar::get_osm(osmar::complete_file(),
+                        source = osmar::osmsource_file(paste(system.file("extdata",
+                        package="EmissV"),"/streets.osm.xz",sep="")))
 roads <- osmar::as_sp(roads,what = "lines")
 
 d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))

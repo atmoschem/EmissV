@@ -4,12 +4,12 @@
 \alias{gridInfo}
 \title{Read grid information from a NetCDF file}
 \usage{
-gridInfo(file = file.choose(), levels = 1, verbose = T)
+gridInfo(file = file.choose(), z = F, verbose = T)
 }
 \arguments{
 \item{file}{file name/path to a wrfinput of wrfchemi file}
 
-\item{levels}{number of levels}
+\item{z}{TRUE for read wrfinput vertical coordinades}
 
 \item{verbose}{display additional information}
 }
@@ -29,7 +29,8 @@ names(grid_d1)
 # for plot the shapes
 library(sp)
 shape   <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
-plot(shape); axis(1); axis(2); box(); grid()
+plot(shape,xlim = c(-55,-40),ylim = c(-30,-15), main="3 nested domains")
+axis(1); axis(2); box(); grid()
 lines(grid_d1$Box, col = "red")
 text(grid_d1$xlim[2],grid_d1$Ylim[1],"d1",pos=4, offset = 0.5)
 lines(grid_d2$Box, col = "red")

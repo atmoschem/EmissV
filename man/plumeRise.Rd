@@ -3,12 +3,12 @@
 \name{plumeRise}
 \alias{plumeRise}
 \title{Calculate plume rise from Brigs (1975) formulation.}
-\format{numeric value in (units) meters}
+\format{data.frame with the input, rise (m) and effective higt (m)}
 \usage{
-plumeRise(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
+plumeRise(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
 }
 \arguments{
-\item{df}{data.frame with micrometeorological and source data}
+\item{df}{data.frame with micrometeorological and emission data}
 
 \item{imax}{maximum number of iteractions}
 
@@ -19,17 +19,58 @@ plumeRise(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
 \item{verbose}{display additional information}
 }
 \description{
-Return plume rise height
+Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.
+}
+\details{
+The input data.frame must contains the folloging colluns:
+
+- z: height of the emission (m)
+
+- r: source raius (m)
+
+- Ve: emission velocity (m/s)
+
+- Te: emission temperature (K)
+
+- ws: wind speed (m/s)
+
+- Temp: ambient temperature (K)
+
+- h: height of the Atmospheric Boundary Layer-ABL (m)
+
+- L: Monin-Obuhkov Lench (m)
+
+- dtdz: lapse ration of potential temperature, used only for stable ABL (K/m)
+
+- Ustar: atriction velocity, used only for neutral ABL (m/s)
+
+- Wstar: scale of convectie velocity, used only for convective ABL (m/s)
+
+Addcitionaly some combination of ws, Wstar and Ustar can produce inacurate results, Weil (1979) propose a geometric limit of 0.62 * (h - Hs) for the rise value.
 }
 \examples{
-\dontrun{
 # Do not run
 
-chimney <- matrix(c(20,0.5,12,400,4,280,100,1,3.6,2.8),ncol = 10, byrow = T)
-chimney<- data.frame(chimney)
-names(chimney) <- c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar")
-
-chimay <- plumeRise(chimney)
+candiota <- matrix(c(150,1,20,420,3.11,273.15 + 3.16,200,-34.86,3.11,0.33,
+                     150,1,20,420,3.81,273.15 + 4.69,300,-34.83,3.81,0.40,
+                     150,1,20,420,3.23,273.15 + 5.53,400,-24.43,3.23,0.48,
+                     150,1,20,420,3.47,273.15 + 6.41,500,-15.15,3.48,0.52,
+                     150,1,20,420,3.37,273.15 + 6.35,600, -8.85,3.37,2.30,
+                     150,1,20,420,3.69,273.15 + 5.93,800,-10.08,3.69,2.80,
+                     150,1,20,420,3.59,273.15 + 6.08,800, -7.23,3.49,1.57,
+                     150,1,20,420,4.14,273.15 + 6.53,900,-28.12,4.14,0.97),
+                     ncol = 10, byrow = TRUE)
+candiota <- data.frame(candiota)
+names(candiota) <- c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar")
+row.names(candiota) <- c("08:00","09:00",paste(10:15,":00",sep=""))
+candiota <- plumeRise(candiota,Hmax = TRUE)
+print(candiota)
 
 }
+\references{
+The plume rise formulas are from Brigs (1975):"Brigs, G. A. Plume rise predictions, Lectures on Air Pollution and Environmental Impact Analyses. Amer. Meteor. Soc. p. 59-111, 1975." and Arya 1999: "Arya, S.P., 1999, Air Pollution Meteorology and Dispersion, Oxford University Press, New York, 310 p."
+
+The limits are from Weil (1979): "WEIL, J.C. Assessmet of plume rise and dispersion models using LIDAR data, PPSP-MP-24. Prepared by Environmental Center, Martin Marietta Corporation, for Maryland Department of Natural Resources. 1979."
+
+The example is data from a chimney of the Candiota thermoelectric powerplant from Arabage et al (2006) "Arabage, M. C.; Degrazia, G. A.; Moraes O. L. Simulação euleriana da dispersão local da pluma de poluente atmosférico de Candiota-RS. Revista Brasileira de Meteorologia, v.21, n.2, p. 153-160, 2006."
 }

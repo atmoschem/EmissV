@@ -33,7 +33,7 @@ grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d0
 x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 test  <- rasterSource(x,grid)
 \dontrun{
-image(test, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
+image(test,axe = F, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 }
 
 }

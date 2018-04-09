@@ -28,7 +28,7 @@
 #'
 #' \dontrun{
 #' sp::spplot(SP,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-#'            main=list(label="Spatial Distribution by Lights for Sao Paulo Metropolitan Area"),
+#'            main=list(label="Spatial Distribution by Lights for Sao Paulo - Brazil"),
 #'            col.regions = c("#031638","#001E48","#002756","#003062",
 #'                            "#003A6E","#004579","#005084","#005C8E",
 #'                            "#006897","#0074A1","#0081AA","#008FB3",

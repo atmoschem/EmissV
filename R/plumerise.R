@@ -1,10 +1,10 @@
 #' Calculate plume rise from Brigs (1975) formulation.
 #'
-#' @description Return plume rise height
+#' @description Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.
 #'
-#' @format numeric value in (units) meters
+#' @format data.frame with the input, rise (m) and effective higt (m)
 #'
-#' @param df data.frame with micrometeorological and source data
+#' @param df data.frame with micrometeorological and emission data
 #' @param imax maximum number of iteractions
 #' @param ermax maximum error
 #' @param Hmax use weil limit for plume rise, see details
@@ -12,19 +12,60 @@
 #'
 #' @export
 #'
-#' @examples \dontrun{
+#' @references The plume rise formulas are from Brigs (1975):"Brigs, G. A. Plume rise predictions, Lectures on Air Pollution and Environmental Impact Analyses. Amer. Meteor. Soc. p. 59-111, 1975." and Arya 1999: "Arya, S.P., 1999, Air Pollution Meteorology and Dispersion, Oxford University Press, New York, 310 p."
+#'
+#' The limits are from Weil (1979): "WEIL, J.C. Assessmet of plume rise and dispersion models using LIDAR data, PPSP-MP-24. Prepared by Environmental Center, Martin Marietta Corporation, for Maryland Department of Natural Resources. 1979."
+#'
+#' The example is data from a chimney of the Candiota thermoelectric powerplant from Arabage et al (2006) "Arabage, M. C.; Degrazia, G. A.; Moraes O. L. Simulação euleriana da dispersão local da pluma de poluente atmosférico de Candiota-RS. Revista Brasileira de Meteorologia, v.21, n.2, p. 153-160, 2006."
+#'
+#' @details The input data.frame must contains the folloging colluns:
+#'
+#' - z: height of the emission (m)
+#'
+#' - r: source raius (m)
+#'
+#' - Ve: emission velocity (m/s)
+#'
+#' - Te: emission temperature (K)
+#'
+#' - ws: wind speed (m/s)
+#'
+#' - Temp: ambient temperature (K)
+#'
+#' - h: height of the Atmospheric Boundary Layer-ABL (m)
+#'
+#' - L: Monin-Obuhkov Lench (m)
+#'
+#' - dtdz: lapse ration of potential temperature, used only for stable ABL (K/m)
+#'
+#' - Ustar: atriction velocity, used only for neutral ABL (m/s)
+#'
+#' - Wstar: scale of convectie velocity, used only for convective ABL (m/s)
+#'
+#' Addcitionaly some combination of ws, Wstar and Ustar can produce inacurate results, Weil (1979) propose a geometric limit of 0.62 * (h - Hs) for the rise value.
+#'
+#' @examples
 #' # Do not run
 #'
-#' chimney <- matrix(c(20,0.5,12,400,4,280,100,1,3.6,2.8),ncol = 10, byrow = T)
-#' chimney<- data.frame(chimney)
-#' names(chimney) <- c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar")
+#' candiota <- matrix(c(150,1,20,420,3.11,273.15 + 3.16,200,-34.86,3.11,0.33,
+#'                      150,1,20,420,3.81,273.15 + 4.69,300,-34.83,3.81,0.40,
+#'                      150,1,20,420,3.23,273.15 + 5.53,400,-24.43,3.23,0.48,
+#'                      150,1,20,420,3.47,273.15 + 6.41,500,-15.15,3.48,0.52,
+#'                      150,1,20,420,3.37,273.15 + 6.35,600, -8.85,3.37,2.30,
+#'                      150,1,20,420,3.69,273.15 + 5.93,800,-10.08,3.69,2.80,
+#'                      150,1,20,420,3.59,273.15 + 6.08,800, -7.23,3.49,1.57,
+#'                      150,1,20,420,4.14,273.15 + 6.53,900,-28.12,4.14,0.97),
+#'                      ncol = 10, byrow = TRUE)
+#' candiota <- data.frame(candiota)
+#' names(candiota) <- c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar")
+#' row.names(candiota) <- c("08:00","09:00",paste(10:15,":00",sep=""))
+#' candiota <- plumeRise(candiota,Hmax = TRUE)
+#' print(candiota)
 #'
-#' chimay <- plumeRise(chimney)
-#'
-#'}
 
-plumeRise <- function(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
+plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
 {
+  if(imax < 2) imax = 2
   g      <- 9.81      # m / s2
   rise   <- rep(0,nrow(df))
   He     <- rep(0,nrow(df))
@@ -40,71 +81,89 @@ plumeRise <- function(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
     U    <- df$ws[j]     # vel média do vento
     Ta   <- df$Temp[j]   # temperatura
     h    <- df$h[j]      # altura da camada limite planetária
-    L    <- abs(df$L[j]) # comp monin-obukov
-    Wstar<- df$Wstar[j]  # w*
-    Ustar<- df$Ustar[j]  # u*
+    L    <- df$L[j]      # comp monin-obukov
 
     # termo de flutuabilidade
-    Flu  <- g * Vi * r^2 * (Ti - Ta)/Ti
+    Flu  <- g * Vi * r^2 * abs(Ti - Ta)/Ti
+    i    <- 1
 
     # convecção forte
-    if(h/L > 10){
+    if(h/abs(L) > 10 & L < 0){
       if(verbose)
         print(paste("strong convective, h/L =",h/L))
+      Wstar<- df$Wstar[j]  # w*
       deltaH <- 4.3 * (Flu / (U * Wstar^2))^(3/5) * h^(2/5)
     }else
       # moderadamente convectivas
-      if(h/L <= 10 & h/L > 1){
+      if(h/abs(L) <= 10 & h/abs(L) > 1 & L < 0){
         if(verbose)
           print(paste("convective, h/L =",h/L))
+        Wstar<- df$Wstar[j]  # w*
         Wd     <- 0.4 * Wstar # downdrafts mean speed
         a      <- ( Flu / U*Wd^2 )^(3/5)
         b      <- 2 * Hs
         x      <- Hs / 2
-        i      <- 1
         err    <- Inf
-        while(err > ermax & i <= imax){
-          i      <- i + 1
+        while(err > ermax & i < imax){
+          i      <- i+1
           f      <- x^3 - a*(x^2) -2*a*b*x -a*(b^2)
           fl     <- 3*(x^2) -2*a*x -2*a*b
           old    <- x
           deltaH <- x - (f/fl)
           err    <- abs( (deltaH - old )/old )
           x      <- deltaH
-          if(verbose){
-            print(paste("Dh old=",old))
-            print(paste("err=",err))
-            print("=====================================================")
-          }
+          # if(verbose){
+          #   print(paste("Dh old=",old))
+          #   print(paste("err=",err))
+          #   print("=====================================================")
+          # }
         }
       }else
         # neutral
-        if(h/L <= 1 & h/L > 0.001){
+        if(h/abs(L) <= 1 & h/abs(L) >= 0.0 & L < 0.0){
           if(verbose)
             print(paste("neutral, h/L =",h/L))
-          deltaH <- (1.3 * Flu / (U * Ustar^2))^0.6
-          for(i in 1:imax){
-            old    <- deltaH
-            deltaH <- 1.3 * (Flu / (U * Ustar^2)) * (1 + Hs/deltaH)^(2/3)
-            err    <- (deltaH - old )/old
-            if(err <= ermax){
-              # print(paste(i,"iterações"))
-              i = imax
-            }
+          Ustar<- df$Ustar[j]  # u*
+          a   <- ((1.3 * Flu) /(U * Ustar))^(3)
+          x   <- Hs / 4
+          err <- Inf
+          while(err > ermax & i< imax){
+            i      <- i+1
+            f      <- x^5 -a*x^2 -2*a*x*Hs -2*a*Hs^2
+            fl     <- 5*x^4 -2*a*x -2*a*Hs
+            old    <- x
+            deltaH <- x - (f/fl)
+            err    <- abs( (deltaH - old )/old )
+            x      <- deltaH
+            # if(verbose){
+            #   print(paste("Dh old=",old))
+            #   print(paste("err=",err))
+            #   print("=====================================================")
+            # }
           }
         }else
           # stable
-          if(h/L <=  0.001){
-            if(verbose)
-              print(paste("stable, h/L =",h/L))
-            deltaH <- 0
+          if(h/L > 1.0){
+            dtdz <- df$dtdz[j]   # gradiente vertical de temperatura
+            s <- (g/Ta) * dtdz
+            if(U <= 1){
+              if(verbose)
+                print(paste("stable, h/L =",h/L,"- calm,","U=",U,"m/s"))
+              deltaH <- 5 * Flu^(1/4) * s^(3/5)
+            }else{
+              if(verbose)
+                print(paste("stable, h/L =",h/L,"- windy,","U=",U,"m/s"))
+              deltaH <- 2.6 * (Flu/(U*s))^(1/3)
+            }
           }
+    if(i == imax)
+      print("* max iterations reached!")
     # criterio de Weil (1979)
     if(Hmax){
       weil    <- 0.62 * (h - Hs)
-      if(verbose)
-        print(paste("weil max=",weil))
       rise[j] = min(deltaH,weil)
+      if(verbose & weil < deltaH)
+        print(paste("using weil max=",weil))
     }else{
       rise[j] = deltaH
     }
@@ -114,90 +173,3 @@ plumeRise <- function(df, imax = 1000, ermax = 1/1000, Hmax = T, verbose = T)
   df <- cbind(df,He)
   return(df)
 }
-# !     ******************* PLUME RISE **********************
-#
-#   !      SUBROUTINE PRISE(L,Q,QEFF,ALT,WE,UR,AFOE,HF,AFO,DH,US,NE,NR,FBE,FB,ES,pkr,tss,tff,d,vs)
-# SUBROUTINE PRISE(L,Q,QEFF,ALT,WE,UR,AFOE,AFO,DH,US,FBE,FB,ES,tss,tff,d,vs)
-# IMPLICIT REAL*8 (A-Z)
-# REAL*8 USTAR,ELLE,WSTAR,HMX,ES,tff,tss,d,vs	  !hf,
-# REAL*8 HS,US,TS,AFO,FB,GRADT,DH,ESSE,QEFF,FBE !,AA,AJ,AL,GU,PU
-# !INTEGER NE,NR,pkr
-#
-# d=9.
-# FB=9.81*((D/2.)**2.)*VS*((Tss-Tff)/Tss)
-# FBE=FB/(US*ALT*(WE**2.))
-# !      FBE=FB/(US*ALT*(WE**2.))
-# USTAR=UR
-# WSTAR=WE
-# HMX=ALT
-# TS=300.
-# !	ts=tff  !ts(temperatura ambiente),gradt(grad de temperatura)
-# GRADT=0.01
-# HS=AFO
-# ELLE=L
-# DHCONV1=10000.
-# DHCONV2=10000.
-# DHSTAB1=10000.
-# DHSTAB2=10000.
-# !     **************** NEUTRAL  CONDITIONS ****************
-#   A=(1.3*(FB/(US*USTAR**2)))**0.6
-# DHNEUT=HS
-# 10 DHPRV=DHNEUT
-# ZCALC=HS+DHNEUT
-# DHNEUT=A*ZCALC**0.4
-# IF (ABS(DHNEUT-DHPRV).GT.0.01*DHPRV) GOTO 10
-# !     *************** CONVECTIVE CONDITIONS ***************
-#   IF (ELLE.LT.0.) THEN
-# !     ******************* BREAKUP MODEL *******************
-#   DHCONV1=4.3*((FB/(US*WSTAR**2.))**0.6)*HMX**0.4
-# !     ****************** TOUCHDOWN MODEL ******************
-#   B=(FB/(US*0.16*WSTAR**2.)**0.33333)
-# DHCONV2=HS
-# 47 DHCPRV=DHCONV2
-# YCALC=2.*HS+DHCONV2
-# DHCONV2=B*YCALC**0.66666
-# IF(ABS(DHCONV2-DHCPRV).GT.0.01*DHCPRV) GOTO 47
-# IF(HS+DHCONV1.GT.HMX) DHCONV1=10000.
-# IF(HS+DHCONV2.GT.HMX) DHCONV2=10000.
-# !     ****************** STABLE CONDITIONS ****************
-#   ELSE
-# ESSE=(9.81/TS)*(GRADT+0.01)
-# DHSTAB1=2.6*(FB/(US*ESSE))**0.3333
-# DHSTAB2=5.*FB**(1./4.)/ESSE**(3./8.)
-# ENDIF
-# DH=MIN(DHNEUT,DHCONV1,DHCONV2,DHSTAB1,DHSTAB2)
-# QEFF=Q
-# !     ***************** PLUME PENETRATION *****************
-#   IF(DH.GE.(0.62*(HMX-HS))) THEN
-# DHT1=MIN(DHCONV1,DHCONV2,DHNEUT)
-# HMX1=HMX-HS
-# GRADT=0.01
-# ESSE=(9.81/TS)*(GRADT+0.01)
-# DHI=4.*FB**(1./4.)*ESSE**(-3./8.)
-# A1=MAX(0.1,DHI)
-# P=(HMX-HS)/A1
-# IF (P.GE.1.5) PEN=0.
-# IF (P.LE.0.5) PEN=1.
-# IF (P.GT.0.5.AND.P.LT.1.5) PEN=1.5-HMX1/DHI
-# IF (PEN.EQ.1) THEN
-# QEFF=0.1
-# DH=HMX1
-# ELSE IF (PEN.EQ.0)THEN
-# QEFF=Q
-# DH=MIN(DHT1,0.62*HMX1)
-# ELSE IF(PEN.GT.0.AND.PEN.LT.1.)THEN
-# IF(DHT1.GE.(0.62*HMX1))THEN
-# QEFF=Q*(1-PEN)
-# DH=(0.62+0.38*PEN)*(HMX-HS)
-# ELSE
-# QEFF=Q
-# DH=DHT1
-# ENDIF
-# ENDIF
-# ENDIF
-# IF(PEN.NE.0.) THEN
-# ES=Q-QEFF
-# ENDIF
-# AFOE=AFO + DH
-# RETURN
-# END

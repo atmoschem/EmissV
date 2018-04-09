@@ -23,8 +23,8 @@
 #'
 #' p_emissions <- pointSource(emissions = p, grid = d1)
 #' \dontrun{
-#' spplot(p_emissions,scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
-#'        main = "3 point sources for domain d1")
+#' sp::spplot(p_emissions,scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
+#'            main = "3 point sources for domain d1")
 #'}
 #'
 #' @note just emissions at surface level for a while
@@ -32,19 +32,38 @@
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
 pointSource <- function(emissions, grid, verbose=T){
-  col    <- grid$Horizontal[1]
-  rol    <- grid$Horizontal[2]
-  r.lat  <- range(grid$Lat)
-  r.lon  <- range(grid$Lon)
-  emis   <- raster::raster(nrows=rol,ncols=col,
-                           xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2]
-                           ,crs="+proj=longlat +ellps=GRS80 +no_defs")
-  values(emis) <- rep(0,ncell(emis))
+  if(is.na(grid$z)){
+    col    <- grid$Horizontal[1]
+    rol    <- grid$Horizontal[2]
+    r.lat  <- range(grid$Lat)
+    r.lon  <- range(grid$Lon)
+    emis   <- raster::raster(nrows=rol,ncols=col,
+                             xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2]
+                             ,crs="+proj=longlat +ellps=GRS80 +no_defs")
+    values(emis) <- rep(0,ncell(emis))
 
-  for(i in 1:length(emissions[[1]])){
-    id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
-                       cellnumbers=TRUE)[1]
-    emis[id.cell] <- emissions$e[i]
+    for(i in 1:length(emissions[[1]])){
+      id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
+                         cellnumbers=TRUE)[1]
+      emis[id.cell] <- emissions$e[i]
+    }
+  }else{
+    col    <- grid$Horizontal[1]
+    rol    <- grid$Horizontal[2]
+    r.lat  <- range(grid$Lat)
+    r.lon  <- range(grid$Lon)
+    z      <- grid$z
+    emis   <- raster::brick(nrows=rol,ncols=col,nl = dim(z)[3],
+                             xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2]
+                             ,crs="+proj=longlat +ellps=GRS80 +no_defs")
+    values(emis) <- rep(0,ncell(emis))
+
+    for(i in 1:length(emissions[[1]])){
+      id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
+                         cellnumbers=TRUE)[1]
+      # em qual layer colocar?
+      emis[id.cell] <- emissions$e[i]
+    }
   }
 
   return(emis)
