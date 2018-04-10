@@ -32,7 +32,7 @@
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
 pointSource <- function(emissions, grid, verbose=T){
-  if(is.na(grid$z)){
+  if(is.na(grid$z[1])){
     col    <- grid$Horizontal[1]
     rol    <- grid$Horizontal[2]
     r.lat  <- range(grid$Lat)
@@ -45,6 +45,12 @@ pointSource <- function(emissions, grid, verbose=T){
     for(i in 1:length(emissions[[1]])){
       id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
                          cellnumbers=TRUE)[1]
+      if(verbose){
+        xy <- xyFromCell(emis,id.cell)
+        lon <- xy[1]
+        lat <- xy[2]
+        print(paste("grid position","lat=",lat,"lon=",lon))
+      }
       emis[id.cell] <- emissions$e[i]
     }
   }else{
@@ -61,10 +67,34 @@ pointSource <- function(emissions, grid, verbose=T){
     for(i in 1:length(emissions[[1]])){
       id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
                          cellnumbers=TRUE)[1]
-      # em qual layer colocar?
-      emis[id.cell] <- emissions$e[i]
+      altura  <- z[rowFromCell(emis, id.cell),rowFromCell(emis, id.cell),]
+      if(verbose){
+        xy <- xyFromCell(emis,id.cell)
+        lon <- xy[1]
+        lat <- xy[2]
+        print(paste("Layer limits for grid position","lat=",lat,"lon=",lon))
+        for(k in 1:length(altura)){
+          print(paste("  height=", altura[k],"k=",k))
+        }
+      }
+      if(emissions$z[i] < altura[2]){
+        a     <- 1
+        print(paste("Emission heigh between", altura[1],"and",altura[2],"at k=",a,
+                    "for z=",emissions$z[i]))
+        cat("\n")
+      }
+      for(k in 2:length(altura)){
+        if(emissions$z[i] >= altura[k-1] & emissions$z[i] < altura[k]){
+          a <- k -1
+          if(verbose){
+            print(paste("Emission heigh between", altura[k-1],"and",altura[k],"at k=",a,
+                        "for z=",emissions$z[i]))
+            cat("\n")
+          }
+        }
+      }
+      emis[id.cell][a] <- emissions$e[i]
     }
   }
-
   return(emis)
 }

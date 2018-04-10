@@ -9,7 +9,7 @@ Exemple data from image of persistent lights of the Defense Meteorological Satel
 Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
 }
 \usage{
-rasterSource(r, grid, verbose = T)
+rasterSource(r, grid, nlevels = "all", verbose = T)
 }
 \arguments{
 \item{r}{input raster object}
