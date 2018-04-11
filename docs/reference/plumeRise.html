@@ -87,25 +87,29 @@
     </div>
 
     
-    <p>Return plume rise height</p>
+    <p>Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.</p>
     
 
-    <pre class="usage"><span class='fu'>plumeRise</span>(<span class='no'>df</span>, <span class='kw'>imax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>errmax</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>plumeRise</span>(<span class='no'>df</span>, <span class='kw'>imax</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ermax</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>, <span class='kw'>Hmax</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame with micrometeorological and source data</p></td>
+      <td><p>data.frame with micrometeorological and emission data</p></td>
     </tr>
     <tr>
       <th>imax</th>
-      <td><p>number of maximum interations</p></td>
+      <td><p>maximum number of iteractions</p></td>
     </tr>
     <tr>
-      <th>errmax</th>
+      <th>ermax</th>
       <td><p>maximum error</p></td>
+    </tr>
+    <tr>
+      <th>Hmax</th>
+      <td><p>use weil limit for plume rise, see details</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -115,20 +119,66 @@
     
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>numeric value in (units) meters</p>
+    <p>data.frame with the input, rise (m) and effective higt (m)</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The input data.frame must contains the folloging colluns:</p>
+<p>- z: height of the emission (m)</p>
+<p>- r: source raius (m)</p>
+<p>- Ve: emission velocity (m/s)</p>
+<p>- Te: emission temperature (K)</p>
+<p>- ws: wind speed (m/s)</p>
+<p>- Temp: ambient temperature (K)</p>
+<p>- h: height of the Atmospheric Boundary Layer-ABL (m)</p>
+<p>- L: Monin-Obuhkov Lench (m)</p>
+<p>- dtdz: lapse ration of potential temperature, used only for stable ABL (K/m)</p>
+<p>- Ustar: atriction velocity, used only for neutral ABL (m/s)</p>
+<p>- Wstar: scale of convectie velocity, used only for convective ABL (m/s)</p>
+<p>Addcitionaly some combination of ws, Wstar and Ustar can produce inacurate results, Weil (1979) propose a geometric limit of 0.62 * (h - Hs) for the rise value.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>The plume rise formulas are from Brigs (1975):"Brigs, G. A. Plume rise predictions, Lectures on Air Pollution and Environmental Impact Analyses. Amer. Meteor. Soc. p. 59-111, 1975." and Arya 1999: "Arya, S.P., 1999, Air Pollution Meteorology and Dispersion, Oxford University Press, New York, 310 p."</p>
+<p>The limits are from Weil (1979): "WEIL, J.C. Assessmet of plume rise and dispersion models using LIDAR data, PPSP-MP-24. Prepared by Environmental Center, Martin Marietta Corporation, for Maryland Department of Natural Resources. 1979."</p>
+<p>The example is data from a chimney of the Candiota thermoelectric powerplant from Arabage et al (2006) "Arabage, M. C.; Degrazia, G. A.; Moraes O. L. Simulação euleriana da dispersão local da pluma de poluente atmosférico de Candiota-RS. Revista Brasileira de Meteorologia, v.21, n.2, p. 153-160, 2006."</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Do not run</span>
+    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
 
-<span class='no'>chimney</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>),<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='no'>T</span>)
-<span class='no'>chimney</span><span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='no'>chimney</span>)
-<span class='fu'>names</span>(<span class='no'>chimney</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"z"</span>,<span class='st'>"r"</span>,<span class='st'>"Ve"</span>,<span class='st'>"Te"</span>,<span class='st'>"h"</span>,<span class='st'>"ws"</span>,<span class='st'>"Temp"</span>,<span class='st'>"Ustar"</span>,<span class='st'>"Wstar"</span>,<span class='st'>"L"</span>)
-
-<span class='no'>chimay</span> <span class='kw'>&lt;-</span> <span class='fu'>plumeRise</span>(<span class='no'>chimney</span>)
-
-<span class='co'># }</span></pre>
+<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.11</span>,<span class='fl'>273.15</span> + <span class='fl'>3.16</span>,<span class='fl'>200</span>,-<span class='fl'>34.86</span>,<span class='fl'>3.11</span>,<span class='fl'>0.33</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.81</span>,<span class='fl'>273.15</span> + <span class='fl'>4.69</span>,<span class='fl'>300</span>,-<span class='fl'>34.83</span>,<span class='fl'>3.81</span>,<span class='fl'>0.40</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.23</span>,<span class='fl'>273.15</span> + <span class='fl'>5.53</span>,<span class='fl'>400</span>,-<span class='fl'>24.43</span>,<span class='fl'>3.23</span>,<span class='fl'>0.48</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.47</span>,<span class='fl'>273.15</span> + <span class='fl'>6.41</span>,<span class='fl'>500</span>,-<span class='fl'>15.15</span>,<span class='fl'>3.48</span>,<span class='fl'>0.52</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.37</span>,<span class='fl'>273.15</span> + <span class='fl'>6.35</span>,<span class='fl'>600</span>, -<span class='fl'>8.85</span>,<span class='fl'>3.37</span>,<span class='fl'>2.30</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.69</span>,<span class='fl'>273.15</span> + <span class='fl'>5.93</span>,<span class='fl'>800</span>,-<span class='fl'>10.08</span>,<span class='fl'>3.69</span>,<span class='fl'>2.80</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.59</span>,<span class='fl'>273.15</span> + <span class='fl'>6.08</span>,<span class='fl'>800</span>, -<span class='fl'>7.23</span>,<span class='fl'>3.49</span>,<span class='fl'>1.57</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>4.14</span>,<span class='fl'>273.15</span> + <span class='fl'>6.53</span>,<span class='fl'>900</span>,-<span class='fl'>28.12</span>,<span class='fl'>4.14</span>,<span class='fl'>0.97</span>),
+                     <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='no'>candiota</span>)
+<span class='fu'>names</span>(<span class='no'>candiota</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"z"</span>,<span class='st'>"r"</span>,<span class='st'>"Ve"</span>,<span class='st'>"Te"</span>,<span class='st'>"ws"</span>,<span class='st'>"Temp"</span>,<span class='st'>"h"</span>,<span class='st'>"L"</span>,<span class='st'>"Ustar"</span>,<span class='st'>"Wstar"</span>)
+<span class='fu'>row.names</span>(<span class='no'>candiota</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"08:00"</span>,<span class='st'>"09:00"</span>,<span class='fu'>paste</span>(<span class='fl'>10</span>:<span class='fl'>15</span>,<span class='st'>":00"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>plumeRise</span>(<span class='no'>candiota</span>,<span class='kw'>Hmax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "convective, h/L = -5.7372346528973"
+#&gt; [1] "using weil max= 31"
+#&gt; [1] "convective, h/L = -8.61326442721792"
+#&gt; [1] "strong convective, h/L = -16.3733115022513"
+#&gt; [1] "using weil max= 155"
+#&gt; [1] "strong convective, h/L = -33.003300330033"
+#&gt; [1] "using weil max= 217"
+#&gt; [1] "strong convective, h/L = -67.7966101694915"
+#&gt; [1] "strong convective, h/L = -79.3650793650794"
+#&gt; [1] "strong convective, h/L = -110.650069156293"
+#&gt; [1] "strong convective, h/L = -32.0056899004267"</div><div class='input'><span class='fu'>print</span>(<span class='no'>candiota</span>)</div><div class='output co'>#&gt;         z r Ve  Te   ws   Temp   h      L Ustar Wstar     rise       He
+#&gt; 08:00 150 1 20 420 3.11 276.31 200 -34.86  3.11  0.33  31.0000 181.0000
+#&gt; 09:00 150 1 20 420 3.81 277.84 300 -34.83  3.81  0.40  41.5831 191.5831
+#&gt; 10:00 150 1 20 420 3.23 278.68 400 -24.43  3.23  0.48 155.0000 305.0000
+#&gt; 11:00 150 1 20 420 3.47 279.56 500 -15.15  3.48  0.52 217.0000 367.0000
+#&gt; 12:00 150 1 20 420 3.37 279.50 600  -8.85  3.37  2.30 121.4376 271.4376
+#&gt; 13:00 150 1 20 420 3.69 279.08 800 -10.08  3.69  2.80 102.0828 252.0828
+#&gt; 14:00 150 1 20 420 3.59 279.23 800  -7.23  3.49  1.57 207.6558 357.6558
+#&gt; 15:00 150 1 20 420 4.14 279.68 900 -28.12  4.14  0.97 355.4518 505.4518</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -136,6 +186,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#format">Format</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

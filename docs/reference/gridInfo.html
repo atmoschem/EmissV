@@ -90,7 +90,7 @@
     <p>Return a list containing information of a regular grid / domain</p>
     
 
-    <pre class="usage"><span class='fu'>gridInfo</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>file.choose</span>(), <span class='kw'>levels</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>gridInfo</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>file.choose</span>(), <span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -100,8 +100,8 @@
       <td><p>file name/path to a wrfinput of wrfchemi file</p></td>
     </tr>
     <tr>
-      <th>levels</th>
-      <td><p>number of levels</p></td>
+      <th>z</th>
+      <td><p>TRUE for read wrfinput vertical coordinades</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -115,20 +115,22 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Do not run</span>
-<span class='no'>grid_d1</span> <span class='kw'>&lt;-</span> <span class='fu'>gridInfo</span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='fu'>names</span>(<span class='no'>grid_d1</span>)
+    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
+<span class='no'>grid_d1</span> <span class='kw'>&lt;-</span> <span class='fu'>gridInfo</span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div><div class='output co'>#&gt; [1] "Grid information from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d01"</div><span class='co'># NOT RUN {</span>
 <span class='no'>grid_d2</span> <span class='kw'>&lt;-</span> <span class='fu'>gridInfo</span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d02"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
 <span class='no'>grid_d3</span> <span class='kw'>&lt;-</span> <span class='fu'>gridInfo</span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d03"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+<span class='fu'>names</span>(<span class='no'>grid_d1</span>)
+<span class='co'># for plot the shapes</span>
+<span class='fu'>library</span>(<span class='no'>sp</span>)
 <span class='no'>shape</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/shapefile'>shapefile</a></span>(<span class='fu'>paste0</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/BR.shp"</span>))
-<span class='fu'>plot</span>(<span class='no'>shape</span>); <span class='fu'>axis</span>(<span class='fl'>1</span>); <span class='fu'>axis</span>(<span class='fl'>2</span>); <span class='fu'>box</span>(); <span class='fu'>grid</span>()
+<span class='fu'>plot</span>(<span class='no'>shape</span>,<span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>55</span>,-<span class='fl'>40</span>),<span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>30</span>,-<span class='fl'>15</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"3 nested domains"</span>)
+<span class='fu'>axis</span>(<span class='fl'>1</span>); <span class='fu'>axis</span>(<span class='fl'>2</span>); <span class='fu'>box</span>(); <span class='fu'>grid</span>()
 <span class='fu'>lines</span>(<span class='no'>grid_d1</span>$<span class='no'>Box</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-<span class='fu'>text</span>(<span class='no'>grid_d1</span>$<span class='no'>xlim</span>[<span class='fl'>2</span>],<span class='no'>grid_d1</span>$<span class='no'>Ylim</span>[<span class='fl'>1</span>],<span class='st'>"d1"</span>,<span class='kw'>pos</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/gridlines'>text</a></span>(<span class='no'>grid_d1</span>$<span class='no'>xlim</span>[<span class='fl'>2</span>],<span class='no'>grid_d1</span>$<span class='no'>Ylim</span>[<span class='fl'>1</span>],<span class='st'>"d1"</span>,<span class='kw'>pos</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
 <span class='fu'>lines</span>(<span class='no'>grid_d2</span>$<span class='no'>Box</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-<span class='fu'>text</span>(<span class='no'>grid_d2</span>$<span class='no'>xlim</span>[<span class='fl'>2</span>],<span class='no'>grid_d2</span>$<span class='no'>Ylim</span>[<span class='fl'>1</span>],<span class='st'>"d2"</span>,<span class='kw'>pos</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/gridlines'>text</a></span>(<span class='no'>grid_d2</span>$<span class='no'>xlim</span>[<span class='fl'>2</span>],<span class='no'>grid_d2</span>$<span class='no'>Ylim</span>[<span class='fl'>1</span>],<span class='st'>"d2"</span>,<span class='kw'>pos</span><span class='kw'>=</span><span class='fl'>4</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
 <span class='fu'>lines</span>(<span class='no'>grid_d3</span>$<span class='no'>Box</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-<span class='fu'>text</span>(<span class='no'>grid_d3</span>$<span class='no'>xlim</span>[<span class='fl'>1</span>],<span class='no'>grid_d3</span>$<span class='no'>Ylim</span>[<span class='fl'>2</span>],<span class='st'>"d3"</span>,<span class='kw'>pos</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0.0</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/gridlines'>text</a></span>(<span class='no'>grid_d3</span>$<span class='no'>xlim</span>[<span class='fl'>1</span>],<span class='no'>grid_d3</span>$<span class='no'>Ylim</span>[<span class='fl'>2</span>],<span class='st'>"d3"</span>,<span class='kw'>pos</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0.0</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

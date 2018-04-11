@@ -128,13 +128,29 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Do not run</span>
+    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
 
-<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>exemples</span> <span class='kw'>=</span> <span class='no'>T</span>)
-
+<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
+#&gt;                              Category   Type Fuel      Use          SP
+#&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342.56
+#&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627.23
+#&gt; Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022.78
+#&gt; Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634.63
+#&gt; Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630.93
+#&gt; Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865.68
+#&gt; Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921.13
+#&gt; Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056.07
+#&gt;                                      RJ         MG          PR          SC
+#&gt; Light Duty Vehicles Gasohol 2712343.945 4371228.30 3036828.707 2029599.648
+#&gt; Light Duty Vehicles Ethanol  204079.488  328895.62  228494.048  152709.120
+#&gt; Light Duty Vehicles Flex    2297169.737 3702131.28 2571986.128 1718932.032
+#&gt; Diesel Trucks                165814.584  267227.69  185651.414  124076.160
+#&gt; Diesel Urban Busses          184947.036  298061.65  207072.731  138392.640
+#&gt; Diesel Intercity Busses        5101.987    8222.39    5712.351    3817.728
+#&gt; Gasohol Motorcycles          753180.860 1213830.38  843285.846  563592.096
+#&gt; Flex Motorcycles              54846.362   88390.70   61407.775   41040.576</div><div class='input'>
 <span class='no'>voc</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"eth"</span>,<span class='st'>"hc3"</span>,<span class='st'>"hc5"</span>,<span class='st'>"hc8"</span>,<span class='st'>"ol2"</span>,<span class='st'>"olt"</span>,<span class='st'>"oli"</span>,<span class='st'>"iso"</span>,<span class='st'>"tol"</span>,<span class='st'>"xyl"</span>,<span class='st'>"ket"</span>,<span class='st'>"ch3oh"</span>,<span class='st'>"ald"</span>)
-<span class='no'>EF_voc</span> <span class='kw'>&lt;-</span> <span class='fu'>as.data.frame</span>(<span class='fu'>matrix</span>(<span class='fl'>NA</span>,<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>9</span>,<span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>8</span>,<span class='kw'>byrow</span> <span class='kw'>=</span> <span class='no'>T</span>),
+<span class='no'>EF_voc</span> <span class='kw'>&lt;-</span> <span class='fu'>as.data.frame</span>(<span class='fu'>matrix</span>(<span class='fl'>NA</span>,<span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>9</span>,<span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>8</span>,<span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
                         <span class='kw'>row.names</span> <span class='kw'>=</span> <span class='fu'>row.names</span>(<span class='no'>veiculos</span>))
 <span class='fu'>names</span>(<span class='no'>EF_voc</span>) <span class='kw'>&lt;-</span>  <span class='fu'>c</span>(<span class='st'>"voc_vap_g"</span>,<span class='st'>"voc_vap_e"</span>,<span class='st'>"voc_vap_d"</span>,
                     <span class='st'>"voc_liq_g"</span>,<span class='st'>"voc_liq_e"</span>,<span class='st'>"voc_liq_d"</span>,
@@ -150,10 +166,26 @@
 <span class='no'>EF_voc</span>[<span class='st'>"voc_exa_e"</span>]  <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>0.000</span>,<span class='fl'>1.30</span>,<span class='fl'>0.217</span>,<span class='fl'>0.00</span>,<span class='fl'>0.00</span>,<span class='fl'>0.00</span>,<span class='fl'>0.00</span>,<span class='fl'>1.08</span>)
 <span class='no'>EF_voc</span>[<span class='st'>"voc_exa_d"</span>]  <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>0.000</span>,<span class='fl'>0.00</span>,<span class='fl'>0.000</span>,<span class='fl'>2.05</span>,<span class='fl'>0.00</span>,<span class='fl'>0.00</span>,<span class='fl'>0.00</span>,<span class='fl'>0.00</span>)
 
-<span class='fu'>print</span>(<span class='no'>EF_voc</span>)
-
-<span class='no'>VOC</span> <span class='kw'>&lt;-</span> <span class='fu'>totalVOC</span>(<span class='no'>veiculos</span>,<span class='no'>EF_voc</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='no'>voc</span>[<span class='fl'>10</span>])
-<span class='co'># }</span></pre>
+<span class='fu'>print</span>(<span class='no'>EF_voc</span>)</div><div class='output co'>#&gt;                             voc_vap_g voc_vap_e voc_vap_d voc_liq_g voc_liq_e
+#&gt; Light Duty Vehicles Gasohol      0.23      0.00         0     2.000     0.000
+#&gt; Light Duty Vehicles Ethanol      0.00      0.25         0     0.000     1.500
+#&gt; Light Duty Vehicles Flex         0.12      0.12         0     0.875     0.875
+#&gt; Diesel Trucks                    0.00      0.00         0     0.000     0.000
+#&gt; Diesel Urban Busses              0.00      0.00         0     0.000     0.000
+#&gt; Diesel Intercity Busses          0.00      0.00         0     0.000     0.000
+#&gt; Gasohol Motorcycles              0.00      0.00         0     1.200     0.000
+#&gt; Flex Motorcycles                 0.00      0.00         0     0.000     1.200
+#&gt;                             voc_liq_d voc_exa_g voc_exa_e voc_exa_d
+#&gt; Light Duty Vehicles Gasohol         0     0.425     0.000      0.00
+#&gt; Light Duty Vehicles Ethanol         0     0.000     1.300      0.00
+#&gt; Light Duty Vehicles Flex            0     0.217     0.217      0.00
+#&gt; Diesel Trucks                       0     0.000     0.000      2.05
+#&gt; Diesel Urban Busses                 0     0.000     0.000      0.00
+#&gt; Diesel Intercity Busses             0     0.000     0.000      0.00
+#&gt; Gasohol Motorcycles                 0     1.080     0.000      0.00
+#&gt; Flex Motorcycles                    0     0.000     1.080      0.00</div><div class='input'>
+<span class='no'>VOC</span> <span class='kw'>&lt;-</span> <span class='fu'>totalVOC</span>(<span class='no'>veiculos</span>,<span class='no'>EF_voc</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='no'>voc</span>[<span class='fl'>10</span>])</div><div class='output co'>#&gt; [1] "Total VOC: 2701460.03833821 t year-1"
+#&gt; [1] "xyl 262157092459.913 MOL year-1"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
