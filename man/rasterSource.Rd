@@ -16,6 +16,8 @@ rasterSource(r, grid, nlevels = "all", verbose = T)
 
 \item{grid}{grid object with the grid information}
 
+\item{nlevels}{number of vertical levels off the emission array}
+
 \item{verbose}{display additional information}
 }
 \value{

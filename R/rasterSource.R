@@ -6,6 +6,7 @@
 #'
 #' @param r input raster object
 #' @param grid grid object with the grid information
+#' @param nlevels number of vertical levels off the emission array
 #' @param verbose display additional information
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{lineSource}}
@@ -52,18 +53,18 @@ rasterSource <- function(r,grid,nlevels="all",verbose = T){
       print(paste("Grid output:",col,"columns",rol,"rows"))
   }else{
     if(nlevels == "all"){
-      nlevels <- dim(d1$z)[3]
+      nlevels <- dim(grid$z)[3]
     }else{
       nlevels <- nlevels
     }
-    total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
+    # total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
 
     X    <- raster::resample(r,box,method = "bilinear") # non-conservative transformation
     X    <- raster::flip(X,2)
     X    <- raster::t(X)
     X    <- raster::as.array(X)
     X    <- X[,,1:nlevels]
-    X    <- X * total_box[1:nlevels]/sum(X) # to conserve mass
+    # X    <- X * total_box[1:nlevels]/sum(X) # to conserve mass
 
     if(verbose)
       print(paste("Grid output:",col,"columns",rol,"rows",nlevels,"levels"))
