@@ -1,5 +1,5 @@
 Package: EmissV
-Title: Vehicular EMISSions by Top-down methods
+Title: Vehicular Emissions by Top-Down Methods
 Version: 0.664.5
 Authors@R: c(
   person(given = "Daniel",
@@ -14,7 +14,7 @@ Authors@R: c(
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
 Description: Top-down methods to create vehicular and other emissions for atmospheric air quality models.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.4)
 Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools, rgeos, rgdal
 Suggests: eixport, osmar
 License: MIT + file LICENSE
