@@ -69,10 +69,17 @@ The following libraries are required for installation on ubuntu:
   sudo yum install netcdf-devel
 ```
 
-# to install
+## To install
 
 ```r
 # install.packages("devtools")
 devtools::install_github("atmoschem/EmissV")
 library(EmissV)
 ```
+## About this package
+
+EmissV is a tool developed during Daniel Schuch's post-doctorate at the at the Department of Atmospheric Sciences, University of São Paulo ([IAG-USP](http://www.iag.usp.br/atmosfericas/)) supervised by professor Edmilson Dias de Freitas.
+
+## Licence notes
+
+This package is provided "as is", without warranty of any kind. In no event shall the authors be liable for any claim, damages or other liability, arising from, out of or in connection with the software, for more details see [Licence file](https://github.com/atmoschem/EmissV/blob/master/LICENSE).
