@@ -47,6 +47,7 @@ rasterSource <- function(r,grid,nlevels="all",verbose = T){
     X    <- raster::flip(X,2)
     X    <- raster::t(X)
     X    <- raster::as.matrix(X)
+    X[is.na(X)] <- 0             # for low resolution input data
     X    <- X * total_box/sum(X) # to conserve mass
 
     if(verbose)
