@@ -93,7 +93,7 @@ vehicles <- function(total_v,area_name = names(total_v),
   as.data.frame(veh_estado)
 
   for (i  in 1:ncol(veh_estado) ) {
-    veh_estado[,i] <- as.numeric(veh_estado[,i])
+    veh_estado[,i] <- as.numeric(as.integer(veh_estado[,i]))
   }
 
   Veh_fuel$Use <- ifelse(
