@@ -5,8 +5,10 @@
 ^appveyor.yml$
 ^Readme.md$
 ^docs$
-^example.jpg
 ^CO_all.png
 ^CO_final.png
 ^paper.md
 ^paper.bib
+^CONDUCT.md
+^CONTRIBUTING.md
+^MIT
