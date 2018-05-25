@@ -3,23 +3,22 @@
 \name{vehicles}
 \alias{vehicles}
 \title{Tool to set-up vehicle data table}
-\format{data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.}
 \usage{
-vehicles(total_v, area_name = names(total_v), distribution, category, type,
-  fuel, vnames = NA, example = F, verbose = T)
+vehicles(total_v, area_name = names(total_v), distribution, type,
+  category = NA, fuel = NA, vnames = NA, example = F, verbose = T)
 }
 \arguments{
 \item{total_v}{total of vehicles by area (area length)}
 
-\item{area_name}{area names (area length)}
+\item{area_name}{area names (area length) or can use names from total_v}
 
 \item{distribution}{distribution of vehicles by category (category length)}
 
-\item{category}{category (category length)}
-
 \item{type}{type of vehicle by category (category length)}
 
-\item{fuel}{fuel type by category (category length)}
+\item{category}{category (category length / NA)}
+
+\item{fuel}{fuel type by category (category length / NA)}
 
 \item{vnames}{name of each vehicle categoy (category length / NA)}
 
@@ -28,7 +27,11 @@ vehicles(total_v, area_name = names(total_v), distribution, category, type,
 \item{verbose}{display additional information}
 }
 \description{
-Return a data frame with vehicle information. Types argument defines the diary use:
+Return a data frame with 4 columns (vehicle category, type, fuel and avarage kilometers driven) and an aditional column with the number of vehicles for each interest area (cityes, states, countries, etc).
+
+This funcion define a line for vehicle class as follow:
+
+Average daily kilometres driven are defined by type (input):
 
 - LDV (Light duty Vehicles) 41 km / day
 
@@ -37,19 +40,23 @@ Return a data frame with vehicle information. Types argument defines the diary u
 - BUS (Busses) 165 km / day
 
 - MOTO (motorcycles and other vehicles) 140 km / day
+
+The number of vehicles are defined by the distribution of vehicles (input) and the total number of vehicles (input) on each area.
 }
 \note{
 total_v and area_name must have the same length.
 
-distribution, category, type, fuel and vnames (if used) must have the same length.
+distribution, type, category (if used), fuel (if used) and vnames (if used) must have the same length.
 }
 \examples{
-# Do not run
 
 veiculos <- vehicles(example = TRUE)
 
-# or the code for the same result
-# DETRAN 2016 data and SP vahicle distribution
+# or the code bellow for the same result
+# DETRAN 2016 data for total number of vehicles for 5 Brazilian states (Sao Paulo,
+# Rio de Janeiro, Minas Gerais, Parana and Santa Catarina)
+# vahicle distribution of Sao Paulo
+
 veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
                      area_name = c("SP", "RJ", "MG", "PR", "SC"),
                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,

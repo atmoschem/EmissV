@@ -87,15 +87,18 @@
     </div>
 
     
-    <p>Return a data frame with vehicle information. Types argument defines the diary use:</p>
+    <p>Return a data frame with 4 columns (vehicle category, type, fuel and avarage kilometers driven) and an aditional column with the number of vehicles for each interest area (cityes, states, countries, etc).</p>
+<p>This funcion define a line for vehicle class as follow:</p>
+<p>Average daily kilometres driven are defined by type (input):</p>
 <p>- LDV (Light duty Vehicles) 41 km / day</p>
 <p>- TRUCKS (Trucks) 110 km / day</p>
 <p>- BUS (Busses) 165 km / day</p>
 <p>- MOTO (motorcycles and other vehicles) 140 km / day</p>
+<p>The number of vehicles are defined by the distribution of vehicles (input) and the total number of vehicles (input) on each area.</p>
     
 
-    <pre class="usage"><span class='fu'>vehicles</span>(<span class='no'>total_v</span>, <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>names</span>(<span class='no'>total_v</span>), <span class='no'>distribution</span>, <span class='no'>category</span>, <span class='no'>type</span>,
-  <span class='no'>fuel</span>, <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>vehicles</span>(<span class='no'>total_v</span>, <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>names</span>(<span class='no'>total_v</span>), <span class='no'>distribution</span>, <span class='no'>type</span>,
+  <span class='kw'>category</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>fuel</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>example</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -106,23 +109,23 @@
     </tr>
     <tr>
       <th>area_name</th>
-      <td><p>area names (area length)</p></td>
+      <td><p>area names (area length) or can use names from total_v</p></td>
     </tr>
     <tr>
       <th>distribution</th>
       <td><p>distribution of vehicles by category (category length)</p></td>
     </tr>
     <tr>
-      <th>category</th>
-      <td><p>category (category length)</p></td>
-    </tr>
-    <tr>
       <th>type</th>
       <td><p>type of vehicle by category (category length)</p></td>
     </tr>
     <tr>
+      <th>category</th>
+      <td><p>category (category length / NA)</p></td>
+    </tr>
+    <tr>
       <th>fuel</th>
-      <td><p>fuel type by category (category length)</p></td>
+      <td><p>fuel type by category (category length / NA)</p></td>
     </tr>
     <tr>
       <th>vnames</th>
@@ -138,14 +141,10 @@
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>total_v and area_name must have the same length.</p>
-<p>distribution, category, type, fuel and vnames (if used) must have the same length.</p>
+<p>distribution, type, category (if used), fuel (if used) and vnames (if used) must have the same length.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -153,8 +152,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
-
+    <pre class="examples"><div class='input'>
 <span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
 #&gt;                              Category   Type Fuel      Use       SP      RJ
 #&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 2712343
@@ -174,8 +172,11 @@
 #&gt; Diesel Intercity Busses        8222    5712    3817
 #&gt; Gasohol Motorcycles         1213830  843285  563592
 #&gt; Flex Motorcycles              88390   61407   41040</div><div class='input'>
-<span class='co'># or the code for the same result</span>
-<span class='co'># DETRAN 2016 data and SP vahicle distribution</span>
+<span class='co'># or the code bellow for the same result</span>
+<span class='co'># DETRAN 2016 data for total number of vehicles for 5 Brazilian states (Sao Paulo,</span>
+<span class='co'># Rio de Janeiro, Minas Gerais, Parana and Santa Catarina)</span>
+<span class='co'># vahicle distribution of Sao Paulo</span>
+
 <span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>total_v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>27332101</span>, <span class='fl'>6377484</span>, <span class='fl'>10277988</span>, <span class='fl'>7140439</span>, <span class='fl'>4772160</span>),
                      <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"SP"</span>, <span class='st'>"RJ"</span>, <span class='st'>"MG"</span>, <span class='st'>"PR"</span>, <span class='st'>"SC"</span>),
                      <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='fl'>0.4253</span>, <span class='fl'>0.0320</span>, <span class='fl'>0.3602</span>, <span class='fl'>0.0260</span>,
@@ -214,8 +215,6 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-
       <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
