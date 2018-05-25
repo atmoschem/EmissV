@@ -1,6 +1,10 @@
 #' Tool to set-up vehicle data table
 #'
-#' @description Return a data frame with vehicle information. Types argument defines the diary use:
+#' @description Return a data frame with 4 columns (vehicle category, type, fuel and avarage kilometers driven) and an aditional column with the number of vehicles for each interest area (cityes, states, countries, etc).
+#'
+#' This funcion define a line for vehicle class as follow:
+#'
+#' Average daily kilometres driven are defined by type (input):
 #'
 #' - LDV (Light duty Vehicles) 41 km / day
 #'
@@ -10,19 +14,19 @@
 #'
 #' - MOTO (motorcycles and other vehicles) 140 km / day
 #'
+#' The number of vehicles are defined by the distribution of vehicles (input) and the total number of vehicles (input) on each area.
+#'
 #' @note total_v and area_name must have the same length.
 #'
-#' @note distribution, category, type, fuel and vnames (if used) must have the same length.
-#'
-#' @format data frame with lines by vehicle category and columns for category, type, Fuel, use and a additional column for each area.
+#' @note distribution, type, category (if used), fuel (if used) and vnames (if used) must have the same length.
 #'
 #' @param total_v total of vehicles by area (area length)
 #' @param area_name area names (area length)
-#' @param distribution distribution of vehicles by category (category length)
-#' @param category category (category length)
-#' @param type type of vehicle by category (category length)
-#' @param fuel fuel type by category (category length)
-#' @param vnames name of each vehicle categoy (category length / NA)
+#' @param distribution distribution of vehicles by vehicle class
+#' @param type type of vehicle by vehicle class (distribution length)
+#' @param category category name (distribution length / NA)
+#' @param fuel fuel type by vehicle class (distribution length / NA)
+#' @param vnames name of each vehicle class (distribution length / NA)
 #' @param example a simple example
 #' @param verbose display additional information
 #'
@@ -33,12 +37,14 @@
 #' @import  units
 #'
 #' @examples
-#' # Do not run
 #'
 #' veiculos <- vehicles(example = TRUE)
 #'
-#' # or the code for the same result
-#' # DETRAN 2016 data and SP vahicle distribution
+#' # or the code bellow for the same result
+#' # DETRAN 2016 data for total number of vehicles for 5 Brazilian states (Sao Paulo,
+#' # Rio de Janeiro, Minas Gerais, Parana and Santa Catarina)
+#' # vahicle distribution of Sao Paulo
+#'
 #' veiculos <- vehicles(total_v = c(27332101, 6377484, 10277988, 7140439, 4772160),
 #'                      area_name = c("SP", "RJ", "MG", "PR", "SC"),
 #'                      distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,
@@ -54,10 +60,8 @@
 #'                                 "Diesel intercity busses","Gasohol motorcycles",
 #'                                 "Flex motorcycles"))
 
-vehicles <- function(total_v,area_name = names(total_v),
-                     distribution,category,type,fuel,vnames = NA,
-                     example = F,
-                     verbose = T)
+vehicles <- function(total_v,area_name = names(total_v), distribution, type,
+                     category = NA,fuel = NA,vnames = NA, example = F, verbose = T)
   {
   if(example == T){
     cat("using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):\n")

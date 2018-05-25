@@ -47,7 +47,7 @@ No aditional steps for windowns installation.
 
 In EmissV the vehicular emissions are estimated by a top-down approach. The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
 
-**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for each region.
+**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for interest area (cityes, states, countries, etc).
 
 ``` r
 library(EmissV)
@@ -127,7 +127,7 @@ data(perfil)
 names(perfil)
 ```
 
-The package has additional functions for read netcdf data, create line and point emissions (with plume rise) and to estimate the emissions emitted in the form of exhaust (exhaust), liquid (sump and evaporative) and vapors (fuel transfer operations) of volatile organic compounds.
+The package has additional functions for read netcdf data, create line and point sources (with plume rise) and to estimate the total emissions of of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
 
 Functions:
 
@@ -156,7 +156,7 @@ Sample datasets:
 
 ### Meta
 
-Bug reports, suggestions, and code contributions are all welcome. Please see [CONTRIBUTING.md](https://github.com/atmoschem/EmissV/CONTRIBUING.md) for details. Note that this project adopt the [Contributor Code of Conduct](https://github.com/atmoschem/EmissV/CONDUCT.md) and by participating in this project you agree to abide by its terms.
+Bug reports, suggestions, and code contributions are all welcome. Please see [CONTRIBUTING.md](https://github.com/atmoschem/EmissV/blob/master/CONTRIBUTING.md) for details. Note that this project adopt the [Contributor Code of Conduct](https://github.com/atmoschem/EmissV/blob/master/CONDUCT.md) and by participating in this project you agree to abide by its terms.
 
 ### Licence
 
