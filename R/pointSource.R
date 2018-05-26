@@ -27,8 +27,6 @@
 #'            main = "3 point sources for domain d1")
 #'}
 #'
-#' @note just emissions at surface level for a while
-#'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
 pointSource <- function(emissions, grid, verbose=T){

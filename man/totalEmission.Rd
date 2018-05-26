@@ -3,14 +3,14 @@
 \name{totalEmission}
 \alias{totalEmission}
 \title{Calculate total emissions}
-\format{Return a list with the daily total emission by territory.}
+\format{Return a list with the daily total emission by interest area (cityes, states, countries, etc).}
 \usage{
 totalEmission(v, ef, pol, verbose = T)
 }
 \arguments{
 \item{v}{dataframe with the vehicle data}
 
-\item{ef}{emission factors}
+\item{ef}{emission factor}
 
 \item{pol}{pollutant name in ef}
 
@@ -19,7 +19,7 @@ totalEmission(v, ef, pol, verbose = T)
 \description{
 Caculate the total emission with:
 
-  Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )
+  Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )
 
 where n is the type of the veicle
 }
@@ -29,11 +29,11 @@ the units (set_units("value",unit) where the recomended unit is g/d) must be use
 \examples{
 # Do not run
 
-veiculos <- vehicles(example = TRUE)
+veic <- vehicles(example = TRUE)
 
 EmissionFactors <- emissionFactor(example = TRUE)
 
-TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","PM"))
+TOTAL <- totalEmission(veic,EmissionFactors,pol = c("CO","PM"))
 }
 \seealso{
 \code{\link{rasterSource}}, \code{\link{lineSource}} and \code{\link{emission}}

@@ -4,7 +4,7 @@
 \alias{rasterSource}
 \title{Distribution of emissions by a georeferenced image}
 \source{
-Exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+Exemple data is a low resolution cutting from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
 }

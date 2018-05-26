@@ -10,17 +10,17 @@ vehicles(total_v, area_name = names(total_v), distribution, type,
 \arguments{
 \item{total_v}{total of vehicles by area (area length)}
 
-\item{area_name}{area names (area length) or can use names from total_v}
+\item{area_name}{area names (area length)}
 
-\item{distribution}{distribution of vehicles by category (category length)}
+\item{distribution}{distribution of vehicles by vehicle class}
 
-\item{type}{type of vehicle by category (category length)}
+\item{type}{type of vehicle by vehicle class (distribution length)}
 
-\item{category}{category (category length / NA)}
+\item{category}{category name (distribution length / NA)}
 
-\item{fuel}{fuel type by category (category length / NA)}
+\item{fuel}{fuel type by vehicle class (distribution length / NA)}
 
-\item{vnames}{name of each vehicle categoy (category length / NA)}
+\item{vnames}{name of each vehicle class (distribution length / NA)}
 
 \item{example}{a simple example}
 

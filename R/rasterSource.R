@@ -11,7 +11,7 @@
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{lineSource}}
 #'
-#' @source Exemple data from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
+#' @source Exemple data is a low resolution cutting from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 #'
 #' @export
 #'

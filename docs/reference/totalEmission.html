@@ -88,7 +88,7 @@
 
     
     <p>Caculate the total emission with:</p>
-<p>Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )</p>
+<p>Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )</p>
 <p>where n is the type of the veicle</p>
     
 
@@ -103,7 +103,7 @@
     </tr>
     <tr>
       <th>ef</th>
-      <td><p>emission factors</p></td>
+      <td><p>emission factor</p></td>
     </tr>
     <tr>
       <th>pol</th>
@@ -117,7 +117,7 @@
     
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>Return a list with the daily total emission by territory.</p>
+    <p>Return a list with the daily total emission by interest area (cityes, states, countries, etc).</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -131,7 +131,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Do not run</span>
 
-<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
+<span class='no'>veic</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
 #&gt;                              Category   Type Fuel      Use       SP      RJ
 #&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 2712343
 #&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627  204079
@@ -160,7 +160,7 @@
 #&gt; Diesel Intercity Busses      1.48 g/km 0.1693 g/km
 #&gt; Gasohol Motorcycles          1.61 g/km 0.0000 g/km
 #&gt; Flex Motorcycles             0.75 g/km 0.0000 g/km</div><div class='input'>
-<span class='no'>TOTAL</span> <span class='kw'>&lt;-</span> <span class='fu'>totalEmission</span>(<span class='no'>veiculos</span>,<span class='no'>EmissionFactors</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"CO"</span>,<span class='st'>"PM"</span>))</div><div class='output co'>#&gt; [1] "Total of CO : 1675884.3887839 t year-1"
+<span class='no'>TOTAL</span> <span class='kw'>&lt;-</span> <span class='fu'>totalEmission</span>(<span class='no'>veic</span>,<span class='no'>EmissionFactors</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"CO"</span>,<span class='st'>"PM"</span>))</div><div class='output co'>#&gt; [1] "Total of CO : 1675884.3887839 t year-1"
 #&gt; [1] "Total of PM : 15061.8180671525 t year-1"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

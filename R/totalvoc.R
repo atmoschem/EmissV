@@ -2,7 +2,7 @@
 #'
 #'@description Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 #'
-#'  Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
+#'  Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 #'
 #'@format Return a list with the daily total emission by territory.
 #'
@@ -22,28 +22,28 @@
 #'@examples
 #' # Do not run
 #'
-#' veiculos <- vehicles(example = TRUE)
+#' veic <- vehicles(example = TRUE)
 #'
-#' voc = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
-#' EF_voc <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = TRUE),
-#'                         row.names = row.names(veiculos))
-#' names(EF_voc) <-  c("voc_vap_g","voc_vap_e","voc_vap_d",
-#'                     "voc_liq_g","voc_liq_e","voc_liq_d",
-#'                     "voc_exa_g","voc_exa_e","voc_exa_d")
+#' COV = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
+#' EF_COV <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = TRUE),
+#'                         row.names = row.names(veic))
+#' names(EF_COV) <-  c("vap_g","vap_e","vap_d",
+#'                     "liq_g","liq_e","liq_d",
+#'                     "exa_g","exa_e","exa_d")
 #'
-#' EF_voc["voc_vap_g"]  <- c(0.230,0.00,0.120,0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_vap_e"]  <- c(0.000,0.25,0.120,0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_vap_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_liq_g"]  <- c(2.000,0.00,0.875,0.00,0.00,0.00,1.20,0.00)
-#' EF_voc["voc_liq_e"]  <- c(0.000,1.50,0.875,0.00,0.00,0.00,0.00,1.20)
-#' EF_voc["voc_liq_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
-#' EF_voc["voc_exa_g"]  <- c(0.425,0.00,0.217,0.00,0.00,0.00,1.08,0.00)
-#' EF_voc["voc_exa_e"]  <- c(0.000,1.30,0.217,0.00,0.00,0.00,0.00,1.08)
-#' EF_voc["voc_exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
+#' EF_COV["vap_g"]  <- c(0.230,0.00,0.120,0.00,0.00,0.00,0.00,0.00)
+#' EF_COV["vap_e"]  <- c(0.000,0.25,0.120,0.00,0.00,0.00,0.00,0.00)
+#' EF_COV["vap_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
+#' EF_COV["liq_g"]  <- c(2.000,0.00,0.875,0.00,0.00,0.00,1.20,0.00)
+#' EF_COV["liq_e"]  <- c(0.000,1.50,0.875,0.00,0.00,0.00,0.00,1.20)
+#' EF_COV["liq_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
+#' EF_COV["exa_g"]  <- c(0.425,0.00,0.217,0.00,0.00,0.00,1.08,0.00)
+#' EF_COV["exa_e"]  <- c(0.000,1.30,0.217,0.00,0.00,0.00,0.00,1.08)
+#' EF_COV["exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
 #'
-#' print(EF_voc)
+#' print(EF_COV)
 #'
-#' VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
+#' COV_total <- totalVOC(veic,EF_COV,pol = COV[10])
 
 totalVOC <- function(v,ef,pol,verbose=T){
 
@@ -63,13 +63,13 @@ totalVOC <- function(v,ef,pol,verbose=T){
   use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
-    print(paste0(pol," is not in suported VOC speciation"))
+    print(paste0(pol," is not in suported COV speciation"))
     print("The specie list contains:")
     print(voc_names)
     total = units::set_units(NA * TOTAL_veic[1,],MOL/units::as_units("d"))
     return(total)
   }
-  # data from ??
+  # data from LAPAT (IAG-USP)
   cov_table <- matrix(c(0.025000, 0.000000, 0.282625, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000,
                         0.240000, 0.213150, 0.435206, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.048995,
                         0.450000, 0.157299, 0.158620, 0.000000, 0.000000, 0.977799, 0.000000, 0.000000, 0.057741,
@@ -91,43 +91,43 @@ totalVOC <- function(v,ef,pol,verbose=T){
 
   # total of VOCs by:
   # Vapors
-  ef_vap  <- ef[,"voc_vap_g"]
+  ef_vap  <- ef[,"vap_g"]
   VOC_vap_g =  TOTAL_veic[1,] * use[1] * ef_vap[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_vap_g   = VOC_vap_g + TOTAL_veic[j,] * use[j] * ef_vap[j]
     }
   }
-  ef_vap  <- ef[,"voc_vap_e"]
+  ef_vap  <- ef[,"vap_e"]
   VOC_vap_e =  TOTAL_veic[1,] * use[1] * ef_vap[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_vap_e   = VOC_vap_e + TOTAL_veic[j,] * use[j] * ef_vap[j]
     }
   }
-  ef_vap  <- ef[,"voc_vap_d"]
+  ef_vap  <- ef[,"vap_d"]
   VOC_vap_d =  TOTAL_veic[1,] * use[1] * ef_vap[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_vap_d   = VOC_vap_d + TOTAL_veic[j,] * use[j] * ef_vap[j]
     }
   }
-  # exaust
-  ef_exa  <- ef[,"voc_exa_g"]
+  # exhaust
+  ef_exa  <- ef[,"exa_g"]
   VOC_exa_g =  TOTAL_veic[1,] * use[1] * ef_exa[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_exa_g   = VOC_exa_g + TOTAL_veic[j,] * use[j] * ef_exa[j]
     }
   }
-  ef_exa  <- ef[,"voc_exa_e"]
+  ef_exa  <- ef[,"exa_e"]
   VOC_exa_e =  TOTAL_veic[1,] * use[1] * ef_exa[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_exa_e   = VOC_exa_e + TOTAL_veic[j,] * use[j] * ef_exa[j]
     }
   }
-  ef_exa  <- ef[,"voc_exa_d"]
+  ef_exa  <- ef[,"exa_d"]
   VOC_exa_d =  TOTAL_veic[1,] * use[1] * ef_exa[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
@@ -135,21 +135,21 @@ totalVOC <- function(v,ef,pol,verbose=T){
     }
   }
   # liquid
-  ef_liq  <- ef[,"voc_liq_g"]
+  ef_liq  <- ef[,"liq_g"]
   VOC_liq_g =  TOTAL_veic[1,] * use[1] * ef_liq[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_liq_g   = VOC_liq_g + TOTAL_veic[j,] * use[j] * ef_liq[j]
     }
   }
-  ef_liq  <- ef[,"voc_liq_e"]
+  ef_liq  <- ef[,"liq_e"]
   VOC_liq_e =  TOTAL_veic[1,] * use[1] * ef_liq[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
       VOC_liq_e   = VOC_liq_e + TOTAL_veic[j,] * use[j] * ef_liq[j]
     }
   }
-  ef_liq  <- ef[,"voc_liq_d"]
+  ef_liq  <- ef[,"liq_d"]
   VOC_liq_d =  TOTAL_veic[1,] * use[1] * ef_liq[1]
   if(nrow(v) >= 2){
     for(j in 2:nrow(v)){
@@ -163,7 +163,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
     total <- total * uni2
 
     total_t_y <- units::set_units(total, "t/year")
-    print(paste("Total VOC:",sum(total_t_y),units::deparse_unit(total_t_y)))
+    print(paste("Total COV:",sum(total_t_y),units::deparse_unit(total_t_y)))
   }
 
   split_cov <- function(pol,verb = verbose){
@@ -190,5 +190,3 @@ totalVOC <- function(v,ef,pol,verbose=T){
   poleunte <- pol
   return(split_cov(poleunte,verbose))
 }
-
-

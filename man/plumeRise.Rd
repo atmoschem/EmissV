@@ -2,7 +2,7 @@
 % Please edit documentation in R/plumerise.R
 \name{plumeRise}
 \alias{plumeRise}
-\title{Calculate plume rise from Brigs (1975) formulation.}
+\title{Calculate plume rise.}
 \format{data.frame with the input, rise (m) and effective higt (m)}
 \usage{
 plumeRise(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)

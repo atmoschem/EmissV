@@ -19,9 +19,6 @@ a raster
 \description{
 Transform a set of points into a grinded output
 }
-\note{
-just emissions at surface level for a while
-}
 \examples{
 # Do not run
 d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))

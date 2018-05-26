@@ -1,4 +1,4 @@
-#' Calculate plume rise from Brigs (1975) formulation.
+#' Calculate plume rise.
 #'
 #' @description Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.
 #'
@@ -72,33 +72,33 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
 
   for(j in 1:nrow(df)){
     # source parameters
-    Hs   <- df$z[j]      # altura da fonte
-    r    <- df$r[j]      # raio da fonte
-    Vi   <- df$Ve[j]     # velocidade de exaustão
-    Ti   <- df$Te[j]     # temperatura de exaustão
+    Hs   <- df$z[j]      # source height
+    r    <- df$r[j]      # source radius
+    Vi   <- df$Ve[j]     # exhaust velocity
+    Ti   <- df$Te[j]     # exhaust temperature
 
     # micrometeorological data
-    U    <- df$ws[j]     # vel média do vento
-    Ta   <- df$Temp[j]   # temperatura
-    h    <- df$h[j]      # altura da camada limite planetária
-    L    <- df$L[j]      # comp monin-obukov
+    U    <- df$ws[j]     # mean wind speed
+    Ta   <- df$Temp[j]   # temperature
+    h    <- df$h[j]      # atmospheric boundary layer height
+    L    <- df$L[j]      # monin-obukov length
 
-    # termo de flutuabilidade
+    # boyance term
     Flu  <- g * Vi * r^2 * abs(Ti - Ta)/Ti
     i    <- 1
 
-    # convecção forte
+    # strong convection
     if(h/abs(L) > 10 & L < 0){
       if(verbose)
         print(paste("strong convective, h/L =",h/L))
       Wstar<- df$Wstar[j]  # w*
       deltaH <- 4.3 * (Flu / (U * Wstar^2))^(3/5) * h^(2/5)
     }else
-      # moderadamente convectivas
+      # slytly convective
       if(h/abs(L) <= 10 & h/abs(L) > 1 & L < 0){
         if(verbose)
           print(paste("convective, h/L =",h/L))
-        Wstar<- df$Wstar[j]  # w*
+        Wstar<- df$Wstar[j]   # w*
         Wd     <- 0.4 * Wstar # downdrafts mean speed
         a      <- ( Flu / U*Wd^2 )^(3/5)
         b      <- 2 * Hs
@@ -144,7 +144,7 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
         }else
           # stable
           if(h/L > 1.0){
-            dtdz <- df$dtdz[j]   # gradiente vertical de temperatura
+            dtdz <- df$dtdz[j]   # temperature vertical gradient
             s <- (g/Ta) * dtdz
             if(U <= 1){
               if(verbose)
@@ -158,7 +158,7 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
           }
     if(i == imax)
       print("* max iterations reached!")
-    # criterio de Weil (1979)
+    # Weil (1979) limit for plume rises
     if(Hmax){
       weil    <- 0.62 * (h - Hs)
       rise[j] = min(deltaH,weil)

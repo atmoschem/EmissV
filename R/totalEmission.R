@@ -2,14 +2,14 @@
 #'
 #'@description Caculate the total emission with:
 #'
-#'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factory(n,pollutant) )
+#'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )
 #'
 #' where n is the type of the veicle
 #'
-#'@format Return a list with the daily total emission by territory.
+#'@format Return a list with the daily total emission by interest area (cityes, states, countries, etc).
 #'
 #'@param v dataframe with the vehicle data
-#'@param ef emission factors
+#'@param ef emission factor
 #'@param pol pollutant name in ef
 #'@param verbose display additional information
 #'
@@ -24,11 +24,11 @@
 #'@examples
 #' # Do not run
 #'
-#' veiculos <- vehicles(example = TRUE)
+#' veic <- vehicles(example = TRUE)
 #'
 #' EmissionFactors <- emissionFactor(example = TRUE)
 #'
-#' TOTAL <- totalEmission(veiculos,EmissionFactors,pol = c("CO","PM"))
+#' TOTAL <- totalEmission(veic,EmissionFactors,pol = c("CO","PM"))
 
 totalEmission <- function(v,ef,pol,verbose = T){
 

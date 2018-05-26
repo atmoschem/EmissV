@@ -17,9 +17,9 @@ totalVOC(v, ef, pol, verbose = T)
 \item{verbose}{display additional information}
 }
 \description{
-Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and  vapor (fuel transfer operations).
+Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 
- Avaliable VOCs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
+ Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 }
 \note{
 The same ef can be used to totalEmission and voc
@@ -27,28 +27,28 @@ The same ef can be used to totalEmission and voc
 \examples{
 # Do not run
 
-veiculos <- vehicles(example = TRUE)
+veic <- vehicles(example = TRUE)
 
-voc = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
-EF_voc <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = TRUE),
-                        row.names = row.names(veiculos))
-names(EF_voc) <-  c("voc_vap_g","voc_vap_e","voc_vap_d",
-                    "voc_liq_g","voc_liq_e","voc_liq_d",
-                    "voc_exa_g","voc_exa_e","voc_exa_d")
+COV = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")
+EF_COV <- as.data.frame(matrix(NA,ncol = 9,nrow = 8,byrow = TRUE),
+                        row.names = row.names(veic))
+names(EF_COV) <-  c("vap_g","vap_e","vap_d",
+                    "liq_g","liq_e","liq_d",
+                    "exa_g","exa_e","exa_d")
 
-EF_voc["voc_vap_g"]  <- c(0.230,0.00,0.120,0.00,0.00,0.00,0.00,0.00)
-EF_voc["voc_vap_e"]  <- c(0.000,0.25,0.120,0.00,0.00,0.00,0.00,0.00)
-EF_voc["voc_vap_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
-EF_voc["voc_liq_g"]  <- c(2.000,0.00,0.875,0.00,0.00,0.00,1.20,0.00)
-EF_voc["voc_liq_e"]  <- c(0.000,1.50,0.875,0.00,0.00,0.00,0.00,1.20)
-EF_voc["voc_liq_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
-EF_voc["voc_exa_g"]  <- c(0.425,0.00,0.217,0.00,0.00,0.00,1.08,0.00)
-EF_voc["voc_exa_e"]  <- c(0.000,1.30,0.217,0.00,0.00,0.00,0.00,1.08)
-EF_voc["voc_exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
+EF_COV["vap_g"]  <- c(0.230,0.00,0.120,0.00,0.00,0.00,0.00,0.00)
+EF_COV["vap_e"]  <- c(0.000,0.25,0.120,0.00,0.00,0.00,0.00,0.00)
+EF_COV["vap_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
+EF_COV["liq_g"]  <- c(2.000,0.00,0.875,0.00,0.00,0.00,1.20,0.00)
+EF_COV["liq_e"]  <- c(0.000,1.50,0.875,0.00,0.00,0.00,0.00,1.20)
+EF_COV["liq_d"]  <- c(0.000,0.00,0.000,0.00,0.00,0.00,0.00,0.00)
+EF_COV["exa_g"]  <- c(0.425,0.00,0.217,0.00,0.00,0.00,1.08,0.00)
+EF_COV["exa_e"]  <- c(0.000,1.30,0.217,0.00,0.00,0.00,0.00,1.08)
+EF_COV["exa_d"]  <- c(0.000,0.00,0.000,2.05,0.00,0.00,0.00,0.00)
 
-print(EF_voc)
+print(EF_COV)
 
-VOC <- totalVOC(veiculos,EF_voc,pol = voc[10])
+COV_total <- totalVOC(veic,EF_COV,pol = COV[10])
 }
 \seealso{
 \code{\link{totalEmission}} and \code{\link{vehicles}}
