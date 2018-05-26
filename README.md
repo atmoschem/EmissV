@@ -164,6 +164,6 @@ Bug reports, suggestions, and code contributions are all welcome. Please see [CO
 
 EmissV is a tool developed during Daniel Schuch's post-doctorate at the at the Department of Atmospheric Sciences, University of São Paulo ([IAG-USP](http://www.iag.usp.br/atmosfericas/)) supervised by professor Edmilson Dias de Freitas.
 
-#### Licence
+#### License
 
 EmissV is published under the terms of the [MIT License](https://opensource.org/licenses/MIT). Copyright [(c)](https://raw.githubusercontent.com/atmoschem/emissv/master/LICENSE) 2018 Daniel Schuch.
