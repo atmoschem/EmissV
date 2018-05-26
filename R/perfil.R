@@ -26,11 +26,12 @@
 #'   axis(2)
 #'   box()
 #' }
-#'
+#'\dontrun{
 #' # view all profiles in perfil data
 #' for(i in 1:length(names(perfil))){
 #'   print(paste("profile",i,names(perfil)[i]))
 #'   plot.perfil(perfil[[i]],names(perfil)[i])
+#' }
 #' }
 #' }
 #' @usage data(perfil)

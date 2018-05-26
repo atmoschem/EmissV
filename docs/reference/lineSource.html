@@ -124,7 +124,6 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Do not run</span>
 <span class='no'>roads</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/osmar/topics/get_osm'>get_osm</a></span>(<span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/osmar/topics/osmsource_file'>complete_file</a></span>(),
                         <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/osmar/topics/osmsource_file'>osmsource_file</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>,
                         <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"EmissV"</span>),<span class='st'>"/streets.osm.xz"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)))
@@ -133,7 +132,6 @@
 <span class='no'>d3</span>    <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste0</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d03"</span>))
 
 <span class='no'>roadLength</span> <span class='kw'>&lt;-</span> <span class='fu'>lineSource</span>(<span class='no'>roads</span>,<span class='no'>d3</span>,<span class='kw'>as_raster</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-
 <span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>roadLength</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,<span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Length of roads"</span>,
            <span class='kw'>sp.layout</span><span class='kw'>=</span><span class='fu'>list</span>(<span class='st'>"sp.lines"</span>, <span class='no'>roads</span>))
 <span class='co'># }</span><div class='input'>

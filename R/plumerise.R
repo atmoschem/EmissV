@@ -1,4 +1,4 @@
-#' Calculate plume rise.
+#' Calculate plume rise height.
 #'
 #' @description Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.
 #'
@@ -45,8 +45,6 @@
 #' Addcitionaly some combination of ws, Wstar and Ustar can produce inacurate results, Weil (1979) propose a geometric limit of 0.62 * (h - Hs) for the rise value.
 #'
 #' @examples
-#' # Do not run
-#'
 #' candiota <- matrix(c(150,1,20,420,3.11,273.15 + 3.16,200,-34.86,3.11,0.33,
 #'                      150,1,20,420,3.81,273.15 + 4.69,300,-34.83,3.81,0.40,
 #'                      150,1,20,420,3.23,273.15 + 5.53,400,-24.43,3.23,0.48,

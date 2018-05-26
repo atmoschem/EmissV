@@ -59,123 +59,120 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    <div id="emissv" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#emissv" class="anchor"></a>EmissV</h1></div>
+    <div class="section level1">
+<div class="page-header"><h1>EmissV</h1></div>
 
-<p>This package provide some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models sush as <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
-<div id="to-install" class="section level2">
-<h2 class="hasAnchor">
-<a href="#to-install" class="anchor"></a>To install</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"atmoschem/EmissV"</span>)
-<span class="kw">library</span>(EmissV)</code></pre></div>
-<div id="system-dependencies" class="section level3">
-<h3 class="hasAnchor">
-<a href="#system-dependencies" class="anchor"></a>System dependencies</h3>
-<p>EmissV import functions from <a href="http://cran.r-project.org/package=ncdf4">ncdf4</a> for read model information, <a href="http://cran.r-project.org/package=raster">raster</a> to process grinded information and <a href="https://github.com/edzer/units/">units</a>.</p>
+<p>This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
+<div class="section level2">
+<h2>Installation</h2>
+<div class="section level3">
+<h3>System dependencies</h3>
+<p>EmissV import functions from <a href="http://cran.r-project.org/package=ncdf4">ncdf4</a> for reading model information, <a href="http://cran.r-project.org/package=raster">raster</a> and <a href="https://cran.r-project.org/web/packages/sf/index.html">sf</a> to process grinded/geographic information and <a href="https://github.com/edzer/units/">units</a>. These packages need some aditional libraries:</p>
 </div>
-<div id="ubuntu-instalation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ubuntu-instalation" class="anchor"></a>Ubuntu instalation</h3>
+<div class="section level3">
+<h3>To Ubuntu</h3>
 <p>The following steps are required for installation on Ubuntu:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
-  <span class="fu">sudo</span> apt-get --yes --force-yes update -qq
-  <span class="co"># units/udunits2 dependency:</span>
-  <span class="fu">sudo</span> apt-get install --yes libudunits2-dev
-  <span class="co"># sf dependencies (without libudunits2-dev):</span>
-  <span class="fu">sudo</span> apt-get install --yes libgdal-dev libgeos-dev libproj-dev
-  <span class="co"># netcdf dependencies:</span>
-  <span class="fu">sudo</span> apt-get install --yes libnetcdf-dev netcdf-bin</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="fu">sudo</span> apt-get --yes --force-yes update -qq</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="co"># netcdf dependencies:</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="fu">sudo</span> apt-get install --yes libnetcdf-dev netcdf-bin</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="co"># units/udunits2 dependency:</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="fu">sudo</span> apt-get install --yes libudunits2-dev</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co"># sf dependencies (without libudunits2-dev):</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="fu">sudo</span> apt-get install --yes libgdal-dev libgeos-dev libproj-dev</a></code></pre></div>
 </div>
-<div id="fedora-instalation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fedora-instalation" class="anchor"></a>Fedora instalation</h3>
+<div class="section level3">
+<h3>To Fedora</h3>
 <p>The following steps are required for installation on Fedora:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="fu">sudo</span> dnf update
-  <span class="co"># units/udunits2 dependency:</span>
-  <span class="fu">sudo</span> yum install udunits2-devel
-  <span class="co"># sf dependencies (without libudunits2-dev):</span>
-  <span class="fu">sudo</span> yum install gdal-devel proj-devel proj-epsg proj-nad geos-devel
-  <span class="co"># netcdf dependencies:</span>
-  <span class="fu">sudo</span> yum install netcdf-devel</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1">  <span class="fu">sudo</span> dnf update</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="co"># netcdf dependencies:</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="fu">sudo</span> yum install netcdf-devel</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="co"># units/udunits2 dependency:</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="fu">sudo</span> yum install udunits2-devel</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="co"># sf dependencies (without libudunits2-dev):</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="fu">sudo</span> yum install gdal-devel proj-devel proj-epsg proj-nad geos-devel</a></code></pre></div>
 </div>
-<div id="windowns-instalation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#windowns-instalation" class="anchor"></a>Windowns instalation</h3>
-<p>No aditional steps for windowns installation.</p>
+<div class="section level3">
+<h3>To Windows</h3>
+<p>No additional steps for windows installation.</p>
+<p>Detailed instructions can be found at <a href="https://www.unidata.ucar.edu/software/netcdf/">netcdf</a>, <a href="https://r-quantities.github.io/units/">libudunits2-dev</a> and <a href="https://r-spatial.github.io/sf/#installing">sf</a> developers page.</p>
+</div>
+<div class="section level3">
+<h3>Package installation</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"atmoschem/EmissV"</span>)</a></code></pre></div>
 </div>
 </div>
-<div id="using-emissv" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-emissv" class="anchor"></a>Using EmissV</h2>
-<p>In EmissV the vehicular emissions are estimated by a top-down approach. The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.</p>
-<p><strong>I.</strong> Total: emission of pollutants is estimated from the fleet, use and emission factors and for interest area (cityes, states, countries, etc).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(EmissV)
-
-veiculos &lt;-<span class="st"> </span><span class="kw"><a href="reference/vehicles.html">vehicles</a></span>(<span class="dt">example =</span> T)
-<span class="co"># using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):</span>
-<span class="co">#                              Category   Type Fuel      Use       SP ...</span>
-<span class="co"># Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...</span>
-<span class="co"># Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...</span>
-<span class="co"># Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...</span>
-<span class="co"># Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...</span>
-<span class="co"># Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...</span>
-<span class="co"># Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...</span>
-<span class="co"># Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...</span>
-<span class="co"># Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...</span>
-
-veiculos &lt;-<span class="st"> </span>veiculos[,<span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>,<span class="op">-</span><span class="dv">8</span>,<span class="op">-</span><span class="dv">9</span>)] <span class="co"># dropping RJ, PR and SC</span>
-
-EF     &lt;-<span class="st"> </span><span class="kw"><a href="reference/emissionFactor.html">emissionFactor</a></span>(<span class="dt">example =</span> T)
-<span class="co"># using a example emission factor (values calculated from CETESB 2015):</span>
-<span class="co">#                                     CO          PM</span>
-<span class="co"># Light duty Vehicles Gasohol  1.75 g/km 0.0013 g/km</span>
-<span class="co"># Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km</span>
-<span class="co"># Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km</span>
-<span class="co"># Diesel trucks                0.45 g/km 0.0612 g/km</span>
-<span class="co"># Diesel urban busses          0.77 g/km 0.1052 g/km</span>
-<span class="co"># Diesel intercity busses      1.48 g/km 0.1693 g/km</span>
-<span class="co"># Gasohol motorcycles          1.61 g/km 0.0000 g/km</span>
-<span class="co"># Flex motorcycles             0.75 g/km 0.0000 g/km</span>
-
-TOTAL  &lt;-<span class="st"> </span><span class="kw"><a href="reference/totalEmission.html">totalEmission</a></span>(veiculos,EF,<span class="dt">pol =</span> <span class="kw">c</span>(<span class="st">"CO"</span>),<span class="dt">verbose =</span> T)
-<span class="co"># [1] "Total of CO : 1127549.20226849 t year-1"</span></code></pre></div>
+<div class="section level2">
+<h2>Using <code>EmissV</code>
+</h2>
+<p>In EmissV the vehicular emissions are estimated by a top-down approach, i.e. the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc).The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.</p>
+<p><strong>I.</strong> Total: emission of pollutants is estimated from the fleet, use and emission factors and for the interest area (cities, states, countries, etc).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(EmissV)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">veiculos &lt;-<span class="st"> </span><span class="kw"><a href="reference/vehicles.html">vehicles</a></span>(<span class="dt">example =</span> T)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#                              Category   Type Fuel      Use       SP ...</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co"># Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co"># Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co"># Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co"># Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co"># Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co"># Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">veiculos &lt;-<span class="st"> </span>veiculos[,<span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>,<span class="op">-</span><span class="dv">8</span>,<span class="op">-</span><span class="dv">9</span>)] <span class="co"># dropping RJ, PR and SC</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">EF     &lt;-<span class="st"> </span><span class="kw"><a href="reference/emissionFactor.html">emissionFactor</a></span>(<span class="dt">example =</span> T)</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co"># using a example emission factor (values calculated from CETESB 2015):</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#                                     CO          PM</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co"># Light duty Vehicles Gasohol  1.75 g/km 0.0013 g/km</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co"># Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co"># Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co"># Diesel trucks                0.45 g/km 0.0612 g/km</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co"># Diesel urban busses          0.77 g/km 0.1052 g/km</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co"># Diesel intercity busses      1.48 g/km 0.1693 g/km</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co"># Gasohol motorcycles          1.61 g/km 0.0000 g/km</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co"># Flex motorcycles             0.75 g/km 0.0000 g/km</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">TOTAL  &lt;-<span class="st"> </span><span class="kw"><a href="reference/totalEmission.html">totalEmission</a></span>(veiculos,EF,<span class="dt">pol =</span> <span class="kw">c</span>(<span class="st">"CO"</span>),<span class="dt">verbose =</span> T)</a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co"># [1] "Total of CO : 1127549.20226849 t year-1"</span></a></code></pre></div>
 <p><strong>II.</strong> Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), OpenStreet maps (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raster &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),
-                         <span class="st">"/dmsp.tiff"</span>,<span class="dt">sep=</span><span class="st">""</span>))
-
-grid   &lt;-<span class="st"> </span><span class="kw"><a href="reference/gridInfo.html">gridInfo</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),
-                   <span class="st">"/wrfinput_d02"</span>,<span class="dt">sep=</span><span class="st">""</span>))
-<span class="co"># [1] "Grid information from: .../EmissV/extdata/wrfinput_d02"</span>
-
-shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),
-                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">12</span>,<span class="dv">1</span>]
-MG     &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Minas Gerais"</span>)
-<span class="co"># [1] "processing Minas Gerais area ... "</span>
-<span class="co"># [1] "fraction of Minas Gerais area inside the domain = 0.0145921494236101"</span>
-
-shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),
-                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">22</span>,<span class="dv">1</span>]
-SP     &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Sao Paulo"</span>)
-<span class="co"># [1] "processing Sao Paulo area ... "</span>
-<span class="co"># [1] "fraction of Sao Paulo area inside the domain = 0.474658563750987"</span>
-
-sp<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/sp/topics/spplot">spplot</a></span>(raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/merge">merge</a></span>(TOTAL[[<span class="dv">1</span>]][[<span class="dv">1</span>]] <span class="op">*</span><span class="st"> </span>SP, TOTAL[[<span class="dv">1</span>]][[<span class="dv">2</span>]] <span class="op">*</span><span class="st"> </span>MG),
-           <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">draw=</span><span class="ot">TRUE</span>),<span class="dt">ylab=</span><span class="st">"Lat"</span>,<span class="dt">xlab=</span><span class="st">"Lon"</span>,
-           <span class="dt">main=</span><span class="kw">list</span>(<span class="dt">label=</span><span class="st">"Emissions of CO [g/d]"</span>),
-           <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">"#031638"</span>,<span class="st">"#001E48"</span>,<span class="st">"#002756"</span>,<span class="st">"#003062"</span>,
-                           <span class="st">"#003A6E"</span>,<span class="st">"#004579"</span>,<span class="st">"#005084"</span>,<span class="st">"#005C8E"</span>,
-                           <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,
-                           <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span>))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">raster &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                         <span class="st">"/dmsp.tiff"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">grid   &lt;-<span class="st"> </span><span class="kw"><a href="reference/gridInfo.html">gridInfo</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">                   <span class="st">"/wrfinput_d02"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># [1] "Grid information from: .../EmissV/extdata/wrfinput_d02"</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">12</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">Minas_Gerais &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Minas Gerais"</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co"># [1] "processing Minas Gerais area ... "</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co"># [1] "fraction of Minas Gerais area inside the domain = 0.0145921494236101"</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">22</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">Sao_Paulo &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Sao Paulo"</span>)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co"># [1] "processing Sao Paulo area ... "</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co"># [1] "fraction of Sao Paulo area inside the domain = 0.474658563750987"</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">sp<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/sp/topics/spplot">spplot</a></span>(raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/merge">merge</a></span>(TOTAL[[<span class="dv">1</span>]][[<span class="dv">1</span>]] <span class="op">*</span><span class="st"> </span>Sao_Paulo, TOTAL[[<span class="dv">1</span>]][[<span class="dv">2</span>]] <span class="op">*</span><span class="st"> </span>Minas_Gerais),</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">           <span class="dt">scales =</span> <span class="kw">list</span>(<span class="dt">draw=</span><span class="ot">TRUE</span>),<span class="dt">ylab=</span><span class="st">"Lat"</span>,<span class="dt">xlab=</span><span class="st">"Lon"</span>,</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">           <span class="dt">main=</span><span class="kw">list</span>(<span class="dt">label=</span><span class="st">"Emissions of CO [g/d]"</span>),</a>
+<a class="sourceLine" id="cb5-23" data-line-number="23">           <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">"#031638"</span>,<span class="st">"#001E48"</span>,<span class="st">"#002756"</span>,<span class="st">"#003062"</span>,</a>
+<a class="sourceLine" id="cb5-24" data-line-number="24">                           <span class="st">"#003A6E"</span>,<span class="st">"#004579"</span>,<span class="st">"#005084"</span>,<span class="st">"#005C8E"</span>,</a>
+<a class="sourceLine" id="cb5-25" data-line-number="25">                           <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,</a>
+<a class="sourceLine" id="cb5-26" data-line-number="26">                           <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span>))</a></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Figure 1 - Emissions of CO using nocturnal lights."></p>
-<p><strong>III.</strong> Emission calculation: calculate the final emission from all different sources and converts to model unit and resolution.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CO_emissions &lt;-<span class="st"> </span><span class="kw"><a href="reference/emission.html">emission</a></span>(TOTAL,<span class="st">"CO"</span>,<span class="kw">list</span>(<span class="dt">SP =</span> SP, <span class="dt">MG =</span> MG),grid,<span class="dt">mm=</span><span class="dv">28</span>, <span class="dt">plot =</span> T)
-<span class="co"># [1] "calculating emissions for CO using molar mass = 28 ..."</span></code></pre></div>
+<p><strong>III.</strong> Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">CO_emissions &lt;-<span class="st"> </span><span class="kw"><a href="reference/emission.html">emission</a></span>(TOTAL,<span class="st">"CO"</span>,<span class="kw">list</span>(<span class="dt">SP =</span> Sao_Paulo, <span class="dt">MG =</span> Minas_Gerais),grid,<span class="dt">mm=</span><span class="dv">28</span>, <span class="dt">plot =</span> T)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co"># [1] "calculating emissions for CO using molar mass = 28 ..."</span></a></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="Figure 2 - CO emissions ready for use in air quality model."></p>
 <p><strong>IV.</strong> Temporal distribution: the package has a set of hourly profiles that represent the mean activity for each day of the week calculated from traffic counts of toll stations located in São Paulo city.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(perfil)
-<span class="kw">names</span>(perfil)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">data</span>(perfil)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">names</span>(perfil)</a></code></pre></div>
 <p>The package has additional functions for read netcdf data, create line and point sources (with plume rise) and to estimate the total emissions of of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).</p>
 <p>Functions:</p>
 <ul>
@@ -216,20 +213,17 @@ sp<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.
 </li>
 <li>Shapefiles for Brazil states</li>
 </ul>
-<div id="meta" class="section level3">
-<h3 class="hasAnchor">
-<a href="#meta" class="anchor"></a>Meta</h3>
+<div class="section level3">
+<h3>Contributing</h3>
 <p>Bug reports, suggestions, and code contributions are all welcome. Please see <a href="https://github.com/atmoschem/EmissV/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for details. Note that this project adopt the <a href="https://github.com/atmoschem/EmissV/blob/master/CONDUCT.md">Contributor Code of Conduct</a> and by participating in this project you agree to abide by its terms.</p>
-</div>
-<div id="licence" class="section level3">
-<h3 class="hasAnchor">
-<a href="#licence" class="anchor"></a>Licence</h3>
-<p>EmissV is published under the terms of the MIT License. Copyright (c) 2018 Daniel Schuch.</p>
-</div>
-<div id="about-this-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#about-this-package" class="anchor"></a>About this package</h3>
+<div class="section level4">
+<h4>About this package</h4>
 <p>EmissV is a tool developed during Daniel Schuch’s post-doctorate at the at the Department of Atmospheric Sciences, University of São Paulo (<a href="http://www.iag.usp.br/atmosfericas/">IAG-USP</a>) supervised by professor Edmilson Dias de Freitas.</p>
+</div>
+<div class="section level4">
+<h4>Licence</h4>
+<p>EmissV is published under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>. Copyright <a href="https://raw.githubusercontent.com/atmoschem/emissv/master/LICENSE">(c)</a> 2018 Daniel Schuch.</p>
+</div>
 </div>
 </div>
 </div>
@@ -256,6 +250,7 @@ sp<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/atmoschem/EmissV"><img src="https://travis-ci.org/atmoschem/EmissV.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/Schuch666/emissv"><img src="https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true" alt="Build status"></a></li>
+<li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/hyperium/hyper.svg" alt="Licence:MIT"></a></li>
 </ul>
 </div>
 </div>

@@ -13,7 +13,6 @@
 #' @export
 #'
 #' @examples
-#' # Do not run
 #' d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #'
 #' p = data.frame(lat      = c(-22,-22,-23.5),

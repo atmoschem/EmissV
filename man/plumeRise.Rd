@@ -2,7 +2,7 @@
 % Please edit documentation in R/plumerise.R
 \name{plumeRise}
 \alias{plumeRise}
-\title{Calculate plume rise.}
+\title{Calculate plume rise height.}
 \format{data.frame with the input, rise (m) and effective higt (m)}
 \usage{
 plumeRise(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
@@ -49,8 +49,6 @@ The input data.frame must contains the folloging colluns:
 Addcitionaly some combination of ws, Wstar and Ustar can produce inacurate results, Weil (1979) propose a geometric limit of 0.62 * (h - Hs) for the rise value.
 }
 \examples{
-# Do not run
-
 candiota <- matrix(c(150,1,20,420,3.11,273.15 + 3.16,200,-34.86,3.11,0.33,
                      150,1,20,420,3.81,273.15 + 4.69,300,-34.83,3.81,0.40,
                      150,1,20,420,3.23,273.15 + 5.53,400,-24.43,3.23,0.48,

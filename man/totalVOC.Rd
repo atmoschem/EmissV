@@ -25,7 +25,6 @@ Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (th
 The same ef can be used to totalEmission and voc
 }
 \examples{
-# Do not run
 
 veic <- vehicles(example = TRUE)
 

@@ -1,53 +1,55 @@
 # EmissV
-[![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)
+[![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)
 
-This package provide some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models sush as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
+This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
-## To install
-
-```r
-# install.packages("devtools")
-devtools::install_github("atmoschem/EmissV")
-library(EmissV)
-```
+## Installation
 
 ### System dependencies 
 
-EmissV import functions from [ncdf4](http://cran.r-project.org/package=ncdf4) for read model information, [raster](http://cran.r-project.org/package=raster) to process grinded information and [units](https://github.com/edzer/units/).
+EmissV import functions from [ncdf4](http://cran.r-project.org/package=ncdf4) for reading model information, [raster](http://cran.r-project.org/package=raster) and [sf](https://cran.r-project.org/web/packages/sf/index.html) to process grinded/geographic information and [units](https://github.com/edzer/units/). These packages need some aditional libraries: 
 
-### Ubuntu instalation
+### To Ubuntu
 The following steps are required for installation on Ubuntu:
 ```bash
   sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
   sudo apt-get --yes --force-yes update -qq
+  # netcdf dependencies:
+  sudo apt-get install --yes libnetcdf-dev netcdf-bin
   # units/udunits2 dependency:
   sudo apt-get install --yes libudunits2-dev
   # sf dependencies (without libudunits2-dev):
   sudo apt-get install --yes libgdal-dev libgeos-dev libproj-dev
-  # netcdf dependencies:
-  sudo apt-get install --yes libnetcdf-dev netcdf-bin
 ```
 
-### Fedora instalation
+### To Fedora
 The following steps are required for installation on Fedora:
 ```bash
   sudo dnf update
+  # netcdf dependencies:
+  sudo yum install netcdf-devel
   # units/udunits2 dependency:
   sudo yum install udunits2-devel
   # sf dependencies (without libudunits2-dev):
   sudo yum install gdal-devel proj-devel proj-epsg proj-nad geos-devel
-  # netcdf dependencies:
-  sudo yum install netcdf-devel
 ```
 
-### Windowns instalation
-No aditional steps for windowns installation.
+### To Windows
+No additional steps for windows installation.
 
-## Using EmissV
+Detailed instructions can be found at [netcdf](https://www.unidata.ucar.edu/software/netcdf/), [libudunits2-dev](https://r-quantities.github.io/units/) and [sf](https://r-spatial.github.io/sf/#installing) developers page.
 
-In EmissV the vehicular emissions are estimated by a top-down approach. The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
+### Package installation
+```r
+# install.packages("devtools")
+devtools::install_github("atmoschem/EmissV")
+```
 
-**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for interest area (cityes, states, countries, etc).
+## Using `EmissV`
+
+In EmissV the vehicular emissions are estimated by a top-down approach, i.e. the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc).The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
+
+**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for the interest area (cities, states, countries, etc).
 
 ``` r
 library(EmissV)
@@ -94,17 +96,17 @@ grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),
 
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = F)[12,1]
-MG     <- areaSource(shape,raster,grid,name = "Minas Gerais")
+Minas_Gerais <- areaSource(shape,raster,grid,name = "Minas Gerais")
 # [1] "processing Minas Gerais area ... "
 # [1] "fraction of Minas Gerais area inside the domain = 0.0145921494236101"
 
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = F)[22,1]
-SP     <- areaSource(shape,raster,grid,name = "Sao Paulo")
+Sao_Paulo <- areaSource(shape,raster,grid,name = "Sao Paulo")
 # [1] "processing Sao Paulo area ... "
 # [1] "fraction of Sao Paulo area inside the domain = 0.474658563750987"
 
-sp::spplot(raster::merge(TOTAL[[1]][[1]] * SP, TOTAL[[1]][[2]] * MG),
+sp::spplot(raster::merge(TOTAL[[1]][[1]] * Sao_Paulo, TOTAL[[1]][[2]] * Minas_Gerais),
            scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
            main=list(label="Emissions of CO [g/d]"),
            col.regions = c("#031638","#001E48","#002756","#003062",
@@ -114,9 +116,9 @@ sp::spplot(raster::merge(TOTAL[[1]][[1]] * SP, TOTAL[[1]][[2]] * MG),
 ```
 ![*Figure 1* - Emissions of CO using nocturnal lights.](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
 
-**III.** Emission calculation: calculate the final emission from all different sources and converts to model unit and resolution.
+**III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
 ``` r
-CO_emissions <- emission(TOTAL,"CO",list(SP = SP, MG = MG),grid,mm=28, plot = T)
+CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),grid,mm=28, plot = T)
 # [1] "calculating emissions for CO using molar mass = 28 ..."
 ```
 ![*Figure 2* - CO emissions ready for use in air quality model.](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png)
@@ -154,14 +156,14 @@ Sample datasets:
 - Shapefiles for Brazil states
 
 
-### Meta
+### Contributing
 
 Bug reports, suggestions, and code contributions are all welcome. Please see [CONTRIBUTING.md](https://github.com/atmoschem/EmissV/blob/master/CONTRIBUTING.md) for details. Note that this project adopt the [Contributor Code of Conduct](https://github.com/atmoschem/EmissV/blob/master/CONDUCT.md) and by participating in this project you agree to abide by its terms.
 
-### Licence
-
-EmissV is published under the terms of the MIT License. Copyright (c) 2018 Daniel Schuch.
-
-### About this package
+#### About this package
 
 EmissV is a tool developed during Daniel Schuch's post-doctorate at the at the Department of Atmospheric Sciences, University of São Paulo ([IAG-USP](http://www.iag.usp.br/atmosfericas/)) supervised by professor Edmilson Dias de Freitas.
+
+#### Licence
+
+EmissV is published under the terms of the [MIT License](https://opensource.org/licenses/MIT). Copyright [(c)](https://raw.githubusercontent.com/atmoschem/emissv/master/LICENSE) 2018 Daniel Schuch.

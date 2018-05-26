@@ -25,19 +25,19 @@ affiliations:
 
 # Summary
 
-Air quality models need input data containing information about atmosphere (like temperature, wind, humidity), terrestrial data (like terrain, landuse, soil types) and emissions. Therefore, the emission inventories are easily seen as the scapegoat if a mismatch is found between modelled and observed concentrations of air pollutants [@PullesHeslinga2010].
+Air quality models need input data containing information about atmosphere (like temperature, wind, humidity), terrestrial data (like terrain, landuse, soil types) and emissions. Therefore, the emission inventories are easily seen as the scapegoat if a mismatch is found between modelled and observed concentrations of air pollutants [@PullesHeslinga2010]. The anthropogenic emissions, especially vehicular emissions, are highly dependent on human activity and are constantly changing due to factors ranging from economic (such as the state of conservation of the fleet, renewal of the fleet and the price of fuel) to legal aspects (such as the vehicle routing).
 
-The **EmissV** is an R package that estimates vehicular emissions by a top-down approach. The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
+The **EmissV** is an R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc). The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
 
-**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for each region.
+**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for the interest area (cities, states, countries, etc).
 
 **II.** Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), OpenStreet maps (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
 
-**III.** Emission calculation: calculate the final emission from all different sources and converts to model unit and resolution.
+**III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
 
 **IV.** Temporal distribution: the package has a set of hourly profiles that represent the mean activity for each day of the week calculated from traffic counts of toll stations located in São Paulo city.
 
-The package also has additional functions for extract information directly from WRF-Chem files and to estimate the emissions emitted in the form of exhaust (exhaust), liquid (sump and evaporative) and vapors (fuel transfer operations) of volatile organic compounds.
+The package has additional functions for read netcdf data, create line and point sources (with plume rise) and to estimate the total emissions of of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 
 ## Functions and data
 
@@ -51,6 +51,7 @@ The package also has additional functions for extract information directly from 
 | gridInfo     | Read grid information from a NetCDF file              |
 | lineSource   | Distribution of emissions by streets                  |
 | perfil       | Dataset with temporal profile for vehicular emissions |
+| plumeRise    | Calculate plume rise height                           |
 | pointSource  | Emissions from point sources                          |
 | rasterSource | Distribution of emissions by a georeferenced image    |
 | read         | Read NetCDF data from global inventories              |
@@ -68,17 +69,18 @@ library(EmissV)
 
 veiculos <- vehicles(example = T)
 # using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
-#                              Category   Type Fuel      Use          SP  ...
-# Light duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342.56  ...
-# Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627.23  ...
-# Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022.78  ...
-# Diesel trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634.63  ...
-# Diesel urban busses           CBUS_B5    BUS   B5 165 km/d   792630.93  ...
-# Diesel intercity busses       MBUS_B5    BUS   B5 165 km/d    21865.68  ...
-# Gasohol motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921.13  ...
-# Flex motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056.07  ...
+#                              Category   Type Fuel      Use       SP ...
+# Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...
+# Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...
+# Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...
+# Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...
+# Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...
+# Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...
+# Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...
+# Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...
 
-veiculos <- veiculos[,c(-6,-8,-9)] # dropping RJ, PR and SC
+# dropping Rio de Janeiro (RJ), parana (PR) and Santa Catarina (SC) emission factors
+veiculos <- veiculos[,c(-6,-8,-9)]
 
 EF     <- emissionFactor(example = T)
 # using a example emission factor (values calculated from CETESB 2015):
@@ -92,9 +94,8 @@ EF     <- emissionFactor(example = T)
 # Gasohol motorcycles          1.61 g/km 0.0000 g/km
 # Flex motorcycles             0.75 g/km 0.0000 g/km
 
-
 TOTAL  <- totalEmission(veiculos,EF,pol = c("CO"),verbose = T)
-# [1] "Total of CO : 819415.556947469 t year-1"
+# [1] "Total of CO : 1127549.20226849 t year-1"
 
 raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
                          "/dmsp.tiff",sep=""))
@@ -105,17 +106,17 @@ grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),
 
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = F)[12,1]
-MG     <- areaSource(shape,raster,grid,name = "Minas Gerais")
+Minas_Gerais <- areaSource(shape,raster,grid,name = "Minas Gerais")
 # [1] "processing Minas Gerais area ... "
-# [1] "fraction of Minas Gerais area inside the domain = 0.0149712373601029"
+# [1] "fraction of Minas Gerais area inside the domain = 0.0145921494236101"
 
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = F)[22,1]
-SP     <- areaSource(shape,raster,grid,name = "Sao Paulo")
+Sao_Paulo <- areaSource(shape,raster,grid,name = "Sao Paulo")
 # [1] "processing Sao Paulo area ... "
-# [1] "fraction of Sao Paulo area inside the domain = 0.473078315902017"
+# [1] "fraction of Sao Paulo area inside the domain = 0.474658563750987"
 
-sp::spplot(raster::merge(TOTAL[[1]][[1]] * SP, TOTAL[[1]][[2]] * MG),
+sp::spplot(raster::merge(TOTAL[[1]][[1]] * Sao_Paulo, TOTAL[[1]][[2]] * Minas_Gerais),
            scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
            main=list(label="Emissions of CO [g/d]"),
            col.regions = c("#031638","#001E48","#002756","#003062",
@@ -123,11 +124,11 @@ sp::spplot(raster::merge(TOTAL[[1]][[1]] * SP, TOTAL[[1]][[2]] * MG),
                            "#006897","#0074A1","#0081AA","#008FB3",
                            "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
 
-CO_emissions <- emission(TOTAL,"CO",list(SP = SP, MG = MG),grid,mm=28, plot = T)
+CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),grid,mm=28, plot = T)
 # [1] "calculating emissions for CO using molar mass = 28 ..."
 ```
 
-The emissions of CO calculated in this example can be seen in the Fig. 1. in `g/d` (by pixel) and the final emissions on Fig. 2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with **ncdf4** [@ncdf4] or with the **eixport** [@eixport] packages.
+The emissions of CO calculated in this example can be seen in the Fig. 1. in `g/d` (by pixel) and the final emissions on Fig. 2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with **ncdf4** [@ncdf4],**RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport] packages.
 
 ![Emissions of CO using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
 

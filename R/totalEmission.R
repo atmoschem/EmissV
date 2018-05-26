@@ -22,7 +22,6 @@
 #'@import units
 #'
 #'@examples
-#' # Do not run
 #'
 #' veic <- vehicles(example = TRUE)
 #'
