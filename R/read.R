@@ -20,7 +20,6 @@
 #' @source read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 #'
 #' @examples \donttest{
-#' # Do not run
 #' d1     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' d2     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 #' print("download and untar EDGAR data from:")

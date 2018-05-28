@@ -16,8 +16,6 @@
 #' @import raster sp
 #'
 #' @examples
-#' # Do not run
-#'
 #' shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
 #'                             "/BR.shp",sep=""),verbose = FALSE)
 #' shape  <- shape[22,1] # subset for Sao Paulo - BR
@@ -25,7 +23,6 @@
 #'                          "/dmsp.tiff",sep=""))
 #' grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 #' SP     <- areaSource(shape,raster,grid,name = "SPMA")
-#'
 #' \donttest{
 #' sp::spplot(SP,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
 #'            main=list(label="Spatial Distribution by Lights for Sao Paulo - Brazil"),

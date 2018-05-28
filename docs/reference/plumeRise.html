@@ -145,7 +145,8 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.11</span>,<span class='fl'>273.15</span> + <span class='fl'>3.16</span>,<span class='fl'>200</span>,-<span class='fl'>34.86</span>,<span class='fl'>3.11</span>,<span class='fl'>0.33</span>,
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>matrix</span>(<span class='fu'>c</span>(<span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.11</span>,<span class='fl'>273.15</span> + <span class='fl'>3.16</span>,<span class='fl'>200</span>,-<span class='fl'>34.86</span>,<span class='fl'>3.11</span>,<span class='fl'>0.33</span>,
                      <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.81</span>,<span class='fl'>273.15</span> + <span class='fl'>4.69</span>,<span class='fl'>300</span>,-<span class='fl'>34.83</span>,<span class='fl'>3.81</span>,<span class='fl'>0.40</span>,
                      <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.23</span>,<span class='fl'>273.15</span> + <span class='fl'>5.53</span>,<span class='fl'>400</span>,-<span class='fl'>24.43</span>,<span class='fl'>3.23</span>,<span class='fl'>0.48</span>,
                      <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.47</span>,<span class='fl'>273.15</span> + <span class='fl'>6.41</span>,<span class='fl'>500</span>,-<span class='fl'>15.15</span>,<span class='fl'>3.48</span>,<span class='fl'>0.52</span>,
@@ -157,26 +158,10 @@
 <span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='no'>candiota</span>)
 <span class='fu'>names</span>(<span class='no'>candiota</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"z"</span>,<span class='st'>"r"</span>,<span class='st'>"Ve"</span>,<span class='st'>"Te"</span>,<span class='st'>"ws"</span>,<span class='st'>"Temp"</span>,<span class='st'>"h"</span>,<span class='st'>"L"</span>,<span class='st'>"Ustar"</span>,<span class='st'>"Wstar"</span>)
 <span class='fu'>row.names</span>(<span class='no'>candiota</span>) <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"08:00"</span>,<span class='st'>"09:00"</span>,<span class='fu'>paste</span>(<span class='fl'>10</span>:<span class='fl'>15</span>,<span class='st'>":00"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>plumeRise</span>(<span class='no'>candiota</span>,<span class='kw'>Hmax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] "convective, h/L = -5.7372346528973"
-#&gt; [1] "using weil max= 31"
-#&gt; [1] "convective, h/L = -8.61326442721792"
-#&gt; [1] "strong convective, h/L = -16.3733115022513"
-#&gt; [1] "using weil max= 155"
-#&gt; [1] "strong convective, h/L = -33.003300330033"
-#&gt; [1] "using weil max= 217"
-#&gt; [1] "strong convective, h/L = -67.7966101694915"
-#&gt; [1] "strong convective, h/L = -79.3650793650794"
-#&gt; [1] "strong convective, h/L = -110.650069156293"
-#&gt; [1] "strong convective, h/L = -32.0056899004267"</div><div class='input'><span class='fu'>print</span>(<span class='no'>candiota</span>)</div><div class='output co'>#&gt;         z r Ve  Te   ws   Temp   h      L Ustar Wstar     rise       He
-#&gt; 08:00 150 1 20 420 3.11 276.31 200 -34.86  3.11  0.33  31.0000 181.0000
-#&gt; 09:00 150 1 20 420 3.81 277.84 300 -34.83  3.81  0.40  41.5831 191.5831
-#&gt; 10:00 150 1 20 420 3.23 278.68 400 -24.43  3.23  0.48 155.0000 305.0000
-#&gt; 11:00 150 1 20 420 3.47 279.56 500 -15.15  3.48  0.52 217.0000 367.0000
-#&gt; 12:00 150 1 20 420 3.37 279.50 600  -8.85  3.37  2.30 121.4376 271.4376
-#&gt; 13:00 150 1 20 420 3.69 279.08 800 -10.08  3.69  2.80 102.0828 252.0828
-#&gt; 14:00 150 1 20 420 3.59 279.23 800  -7.23  3.49  1.57 207.6558 357.6558
-#&gt; 15:00 150 1 20 420 4.14 279.68 900 -28.12  4.14  0.97 355.4518 505.4518</div><div class='input'>
-</div></pre>
+<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>plumeRise</span>(<span class='no'>candiota</span>,<span class='kw'>Hmax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>print</span>(<span class='no'>candiota</span>)
+
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

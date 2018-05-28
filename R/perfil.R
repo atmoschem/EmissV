@@ -7,8 +7,6 @@
 #' @note The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = hourly emission.
 #'
 #' @examples
-#' # Do not run
-#'
 #' # load the data
 #' data(perfil)
 #' \donttest{

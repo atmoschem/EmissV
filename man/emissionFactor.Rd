@@ -25,8 +25,6 @@ emissionFactor(ef, poluttant = names(ef), vnames = NA, unit = "g/km",
 Return a data frame with vehicle information. Types argument defines the diary use:
 }
 \examples{
-# Do not run
-
 EF <- emissionFactor(example = TRUE)
 
 # or the code for the same result

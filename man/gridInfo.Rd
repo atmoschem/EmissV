@@ -20,7 +20,6 @@ Return a list containing information of a regular grid / domain
 just WRF-Chem is suported by now
 }
 \examples{
-# Do not run
 grid_d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 \donttest{
 grid_d2 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))

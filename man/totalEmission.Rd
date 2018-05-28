@@ -27,7 +27,6 @@ where n is the type of the veicle
 the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame
 }
 \examples{
-
 veic <- vehicles(example = TRUE)
 
 EmissionFactors <- emissionFactor(example = TRUE)

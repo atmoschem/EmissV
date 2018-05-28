@@ -18,8 +18,6 @@
 #' @import  units
 #'
 #' @examples
-#' # Do not run
-#'
 #' EF <- emissionFactor(example = TRUE)
 #'
 #' # or the code for the same result

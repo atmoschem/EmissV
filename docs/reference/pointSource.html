@@ -119,19 +119,21 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>d1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div><div class='output co'>#&gt; [1] "Grid information from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d01"</div><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>d1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+
 <span class='no'>p</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(<span class='kw'>lat</span>      <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>22</span>,-<span class='fl'>22</span>,-<span class='fl'>23.5</span>),
                <span class='kw'>lon</span>      <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>46</span>,-<span class='fl'>48</span>,-<span class='fl'>47</span>  ),
                <span class='kw'>z</span>        <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>  ,  <span class='fl'>0</span>,  <span class='fl'>0</span>  ),
                <span class='kw'>emission</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>666</span>,<span class='fl'>444</span>,<span class='fl'>111</span>  ) )
 
-<span class='no'>p_emissions</span> <span class='kw'>&lt;-</span> <span class='fu'>pointSource</span>(<span class='kw'>emissions</span> <span class='kw'>=</span> <span class='no'>p</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='no'>d1</span>)</div><div class='output co'>#&gt; [1] "grid position lat= -22.010806627171 lon= -46.0152584808041"
-#&gt; [1] "grid position lat= -22.010806627171 lon= -47.9944115841027"
-#&gt; [1] "grid position lat= -23.4723500487625 lon= -47.0048350324534"</div><span class='co'># NOT RUN {</span>
+<span class='no'>p_emissions</span> <span class='kw'>&lt;-</span> <span class='fu'>pointSource</span>(<span class='kw'>emissions</span> <span class='kw'>=</span> <span class='no'>p</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='no'>d1</span>)
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>p_emissions</span>,<span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,
            <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"3 point sources for domain d1"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='co'># }</span># NOT RUN {
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -30,7 +30,6 @@ Calculate the spatial distribution by a raster
 About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 }
 \examples{
-# Do not run
 grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 test  <- rasterSource(x,grid)

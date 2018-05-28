@@ -2,9 +2,7 @@
 #'
 #' @description Return a data frame with 4 columns (vehicle category, type, fuel and avarage kilometers driven) and an aditional column with the number of vehicles for each interest area (cityes, states, countries, etc).
 #'
-#' This funcion define a line for vehicle class as follow:
-#'
-#' Average daily kilometres driven are defined by type (input):
+#' Average daily kilometres driven are defined by vehicle type:
 #'
 #' - LDV (Light duty Vehicles) 41 km / day
 #'
@@ -14,7 +12,7 @@
 #'
 #' - MOTO (motorcycles and other vehicles) 140 km / day
 #'
-#' The number of vehicles are defined by the distribution of vehicles (input) and the total number of vehicles (input) on each area.
+#' The number of vehicles are defined by the distribution of vehicles by vehicle classs and the total number of vehicles by area.
 #'
 #' @note total_v and area_name must have the same length.
 #'
@@ -37,7 +35,6 @@
 #' @import  units
 #'
 #' @examples
-#'
 #' veiculos <- vehicles(example = TRUE)
 #'
 #' # or the code bellow for the same result

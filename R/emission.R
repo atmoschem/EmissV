@@ -29,8 +29,6 @@
 #' @import units raster sp
 #'
 #' @examples
-#' # Do not run
-#'
 #' veiculos <- vehicles(example = TRUE)
 #'
 #' EmissionFactors <- emissionFactor(example = TRUE)

@@ -40,8 +40,6 @@ the list of area must be in the same order as defined in vehicles and total emis
 just WRF-Chem is suported by now
 }
 \examples{
-# Do not run
-
 veiculos <- vehicles(example = TRUE)
 
 EmissionFactors <- emissionFactor(example = TRUE)

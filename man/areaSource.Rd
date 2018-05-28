@@ -30,8 +30,6 @@ Calculate the spatial distribution by a raster kasked by shape/model grid inform
 About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 }
 \examples{
-# Do not run
-
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = FALSE)
 shape  <- shape[22,1] # subset for Sao Paulo - BR
@@ -39,7 +37,6 @@ raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
                          "/dmsp.tiff",sep=""))
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 SP     <- areaSource(shape,raster,grid,name = "SPMA")
-
 \donttest{
 sp::spplot(SP,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
            main=list(label="Spatial Distribution by Lights for Sao Paulo - Brazil"),

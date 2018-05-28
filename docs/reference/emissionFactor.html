@@ -132,35 +132,18 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>EF</span> <span class='kw'>&lt;-</span> <span class='fu'>emissionFactor</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='no'>EF</span> <span class='kw'>&lt;-</span> <span class='fu'>emissionFactor</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example emission factor (values calculated from CETESB 2015):
-#&gt;                                     CO          PM
-#&gt; Light Duty Vehicles Gasohol  1.75 g/km 0.0013 g/km
-#&gt; Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km
-#&gt; Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km
-#&gt; Diesel Trucks                0.45 g/km 0.0612 g/km
-#&gt; Diesel Urban Busses          0.77 g/km 0.1052 g/km
-#&gt; Diesel Intercity Busses      1.48 g/km 0.1693 g/km
-#&gt; Gasohol Motorcycles          1.61 g/km 0.0000 g/km
-#&gt; Flex Motorcycles             0.75 g/km 0.0000 g/km</div><div class='input'>
 <span class='co'># or the code for the same result</span>
 <span class='no'>EF</span> <span class='kw'>&lt;-</span> <span class='fu'>emissionFactor</span>(<span class='kw'>ef</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>CO</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1.75</span>,<span class='fl'>10.04</span>,<span class='fl'>0.39</span>,<span class='fl'>0.45</span>,<span class='fl'>0.77</span>,<span class='fl'>1.48</span>,<span class='fl'>1.61</span>,<span class='fl'>0.75</span>),
                                <span class='kw'>PM</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.0013</span>,<span class='fl'>0.0</span>,<span class='fl'>0.0010</span>,<span class='fl'>0.0612</span>,<span class='fl'>0.1052</span>,<span class='fl'>0.1693</span>,<span class='fl'>0.0</span>,<span class='fl'>0.0</span>)),
                      <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Light duty Vehicles Gasohol"</span>,<span class='st'>"Light Duty Vehicles Ethanol"</span>,
                                 <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,<span class='st'>"Diesel urban busses"</span>,
                                 <span class='st'>"Diesel intercity busses"</span>,<span class='st'>"Gasohol motorcycles"</span>,
-                                <span class='st'>"Flex motorcycles"</span>))</div><div class='output co'>#&gt; Emission factors:
-#&gt;                                     CO          PM
-#&gt; Light duty Vehicles Gasohol  1.75 g/km 0.0013 g/km
-#&gt; Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km
-#&gt; Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km
-#&gt; Diesel trucks                0.45 g/km 0.0612 g/km
-#&gt; Diesel urban busses          0.77 g/km 0.1052 g/km
-#&gt; Diesel intercity busses      1.48 g/km 0.1693 g/km
-#&gt; Gasohol motorcycles          1.61 g/km 0.0000 g/km
-#&gt; Flex motorcycles             0.75 g/km 0.0000 g/km</div><div class='input'>
-</div></pre>
+                                <span class='st'>"Flex motorcycles"</span>))
+
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

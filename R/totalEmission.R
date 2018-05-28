@@ -22,7 +22,6 @@
 #'@import units
 #'
 #'@examples
-#'
 #' veic <- vehicles(example = TRUE)
 #'
 #' EmissionFactors <- emissionFactor(example = TRUE)

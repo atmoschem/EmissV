@@ -18,7 +18,6 @@
 #' @import raster
 #'
 #' @examples
-#' # Do not run
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 #' test  <- rasterSource(x,grid)

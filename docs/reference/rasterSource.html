@@ -132,12 +132,15 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
-<span class='no'>grid</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))</div><div class='output co'>#&gt; [1] "Grid information from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d01"</div><div class='input'><span class='no'>x</span>     <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/dmsp.tiff"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='no'>test</span>  <span class='kw'>&lt;-</span> <span class='fu'>rasterSource</span>(<span class='no'>x</span>,<span class='no'>grid</span>)</div><div class='output co'>#&gt; [1] "Grid output: 99 columns 93 rows"</div><span class='co'># NOT RUN {</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>grid</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+<span class='no'>x</span>     <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='fu'>paste</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/dmsp.tiff"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
+<span class='no'>test</span>  <span class='kw'>&lt;-</span> <span class='fu'>rasterSource</span>(<span class='no'>x</span>,<span class='no'>grid</span>)
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
 <span class='fu'>image</span>(<span class='no'>test</span>,<span class='kw'>axe</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"Spatial distribution by Persistent Nocturnal Lights from DMSP"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='co'># }</span># NOT RUN {
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

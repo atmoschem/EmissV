@@ -15,8 +15,6 @@ set of houtly profiles that represent the mean activity for each day of the week
 The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = hourly emission.
 }
 \examples{
-# Do not run
-
 # load the data
 data(perfil)
 \donttest{

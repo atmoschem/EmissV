@@ -20,7 +20,6 @@
 #'@import units
 #'
 #'@examples
-#'
 #' veic <- vehicles(example = TRUE)
 #'
 #' COV = c("eth","hc3","hc5","hc8","ol2","olt","oli","iso","tol","xyl","ket","ch3oh","ald")

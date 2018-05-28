@@ -102,33 +102,31 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Do not run</span>
-
+    <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># load the data</span>
-<span class='fu'>data</span>(<span class='no'>perfil</span>)</div># NOT RUN {
-# function to simple view
-plot.perfil <- function(per = perfil$LDV, text="", color = "#0000FFBB"){
-  plot(per[,1],ty = "l", ylim = range(per),axe = FALSE,
-       xlab = "hour",ylab = "Intensity",main = text,col=color)
-  for(i in 2:7){
-    lines(per[,i],col = color)
+<span class='fu'>data</span>(<span class='no'>perfil</span>)
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
+<span class='co'># function to simple view</span>
+<span class='no'>plot.perfil</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>per</span> <span class='kw'>=</span> <span class='no'>perfil</span>$<span class='no'>LDV</span>, <span class='no'>text</span><span class='kw'>=</span><span class='st'>""</span>, <span class='no'>color</span> <span class='kw'>=</span> <span class='st'>"#0000FFBB"</span>){
+  <span class='fu'>plot</span>(<span class='no'>per</span>[,<span class='fl'>1</span>],<span class='kw'>ty</span> <span class='kw'>=</span> <span class='st'>"l"</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>range</span>(<span class='no'>per</span>),<span class='kw'>axe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+       <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"hour"</span>,<span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Intensity"</span>,<span class='kw'>main</span> <span class='kw'>=</span> <span class='no'>text</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='no'>color</span>)
+  <span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>2</span>:<span class='fl'>7</span>){
+    <span class='fu'>lines</span>(<span class='no'>per</span>[,<span class='no'>i</span>],<span class='kw'>col</span> <span class='kw'>=</span> <span class='no'>color</span>)
   }
-  for(i in 1:7){
-    points(per[,i],col = "black", pch = 20)
+  <span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>7</span>){
+    <span class='fu'>points</span>(<span class='no'>per</span>[,<span class='no'>i</span>],<span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>pch</span> <span class='kw'>=</span> <span class='fl'>20</span>)
   }
-  axis(1,at=0.5+c(0,6,12,18,24),labels = c("00:00","06:00","12:00","18:00","00:00"))
-  axis(2)
-  box()
+  <span class='fu'>axis</span>(<span class='fl'>1</span>,<span class='kw'>at</span><span class='kw'>=</span><span class='fl'>0.5</span>+<span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>6</span>,<span class='fl'>12</span>,<span class='fl'>18</span>,<span class='fl'>24</span>),<span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"00:00"</span>,<span class='st'>"06:00"</span>,<span class='st'>"12:00"</span>,<span class='st'>"18:00"</span>,<span class='st'>"00:00"</span>))
+  <span class='fu'>axis</span>(<span class='fl'>2</span>)
+  <span class='fu'>box</span>()
 }
-\dontrun{
-# view all profiles in perfil data
-for(i in 1:length(names(perfil))){
-  print(paste("profile",i,names(perfil)[i]))
-  plot.perfil(perfil[[i]],names(perfil)[i])
+<span class='co'># view all profiles in perfil data</span>
+<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='fu'>names</span>(<span class='no'>perfil</span>))){
+  <span class='fu'>print</span>(<span class='fu'>paste</span>(<span class='st'>"profile"</span>,<span class='no'>i</span>,<span class='fu'>names</span>(<span class='no'>perfil</span>)[<span class='no'>i</span>]))
+  <span class='fu'>plot.perfil</span>(<span class='no'>perfil</span><span class='kw'>[[</span><span class='no'>i</span>]],<span class='fu'>names</span>(<span class='no'>perfil</span>)[<span class='no'>i</span>])
 }
-}
-# }
-</pre>
+
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
