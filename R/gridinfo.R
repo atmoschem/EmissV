@@ -15,7 +15,7 @@
 #' @examples
 #' # Do not run
 #' grid_d1 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-#' \dontrun{
+#' \donttest{
 #' grid_d2 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 #' grid_d3 <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d03",sep=""))
 #' names(grid_d1)

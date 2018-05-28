@@ -34,7 +34,7 @@ About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteo
 grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 test  <- rasterSource(x,grid)
-\dontrun{
+\donttest{
 image(test,axe = F, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 }
 

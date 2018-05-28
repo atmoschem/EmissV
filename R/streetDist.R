@@ -16,7 +16,7 @@
 #' @importFrom data.table data.table
 #' @import units
 #' @importFrom sf st_sf st_dimension st_transform st_length st_cast st_intersection
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Do not run
 #' library(sf)
 #' # Download OSM streets

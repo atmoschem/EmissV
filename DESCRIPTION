@@ -13,10 +13,14 @@ Authors@R: c(
          email = "sergio.ibarra@usp.br",
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
-Description: Top-down methods to create vehicular and other emissions for atmospheric air quality models.
+Description: EmissV creates emissions for use in atmospheric air quality models. 
+  Vehicular emissions are estimated from a top-down approach, the emissions are calculated 
+  using the statistical description of the fleet and then different methods 
+  (Vara-Vela et al., 2016)<doi:10.5194/acp-16-777-2016> are available for spatial 
+  and temporal distribution of the emissions.
 Depends: R (>= 3.4)
 Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools, rgeos, rgdal
-Suggests: eixport, osmar
+Suggests: eixport, osmar, vein
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

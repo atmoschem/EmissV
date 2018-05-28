@@ -22,7 +22,7 @@ lineSource(s, grid, as_raster = F, verbose = T)
 Create a distribution from sp spatial lines data frame or spatial lines
 }
 \examples{
-\dontrun{
+\donttest{
 roads <- osmar::get_osm(osmar::complete_file(),
                         source = osmar::osmsource_file(paste(system.file("extdata",
                         package="EmissV"),"/streets.osm.xz",sep="")))

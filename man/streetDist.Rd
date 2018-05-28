@@ -26,7 +26,7 @@ grid of polygon
 Distribute emissions by streets of OpenStreetMap
 }
 \examples{
-\dontrun{
+\donttest{
 # Do not run
 library(sf)
 # Download OSM streets

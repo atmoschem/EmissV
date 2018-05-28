@@ -19,7 +19,7 @@ The profile is normalized by days (but is balanced for a complete week) so diary
 
 # load the data
 data(perfil)
-\dontrun{
+\donttest{
 # function to simple view
 plot.perfil <- function(per = perfil$LDV, text="", color = "#0000FFBB"){
   plot(per[,1],ty = "l", ylim = range(per),axe = FALSE,
@@ -34,7 +34,7 @@ plot.perfil <- function(per = perfil$LDV, text="", color = "#0000FFBB"){
   axis(2)
   box()
 }
-\dontrun{
+\donttest{
 # view all profiles in perfil data
 for(i in 1:length(names(perfil))){
   print(paste("profile",i,names(perfil)[i]))

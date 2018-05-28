@@ -16,7 +16,7 @@
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' roads <- osmar::get_osm(osmar::complete_file(),
 #'                         source = osmar::osmsource_file(paste(system.file("extdata",
 #'                         package="EmissV"),"/streets.osm.xz",sep="")))
