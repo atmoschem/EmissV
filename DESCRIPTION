@@ -1,6 +1,30 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
-Version: 0.664.5
+Version: 0.664.6
+Author:c(
+  person(given = "Daniel",
+         family = "Schuch",
+         role = c("aut", "cre"),
+         email = "schuch@usp.br",
+         comment = c(ORCID = "0000-0001-5977-4519")),
+  person(given = "Sergio",
+         family = "Ibarra-Espinosa",
+         role = c("aut"),
+         email = "sergio.ibarra@usp.br",
+         comment = c(ORCID = "0000-0002-3162-1905"))
+  )
+Manteiner:c(
+  person(given = "Daniel",
+         family = "Schuch",
+         role = c("aut", "cre"),
+         email = "schuch@usp.br",
+         comment = c(ORCID = "0000-0001-5977-4519")),
+  person(given = "Sergio",
+         family = "Ibarra-Espinosa",
+         role = c("aut"),
+         email = "sergio.ibarra@usp.br",
+         comment = c(ORCID = "0000-0002-3162-1905"))
+  )
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -19,7 +43,7 @@ Description: This package creates emissions for use in air quality models.
   the emission is spatially distributed according to georeferenced images, 
   shapefiles or data from the OpentreetMap and then distributed temporarily.
 Depends: R (>= 3.4)
-Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools, rgeos, rgdal
+Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools, rgeos, rgdal, vein, eixport
 Suggests: osmar
 License: MIT + file LICENSE
 Encoding: UTF-8

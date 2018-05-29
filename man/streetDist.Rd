@@ -49,6 +49,3 @@ teste <- streetDist(emission = 1000000, dist = per, grid = g,
                     osm = streets, epsg = 31983)
 }
 }
-\author{
-Sergio Ibarra
-}

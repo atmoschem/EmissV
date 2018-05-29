@@ -11,7 +11,6 @@
 #' @param epsg spatial code for projecting spatial data
 #' @return grid of polygon
 #' @export
-#' @author Sergio Ibarra
 #'
 #' @importFrom data.table data.table
 #' @import units
