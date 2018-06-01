@@ -41,6 +41,13 @@ No additional steps for windows installation.
 Detailed instructions can be found at [netcdf](https://www.unidata.ucar.edu/software/netcdf/), [libudunits2-dev](https://r-quantities.github.io/units/) and [sf](https://r-spatial.github.io/sf/#installing) developers page.
 
 ### Package installation
+To install the [CRAN](https://cran.r-project.org/package=EmissV) version:
+
+```r
+install.packages("EmissV")
+```
+To install the development version:
+
 ```r
 # install.packages("devtools")
 devtools::install_github("atmoschem/EmissV")
