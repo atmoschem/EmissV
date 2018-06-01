@@ -1,6 +1,6 @@
 # EmissV
 [![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV) 
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/EmissV?color=orange)](http://cran.r-project.org/package=EmissV)[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)
+[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)
 
 This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
