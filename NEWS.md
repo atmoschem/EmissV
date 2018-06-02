@@ -1,3 +1,5 @@
+## EmissV 0.664.6 (2018-05-29)
+- adding fest argument in lineSource
 ## EmissV 0.664.5 (2018-03-24)
 - all external data was reduced from 28mb to less than 1mb
 - examples update

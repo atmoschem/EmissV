@@ -1,6 +1,6 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
-Version: 0.664.5
+Version: 0.664.6
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -21,7 +21,7 @@ Description: Creates emissions for use in air quality models. Vehicular emission
   <https://www.openstreetmap.org> and then distributed temporarily 
   (Vara-Vela et al., 2016, <doi:10.5194/acp-16-777-2016>).
 Depends: R (>= 3.4)
-Imports: ncdf4, raster, units, methods, sp, spatstat, maptools, rgeos, rgdal
+Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools, rgeos, rgdal, vein, eixport
 Suggests: osmar
 License: MIT + file LICENSE
 Encoding: UTF-8

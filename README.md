@@ -1,5 +1,8 @@
 # EmissV
-[![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)
+[![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV) 
+[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)
+
+![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo.png)
 
 This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
@@ -40,6 +43,13 @@ No additional steps for windows installation.
 Detailed instructions can be found at [netcdf](https://www.unidata.ucar.edu/software/netcdf/), [libudunits2-dev](https://r-quantities.github.io/units/) and [sf](https://r-spatial.github.io/sf/#installing) developers page.
 
 ### Package installation
+To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.664.5)*:
+
+```r
+install.packages("EmissV")
+```
+To install the *development version (0.664.6)*:
+
 ```r
 # install.packages("devtools")
 devtools::install_github("atmoschem/EmissV")
