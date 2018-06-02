@@ -38,6 +38,10 @@
 #' teste <- streetDist(emission = 1000000, dist = per, grid = g,
 #'                     osm = streets, epsg = 31983)
 #'}
+
+# sf e data.table removidos das dependendencias
+# ^R/streetDist.R
+
 streetDist <- function(emission = NULL,
                        dist = NULL, # dist comprimento 5
                        grid = NULL, # grid sf

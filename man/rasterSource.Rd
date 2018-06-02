@@ -6,7 +6,7 @@
 \source{
 Exemple data is a low resolution cutting from image of persistent lights of the Defense Meteorological Satellite Program (DMSP) \url{https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
-Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
+Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
 }
 \usage{
 rasterSource(r, grid, nlevels = "all", verbose = T)

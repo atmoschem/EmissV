@@ -25,7 +25,7 @@
 #' image(test,axe = F, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'}
 #'
-#'@source Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
+#'@source Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 

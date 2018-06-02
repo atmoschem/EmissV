@@ -1,4 +1,4 @@
-#' Read netcdf (.nc) data from global inventaries
+#' Read NetCDF data from global inventaries
 #'
 #' @description Read data from global inventoris
 #'

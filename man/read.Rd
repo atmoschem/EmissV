@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.R
 \name{read}
 \alias{read}
-\title{Read netcdf (.nc) data from global inventaries}
+\title{Read NetCDF data from global inventaries}
 \source{
 read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 }

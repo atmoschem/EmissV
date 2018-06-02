@@ -5,7 +5,7 @@
 \title{Distribution of emissions by area}
 \format{a raster}
 \source{
-Data avaliable \url{https://ngdc.noaa.gov/eog/dmsp/downloadV4composites.html}
+Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
 }
 \usage{
 areaSource(s, r, grid = NA, name = "", as_frac = F, verbose = T)

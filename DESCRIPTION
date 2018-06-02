@@ -13,13 +13,15 @@ Authors@R: c(
          email = "sergio.ibarra@usp.br",
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
-Description: This package creates emissions for use in air quality models.
-  Vehicular emissions are estimated by a top-down approach, total emissions 
-  are calculated using the statistical description of the fleet of vehicles, 
-  the emission is spatially distributed according to georeferenced images, 
-  shapefiles or data from the OpentreetMap and then distributed temporarily.
+Maintainer: Daniel Schuch <schuch@usp.br>
+Description: Creates emissions for use in air quality models. Vehicular emissions 
+  are estimated by a top-down approach, total emissions are calculated using the 
+  statistical description of the fleet of vehicles, the emission is spatially 
+  distributed according to satellite images or openstreetmap data 
+  <https://www.openstreetmap.org> and then distributed temporarily 
+  (Vara-Vela et al., 2016, <doi:10.5194/acp-16-777-2016>).
 Depends: R (>= 3.4)
-Imports: ncdf4, raster, units, methods, sf, data.table, sp, spatstat, maptools, rgeos, rgdal
+Imports: ncdf4, raster, units, methods, sp, spatstat, maptools, rgeos, rgdal
 Suggests: osmar
 License: MIT + file LICENSE
 Encoding: UTF-8
