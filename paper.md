@@ -130,7 +130,7 @@ CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
 # [1] "calculating emissions for CO using molar mass = 28 ..."
 ```
 
-The emissions of CO calculated in this example can be seen in the Figure 1. in `g/d` (by pixel) and the final emissions on Figure  2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with packages that suport NetCDF format sush as **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport].
+The emissions of CO calculated in this example can be seen in the Figure 1. in `g/d` (by pixel) and the final emissions on Figure  2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written to WRF-Chem emision files using some package that make the interface with NetCDF format sush as **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport].
 
 ![Figure 1 - Emissions of CO using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
 
