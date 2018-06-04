@@ -84,7 +84,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       r                 <- raster::flip(r,2)
 
       a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-                      main=list(label=paste("Emisions of", pol ,"[",deparse_unit(VAR_e),"]")),
+                      main=list(label=paste("Emissions of", pol ,"[",deparse_unit(VAR_e),"]")),
                       col.regions = c("#031638","#001E48","#002756","#003062",
                                       "#003A6E","#004579","#005084","#005C8E",
                                       "#006897","#0074A1","#0081AA","#008FB3",
