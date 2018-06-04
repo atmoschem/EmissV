@@ -34,7 +34,7 @@
 #' }
 #'
 #'
-#'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/}
+#'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 #'
 
 # algorithm source:
@@ -49,10 +49,9 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, fast = F){
                            type = "wrfinput",
                            matrix = FALSE,
                            epsg = 4326)
-    roads  <- s # acho que o sergio esqueceu
     roads2 <- s
     #  Calcula comprimento
-    roads2$length <- sf::st_length(sf::st_as_sf(roads))
+    roads2$length <- sf::st_length(sf::st_as_sf(roads2))
     # deixa so o campo length
     roads3 <- roads2[, "length"]
     # calcula comprimento de rua em cada celula de grade

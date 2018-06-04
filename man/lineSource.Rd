@@ -4,7 +4,7 @@
 \alias{lineSource}
 \title{Distribution of emissions by streets}
 \source{
-OpenstreetMap data avaliable \url{https://www.openstreetmap.org/}
+OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 }
 \usage{
 lineSource(s, grid, as_raster = F, verbose = T, fast = F)

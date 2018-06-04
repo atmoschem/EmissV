@@ -1,5 +1,5 @@
 ---
-title: 'EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models'
+title: 'EmissV: An R package to create vehicular and other emissions for air quality models'
 authors:
 - affiliation: '1'
   name: Daniel Schuch
@@ -29,9 +29,9 @@ Air quality models need input data containing information about atmosphere (like
 
 The **EmissV** is an R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc). The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
 
-**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors and for the interest area (cities, states, countries, etc).
+**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors for each interest area (cities, states, countries, etc).
 
-**II.** Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), OpenStreet maps (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
+**II.** Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), openStreetmap data (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
 
 **III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
 
@@ -67,7 +67,7 @@ The following example creates an area source for São Paulo State (Brasil). The 
 ``` r
 library(EmissV)
 
-veiculos <- vehicles(example = T)
+ve <- vehicles(example = T)
 # using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
 #                              Category   Type Fuel      Use       SP ...
 # Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...
@@ -80,7 +80,7 @@ veiculos <- vehicles(example = T)
 # Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...
 
 # dropping Rio de Janeiro (RJ), parana (PR) and Santa Catarina (SC) emission factors
-veiculos <- veiculos[,c(-6,-8,-9)]
+ve <- ve[,c(-6,-8,-9)]
 
 EF     <- emissionFactor(example = T)
 # using a example emission factor (values calculated from CETESB 2015):
@@ -94,7 +94,7 @@ EF     <- emissionFactor(example = T)
 # Gasohol motorcycles          1.61 g/km 0.0000 g/km
 # Flex motorcycles             0.75 g/km 0.0000 g/km
 
-TOTAL  <- totalEmission(veiculos,EF,pol = c("CO"),verbose = T)
+TOTAL  <- totalEmission(ve,EF,pol = c("CO"),verbose = T)
 # [1] "Total of CO : 1127549.20226849 t year-1"
 
 raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
@@ -124,11 +124,12 @@ sp::spplot(raster::merge(TOTAL[[1]][[1]] * Sao_Paulo, TOTAL[[1]][[2]] * Minas_Ge
                            "#006897","#0074A1","#0081AA","#008FB3",
                            "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
 
-CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),grid,mm=28, plot = T)
+CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
+                         grid,mm=28, plot = T)
 # [1] "calculating emissions for CO using molar mass = 28 ..."
 ```
 
-The emissions of CO calculated in this example can be seen in the Fig. 1. in `g/d` (by pixel) and the final emissions on Fig. 2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with **ncdf4** [@ncdf4],**RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport] packages.
+The emissions of CO calculated in this example can be seen in the Fig. 1. in `g/d` (by pixel) and the final emissions on Fig. 2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport] packages.
 
 ![Emissions of CO using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
 
