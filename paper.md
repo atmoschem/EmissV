@@ -62,7 +62,7 @@ The package has additional functions for create emissions from individual source
 
 ## Examples
 
-The following example creates an area source for São Paulo State (Brasil). The `vehicles` function creates a `data.frame` with information about the São Paulo Fleet (using [@detran2016] data), the `emissionFactors` create a a `data.frame` with emission factors for CO and PM [@cetesbEV2015]. The `totalEmission` calculate the total of CO for these vehicles and this emission factors. The next 3 lines open different data: a shapefile, a raster and a wrf file. This this data are the input for `areaSouce` that creates an area source based in an image of persistent lights of the Defense Meteorological Satellite Program (DMSP) for São Paulo and Minas Gerais Brasilian states and finally the function `emission` calculate the CO emissions.
+The following example creates an area source for São Paulo State (Brasil). The `vehicles` function create a `data.frame` with information about the São Paulo Fleet (using [@detran2016] data), the `emissionFactors` create a a `data.frame` with emission factors for CO and PM [@cetesbEV2015]. The `totalEmission` calculates the total emissions of CO for these vehicles and this emission factors. The next 3 lines opens different data: a shapefile, a raster and a wrf file. This data are the input for `areaSouce` that creates an area source based in an image of persistent lights of the Defense Meteorological Satellite Program (DMSP) for São Paulo and Minas Gerais Brasilian states and finally the the function `emission` calculates the CO emissions.
 
 ``` r
 library(EmissV)
@@ -130,7 +130,7 @@ CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
 # [1] "calculating emissions for CO using molar mass = 28 ..."
 ```
 
-The emissions of CO calculated in this example can be seen in the Figure 1. in `g/d` (by pixel) and the final emissions on Figure  2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written to WRF-Chem emision files using some package that make the interface with NetCDF format sush as **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport].
+The emissions of CO calculated in this example can be seen in the Figure 1. in `g/d` (by pixel) and the final emissions on Figure  2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written to WRF-Chem emision files using some package that makes the interface with NetCDF format such as **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport].
 
 ![Figure 1 - Emissions of CO using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
 
