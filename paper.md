@@ -29,15 +29,15 @@ Air quality models need input data containing information about atmosphere (sush
 
 The **EmissV** is an R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc). The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
 
-**I.** Total: emission of pollutants is estimated from the fleet, use and emission factors for each interest area (cities, states, countries, etc).
+**I.** Total: emission of pollutants is estimated from the fleet (number of vehicles), use (km/day) and emission factors (g/km) for each interest area (cities, states, countries, etc) or alternatively the totals of some inventory can be used.
 
-**II.** Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), openStreetmap data (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
+**II.** Spatial distribution: the package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), openstreetmap data (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
 
 **III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
 
-**IV.** Temporal distribution: the package has a set of hourly profiles that represent the mean activity for each day of the week calculated from traffic counts of toll stations located in São Paulo city.
+**IV.** Temporal distribution: a set of hourly profiles that represent the mean activity (by hour and day of the week) calculated from traffic counts of toll stations located at São Paulo city area available for apply in the emissions.
 
-The package has additional functions for read netcdf data, create line and point sources (with plume rise) and to estimate the total emissions of of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+The package has additional functions for create emissions from individual sources (counting with some plume rise parameterizations) and to estimate the vehicular emissions of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 
 ## Functions and data
 
@@ -62,7 +62,7 @@ The package has additional functions for read netcdf data, create line and point
 
 ## Examples
 
-The following example creates an area source for São Paulo State (Brasil). The `vehicles` function creates a data.frame with information about the São Paulo Fleet, the `emissionFactors` create a a data.frame with emission factors for CO and PM [@cetesbEV2015]. The `totalEmission` calculate the total of CO for these vehicles and this emission factors. The next 3 lines open different data: a shapefile, a raster and read a wrf file all this data are the input for `areaSouce` that creates an area source based in an image of persistent lights of the Defense Meteorological Satellite Program (DMSP) for São Paulo and Minas Gerais (two states of Brasil) and finally the function `emission` calculate the CO emissions.
+The following example creates an area source for São Paulo State (Brasil). The `vehicles` function creates a `data.frame` with information about the São Paulo Fleet (using [@detran2016] data), the `emissionFactors` create a a `data.frame` with emission factors for CO and PM [@cetesbEV2015]. The `totalEmission` calculate the total of CO for these vehicles and this emission factors. The next 3 lines open different data: a shapefile, a raster and a wrf file. This this data are the input for `areaSouce` that creates an area source based in an image of persistent lights of the Defense Meteorological Satellite Program (DMSP) for São Paulo and Minas Gerais Brasilian states and finally the function `emission` calculate the CO emissions.
 
 ``` r
 library(EmissV)
@@ -130,11 +130,11 @@ CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
 # [1] "calculating emissions for CO using molar mass = 28 ..."
 ```
 
-The emissions of CO calculated in this example can be seen in the Fig. 1. in `g/d` (by pixel) and the final emissions on Fig. 2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport] packages.
+The emissions of CO calculated in this example can be seen in the Figure 1. in `g/d` (by pixel) and the final emissions on Figure  2 in `MOL h-1 km-1` (by model grid cell). These emissions can be written on an emission file from WRF-Chem with packages that suport NetCDF format sush as **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport].
 
-![Emissions of CO using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
+![Figure 1 - Emissions of CO using nocturnal lights](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
 
-![CO emissions ready for use in air quality model](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png)
+![Figure 2 - CO emissions ready for use in air quality model](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png)
 
 
 The R package **EmissV** is available at the repository  https://github.com/atmoschem/EmissV. 
