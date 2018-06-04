@@ -33,7 +33,7 @@ The **EmissV** is an R package that estimates vehicular emissions by a top-down 
 
 **II.** Spatial distribution: the package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), openstreetmap data (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
 
-**III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
+**III.** Emission calculation: calculates the final emission from all different sources and converts to model units and resolution.
 
 **IV.** Temporal distribution: a set of hourly profiles that represents the mean activity (by hour and day of the week) calculated from traffic counts of toll stations located at São Paulo city available for apply in the emissions.
 
@@ -41,7 +41,7 @@ The package has additional functions for create emissions from individual source
 
 ## Functions and data
 
-**EmissV** count with the folllwing functions:
+**EmissV** counts with the folllwing functions:
 
 | Function     | Description                                           |
 |--------------|-------------------------------------------------------|
