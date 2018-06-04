@@ -142,6 +142,6 @@ And this installation is tested automatically on Linux via [TravisCI](https://tr
 
 # Acknowledgements
 
-The development of eixport was supported by postdoc grans fro the Fundação de Universidade de São Paulo and Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior.
+The development of eixport was supported by postdoc grans from the Fundação da Universidade de São Paulo and Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior.
 
 # References
