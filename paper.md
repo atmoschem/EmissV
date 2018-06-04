@@ -79,7 +79,8 @@ ve <- vehicles(example = T)
 # Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...
 # Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...
 
-# dropping Rio de Janeiro (RJ), parana (PR) and Santa Catarina (SC) emission factors
+# dropping Rio de Janeiro (RJ), parana (PR) and Santa Catarina (SC) counting 
+# of the fleet of vehicles
 ve <- ve[,c(-6,-8,-9)]
 
 EF     <- emissionFactor(example = T)
