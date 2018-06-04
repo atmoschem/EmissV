@@ -35,7 +35,7 @@ The **EmissV** is an R package that estimates vehicular emissions by a top-down 
 
 **III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
 
-**IV.** Temporal distribution: a set of hourly profiles that represent the mean activity (by hour and day of the week) calculated from traffic counts of toll stations located at São Paulo city area available for apply in the emissions.
+**IV.** Temporal distribution: a set of hourly profiles that represents the mean activity (by hour and day of the week) calculated from traffic counts of toll stations located at São Paulo city available for apply in the emissions.
 
 The package has additional functions for create emissions from individual sources (counting with some plume rise parameterizations) and to estimate the vehicular emissions of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 
