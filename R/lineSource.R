@@ -37,7 +37,7 @@
 #'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 #'
 
-# algorithm source:
+# OLD algorithm source:
 # https://gis.stackexchange.com/questions/119993/convert-line-shapefile-to-raster-value-total-length-of-lines-within-cell
 
 
@@ -50,17 +50,17 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, fast = F){
                            matrix = FALSE,
                            epsg = 4326)
     roads2 <- s
-    #  Calcula comprimento
+    #  Calculate the length
     roads2$length <- sf::st_length(sf::st_as_sf(roads2))
-    # deixa so o campo length
+    # just length
     roads3 <- roads2[, "length"]
-    # calcula comprimento de rua em cada celula de grade
+    # calculate the length of streets in each cell
     roads4 <- vein::emis_grid(spobj = roads3, g = g, sr = 4326, type = "lines")
-    # normaliza
+    # normalyse
     roads4$length <- roads4$length / sum(roads4$length)
-    # converte Spatial
+    # converts to Spatial
     roads4sp <- as(roads4, "Spatial")
-    # rasteriza
+    # make a raster
     r <- raster::raster(ncol = grid$Horizontal[1], nrow = grid$Horizontal[2])
     raster::extent(r) <- raster::extent(roads4sp)
     r <- raster::rasterize(roads4sp, r, field = roads4sp$length,
