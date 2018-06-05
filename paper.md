@@ -99,7 +99,7 @@ TOTAL  <- totalEmission(ve,EF,pol = c("CO"),verbose = T)
 # [1] "Total of CO : 1127549.20226849 t year-1"
 
 raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
-                         "/dmsp.tiff",sep=""))
+                         "/dmsp_hi-res.tiff",sep=""))
 
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),
                    "/wrfinput_d02",sep=""))
