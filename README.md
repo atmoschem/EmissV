@@ -1,6 +1,6 @@
 # EmissV
 [![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV) 
-[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)
+[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
 
 ![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo.png)
 
