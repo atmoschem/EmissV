@@ -119,7 +119,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     unidade <- total[[1]][1]/as.numeric(total[[1]][[1]])
 
     for(i in 1:length(area)){
-      area[[i]] = area[[i]] * var[[i]]
+      area[[i]] = area[[i]] * drop_units(var[[i]])
     }
     area <- unname(area)
 
@@ -152,9 +152,12 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
   }
   else{
     #  mol km^-2 hr^-1
-    units::install_symbolic_unit("MOL")
-    MOL <- units::make_unit("MOL")                   # new unit MOL
-    install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
+	if (utils::packageVersion("units") <= "0.5-1") {
+      units::install_symbolic_unit("MOL")
+      MOL <- units::make_unit("MOL")                   # new unit MOL
+      install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
+	} else
+      install_conversion_constant("MOL", "g", mm) # new conversion
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
   }
