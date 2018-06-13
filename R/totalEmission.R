@@ -2,7 +2,7 @@
 #'
 #'@description Caculate the total emission with:
 #'
-#'   Emission = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )
+#'   Emission(pollutant) = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )
 #'
 #' where n is the type of the veicle
 #'
