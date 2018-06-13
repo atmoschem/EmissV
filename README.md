@@ -1,6 +1,6 @@
 # EmissV
 [![Travis-CI Build Status](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![Build status](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv)[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV) 
-[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
+[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)[![Coverage Status](https://img.shields.io/codecov/c/github/atmoschem/EmissV/master.svg)](https://codecov.io/github/atmoschem/EmissV?branch=master)
 
 ![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo.png)
 
@@ -48,7 +48,7 @@ To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.664
 ```r
 install.packages("EmissV")
 ```
-To install the *development version (0.664.6)*:
+To install the *development version (0.664.7)*:
 
 ```r
 # install.packages("devtools")
