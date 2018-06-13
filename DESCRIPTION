@@ -21,8 +21,10 @@ Description: Creates emissions for use in air quality models. Vehicular emission
   <https://www.openstreetmap.org> and then distributed temporarily 
   (Vara-Vela et al., 2016, <doi:10.5194/acp-16-777-2016>).
 Depends: R (>= 3.4)
-Imports: ncdf4, units, raster, sp, sf, methods, data.table, spatstat, maptools, vein, eixport
-Suggests: osmar
+Imports: ncdf4, units, raster, sp, sf, methods, data.table
+Suggests: osmar,
+    testthat,
+    covr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -7,7 +7,7 @@
 OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 }
 \usage{
-lineSource(s, grid, as_raster = F, verbose = T, fast = F)
+lineSource(s, grid, as_raster = F, verbose = T)
 }
 \arguments{
 \item{s}{SpatialLinesDataFrame of SpatialLines object}
@@ -17,8 +17,6 @@ lineSource(s, grid, as_raster = F, verbose = T, fast = F)
 \item{as_raster}{output format, TRUE for raster, FALSE for matrix}
 
 \item{verbose}{display additional information}
-
-\item{fast}{fun (or not)}
 }
 \description{
 Create a distribution from sp spatial lines data frame or spatial lines
@@ -28,15 +26,14 @@ Create a distribution from sp spatial lines data frame or spatial lines
 roads <- osmar::get_osm(osmar::complete_file(),
                         source = osmar::osmsource_file(paste(system.file("extdata",
                         package="EmissV"),"/streets.osm.xz",sep="")))
-roads <- osmar::as_sp(roads,what = "lines")
-#roads <- sf::st_as_sf(roads)
+road_lines <- osmar::as_sp(roads,what = "lines")
+roads <- sf::st_as_sf(road_lines)
 
 d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))
 
 roadLength <- lineSource(roads,d3,as_raster=TRUE)
 sp::spplot(roadLength, scales = list(draw=TRUE), ylab="Lat", xlab="Lon",main="Length of roads",
-           sp.layout=list("sp.lines", roads))
-roadLengthraster <- lineSource(roads,d3,as_raster=TRUE, fest = TRUE)
+           sp.layout=list("sp.lines", road_lines))
 }
 
 
