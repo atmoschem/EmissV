@@ -154,10 +154,11 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     #  mol km^-2 hr^-1
 	if (utils::packageVersion("units") <= "0.5-1") {
       units::install_symbolic_unit("MOL")
-      MOL <- units::make_unit("MOL")                   # new unit MOL
+      MOL <- units::as_units("MOL")                    # new unit MOL
       install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
-	} else
-      install_conversion_constant("MOL", "g", mm) # new conversion
+	} else{
+	  install_conversion_constant("MOL", "g", mm) # new conversion
+	}
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
   }

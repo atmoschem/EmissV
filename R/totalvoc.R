@@ -46,11 +46,11 @@
 totalVOC <- function(v,ef,pol,verbose=T){
 
   units::install_symbolic_unit("MOL")
-  # units::install_symbolic_unit("y")
   MOL <- units::make_unit("MOL")
-  # y   <- units::make_unit("y")
-  units::install_conversion_constant("MOL/d", "MOL/year", 365 )
-  units::install_conversion_constant("g/d", "t/year", 365/1000000 )
+  if (utils::packageVersion("units") <= "0.5-1"){
+    units::install_conversion_constant("MOL/d", "MOL/year", 365 )
+    units::install_conversion_constant("g/d", "t/year", 365/1000000 )
+  }
 
   voc_names <- c("eth","hc3","hc5","hc8","ol2",
                  "olt","oli","iso","tol","xyl",
