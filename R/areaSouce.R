@@ -58,7 +58,5 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
     if(as_frac) return(sp_r)
     return(sp)
   }
-  if(as_frac & !is.na(grid[1]))
-    return(sp_r)
   return(sp)
 }
