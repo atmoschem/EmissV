@@ -29,7 +29,7 @@ Air quality models need input data containing information about atmosphere (such
 
 The EmissV is a R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at available level (National, State, City, etc). The following steps show an example of the workflow for calculating vehicular emissions, this emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally to be used as input in numeric air quality models such WRF-Chem [@Grelletal2005].
 
-**I.** Total: emission of pollutants is estimated from the fleet (number of vehicles), use (km/day) and emission factors (g/km) by pollutant for each interest area (cities, states, countries, etc) or alternatively the totals of some inventory can be used.
+**I.** Total: emission of pollutants is estimated from the fleet (number, type and year of vehicles), vehicular activity (km/day) and emission factors (g/km) by pollutant for each interest area (cities, states, countries, etc) or alternatively the totals of some inventory can be used.
 
 **II.** Spatial distribution: the package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), openstreetmap data (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
 
