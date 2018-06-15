@@ -45,8 +45,8 @@
 
 totalVOC <- function(v,ef,pol,verbose=T){
 
-  units::install_symbolic_unit("MOL")
-  MOL <- units::make_unit("MOL")
+  suppressWarnings( units::install_symbolic_unit("MOL"))
+  MOL <- units::as_units("MOL")
   if (utils::packageVersion("units") <= "0.5-1"){
     units::install_conversion_constant("MOL/d", "MOL/year", 365 )
     units::install_conversion_constant("g/d", "t/year", 365/1000000 )
