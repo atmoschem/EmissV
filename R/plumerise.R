@@ -118,7 +118,7 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
         }
       }else
         # neutral
-        if(h/abs(L) <= 1 & h/abs(L) >= 0.0 & L < 0.0){
+        if(abs(h/L) <= 1.0 & abs(h/L) >= 0.0){ #  & L < 0.0
           if(verbose)
             print(paste("neutral, h/L =",h/L))
           Ustar<- df$Ustar[j]  # u*
