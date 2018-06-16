@@ -33,7 +33,7 @@
 
 gridInfo <- function(file = file.choose(),z=F,verbose = T){
     if(verbose)
-      cat(paste("Grid information from:",file))
+      cat(paste("Grid information from:",file,"\n"))
     wrf <- ncdf4::nc_open(file)
     lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
     lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
