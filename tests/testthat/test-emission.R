@@ -16,7 +16,7 @@ test_that("final emission works", {
                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
                             mm=28,
                             verbose = T,
-                            aerosol = F,
+                            aerosol = T,
                             plot = T)
   ),
   units::as_units(362.58086806097963972206343896687030792236328125, "ug*m^-2*s^-1"))
