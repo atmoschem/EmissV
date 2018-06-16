@@ -14,7 +14,7 @@ test_that("final emission works", {
                                                  gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
                                                  name = "RJ",verbose = F)),
                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
-                            mm=28,
+                            mm=1,
                             verbose = T,
                             aerosol = T,
                             plot = T)
@@ -37,10 +37,16 @@ test_that("final emission works", {
   ),
   units::as_units(39419.0995366892966558225452899932861328125, "MOL*km^-2*h^-1"))
 
-  expect_equal(sum(emission(inventory = read("edgar_co_test.nc"),
+  expect_equal(nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
                             grid = gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),
                                             verbose = F),
-                            mm=1)
+                            mm=1,plot = T)
   ),
-  units::as_units(0.00000000030245475720301617794660842264420352876186370849609375, "MOL*h^-1*km^-2"))
+  nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
+               grid = gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),
+                               verbose = F),
+               mm=1,plot = T, aerosol = T)
+  ))
 })
+
+# units::as_units(0.00000000030245475720301617794660842264420352876186370849609375, "MOL*h^-1*km^-2")

@@ -2,3 +2,4 @@
 .Rhistory
 .RData
 paper.pdf
+^tests/testthat/Rplots.pdf
