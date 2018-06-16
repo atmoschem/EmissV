@@ -14,9 +14,9 @@ test_that("final emission works", {
                                                  gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
                                                  name = "RJ",verbose = F)),
                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
-                            mm=1,
+                            mm=28,
                             verbose = T,
-                            aerosol = T,
+                            aerosol = F,
                             plot = T)
   ),
   units::as_units(362.58086806097963972206343896687030792236328125, "ug*m^-2*s^-1"))
@@ -30,9 +30,9 @@ test_that("final emission works", {
                                                  gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
                                                  name = "SP",verbose = F)),
                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
-                            mm=28,
+                            mm=1,
                             verbose = T,
-                            aerosol = F,
+                            aerosol = T,
                             plot = T)
   ),
   units::as_units(39419.0995366892966558225452899932861328125, "MOL*km^-2*h^-1"))
