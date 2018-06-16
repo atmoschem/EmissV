@@ -17,6 +17,7 @@ test_that("pontual esmission works", {
                                                            150,1,20,420,3.81,273.15 + 4.69,200,209,3.81,0.40,2),
                                                          ncol = 11, byrow = TRUE),
                                                   row.names = c("05:00","06:00","19:00")),
-                                       c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar","dtdz")),Hmax = F))
+                                       c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar","dtdz")),Hmax = F,
+                              imax = 2))
   )
 })
