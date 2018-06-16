@@ -35,7 +35,7 @@
 read <- function(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
   ed   <- ncdf4::nc_open(file[1])
   name <- names(ed$var)
-  var  <- ncdf4::ncvar_get(ed,name)
+  var  <- ncdf4::ncvar_get(ed,name[1])
   varold <- units::as_units(0.0 * var,"g m-2 s-1")
   var  <- apply(var,1,rev)
   r    <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
@@ -45,13 +45,13 @@ read <- function(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
   raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
 
   if(verbose)
-    print(paste0("reading ",name," (",version,") units are g m-2 s-1 ..."))
+    cat(paste0("reading ",name," (",version,") units are g m-2 s-1 ...\n"))
 
   for(i in 1:length(file)){
-    print(file[i])
+    cat(paste0("from ",file[i]),"\n")
     ed   <- ncdf4::nc_open(file[i])
     name <- names(ed$var)
-    var  <- ncdf4::ncvar_get(ed,name)
+    var  <- ncdf4::ncvar_get(ed,name[1])
     if(as_raster){
       var <- apply(var,1,rev)
       r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)

@@ -65,8 +65,8 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     else{
       ##  mol km-2 h-1
       VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
-      units::install_symbolic_unit("MOL")
-      MOL <- units::make_unit("MOL")
+      suppressWarnings( units::install_symbolic_unit("MOL") )
+      MOL <- units::as_units("MOL")
       conversao <- as_units(1/mm, "MOL g-1")
       VAR_e     <- VAR_e * conversao
     }

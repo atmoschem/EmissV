@@ -50,7 +50,7 @@ rasterSource <- function(r,grid,nlevels="all",verbose = T){
     X    <- X * total_box/sum(X) # to conserve mass
 
     if(verbose)
-      print(paste("Grid output:",col,"columns",rol,"rows"))
+      cat(paste("Grid output:",col,"columns",rol,"rows\n"))
   }else{
     if(nlevels == "all"){
       nlevels <- dim(grid$z)[3]
@@ -67,7 +67,7 @@ rasterSource <- function(r,grid,nlevels="all",verbose = T){
     # X    <- X * total_box[1:nlevels]/sum(X) # to conserve mass
 
     if(verbose)
-      print(paste("Grid output:",col,"columns",rol,"rows",nlevels,"levels"))
+      cat(paste("Grid output:",col,"columns",rol,"rows",nlevels,"levels\n"))
   }
 
   return(X)
