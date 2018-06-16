@@ -36,9 +36,9 @@ totalEmission <- function(v,ef,pol,verbose = T){
 
   for(i in 1:length(pol)){
     if(!is.element(pol[i], ef_names)){
-      print(paste0(pol[i]," not found in emission factor!"))
-      print("The emissions factors contains:")
-      print(ef_names)
+      cat(paste0(pol[i]," not found in emission factor!\n"))
+      cat("The emissions factors contains:\n")
+      cat(paste0(ef_names,"\n"))
       total = units::set_units(NA * TOTAL_veic[1,],units::as_units("g/d"))
       assign(pol[i],total)
     }
@@ -53,10 +53,10 @@ totalEmission <- function(v,ef,pol,verbose = T){
       }
 
       if(verbose){
-        if (utils::packageVersion("units") <= "0.5-1")
-          units::install_conversion_constant("g/d", "t/year", 365/1000000 )
+        # if (utils::packageVersion("units") <= "0.5-1")
+        #   units::install_conversion_constant("g/d", "t/year", 365/1000000 )
         total_t_y <- units::set_units(total,"t/year")
-        print(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y)))
+        cat(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y),"\n"))
       }
       assign(pol[i],total)
     }

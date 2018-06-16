@@ -50,7 +50,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
 
   if(!is.null(inventory)){
     if(verbose)
-      print("Using raster from inventory ... ")
+      cat("Using raster from inventory ...\n")
     # input is g m-2 s-1
     if(class(inventory)[1]=="RasterLayer"){
       VAR_e <- rasterSource(inventory,grid,verbose = verbose)
@@ -97,18 +97,18 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
 
   if(verbose)
     if(aerosol){
-      print(paste("calculating emissions for ",pol," as aerosol"," ...",sep=""))
+      cat(paste("calculating emissions for ",pol," as aerosol"," ...\n",sep=""))
     }else{
       if(mm == 1){
-        print(paste("calculating emissions for ",pol," ...",sep=""))
+        cat(paste("calculating emissions for ",pol," ...\n",sep=""))
       }else{
-        print(paste("calculating emissions for ",pol," using molar mass = ",mm," ...",sep=""))
+        cat(paste("calculating emissions for ",pol," using molar mass = ",mm," ...\n",sep=""))
       }
     }
 
   n <- which(names(total) == pol)
   if(length(n) == 0){
-    print(paste(pol,"not found in total !"))
+    cat(paste(pol,"not found in total !\n"))
     stop()
   }
 
@@ -152,13 +152,13 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
   }
   else{
     #  mol km^-2 hr^-1
-	if (utils::packageVersion("units") <= "0.5-1") {
-      units::install_symbolic_unit("MOL")
-      MOL <- units::as_units("MOL")                    # new unit MOL
-      install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
-	} else{
+# if (utils::packageVersion("units") <= "0.5-1") {
+#       units::install_symbolic_unit("MOL")
+#       MOL <- units::as_units("MOL")                    # new unit MOL
+#       install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
+# 	} else{
 	  install_conversion_constant("MOL", "g", mm) # new conversion
-	}
+# }
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
   }

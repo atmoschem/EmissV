@@ -61,9 +61,9 @@ totalVOC <- function(v,ef,pol,verbose=T){
   use        <- v$Use * use_inv
 
   if(!(pol %in% voc_names)){
-    print(paste0(pol," is not in suported COV speciation"))
-    print("The specie list contains:")
-    print(voc_names)
+    cat(paste0(pol," is not in suported COV speciation","\n"))
+    cat("The specie list contains:\n")
+    cat(c(voc_names,"\n"))
     total = units::set_units(NA * TOTAL_veic[1,],MOL/units::as_units("d"))
     return(total)
   }
@@ -161,7 +161,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
     total <- total * uni2
 
     total_t_y <- units::set_units(total, "t/year")
-    print(paste("Total COV:",sum(total_t_y),units::deparse_unit(total_t_y)))
+    cat(paste("Total COV:",sum(total_t_y),units::deparse_unit(total_t_y),"\n"))
   }
 
   split_cov <- function(pol,verb = verbose){
@@ -180,7 +180,7 @@ totalVOC <- function(v,ef,pol,verbose=T){
     COV   <- COV * uni
     if(verb){
       COV2 <- units::set_units(COV,"MOL/year",check_is_valid = F)
-      print(paste(pol,sum(COV2),units::deparse_unit(COV2)))
+      cat(paste(pol,sum(COV2),units::deparse_unit(COV2),"\n"))
     }
     return(COV)
   }

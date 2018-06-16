@@ -18,6 +18,6 @@ test_that("pontual esmission works", {
                                                          ncol = 11, byrow = TRUE),
                                                   row.names = c("05:00","06:00","19:00")),
                                        c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar","dtdz")),Hmax = F,
-                              imax = 2))
+                              imax = 1))
   )
 })

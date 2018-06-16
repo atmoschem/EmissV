@@ -88,14 +88,14 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
     # strong convection
     if(h/abs(L) > 10 & L < 0){
       if(verbose)
-        print(paste("strong convective, h/L =",h/L))
+        cat(paste("strong convective, h/L =",h/L,"\n"))
       Wstar<- df$Wstar[j]  # w*
       deltaH <- 4.3 * (Flu / (U * Wstar^2))^(3/5) * h^(2/5)
     }else
       # slytly convective
       if(h/abs(L) <= 10 & h/abs(L) > 1 & L < 0){
         if(verbose)
-          print(paste("convective, h/L =",h/L))
+          cat(paste("convective, h/L =",h/L,"\n"))
         Wstar<- df$Wstar[j]   # w*
         Wd     <- 0.4 * Wstar # downdrafts mean speed
         a      <- ( Flu / U*Wd^2 )^(3/5)
@@ -120,7 +120,7 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
         # neutral
         if(abs(h/L) <= 1.0 & abs(h/L) >= 0.0){ #  & L < 0.0
           if(verbose)
-            print(paste("neutral, h/L =",h/L))
+            cat(paste("neutral, h/L =",h/L,"\n"))
           Ustar<- df$Ustar[j]  # u*
           a   <- ((1.3 * Flu) /(U * Ustar))^(3)
           x   <- Hs / 4
@@ -146,22 +146,22 @@ plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
             s <- (g/Ta) * dtdz
             if(U <= 1){
               if(verbose)
-                print(paste("stable, h/L =",h/L,"- calm,","U=",U,"m/s"))
+                cat(paste("stable, h/L =",h/L,"- calm,","U=",U,"m/s","\n"))
               deltaH <- 5 * Flu^(1/4) * s^(3/5)
             }else{
               if(verbose)
-                print(paste("stable, h/L =",h/L,"- windy,","U=",U,"m/s"))
+                cat(paste("stable, h/L =",h/L,"- windy,","U=",U,"m/s","\n"))
               deltaH <- 2.6 * (Flu/(U*s))^(1/3)
             }
           }
     if(i == imax)
-      print("* max iterations reached!")
+      cat("* max iterations reached!","\n")
     # Weil (1979) limit for plume rises
     if(Hmax){
       weil    <- 0.62 * (h - Hs)
       rise[j] = min(deltaH,weil)
       if(verbose & weil < deltaH)
-        print(paste("using weil max=",weil))
+        cat(paste("using weil max=",weil,"\n"))
     }else{
       rise[j] = deltaH
     }
