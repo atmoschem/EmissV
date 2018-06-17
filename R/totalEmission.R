@@ -39,7 +39,7 @@ totalEmission <- function(v,ef,pol,verbose = T){
       cat(paste0(pol[i]," not found in emission factor!\n"))
       cat("The emissions factors contains:\n")
       cat(paste0(ef_names,"\n"))
-      total = units::set_units(NA * TOTAL_veic[1,],units::as_units("g/d"))
+      total = units::set_units(0,"g/d")
       assign(pol[i],total)
     }
     else{

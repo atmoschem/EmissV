@@ -3,7 +3,7 @@ context("emission")
 test_that("final emission works", {
   expect_equal(sum(emission(totalEmission(vehicles(example = TRUE,verbose = F),
                                           emissionFactor(example = TRUE,verbose = F),
-                                          pol = c("CO"),verbose = F),
+                                          pol = c("CO"),verbose = T),
                             "CO",
                             list(SP = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[22,1],
                                                  raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
