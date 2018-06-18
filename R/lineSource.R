@@ -1,11 +1,14 @@
 #' Distribution of emissions by streets
 #'
-#' @description Create a distribution from sp spatial lines data frame or spatial lines
+#' @description Create a distribution from sp spatial lines data frame or spatial lines.
+#'
+#' Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe
 #'
 #' @param s SpatialLinesDataFrame of SpatialLines object
 #' @param grid grid object with the grid information
 #' @param as_raster output format, TRUE for raster, FALSE for matrix
 #' @param verbose display additional information
+#' @param type "wrfinput" or "geo" for grid type
 #' @export
 #'
 #' @importFrom methods as
@@ -14,6 +17,7 @@
 #' @import sf
 #' @import raster
 #' @import ncdf4
+#' @import lwgeom
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
@@ -36,17 +40,17 @@
 #'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 #'
 
-lineSource <- function(s, grid, as_raster = F,verbose = T){
+lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput"){
 
-  wrf_grid <- function(filewrf, type = "wrfinput", matrix = F, epsg = 4326){
+  wrf_grid <- function(filewrf, type = "wrfinput", epsg = 4326){
     cat(paste("using grid info from:", filewrf, "\n"))
     wrf <- ncdf4::nc_open(filewrf)
     if(type == "wrfinput"){
       lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT")
       lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG")
-    } else if(type == "geo"){
-      lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT_M")
-      lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG_M")
+    } else if(type == "geo"){                             # nocov
+      lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT_M")   # nocov
+      lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG_M")  # nocov
     }
     time   <- ncdf4::ncvar_get(wrf, varid = "Times")
     dx     <- ncdf4::ncatt_get(wrf, varid = 0,
@@ -60,7 +64,6 @@ lineSource <- function(s, grid, as_raster = F,verbose = T){
     ncdf4::nc_close(wrf)
     r.lat  <- range(lon)
     r.lon  <- range(lat)
-    EM  <- matrix(0, nrow = n.lon, ncol = n.lat)
 
     points      <- data.frame(lat  = c(lat),
                               long = c(lon))
@@ -103,12 +106,7 @@ lineSource <- function(s, grid, as_raster = F,verbose = T){
                         to = "POLYGON")
     grid$id <- 1:nrow(grid)
 
-    if (matrix == T){
-      return(EM)
-    } else {
-      return(grid)
-    }
-
+    return(grid)
   }
 
   emis_grid <- function (spobj, g, sr, type = "lines")
@@ -124,8 +122,6 @@ lineSource <- function(s, grid, as_raster = F,verbose = T){
     if (type == "lines") {
       netdf <- sf::st_set_geometry(net, NULL)
       snetdf <- sum(netdf, na.rm = TRUE)
-      # cat(paste0("Sum of street emissions ", round(snetdf,
-      #                                              2), "\n"))
       ncolnet <- ncol(sf::st_set_geometry(net, NULL))
       net <- net[, grep(pattern = TRUE, x = sapply(net, is.numeric))]
       namesnet <- names(sf::st_set_geometry(net, NULL))
@@ -140,8 +136,6 @@ lineSource <- function(s, grid, as_raster = F,verbose = T){
                  .SDcols = namesnet]
       id <- dfm$id
       dfm <- dfm * snetdf/sum(dfm, na.rm = TRUE)
-      # cat(paste0("Sum of gridded emissions ", round(sum(dfm,
-      #                                                   na.rm = T), 2), "\n"))
       dfm$id <- id
       names(dfm) <- c("id", namesnet)
       gx <- data.frame(id = g$id)
@@ -150,7 +144,7 @@ lineSource <- function(s, grid, as_raster = F,verbose = T){
       gx <- sf::st_sf(gx, geometry = g$geometry)
       return(gx)
     }
-    else if (type == "points") {
+    else if (type == "points") { # nocov start
       xgg <- data.table::data.table(sf::st_set_geometry(sf::st_intersection(net,
                                                                             g), NULL))
       xgg[is.na(xgg)] <- 0
@@ -161,14 +155,13 @@ lineSource <- function(s, grid, as_raster = F,verbose = T){
       gx <- merge(gx, dfm, by = "id", all.x = TRUE)
       gx[is.na(gx)] <- 0
       gx <- sf::st_sf(gx, geometry = g$geometry)
-      return(gx)
+      return(gx) # nocov end
     }
   }
 
   # if (!fast) {
    g <- wrf_grid(filewrf = grid$File,
-                 type = "wrfinput",
-                 matrix = FALSE,
+                 type = type,
                  epsg = 4326)
     roads2 <- s
     #  Calculate the length

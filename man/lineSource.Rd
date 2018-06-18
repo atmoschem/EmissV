@@ -7,7 +7,7 @@
 OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 }
 \usage{
-lineSource(s, grid, as_raster = F, verbose = T)
+lineSource(s, grid, as_raster = F, verbose = T, type = "wrfinput")
 }
 \arguments{
 \item{s}{SpatialLinesDataFrame of SpatialLines object}
@@ -17,9 +17,13 @@ lineSource(s, grid, as_raster = F, verbose = T)
 \item{as_raster}{output format, TRUE for raster, FALSE for matrix}
 
 \item{verbose}{display additional information}
+
+\item{type}{"wrfinput" or "geo" for grid type}
 }
 \description{
-Create a distribution from sp spatial lines data frame or spatial lines
+Create a distribution from sp spatial lines data frame or spatial lines.
+
+Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe
 }
 \examples{
 \donttest{
