@@ -13,6 +13,7 @@
 #' @importFrom data.table .SD
 #' @import sf
 #' @import raster
+#' @import ncdf4
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
