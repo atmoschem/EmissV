@@ -45,6 +45,6 @@ test_that("final emission works", {
   nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
                grid = gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),
                                verbose = F),
-               mm=1,plot = T, aerosol = T)
+               mm=1,plot = T, aerosol = F)
   ))
 })

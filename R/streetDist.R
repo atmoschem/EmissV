@@ -42,10 +42,10 @@
 # ^R/streetDist.R
 
 streetDist <- function(emission = NULL,
-                       dist = NULL, # dist comprimento 5
-                       grid = NULL, # grid sf
-                       osm = NULL,  #streets OSM motorway trunk primary secondary tertiary
-                       epsg = NULL){ #sem perfil por enquanto
+                       dist = c(1, 0, 0, 0, 0), # dist comprimento 5
+                       grid = NULL,             # grid sf
+                       osm  = NULL,   #streets OSM motorway trunk primary secondary tertiary
+                       epsg = 31983){ #sem perfil por enquanto
   .SD = NULL
   id  = NULL
   dist <- dist/sum(dist)
