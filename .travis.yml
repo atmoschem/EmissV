@@ -26,4 +26,4 @@ script:
 
 after_success:
 - Rscript -e 'covr::codecov()'
-- cat /home/travis/build/stix-global/eutradeflows/eutradeflows.Rcheck/00check.log
+- cat /home/travis/build/atmoschem/EmissV/EmissV.Rcheck/00check.log
