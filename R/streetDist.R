@@ -45,12 +45,12 @@ streetDist <- function(emission = NULL,
                        dist = c(1, 0, 0, 0, 0), # dist comprimento 5
                        grid = NULL,             # grid sf
                        osm  = NULL,   #streets OSM motorway trunk primary secondary tertiary
-                       epsg = 31983){ #sem perfil por enquanto
+                       epsg = NULL){ #sem perfil por enquanto
   .SD = NULL
   id  = NULL
   dist <- dist/sum(dist)
   grido <- grid
-  if(exists("epsg")){
+  if(!is.null(epsg)){
     osm <- sf::st_transform(osm, epsg)
     grid <- sf::st_transform(grid, epsg)
     osm$LKM <- sf::st_length(osm)

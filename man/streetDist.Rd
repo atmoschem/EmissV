@@ -5,7 +5,7 @@
 \title{Distribution by OpenStreetnMap street}
 \usage{
 streetDist(emission = NULL, dist = c(1, 0, 0, 0, 0), grid = NULL,
-  osm = NULL, epsg = 31983)
+  osm = NULL, epsg = NULL)
 }
 \arguments{
 \item{emission}{numeric of emissions}
