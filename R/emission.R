@@ -107,8 +107,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
 
   n <- which(names(total) == pol)
   if(length(n) == 0){
-    cat(paste(pol,"not found in total !\n"))
-    stop()
+    return(cat(paste(pol,"not found in total !\n")))
   }
 
   var <- total[[n]]
@@ -134,10 +133,10 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     # put the units (to back the unit)
     VAR_e <- VAR_e * unidade
   }
-  if(is.matrix(area)){
-    VAR_e               <- area * var[[1]]
-    VAR_e[is.na(VAR_e)] <- 0
-  }
+  # if(is.matrix(area)){
+  #   VAR_e               <- area * var[[1]]
+  #   VAR_e[is.na(VAR_e)] <- 0
+  # }
 
   dx <- grid$DX
   dx <- dx*units::as_units("km")

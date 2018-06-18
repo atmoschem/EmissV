@@ -2,6 +2,22 @@ context("emission")
 
 test_that("final emission works", {
 
+  expect_equal(emission(totalEmission(vehicles(example = TRUE,verbose = F),
+                                      emissionFactor(example = TRUE,verbose = F),
+                                      pol = c("CO"),verbose = T),
+                        "FISH",
+                        list(SP = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[22,1],
+                                             raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
+                                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                             name = "SP",verbose = F),
+                             RJ = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[17,1],
+                                             raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
+                                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                             name = "RJ",verbose = F)),
+                        gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
+                        verbose = F),
+               cat(paste("FISH","not found in total !\n")))
+
   expect_equal(drop_units(emission(totalEmission(vehicles(example = TRUE,verbose = F),
                                       emissionFactor(example = TRUE,verbose = F),
                                       pol = c("CO"),verbose = T),
