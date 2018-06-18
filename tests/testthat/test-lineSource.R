@@ -8,7 +8,7 @@ test_that("line emissions works", {
   oldw <- getOption("warn")
   options(warn = -1)
 
-  # expect_equal(1,sum(lineSource(s,g,as_raster=FALSE)))
+  expect_equal(1,sum(lineSource(s,g,as_raster=FALSE)))
   expect_equal(raster::cellStats(lineSource(s,g,as_raster=TRUE),"sum"),1)
 
   options(warn = oldw)
