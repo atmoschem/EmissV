@@ -133,10 +133,6 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     # put the units (to back the unit)
     VAR_e <- VAR_e * unidade
   }
-  # if(is.matrix(area)){
-  #   VAR_e               <- area * var[[1]]
-  #   VAR_e[is.na(VAR_e)] <- 0
-  # }
 
   dx <- grid$DX
   dx <- dx*units::as_units("km")
