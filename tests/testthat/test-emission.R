@@ -32,7 +32,7 @@ test_that("final emission works", {
                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
                             mm=28,
                             verbose = T,
-                            aerosol = T,
+                            aerosol = F,
                             plot = T)
   ),
   units::as_units(306.59299639647224466898478567600250244140625, "ug*m^-2*s^-1"))
@@ -45,6 +45,6 @@ test_that("final emission works", {
   nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
                grid = gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),
                                verbose = F),
-               mm=1,plot = T, aerosol = F)
+               mm=1,plot = T, aerosol = T)
   ))
 })
