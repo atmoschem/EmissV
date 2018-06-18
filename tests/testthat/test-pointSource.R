@@ -20,4 +20,12 @@ test_that("pontual esmission works", {
                                        c("z","r","Ve","Te","ws","Temp","h","L","Ustar","Wstar","dtdz")),Hmax = F,
                               imax = 1))
   )
+
+  expect_equal(raster::cellStats(pointSource(data.frame(lat      = c(-22,-22,-23.5),
+                                                        lon      = c(-46,-48,-47  ),
+                                                        z        = c(0  ,  0,  0  ),
+                                                        emission = c(666,444,111  ) ),
+                                             gridInfo(paste(system.file("extdata", package = "EmissV"),
+                                                            "/wrfinput_d01",sep=""))),"sum"),
+               1221)
 })
