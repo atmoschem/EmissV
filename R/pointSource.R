@@ -71,7 +71,7 @@ pointSource <- function(emissions, grid, verbose=T){
         lat <- xy[2]
         cat(paste("Layer limits for grid position","lat=",lat,"lon=",lon,"\n"))
         for(k in 1:length(altura)){
-          cat(paste("  height=", altura[k],"k=",k,"\n"))
+          cat(paste("  height=",sprintf("%03.2f",altura[k]),"m k=",k,"\n"))
         }
       }
       # if(emissions$z[i] < altura[2]){
@@ -84,7 +84,8 @@ pointSource <- function(emissions, grid, verbose=T){
         if(emissions$z[i] >= altura[k-1] & emissions$z[i] < altura[k]){
           a <- k -1
           if(verbose){
-            cat(paste("Emission heigh between", altura[k-1],"and",altura[k],"at k=",a,
+            cat(paste("Emission heigh between", sprintf("%03.2f",altura[k-1]),"m and",
+                      sprintf("%03.2f",altura[k]),"m at k=",a,
                         "for z=",emissions$z[i]))
             cat("\n")
           }
