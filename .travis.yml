@@ -23,7 +23,7 @@ before_install:
 script:
   - R CMD build .
   - R CMD check *tar.gz
+  - cat /home/travis/build/atmoschem/EmissV/EmissV.Rcheck/00check.log
 
 after_success:
 - Rscript -e 'covr::codecov()'
-- cat /home/travis/build/atmoschem/EmissV/EmissV.Rcheck/00check.log
