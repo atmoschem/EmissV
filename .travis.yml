@@ -6,10 +6,10 @@ r:
   #- oldrel
 
 r_github_packages: atmoschem/eixport
-  
+
 pandoc: false
 warnings_are_errors: true
-  
+
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
   - sudo apt-get --yes --force-yes update -qq
@@ -23,6 +23,7 @@ before_install:
 script:
   - R CMD build .
   - R CMD check *tar.gz
- 
+
 after_success:
 - Rscript -e 'covr::codecov()'
+- cat /home/travis/build/stix-global/eutradeflows/eutradeflows.Rcheck/00check.log
