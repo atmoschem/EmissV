@@ -15,7 +15,6 @@
 #'
 #' @import raster
 #' @import ncdf4
-#' @import osmar
 #' @importFrom units as_units set_units
 #'
 #' @source read abbout EDGAR at http://edgar.jrc.ec.europa.eu
@@ -71,12 +70,11 @@ read <- function(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
       return(var)
     }
   }
-  if(version == "osm"){
-    cat(paste("reading osm data from",file,"\n"))
-    roads <- suppressWarnings( osmar::get_osm(osmar::complete_file(),
-                                              source = osmar::osmsource_file(file)) )
-    road_lines <- osmar::as_sp(roads,what = "lines")
-    roads <- sf::st_as_sf(road_lines)
-    return(roads)
-  }
+  # if(version == "osm"){
+  #   cat(paste("reading osm data from",file,"\n"))
+  #   roads <- osmar::get_osm(osmar::complete_file(),source = osmar::osmsource_file(file))
+  #   road_lines <- osmar::as_sp(roads,what = "lines")
+  #   roads <- sf::st_as_sf(road_lines)
+  #   return(roads)
+  # }
 }
