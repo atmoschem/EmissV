@@ -1,6 +1,6 @@
 context("streetDist")
 
-test_that("multiplication works", {
+test_that("funcion muy loca", {
   expect_equal(dim(suppressWarnings(  streetDist(emission = 1000000,
                                                  grid = readRDS("g.Rds"),
                                                  osm  = readRDS("streets.Rds"))) ),
