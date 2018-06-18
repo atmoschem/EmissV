@@ -26,3 +26,6 @@ script:
 
 after_success:
 - Rscript -e 'covr::codecov()'
+
+after_failure:
+- Rscript -e 'readLines("/home/travis/build/atmoschem/EmissV/EmissV.Rcheck/00check.log")'
