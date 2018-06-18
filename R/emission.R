@@ -93,7 +93,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     return(VAR_e)
   }
 
-  if(verbose)
+  if(verbose){
     if(aerosol){
       cat(paste("calculating emissions for ",pol," as aerosol"," ...\n",sep=""))
     }else{
@@ -103,6 +103,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
         cat(paste("calculating emissions for ",pol," using molar mass = ",mm," ...\n",sep=""))
       }
     }
+  }
 
   n <- which(names(total) == pol)
   if(length(n) == 0){
@@ -155,6 +156,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
 #       MOL <- units::as_units("MOL")                    # new unit MOL
 #       install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
 # 	} else{
+    remove_symbolic_unit("MOL")
 	  install_conversion_constant("MOL", "g", mm) # new conversion
 # }
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
