@@ -6,5 +6,6 @@ test_that("line emissions works", {
                                             as_raster=TRUE),"sum"),
                sum(lineSource(read(paste(system.file("extdata",package="EmissV"),"/streets.osm.xz",sep=""),"osm"),
                               gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03")),
-                              as_raster=FALSE)))
+                              as_raster=FALSE))
+               )
 })
