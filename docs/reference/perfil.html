@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Temporal profile for veicular emissions � perfil • EmissV</title>
+<title>Temporal profile for veicular emissions — perfil • EmissV</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Temporal profile for veicular emissions — perfil" />
+
+<meta property="og:description" content="set of houtly profiles that represent the mean activity for each day of the week. These profiles comes from traffic counts of toll stations located in São Paulo city, for summer and winters of 2012, 2013 and 2014." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">EmissV</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">EmissV</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.8</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -61,7 +77,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -73,6 +89,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -80,15 +97,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Temporal profile for veicular emissions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/perfil.R'><code>R/perfil.R</code></a></small>
+    <div class="hidden name"><code>perfil.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
-    <p>set of houtly profiles that represent the mean activity for each day of the week. These profiles comes from traffic counts of toll stations located in S�o Paulo city, for summer and winters of 2012, 2013 and 2014.</p>
+    <p>set of houtly profiles that represent the mean activity for each day of the week. These profiles comes from traffic counts of toll stations located in São Paulo city, for summer and winters of 2012, 2013 and 2014.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>data</span>(<span class='no'>perfil</span>)</pre>
         
@@ -102,11 +123,8 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># load the data</span>
-<span class='fu'>data</span>(<span class='no'>perfil</span>)
-<span class='co'># }</span><span class='co'># NOT RUN {</span>
-<span class='co'># function to simple view</span>
+    <pre class="examples"><div class='input'><span class='co'># load the data</span>
+<span class='fu'>data</span>(<span class='no'>perfil</span>)</div><div class='input'><span class='co'># function to simple view</span>
 <span class='no'>plot.perfil</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>per</span> <span class='kw'>=</span> <span class='no'>perfil</span>$<span class='no'>LDV</span>, <span class='no'>text</span><span class='kw'>=</span><span class='st'>""</span>, <span class='no'>color</span> <span class='kw'>=</span> <span class='st'>"#0000FFBB"</span>){
   <span class='fu'>plot</span>(<span class='no'>per</span>[,<span class='fl'>1</span>],<span class='kw'>ty</span> <span class='kw'>=</span> <span class='st'>"l"</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'>range</span>(<span class='no'>per</span>),<span class='kw'>axe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
        <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"hour"</span>,<span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Intensity"</span>,<span class='kw'>main</span> <span class='kw'>=</span> <span class='no'>text</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='no'>color</span>)
@@ -124,9 +142,8 @@
 <span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='fu'>names</span>(<span class='no'>perfil</span>))){
   <span class='fu'>print</span>(<span class='fu'>paste</span>(<span class='st'>"profile"</span>,<span class='no'>i</span>,<span class='fu'>names</span>(<span class='no'>perfil</span>)[<span class='no'>i</span>]))
   <span class='fu'>plot.perfil</span>(<span class='no'>perfil</span><span class='kw'>[[</span><span class='no'>i</span>]],<span class='fu'>names</span>(<span class='no'>perfil</span>)[<span class='no'>i</span>])
-}
-
-<span class='co'># }</span></pre>
+}</div><div class='output co'>#&gt; [1] "profile 1 LDV"</div><div class='img'><img src='perfil-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 2 HDV"</div><div class='img'><img src='perfil-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 3 PC_JUNE_2012"</div><div class='img'><img src='perfil-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 4 PC_JUNE_2013"</div><div class='img'><img src='perfil-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 5 PC_JUNE_2014"</div><div class='img'><img src='perfil-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 6 LCV_JUNE_2012"</div><div class='img'><img src='perfil-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 7 LCV_JUNE_2013"</div><div class='img'><img src='perfil-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 8 LCV_JUNE_2014"</div><div class='img'><img src='perfil-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 9 MC_JUNE_2012"</div><div class='img'><img src='perfil-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 10 MC_JUNE_2013"</div><div class='img'><img src='perfil-10.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 11 MC_JUNE_2014"</div><div class='img'><img src='perfil-11.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 12 HGV_JUNE_2012"</div><div class='img'><img src='perfil-12.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 13 HGV_JUNE_2013"</div><div class='img'><img src='perfil-13.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 14 HGV_JUNE_2014"</div><div class='img'><img src='perfil-14.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 15 PC_JANUARY_2012"</div><div class='img'><img src='perfil-15.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 16 PC_JANUARY_2013"</div><div class='img'><img src='perfil-16.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 17 PC_JANUARY_2014"</div><div class='img'><img src='perfil-17.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 18 LCV_JANUARY_2012"</div><div class='img'><img src='perfil-18.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 19 LCV_JANUARY_2013"</div><div class='img'><img src='perfil-19.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 20 LCV_JANUARY_2014"</div><div class='img'><img src='perfil-20.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 21 MC_JANUARY_2012"</div><div class='img'><img src='perfil-21.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 22 MC_JANUARY_2014"</div><div class='img'><img src='perfil-22.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 23 HGV_JANUARY_2012"</div><div class='img'><img src='perfil-23.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 24 HGV_JANUARY_2013"</div><div class='img'><img src='perfil-24.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "profile 25 HGV_JANUARY_2014"</div><div class='img'><img src='perfil-25.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -154,5 +171,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
