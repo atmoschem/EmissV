@@ -4,11 +4,15 @@
 #'
 #' Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe
 #'
+#' The "sf" (and "sp") uses a grid in SpatialPolygons format instead of create from a model input.
+#'
 #' @param s SpatialLinesDataFrame of SpatialLines object
 #' @param grid grid object with the grid information
 #' @param as_raster output format, TRUE for raster, FALSE for matrix
 #' @param verbose display additional information
-#' @param type "wrfinput" or "geo" for grid type
+#' @param type "wrfinput", "geo", "sp" or "sf" for grid type
+#' @param gcol grid points for a "sp" or "sf" type
+#' @param grow grid points for a "sp" or "sf" type
 #' @export
 #'
 #' @importFrom methods as
@@ -40,7 +44,8 @@
 #'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 #'
 
-lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput"){
+lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput",
+                       gcol = 100, grow = 100){
 
   wrf_grid <- function(filewrf, type = "wrfinput", epsg = 4326){
     cat(paste("using grid info from:", filewrf, "\n"))
@@ -159,10 +164,10 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput"){
     }
   }
 
-  # if (!fast) {
-   g <- wrf_grid(filewrf = grid$File,
-                 type = type,
-                 epsg = 4326)
+  if(type %in% c("wrfinput","geo")){
+    g <- wrf_grid(filewrf = grid$File,
+                  type = type,
+                  epsg = 4326)
     roads2 <- s
     #  Calculate the length
     roads2$length <- sf::st_length(sf::st_as_sf(roads2))
@@ -188,8 +193,38 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput"){
       roadLength <- raster::as.matrix(roadLength)
       return(raster::as.matrix(roadLength))
     }
-  # } else {
+  }
 
+  if(type %in% c("sp","sf")){ # nocov start
+    if("sp" %in% class(grid[1])){
+      roads2 <- sf::st_as_sf(s)
+    }else{
+      roads2 <- s
+    }
+    #  Calculate the length
+    roads2$length <- sf::st_length(sf::st_as_sf(roads2))
+    # just length
+    roads3 <- roads2[, "length"]
+    # calculate the length of streets in each cell
+    ras_Id <- cbind(id = 1:nrow(grid),grid)
+
+    roads4 <- emis_grid(spobj = roads3, g = ras_Id, type = "lines")
+    # normalyse
+    roads4$length <- roads4$length / sum(roads4$length)
+    if(as_raster){
+      # converts to Spatial
+      roads4sp <- as(roads4, "Spatial")
+      # make a raster
+      r <- raster::raster(ncol = gcol, nrow = grow)
+      raster::extent(r) <- raster::extent(grid)
+      r <- raster::rasterize(roads4sp, r, field = roads4sp$length,
+                             update = TRUE, updateValue = "NA")
+      r[is.na(r[])] <- 0
+      return(r)
+    }else{
+      return(roads4)
+    }
+  } # nocov end
   # OLD algorithm source:
   # https://gis.stackexchange.com/questions/119993/convert-line-shapefile-to-raster-value-total-length-of-lines-within-cell
   # print("take a coffee, this function may take a few minutes ...")

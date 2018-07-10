@@ -7,7 +7,8 @@
 OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 }
 \usage{
-lineSource(s, grid, as_raster = F, verbose = T, type = "wrfinput")
+lineSource(s, grid, as_raster = F, verbose = T, type = "wrfinput",
+  gcol = 100, grow = 100)
 }
 \arguments{
 \item{s}{SpatialLinesDataFrame of SpatialLines object}
@@ -18,12 +19,18 @@ lineSource(s, grid, as_raster = F, verbose = T, type = "wrfinput")
 
 \item{verbose}{display additional information}
 
-\item{type}{"wrfinput" or "geo" for grid type}
+\item{type}{"wrfinput", "geo", "sp" or "sf" for grid type}
+
+\item{gcol}{grid points for a "sp" or "sf" type}
+
+\item{grow}{grid points for a "sp" or "sf" type}
 }
 \description{
 Create a distribution from sp spatial lines data frame or spatial lines.
 
 Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe
+
+The "sf" (and "sp") uses a grid in SpatialPolygons format instead of create from a model input.
 }
 \examples{
 \donttest{
