@@ -104,7 +104,7 @@ streetDist <- function(emission = 1,
                   osm$highway == "tertiary_link", ]
   osm_te$x <- emission*dist[5]*osm_te$LKM/sum(osm_te$LKM, na.rm = T)
   osm_all <- rbind(osm_m, osm_t, osm_p, osm_s, osm_te)
-  if (warning){
+  if (warnings){
   osmgrid <- sf::st_intersection(osm_all, grid)
   } else {
     osmgrid <- suppressWarnings(sf::st_intersection(osm_all, grid))
