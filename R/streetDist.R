@@ -3,12 +3,13 @@
 #' @description Distribute emissions by streets of OpenStreetMap
 #'
 #'
-#' @param emission numeric of emissions
-#' @param dist numeric vector with length 5. The order represents motorway,
+#' @param emission Numeric;  emissions.
+#' @param dist Numeric; vector with length 5. The order represents motorway,
 #' trunk, primary, secondary and tertiary
-#' @param grid grid of polygons class sf
+#' @param grid 'sf' POLYGON; grid of polygons class sf.
 #' @param osm streets of OpenStreetMaps class sf
-#' @param epsg spatial code for projecting spatial data
+#' @param epsg Numeric; spatial code for projecting spatial data
+#' @param warnings Logical; to show warnings.
 #' @return grid of polygon
 #' @export
 #'
@@ -36,20 +37,47 @@
 #' per <- c(1, 0, 0, 0, 0)
 #' teste <- streetDist(emission = 1000000, dist = per, grid = g,
 #'                     osm = streets, epsg = 31983)
+#' # Another example:
+#' library (EmissV)
+#' library (osmdata)
+#' library (sf)
+#' city <- "accra"
+#' bb <- getbb (city)
+#' dat <- opq (bbox = city) %>%
+#'   add_osm_feature (key = "highway") %>%
+#'   osmdata_sf (quiet = FALSE) %>%
+#'   osmdata::osm_poly2line () %>%
+#'   magrittr::extract2 ("osm_lines")
+#' #saveRDS (dat, file = "accra-hw.Rds")
+#' utm <- 32630 # for Accra
+#'
+#' # Get a raster grid of population density to use for the emission distribution:
+#' url <- paste0 ("https://github.com/ATFutures/who-data/releases/download/",
+#'                "v0.0.2-worldpop-tif-gha-npl/accra.2fpopdens.2fGHA15adj_040213.tif")
+#' download.file (url, "accra-pop.tif", mode = "wb")
+#' ras <- raster::raster ("accra-pop.tif") %>%
+#'   raster::crop (raster::extent (bb)) %>%
+#'   as ("SpatialPolygons") %>%
+#'   st_as_sf ()
+#'
+#' #dat <- readRDS (file = "accra-hw.Rds")
+#' dat <- dat[dat$highway %in% c ("motorway", "trunk", "primary",
+#'                                 "secondary", "teritary"), ]
+#'
+#' s <- streetDist (emission = 1, dist = c (1, 0, 0, 0, 0), grid = ras,
+#'                  osm = dat, epsg = utm)
 #'}
-
-# sf e data.table removidos das dependendencias
-# ^R/streetDist.R
-
 streetDist <- function(emission = 1,
-                       dist = c(1, 0, 0, 0, 0), # dist comprimento 5
-                       grid = NULL,             # grid sf
-                       osm  = NULL,   #streets OSM motorway trunk primary secondary tertiary
-                       epsg = 31983){ #sem perfil por enquanto
+                       dist = c(1, 0, 0, 0, 0), # dist length 5
+                       grid = NULL, # grid sf
+                       osm  = NULL, #streets OSM motorway trunk primary secondary tertiary
+                       epsg = 31983,
+                       warnings = FALSE){
 
   .SD = NULL
   id  = NULL
   dist <- dist/sum(dist)
+  grid$id <- 1:nrow(grid)
   grido <- grid
 
   osm <- sf::st_transform(osm, epsg)
@@ -76,7 +104,11 @@ streetDist <- function(emission = 1,
                   osm$highway == "tertiary_link", ]
   osm_te$x <- emission*dist[5]*osm_te$LKM/sum(osm_te$LKM, na.rm = T)
   osm_all <- rbind(osm_m, osm_t, osm_p, osm_s, osm_te)
+  if (warning){
   osmgrid <- sf::st_intersection(osm_all, grid)
+  } else {
+    osmgrid <- suppressWarnings(sf::st_intersection(osm_all, grid))
+  }
   osmgrid$LKM2 <- sf::st_length(sf::st_cast(osmgrid[sf::st_dimension(osmgrid) == 1,]))
   osmgridg <- data.table::data.table(osmgrid)
   osmgridg$x <- as.numeric(osmgridg$x) * as.numeric(osmgridg$LKM2/osmgridg$LKM)

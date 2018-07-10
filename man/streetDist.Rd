@@ -5,19 +5,21 @@
 \title{Distribution by OpenStreetnMap street}
 \usage{
 streetDist(emission = 1, dist = c(1, 0, 0, 0, 0), grid = NULL,
-  osm = NULL, epsg = 31983)
+  osm = NULL, epsg = 31983, warnings = FALSE)
 }
 \arguments{
-\item{emission}{numeric of emissions}
+\item{emission}{Numeric;  emissions.}
 
-\item{dist}{numeric vector with length 5. The order represents motorway,
+\item{dist}{Numeric; vector with length 5. The order represents motorway,
 trunk, primary, secondary and tertiary}
 
-\item{grid}{grid of polygons class sf}
+\item{grid}{'sf' POLYGON; grid of polygons class sf.}
 
 \item{osm}{streets of OpenStreetMaps class sf}
 
-\item{epsg}{spatial code for projecting spatial data}
+\item{epsg}{Numeric; spatial code for projecting spatial data}
+
+\item{warnings}{Logical; to show warnings.}
 }
 \value{
 grid of polygon
@@ -47,5 +49,34 @@ streets$id <- NULL
 per <- c(1, 0, 0, 0, 0)
 teste <- streetDist(emission = 1000000, dist = per, grid = g,
                     osm = streets, epsg = 31983)
+# Another example:
+library (EmissV)
+library (osmdata)
+library (sf)
+city <- "accra"
+bb <- getbb (city)
+dat <- opq (bbox = city) \%>\%
+  add_osm_feature (key = "highway") \%>\%
+  osmdata_sf (quiet = FALSE) \%>\%
+  osmdata::osm_poly2line () \%>\%
+  magrittr::extract2 ("osm_lines")
+#saveRDS (dat, file = "accra-hw.Rds")
+utm <- 32630 # for Accra
+
+# Get a raster grid of population density to use for the emission distribution:
+url <- paste0 ("https://github.com/ATFutures/who-data/releases/download/",
+               "v0.0.2-worldpop-tif-gha-npl/accra.2fpopdens.2fGHA15adj_040213.tif")
+download.file (url, "accra-pop.tif", mode = "wb")
+ras <- raster::raster ("accra-pop.tif") \%>\%
+  raster::crop (raster::extent (bb)) \%>\%
+  as ("SpatialPolygons") \%>\%
+  st_as_sf ()
+
+#dat <- readRDS (file = "accra-hw.Rds")
+dat <- dat[dat$highway \%in\% c ("motorway", "trunk", "primary",
+                                "secondary", "teritary"), ]
+
+s <- streetDist (emission = 1, dist = c (1, 0, 0, 0, 0), grid = ras,
+                 osm = dat, epsg = utm)
 }
 }
