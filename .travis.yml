@@ -5,10 +5,6 @@ r:
   #- devel
   #- oldrel
   
-r_binary_packages:
-  - devtools
-  - roxygen2
-
 pandoc: false
 warnings_are_errors: false
 
@@ -27,5 +23,4 @@ script:
   - R CMD check *tar.gz
 
 after_success:
-# - Rscript -e 'covr::codecov(quiet = FALSE)'
-- Rscript -e 'devtools::install();devtools::test()'
+- Rscript -e 'covr::codecov(quiet = FALSE)'
