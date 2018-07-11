@@ -1,5 +1,6 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
+Date: 2018-06-20
 Version: 0.664.9
 Authors@R: c(
   person(given = "Daniel",
