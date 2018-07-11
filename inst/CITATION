@@ -1,0 +1,19 @@
+citHeader("To cite EmissV in publications use one of (if not all):")
+
+citEntry(entry = "article",
+         title          = "EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models",
+         journal		    = "JOSS",
+         author         = personList(person("Daniel", "Schuch"),
+                                     person("Sergio", "Ibarra-Espinosa")),
+         year           = "2018",
+         url            = "http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044",
+
+         textVersion  =
+           paste("Schuch, D. Ibarra-Espinosa, S. and Freitas, E. D. (2018).",
+                 "EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models",
+                 "JOSS., 10.21105/joss.00627, in review, 2018.")
+)
+
+citation(auto = meta)
+
+citFooter("Thanks")
