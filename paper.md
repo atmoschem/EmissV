@@ -139,10 +139,10 @@ CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
 The emissions of CO calculated in this example can be seen in Figure 1 in `g/d` (by pixel) and the final emissions on Figure  2 in `MOL h-1 km-1` (by model grid cell). This emissions can be written to WRF-Chem emission files using some package that makes the interface with NetCDF format such as **ncdf4** [@ncdf4], **RNetCDF** [@RNetCDF], **ncdf.tools** [@ncdftools] or with the **eixport** [@eixport].
 
 The R package EmissV is available at the repository  https://github.com/atmoschem/EmissV. 
-And this installation is tested automatically on Linux via [TravisCI](https://travis-ci.org/atmoschem/eixport) and Windows via [Appveyor](https://ci.appveyor.com/project/Schuch666/eixport) continuous integration systems. Also, EmissV is already on CRAN https://CRAN.R-project.org/package=EmissV.
+And this installation is tested automatically on Linux via [TravisCI](https://travis-ci.org/atmoschem/EmissV) and Windows via [Appveyor](https://ci.appveyor.com/project/Schuch666/EmissC) continuous integration systems. Also, EmissV is already on CRAN https://CRAN.R-project.org/package=EmissV.
 
 # Acknowledgements
 
-The development of eixport was supported by postdoc grans from the Fundação da Universidade de São Paulo and Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior.
+The development of EmissV was supported by postdoc grans from the Fundação da Universidade de São Paulo and Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior.
 
 # References
