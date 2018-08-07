@@ -40,11 +40,11 @@ the list of area must be in the same order as defined in vehicles and total emis
 just WRF-Chem is suported by now
 }
 \examples{
-veiculos <- vehicles(example = TRUE)
+fleet  <- vehicles(example = TRUE)
 
 EmissionFactors <- emissionFactor(example = TRUE)
 
-TOTAL  <- totalEmission(veiculos,EmissionFactors,pol = c("CO"),verbose = TRUE)
+TOTAL  <- totalEmission(fleet,EmissionFactors,pol = c("CO"),verbose = TRUE)
 
 grid   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
 shape  <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))
