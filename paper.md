@@ -1,5 +1,5 @@
 ---
-title: 'EmissV: a R package to create vehicular and other emissions for air quality models'
+title: 'EmissV: an R package to create vehicular and other emissions for air quality models'
 authors:
 - affiliation: '1'
   name: Daniel Schuch
@@ -27,7 +27,7 @@ affiliations:
 
 Air quality models need input data containing information about atmosphere (such as temperature, wind, humidity), terrestrial data (such as terrain, land use, soil types) and emissions. Therefore, the emission inventories are easily seen as the scapegoat if a mismatch is found between modelled and observed concentrations of air pollutants [@PullesHeslinga2010]. The anthropogenic emissions, especially vehicular emissions, are highly dependent on human activity and constantly changing due to various factors ranging from economic (such as the state of conservation of the fleet, renewal of the fleet and the price of fuel) to legal aspects (such as the vehicle routing).
 
-The EmissV is a R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at available level (National, State, City, etc). The following steps show an example of the workflow for calculating vehicular emissions, this emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally to be used as input in numeric air quality models such WRF-Chem [@Grelletal2005].
+The EmissV is an R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at available level (National, State, City, etc). The following steps show an example of the workflow for calculating vehicular emissions, this emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally to be used as input in numeric air quality models such WRF-Chem [@Grelletal2005].
 
 **I.** Total: emission of pollutants is estimated from the fleet (number, type and year of vehicles), vehicular activity (km/day) and emission factors (g/km) by pollutant for each interest area (cities, states, countries, etc) or alternatively the totals of some inventory can be used.
 
