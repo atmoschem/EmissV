@@ -116,7 +116,8 @@ Sao_Paulo <- areaSource(shape,raster,grid,name = "Sao Paulo")
 # [1] "processing Sao Paulo area ... "
 # [1] "fraction of Sao Paulo area inside the domain = 0.474658563750987"
 
-sp::spplot(raster::merge(TOTAL[[1]][[1]] * Sao_Paulo, TOTAL[[1]][[2]] * Minas_Gerais),
+sp::spplot(raster::merge(as.numeric(TOTAL[[1]][[1]]) * Sao_Paulo,
+                         as.numeric(TOTAL[[1]][[2]]) * Minas_Gerais),
            scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
            main=list(label="Emissions of CO [g/d]"),
            col.regions = c("#031638","#001E48","#002756","#003062",
