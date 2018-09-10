@@ -95,7 +95,7 @@ EF     <- emissionFactor(example = T)
 # Flex Motorcycles             0.75 g/km 0.0000 g/km
 
 TOTAL  <- totalEmission(fleet,EF,pol = c("CO"),verbose = T)
-# [1] "Total of CO : 1127548.9048935 t year-1"
+# [1] "Total of CO : 1128297.0993334 t year-1"
 
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),
                    "/wrfinput_d02",sep=""))
