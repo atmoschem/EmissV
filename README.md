@@ -91,7 +91,7 @@ EF     <- emissionFactor(example = T)
 # Flex motorcycles             0.75 g/km 0.0000 g/km
 
 TOTAL  <- totalEmission(veiculos,EF,pol = c("CO"),verbose = T)
-# [1] "Total of CO : 1127549.20226849 t year-1"
+# [1] "Total of CO : 1128297.0993334 t year-1"
 ```
 
 **II.** Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), OpenStreet maps (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.
