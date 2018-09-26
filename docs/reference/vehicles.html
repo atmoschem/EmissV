@@ -67,7 +67,7 @@ The number of vehicles are defined by the distribution of vehicles by vehicle cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.8</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.9</span>
       </span>
     </div>
 
@@ -88,12 +88,7 @@ The number of vehicles are defined by the distribution of vehicles by vehicle cl
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/atmoschem/EmissV">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,7 +102,7 @@ The number of vehicles are defined by the distribution of vehicles by vehicle cl
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tool to set-up vehicle data table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/vehicles.R'><code>R/vehicles.R</code></a></small>
+    
     <div class="hidden name"><code>vehicles.Rd</code></div>
     </div>
 
@@ -178,7 +173,7 @@ The number of vehicles are defined by the distribution of vehicles by vehicle cl
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
+    <pre class="examples"><div class='input'><span class='no'>fleet</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
 #&gt;                              Category   Type Fuel      Use       SP      RJ
 #&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 2712343
 #&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627  204079
@@ -202,20 +197,20 @@ The number of vehicles are defined by the distribution of vehicles by vehicle cl
 <span class='co'># Rio de Janeiro, Minas Gerais, Parana and Santa Catarina)</span>
 <span class='co'># vahicle distribution of Sao Paulo</span>
 
-<span class='no'>veiculos</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>total_v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>27332101</span>, <span class='fl'>6377484</span>, <span class='fl'>10277988</span>, <span class='fl'>7140439</span>, <span class='fl'>4772160</span>),
-                     <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"SP"</span>, <span class='st'>"RJ"</span>, <span class='st'>"MG"</span>, <span class='st'>"PR"</span>, <span class='st'>"SC"</span>),
-                     <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='fl'>0.4253</span>, <span class='fl'>0.0320</span>, <span class='fl'>0.3602</span>, <span class='fl'>0.0260</span>,
-                                       <span class='fl'>0.0290</span>, <span class='fl'>0.0008</span>, <span class='fl'>0.1181</span>, <span class='fl'>0.0086</span>),
-                     <span class='kw'>category</span> <span class='kw'>=</span>  <span class='fu'>c</span>(<span class='st'>"LDV_E25"</span>,<span class='st'>"LDV_E100"</span>,<span class='st'>"LDV_F"</span>,<span class='st'>"TRUCKS_B5"</span>,
-                                   <span class='st'>"CBUS_B5"</span>,<span class='st'>"MBUS_B5"</span>,<span class='st'>"MOTO_E25"</span>,<span class='st'>"MOTO_F"</span>),
-                     <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"LDV"</span>, <span class='st'>"LDV"</span>, <span class='st'>"LDV"</span>,<span class='st'>"TRUCKS"</span>,
-                              <span class='st'>"BUS"</span>,<span class='st'>"BUS"</span>,<span class='st'>"MOTO"</span>, <span class='st'>"MOTO"</span>),
-                     <span class='kw'>fuel</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"E25"</span>, <span class='st'>"E100"</span>, <span class='st'>"FLEX"</span>,<span class='st'>"B5"</span>,
-                              <span class='st'>"B5"</span>,<span class='st'>"B5"</span>,<span class='st'>"E25"</span>, <span class='st'>"FLEX"</span>),
-                     <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Light duty Vehicles Gasohol"</span>,<span class='st'>"Light Duty Vehicles Ethanol"</span>,
-                                <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,<span class='st'>"Diesel urban busses"</span>,
-                                <span class='st'>"Diesel intercity busses"</span>,<span class='st'>"Gasohol motorcycles"</span>,
-                                <span class='st'>"Flex motorcycles"</span>))</div><div class='output co'>#&gt; vehicles:
+<span class='no'>fleet</span> <span class='kw'>&lt;-</span> <span class='fu'>vehicles</span>(<span class='kw'>total_v</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>27332101</span>, <span class='fl'>6377484</span>, <span class='fl'>10277988</span>, <span class='fl'>7140439</span>, <span class='fl'>4772160</span>),
+                  <span class='kw'>area_name</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"SP"</span>, <span class='st'>"RJ"</span>, <span class='st'>"MG"</span>, <span class='st'>"PR"</span>, <span class='st'>"SC"</span>),
+                  <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fu'>c</span>( <span class='fl'>0.4253</span>, <span class='fl'>0.0320</span>, <span class='fl'>0.3602</span>, <span class='fl'>0.0260</span>,
+                                   <span class='fl'>0.0290</span>, <span class='fl'>0.0008</span>, <span class='fl'>0.1181</span>, <span class='fl'>0.0086</span>),
+                  <span class='kw'>category</span> <span class='kw'>=</span>  <span class='fu'>c</span>(<span class='st'>"LDV_E25"</span>,<span class='st'>"LDV_E100"</span>,<span class='st'>"LDV_F"</span>,<span class='st'>"TRUCKS_B5"</span>,
+                                <span class='st'>"CBUS_B5"</span>,<span class='st'>"MBUS_B5"</span>,<span class='st'>"MOTO_E25"</span>,<span class='st'>"MOTO_F"</span>),
+                  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"LDV"</span>, <span class='st'>"LDV"</span>, <span class='st'>"LDV"</span>,<span class='st'>"TRUCKS"</span>,
+                          <span class='st'>"BUS"</span>,<span class='st'>"BUS"</span>,<span class='st'>"MOTO"</span>, <span class='st'>"MOTO"</span>),
+                  <span class='kw'>fuel</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"E25"</span>, <span class='st'>"E100"</span>, <span class='st'>"FLEX"</span>,<span class='st'>"B5"</span>,
+                           <span class='st'>"B5"</span>,<span class='st'>"B5"</span>,<span class='st'>"E25"</span>, <span class='st'>"FLEX"</span>),
+                  <span class='kw'>vnames</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Light duty Vehicles Gasohol"</span>,<span class='st'>"Light Duty Vehicles Ethanol"</span>,
+                             <span class='st'>"Light Duty Vehicles Flex"</span>,<span class='st'>"Diesel trucks"</span>,<span class='st'>"Diesel urban busses"</span>,
+                             <span class='st'>"Diesel intercity busses"</span>,<span class='st'>"Gasohol motorcycles"</span>,
+                             <span class='st'>"Flex motorcycles"</span>))</div><div class='output co'>#&gt; vehicles:
 #&gt;                              Category   Type Fuel      Use       SP      RJ
 #&gt; Light duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 2712343
 #&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627  204079

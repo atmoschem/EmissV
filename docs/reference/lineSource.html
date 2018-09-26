@@ -33,7 +33,8 @@
 <meta property="og:title" content="Distribution of emissions by streets — lineSource" />
 
 <meta property="og:description" content="Create a distribution from sp spatial lines data frame or spatial lines.
-Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;geo&quot; for a output from geog.exe" />
+Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;geo&quot; for a output from geog.exe
+The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format instead of create from a model input." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -62,7 +63,7 @@ Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;g
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.8</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.9</span>
       </span>
     </div>
 
@@ -83,12 +84,7 @@ Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;g
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/atmoschem/EmissV">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -102,7 +98,7 @@ Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;g
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Distribution of emissions by streets</h1>
-    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/lineSource.R'><code>R/lineSource.R</code></a></small>
+    
     <div class="hidden name"><code>lineSource.Rd</code></div>
     </div>
 
@@ -110,10 +106,12 @@ Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;g
     
     <p>Create a distribution from sp spatial lines data frame or spatial lines.</p>
 <p>Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe</p>
+<p>The "sf" (and "sp") uses a grid in SpatialPolygons format instead of create from a model input.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>lineSource</span>(<span class='no'>s</span>, <span class='no'>grid</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"wrfinput"</span>)</pre>
+    <pre class="usage"><span class='fu'>lineSource</span>(<span class='no'>s</span>, <span class='no'>grid</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"wrfinput"</span>,
+  <span class='kw'>gcol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>grow</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,7 +134,15 @@ Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;g
     </tr>
     <tr>
       <th>type</th>
-      <td><p>"wrfinput" or "geo" for grid type</p></td>
+      <td><p>"wrfinput", "geo", "sp" or "sf" for grid type</p></td>
+    </tr>
+    <tr>
+      <th>gcol</th>
+      <td><p>grid points for a "sp" or "sf" type</p></td>
+    </tr>
+    <tr>
+      <th>grow</th>
+      <td><p>grid points for a "sp" or "sf" type</p></td>
     </tr>
     </table>
     

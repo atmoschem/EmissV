@@ -64,7 +64,7 @@ In EmissV the vehicular emissions are estimated by a top-down approach, i.e. the
 ``` r
 library(EmissV)
 
-veiculos <- vehicles(example = T)
+fleet <- vehicles(example = T)
 # using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
 #                              Category   Type Fuel      Use       SP ...
 # Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...
@@ -76,7 +76,7 @@ veiculos <- vehicles(example = T)
 # Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...
 # Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...
 
-veiculos <- veiculos[,c(-6,-8,-9)] # dropping RJ, PR and SC
+fleet <- fleet[,c(-6,-8,-9)] # dropping RJ, PR and SC
 
 EF     <- emissionFactor(example = T)
 # using a example emission factor (values calculated from CETESB 2015):
@@ -90,7 +90,7 @@ EF     <- emissionFactor(example = T)
 # Gasohol motorcycles          1.61 g/km 0.0000 g/km
 # Flex motorcycles             0.75 g/km 0.0000 g/km
 
-TOTAL  <- totalEmission(veiculos,EF,pol = c("CO"),verbose = T)
+TOTAL  <- totalEmission(fleet,EF,pol = c("CO"),verbose = T)
 # [1] "Total of CO : 1128297.0993334 t year-1"
 ```
 

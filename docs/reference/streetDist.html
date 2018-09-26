@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.8</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.9</span>
       </span>
     </div>
 
@@ -82,12 +82,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/atmoschem/EmissV">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -101,7 +96,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Distribution by OpenStreetnMap street</h1>
-    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/streetDist.R'><code>R/streetDist.R</code></a></small>
+    
     <div class="hidden name"><code>streetDist.Rd</code></div>
     </div>
 
@@ -112,23 +107,23 @@
     </div>
 
     <pre class="usage"><span class='fu'>streetDist</span>(<span class='kw'>emission</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>grid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>osm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epsg</span> <span class='kw'>=</span> <span class='fl'>31983</span>)</pre>
+  <span class='kw'>osm</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epsg</span> <span class='kw'>=</span> <span class='fl'>31983</span>, <span class='kw'>warnings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>emission</th>
-      <td><p>numeric of emissions</p></td>
+      <td><p>Numeric;  emissions.</p></td>
     </tr>
     <tr>
       <th>dist</th>
-      <td><p>numeric vector with length 5. The order represents motorway,
+      <td><p>Numeric; vector with length 5. The order represents motorway,
 trunk, primary, secondary and tertiary</p></td>
     </tr>
     <tr>
       <th>grid</th>
-      <td><p>grid of polygons class sf</p></td>
+      <td><p>'sf' POLYGON; grid of polygons class sf.</p></td>
     </tr>
     <tr>
       <th>osm</th>
@@ -136,7 +131,11 @@ trunk, primary, secondary and tertiary</p></td>
     </tr>
     <tr>
       <th>epsg</th>
-      <td><p>spatial code for projecting spatial data</p></td>
+      <td><p>Numeric; spatial code for projecting spatial data</p></td>
+    </tr>
+    <tr>
+      <th>warnings</th>
+      <td><p>Logical; to show warnings.</p></td>
     </tr>
     </table>
     
@@ -167,6 +166,35 @@ trunk, primary, secondary and tertiary</p></td>
 <span class='no'>per</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>)
 <span class='no'>teste</span> <span class='kw'>&lt;-</span> <span class='fu'>streetDist</span>(<span class='kw'>emission</span> <span class='kw'>=</span> <span class='fl'>1000000</span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='no'>per</span>, <span class='kw'>grid</span> <span class='kw'>=</span> <span class='no'>g</span>,
                     <span class='kw'>osm</span> <span class='kw'>=</span> <span class='no'>streets</span>, <span class='kw'>epsg</span> <span class='kw'>=</span> <span class='fl'>31983</span>)
+<span class='co'># Another example:</span>
+<span class='fu'>library</span> (<span class='no'>EmissV</span>)
+<span class='fu'>library</span> (<span class='no'>osmdata</span>)
+<span class='fu'>library</span> (<span class='no'>sf</span>)
+<span class='no'>city</span> <span class='kw'>&lt;-</span> <span class='st'>"accra"</span>
+<span class='no'>bb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/osmdata/topics/getbb'>getbb</a></span> (<span class='no'>city</span>)
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/osmdata/topics/opq'>opq</a></span> (<span class='kw'>bbox</span> <span class='kw'>=</span> <span class='no'>city</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/osmdata/topics/add_osm_feature'>add_osm_feature</a></span> (<span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"highway"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/osmdata/topics/osmdata_sf'>osmdata_sf</a></span> (<span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>osmdata</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/osmdata/topics/osm_poly2line'>osm_poly2line</a></span> () <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>magrittr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/magrittr/topics/aliases'>extract2</a></span> (<span class='st'>"osm_lines"</span>)
+<span class='co'>#saveRDS (dat, file = "accra-hw.Rds")</span>
+<span class='no'>utm</span> <span class='kw'>&lt;-</span> <span class='fl'>32630</span> <span class='co'># for Accra</span>
+
+<span class='co'># Get a raster grid of population density to use for the emission distribution:</span>
+<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='fu'>paste0</span> (<span class='st'>"https://github.com/ATFutures/who-data/releases/download/"</span>,
+               <span class='st'>"v0.0.2-worldpop-tif-gha-npl/accra.2fpopdens.2fGHA15adj_040213.tif"</span>)
+<span class='fu'>download.file</span> (<span class='no'>url</span>, <span class='st'>"accra-pop.tif"</span>, <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"wb"</span>)
+<span class='no'>ras</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span> (<span class='st'>"accra-pop.tif"</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/crop'>crop</a></span> (<span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></span> (<span class='no'>bb</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/sf/topics/coerce-methods'>as</a></span> (<span class='st'>"SpatialPolygons"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/sf/topics/st_as_sf'>st_as_sf</a></span> ()
+
+<span class='co'>#dat &lt;- readRDS (file = "accra-hw.Rds")</span>
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='no'>dat</span>[<span class='no'>dat</span>$<span class='no'>highway</span> <span class='kw'>%in%</span> <span class='fu'>c</span> (<span class='st'>"motorway"</span>, <span class='st'>"trunk"</span>, <span class='st'>"primary"</span>,
+                                <span class='st'>"secondary"</span>, <span class='st'>"teritary"</span>), ]
+
+<span class='no'>s</span> <span class='kw'>&lt;-</span> <span class='fu'>streetDist</span> (<span class='kw'>emission</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='fu'>c</span> (<span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>grid</span> <span class='kw'>=</span> <span class='no'>ras</span>,
+                 <span class='kw'>osm</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>epsg</span> <span class='kw'>=</span> <span class='no'>utm</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EmissV</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.8</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.9</span>
       </span>
     </div>
 
@@ -79,12 +79,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/atmoschem/EmissV">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -102,7 +97,7 @@
 
 
 <hr>
-<p>title: ‘EmissV: a R package to create vehicular and other emissions for air quality models’ authors:</p>
+<p>title: ‘EmissV: an R package to create vehicular and other emissions for air quality models’ authors:</p>
 <ul>
 <li>affiliation: ‘1’ name: Daniel Schuch orcid: 0000-0001-5977-4519</li>
 <li>affiliation: ‘1’ name: Sergio Ibarra-Espinosa orcid: 0000-0002-3162-1905</li>
@@ -115,7 +110,7 @@
 <div id="summary" class="section level1">
 
 <p>Air quality models need input data containing information about atmosphere (such as temperature, wind, humidity), terrestrial data (such as terrain, land use, soil types) and emissions. Therefore, the emission inventories are easily seen as the scapegoat if a mismatch is found between modelled and observed concentrations of air pollutants [@PullesHeslinga2010]. The anthropogenic emissions, especially vehicular emissions, are highly dependent on human activity and constantly changing due to various factors ranging from economic (such as the state of conservation of the fleet, renewal of the fleet and the price of fuel) to legal aspects (such as the vehicle routing).</p>
-<p>The EmissV is a R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at available level (National, State, City, etc). The following steps show an example of the workflow for calculating vehicular emissions, this emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally to be used as input in numeric air quality models such WRF-Chem [@Grelletal2005].</p>
+<p>The EmissV is an R package that estimates vehicular emissions by a top-down approach, the emissions are calculated using the statistical description of the fleet at available level (National, State, City, etc). The following steps show an example of the workflow for calculating vehicular emissions, this emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally to be used as input in numeric air quality models such WRF-Chem [@Grelletal2005].</p>
 <p><strong>I.</strong> Total: emission of pollutants is estimated from the fleet (number, type and year of vehicles), vehicular activity (km/day) and emission factors (g/km) by pollutant for each interest area (cities, states, countries, etc) or alternatively the totals of some inventory can be used.</p>
 <p><strong>II.</strong> Spatial distribution: the package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), openstreetmap data (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.</p>
 <p><strong>III.</strong> Emission calculation: calculates the final emission from all different sources and converts to model units and resolution.</p>
@@ -224,7 +219,7 @@
 <a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co"># Flex Motorcycles             0.75 g/km 0.0000 g/km</span></a>
 <a class="sourceLine" id="cb1-29" data-line-number="29"></a>
 <a class="sourceLine" id="cb1-30" data-line-number="30">TOTAL  &lt;-<span class="st"> </span><span class="kw"><a href="reference/totalEmission.html">totalEmission</a></span>(fleet,EF,<span class="dt">pol =</span> <span class="kw">c</span>(<span class="st">"CO"</span>),<span class="dt">verbose =</span> T)</a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co"># [1] "Total of CO : 1127548.9048935 t year-1"</span></a>
+<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co"># [1] "Total of CO : 1128297.0993334 t year-1"</span></a>
 <a class="sourceLine" id="cb1-32" data-line-number="32"></a>
 <a class="sourceLine" id="cb1-33" data-line-number="33">grid   &lt;-<span class="st"> </span><span class="kw"><a href="reference/gridInfo.html">gridInfo</a></span>(<span class="kw">paste</span>(<span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
 <a class="sourceLine" id="cb1-34" data-line-number="34">                   <span class="st">"/wrfinput_d02"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
@@ -261,13 +256,13 @@
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Emissions of CO using nocturnal lights."></p>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="CO emissions ready for use in air quality model."></p>
 <p>The emissions of CO calculated in this example can be seen in Figure 1 in <code>g/d</code> (by pixel) and the final emissions on Figure 2 in <code>MOL h-1 km-1</code> (by model grid cell). This emissions can be written to WRF-Chem emission files using some package that makes the interface with NetCDF format such as <strong>ncdf4</strong> [@ncdf4], <strong>RNetCDF</strong> [@RNetCDF], <strong>ncdf.tools</strong> [@ncdftools] or with the <strong>eixport</strong> [@eixport].</p>
-<p>The R package EmissV is available at the repository <a href="https://github.com/atmoschem/EmissV" class="uri">https://github.com/atmoschem/EmissV</a>. And this installation is tested automatically on Linux via <a href="https://travis-ci.org/atmoschem/eixport">TravisCI</a> and Windows via <a href="https://ci.appveyor.com/project/Schuch666/eixport">Appveyor</a> continuous integration systems. Also, EmissV is already on CRAN <a href="https://CRAN.R-project.org/package=EmissV" class="uri">https://CRAN.R-project.org/package=EmissV</a>.</p>
+<p>The R package EmissV is available at the repository <a href="https://github.com/atmoschem/EmissV" class="uri">https://github.com/atmoschem/EmissV</a>. And this installation is tested automatically on Linux via <a href="https://travis-ci.org/atmoschem/EmissV">TravisCI</a> and Windows via <a href="https://ci.appveyor.com/project/Schuch666/EmissC">Appveyor</a> continuous integration systems. Also, EmissV is already on CRAN <a href="https://CRAN.R-project.org/package=EmissV" class="uri">https://CRAN.R-project.org/package=EmissV</a>.</p>
 </div>
 </div>
 <div id="acknowledgements" class="section level1">
 <h1 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h1>
-<p>The development of eixport was supported by postdoc grans from the Fundação da Universidade de São Paulo and Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior.</p>
+<p>The development of EmissV was supported by postdoc grans from the Fundação da Universidade de São Paulo and Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior.</p>
 </div>
 <div id="references" class="section level1">
 <h1 class="hasAnchor">
