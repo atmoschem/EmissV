@@ -38,7 +38,7 @@
 areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
   if(verbose){
     if(name != "") name = paste0(name," ")
-    cat(paste("processing ",name,"area ... ",sep = ""))
+    cat(paste("processing ",name,"area ... \n",sep = ""))
   }
 
   sp       <- raster::mask(r,sp::spTransform(s,sp::CRS(sp::proj4string(r))))
@@ -54,7 +54,7 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
     sp     <- raster::crop(sp / sp_soma ,box)
     sp_r   <- raster::cellStats(sp,"sum")
     if(verbose)
-      cat(paste("fraction of ",name,"area inside the domain = ",sp_r, sep =""))
+      cat(paste("fraction of ",name,"area inside the domain = ",sp_r,"\n", sep =""))
     if(as_frac) return(sp_r)
     return(sp)
   }

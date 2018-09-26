@@ -95,11 +95,11 @@ EF     <- emissionFactor(example = T)
 # Flex Motorcycles             0.75 g/km 0.0000 g/km
 
 TOTAL  <- totalEmission(fleet,EF,pol = c("CO"),verbose = T)
-# [1] "Total of CO : 1128297.0993334 t year-1"
+# Total of CO : 1128297.0993334 t year-1
 
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),
                    "/wrfinput_d02",sep=""))
-# [1] "Grid information from: .../EmissV/extdata/wrfinput_d02"
+# Grid information from: .../EmissV/extdata/wrfinput_d02
 
 raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
                          "/dmsp_hi-res.tiff",sep=""))
@@ -108,19 +108,20 @@ shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = F)[12,1]
                             
 Minas_Gerais <- areaSource(shape,raster,grid,name = "Minas Gerais")
-# [1] "processing Minas Gerais area ... "
-# [1] "fraction of Minas Gerais area inside the domain = 0.0147607845622591"
+# processing Minas Gerais area ...
+# fraction of Minas Gerais area inside the domain = 0.0147607845622591
 
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = F)[22,1]
                             
 Sao_Paulo <- areaSource(shape,raster,grid,name = "Sao Paulo")
-# [1] "processing Sao Paulo area ... "
-# [1] "fraction of Sao Paulo area inside the domain = 0.473260323300595"
+# processing Sao Paulo area ...
+# fraction of Sao Paulo area inside the domain = 0.473260323300595
 
-sp::spplot(raster::merge(TOTAL[[1]][[1]] * Sao_Paulo, TOTAL[[1]][[2]] * Minas_Gerais),
+sp::spplot(raster::merge(drop_units(TOTAL$CO[[1]]) * Sao_Paulo, 
+                         drop_units(TOTAL$CO[[2]]) * Minas_Gerais),
            scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-           main=list(label="Emissions of CO [g/d]"),
+           # main=list(label="Emissions of CO [g/d]"),
            col.regions = c("#031638","#001E48","#002756","#003062",
                            "#003A6E","#004579","#005084","#005C8E",
                            "#006897","#0074A1","#0081AA","#008FB3",
@@ -128,7 +129,7 @@ sp::spplot(raster::merge(TOTAL[[1]][[1]] * Sao_Paulo, TOTAL[[1]][[2]] * Minas_Ge
 
 CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
                          grid,mm=28, plot = T)
-# [1] "calculating emissions for CO using molar mass = 28 ..."
+# calculating emissions for CO using molar mass = 28 ...
 ```
 
 ![Emissions of CO using nocturnal lights.](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png)
