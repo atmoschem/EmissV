@@ -168,15 +168,15 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>fleet</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
-#&gt;                              Category   Type Fuel      Use       SP      RJ
-#&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 2712343
-#&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627  204079
-#&gt; Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 2297169
-#&gt; Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634  165814
-#&gt; Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630  184947
-#&gt; Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865    5101
-#&gt; Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921  753180
-#&gt; Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056   54846
+#&gt;                              Category   Type Fuel        Use       SP      RJ
+#&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 [km/d] 11624342 2712343
+#&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 [km/d]   874627  204079
+#&gt; Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 [km/d]  9845022 2297169
+#&gt; Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 [km/d]   710634  165814
+#&gt; Diesel Urban Busses           CBUS_B5    BUS   B5 165 [km/d]   792630  184947
+#&gt; Diesel Intercity Busses       MBUS_B5    BUS   B5 165 [km/d]    21865    5101
+#&gt; Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 [km/d]  3227921  753180
+#&gt; Flex Motorcycles               MOTO_F   MOTO FLEX 140 [km/d]   235056   54846
 #&gt;                                  MG      PR      SC
 #&gt; Light Duty Vehicles Gasohol 4371228 3036828 2029599
 #&gt; Light Duty Vehicles Ethanol  328895  228494  152709
@@ -187,15 +187,15 @@
 #&gt; Gasohol Motorcycles         1213830  843285  563592
 #&gt; Flex Motorcycles              88390   61407   41040</div><div class='input'>
 <span class='no'>EmissionFactors</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='emissionFactor.html'>emissionFactor</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example emission factor (values calculated from CETESB 2015):
-#&gt;                                     CO          PM
-#&gt; Light Duty Vehicles Gasohol  1.75 g/km 0.0013 g/km
-#&gt; Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km
-#&gt; Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km
-#&gt; Diesel Trucks                0.45 g/km 0.0612 g/km
-#&gt; Diesel Urban Busses          0.77 g/km 0.1052 g/km
-#&gt; Diesel Intercity Busses      1.48 g/km 0.1693 g/km
-#&gt; Gasohol Motorcycles          1.61 g/km 0.0000 g/km
-#&gt; Flex Motorcycles             0.75 g/km 0.0000 g/km</div><div class='input'>
+#&gt;                                       CO            PM
+#&gt; Light Duty Vehicles Gasohol  1.75 [g/km] 0.0013 [g/km]
+#&gt; Light Duty Vehicles Ethanol 10.04 [g/km] 0.0000 [g/km]
+#&gt; Light Duty Vehicles Flex     0.39 [g/km] 0.0010 [g/km]
+#&gt; Diesel Trucks                0.45 [g/km] 0.0612 [g/km]
+#&gt; Diesel Urban Busses          0.77 [g/km] 0.1052 [g/km]
+#&gt; Diesel Intercity Busses      1.48 [g/km] 0.1693 [g/km]
+#&gt; Gasohol Motorcycles          1.61 [g/km] 0.0000 [g/km]
+#&gt; Flex Motorcycles             0.75 [g/km] 0.0000 [g/km]</div><div class='input'>
 <span class='no'>TOTAL</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='totalEmission.html'>totalEmission</a></span>(<span class='no'>fleet</span>,<span class='no'>EmissionFactors</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"CO"</span>),<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Total of CO : 1676996.43578795 t year-1 </div><div class='input'>
 <span class='no'>grid</span>   <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'>paste0</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d01"</span>))</div><div class='output co'>#&gt; Grid information from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d01 </div><div class='input'><span class='no'>shape</span>  <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/shapefile'>shapefile</a></span>(<span class='fu'>paste0</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/BR.shp"</span>))
 <span class='no'>raster</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='fu'>paste0</span>(<span class='fu'>system.file</span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/dmsp.tiff"</span>))

@@ -146,15 +146,15 @@ Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>veic</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='vehicles.html'>vehicles</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):
-#&gt;                              Category   Type Fuel      Use       SP      RJ
-#&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 2712343
-#&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627  204079
-#&gt; Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 2297169
-#&gt; Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634  165814
-#&gt; Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630  184947
-#&gt; Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865    5101
-#&gt; Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921  753180
-#&gt; Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056   54846
+#&gt;                              Category   Type Fuel        Use       SP      RJ
+#&gt; Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 [km/d] 11624342 2712343
+#&gt; Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 [km/d]   874627  204079
+#&gt; Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 [km/d]  9845022 2297169
+#&gt; Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 [km/d]   710634  165814
+#&gt; Diesel Urban Busses           CBUS_B5    BUS   B5 165 [km/d]   792630  184947
+#&gt; Diesel Intercity Busses       MBUS_B5    BUS   B5 165 [km/d]    21865    5101
+#&gt; Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 [km/d]  3227921  753180
+#&gt; Flex Motorcycles               MOTO_F   MOTO FLEX 140 [km/d]   235056   54846
 #&gt;                                  MG      PR      SC
 #&gt; Light Duty Vehicles Gasohol 4371228 3036828 2029599
 #&gt; Light Duty Vehicles Ethanol  328895  228494  152709
@@ -199,7 +199,8 @@ Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh
 #&gt; Diesel Intercity Busses      0.00
 #&gt; Gasohol Motorcycles          0.00
 #&gt; Flex Motorcycles             0.00</div><div class='input'>
-<span class='no'>COV_total</span> <span class='kw'>&lt;-</span> <span class='fu'>totalVOC</span>(<span class='no'>veic</span>,<span class='no'>EF_COV</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='no'>COV</span>[<span class='fl'>10</span>])</div><div class='output co'>#&gt; Total COV: 2703251.58732021 t year-1 
+<span class='no'>COV_total</span> <span class='kw'>&lt;-</span> <span class='fu'>totalVOC</span>(<span class='no'>veic</span>,<span class='no'>EF_COV</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='no'>COV</span>[<span class='fl'>10</span>])</div><div class='output co'>#&gt; function totalVOC will be discontinued in the next versions
+#&gt; Total COV: 2703251.58732021 t year-1 
 #&gt; xyl 262330984930.355 MOL year-1 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
