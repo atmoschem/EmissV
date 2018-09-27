@@ -98,7 +98,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       cat(paste("calculating emissions for ",pol," as aerosol"," ...\n",sep=""))
     }else{
       if(mm == 1){
-        cat(paste("calculating emissions for ",pol," ...\n",sep=""))
+        cat(paste("calculating emissions for ",pol," ...\n",sep="")) # nocov
       }else{
         cat(paste("calculating emissions for ",pol," using molar mass = ",mm," ...\n",sep=""))
       }
@@ -147,26 +147,13 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
   else{
     #  mol km^-2 hr^-1
     if(exists("ud_units$MOL"))
-      units::remove_symbolic_unit("MOL")
+      units::remove_symbolic_unit("MOL") # nocov
     if(!exists("ud_units$MOL"))
       units::install_conversion_constant("MOL", "g", const = mm) # new conversion
     VAR_e   =  units::set_units(VAR_e,"MOL/d")
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
   }
-
-  # if(aerosol){
-  #   ##  ug m-2 s-1
-  #   VAR_e = units::set_units(VAR_e,"ug m-2 s-1")
-  # }
-  # else{
-  #   ##  mol km-2 h-1
-  #   VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
-  #   suppressWarnings( units::install_symbolic_unit("MOL") )
-  #   MOL <- units::as_units("MOL")
-  #   conversao <- units::as_units(1/mm, "MOL g-1")
-  #   VAR_e     <- VAR_e * conversao
-  # }
 
   if(plot == T){
     col   <- grid$Horizontal[1]

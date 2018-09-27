@@ -45,12 +45,10 @@
 
 totalVOC <- function(v,ef,pol,verbose=T){
 
+  cat("function totalVOC will be discontinued in the next versions\n")
+
   suppressWarnings( units::install_symbolic_unit("MOL"))
   MOL <- units::as_units("MOL")
-  # if (utils::packageVersion("units") <= "0.5-1"){
-  #   units::install_conversion_constant("MOL/d", "MOL/year", 365 )
-  #   units::install_conversion_constant("g/d", "t/year", 365/1000000 )
-  # }
 
   voc_names <- c("eth","hc3","hc5","hc8","ol2",
                  "olt","oli","iso","tol","xyl",
