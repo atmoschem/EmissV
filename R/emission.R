@@ -65,7 +65,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
       suppressWarnings( units::install_symbolic_unit("MOL") )
       MOL <- units::as_units("MOL")
-      conversao <- as_units(1/mm, "MOL g-1")
+      conversao <- units::as_units(1/mm, "MOL g-1")
       VAR_e     <- VAR_e * conversao
     }
 
@@ -82,7 +82,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       r                 <- raster::flip(r,2)
 
       a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-                      main=list(label=paste("Emissions of", pol ,"[",deparse_unit(VAR_e),"]")),
+                      main=list(label=paste("Emissions of", pol ,"[",units::deparse_unit(VAR_e),"]")),
                       col.regions = c("#031638","#001E48","#002756","#003062",
                                       "#003A6E","#004579","#005084","#005C8E",
                                       "#006897","#0074A1","#0081AA","#008FB3",
@@ -117,7 +117,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     unidade <- total[[1]][1]/as.numeric(total[[1]][[1]])
 
     for(i in 1:length(area)){
-      area[[i]] = area[[i]] * drop_units(var[[i]])
+      area[[i]] = area[[i]] * units::drop_units(var[[i]])
     }
     area <- unname(area)
 
@@ -133,10 +133,10 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     # put the units (to back the unit)
     VAR_e <- VAR_e * unidade
   }
+  # return(VAR_e)
 
   dx <- grid$DX
   dx <- dx*units::as_units("km")
-  # dx =  units::set_units(dx,km)
 
   if(aerosol){
     ##  ug m^-2 s^-1
@@ -146,17 +146,27 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
   }
   else{
     #  mol km^-2 hr^-1
-# if (utils::packageVersion("units") <= "0.5-1") {
-#       units::install_symbolic_unit("MOL")
-#       MOL <- units::as_units("MOL")                    # new unit MOL
-#       install_conversion_constant("MOL/h","g/d",mm/24) # new conversion
-# 	} else{
-    remove_symbolic_unit("MOL")
-	  install_conversion_constant("MOL", "g", mm) # new conversion
-# }
+    if(exists("ud_units$MOL"))
+      units::remove_symbolic_unit("MOL")
+    if(!exists("ud_units$MOL"))
+      units::install_conversion_constant("MOL", "g", const = mm) # new conversion
+    VAR_e   =  units::set_units(VAR_e,"MOL/d")
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
   }
+
+  # if(aerosol){
+  #   ##  ug m-2 s-1
+  #   VAR_e = units::set_units(VAR_e,"ug m-2 s-1")
+  # }
+  # else{
+  #   ##  mol km-2 h-1
+  #   VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
+  #   suppressWarnings( units::install_symbolic_unit("MOL") )
+  #   MOL <- units::as_units("MOL")
+  #   conversao <- units::as_units(1/mm, "MOL g-1")
+  #   VAR_e     <- VAR_e * conversao
+  # }
 
   if(plot == T){
     col   <- grid$Horizontal[1]
