@@ -44,9 +44,16 @@ gridInfo <- function(file = file.choose(),z=F,verbose = T){
       PH  <- ncdf4::ncvar_get(wrf,varid = "PH")  # 3d
       HGT <- ncdf4::ncvar_get(wrf,varid = "HGT") # 2d
       z   <- PH
-      for(i in 1:dim(PH)[3]){
-        z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT # 9.81 return values < 0, ~10-5
+      if(length(time) == 1){ # just one time
+        for(i in 1:dim(PH)[3]){
+          z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT # 9.81 return values < 0, ~10-5
+        }
+      }else{
+        for(i in 1:dim(PH)[3]){ # for multiple times (test version)
+          z[,,i,]   <- (PH[,,i,] + PHB[,,i,])/9.8 - HGT # 9.81 return values < 0, ~10-5
+        }
       }
+
     }else{
       z <- NA
     }
