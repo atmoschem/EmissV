@@ -47,10 +47,10 @@ gridInfo <- function(file = file.choose(),z=F,verbose = T){
       if(length(time) == 1){                            # just one time
         for(i in 1:dim(PH)[3]){
           z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT    # 9.81 return values < 0, ~10-5
-        }
-      }else{                                            # this is for an alternative use
-        for(i in 1:dim(PH)[3]){                         # for multiple times (test version)
-          z[,,i,]   <- (PH[,,i,] + PHB[,,i,])/9.8 - HGT # 9.81 return values < 0, ~10-5
+        }                                               # this is for an alternative use
+      }else{                                            # for multiple times (test version)
+        for(i in 1:dim(PH)[3]){                         # nocov
+          z[,,i,]   <- (PH[,,i,] + PHB[,,i,])/9.8 - HGT # nocov
         }
       }
 
