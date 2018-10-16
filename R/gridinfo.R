@@ -38,15 +38,15 @@ gridInfo <- function(file = file.choose(),z=F,verbose = T){
     lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
     lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
     time<- ncdf4::ncvar_get(wrf,varid = "Times")
-    dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # km
+    dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
     if(z){
-      PHB <- ncdf4::ncvar_get(wrf,varid = "PHB") # 3d
-      PH  <- ncdf4::ncvar_get(wrf,varid = "PH")  # 3d
-      HGT <- ncdf4::ncvar_get(wrf,varid = "HGT") # 2d
+      PHB <- ncdf4::ncvar_get(wrf,varid = "PHB")        # 3d
+      PH  <- ncdf4::ncvar_get(wrf,varid = "PH")         # 3d
+      HGT <- ncdf4::ncvar_get(wrf,varid = "HGT")        # 2d
       z   <- PH
-      if(length(time) == 1){ # just one time
+      if(length(time) == 1){                            # just one time
         for(i in 1:dim(PH)[3]){
-          z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT # 9.81 return values < 0, ~10-5
+          z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT    # 9.81 return values < 0, ~10-5
         }
       }else{                                            # this is for an alternative use
         for(i in 1:dim(PH)[3]){                         # for multiple times (test version)
@@ -60,9 +60,9 @@ gridInfo <- function(file = file.choose(),z=F,verbose = T){
     ncdf4::nc_close(wrf)
     lx  <- range(lon)
     ly  <- range(lat)
-    OUT <- list(Times = time, Lat = lat, Lon = lon, Horizontal = dim(lat),
-                Levels = z, DX = dx,xlim = lx, Ylim = ly, File = file,
+    OUT <- list(File = file, Times = time, Lat = lat, Lon = lon, z = z,
+                Horizontal = dim(lat), DX = dx, xlim = lx, Ylim = ly,
                 Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
-                           y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),z = z)
+                           y = c(ly[2],ly[2],ly[1],ly[1],ly[2])))
     return(OUT)
 }
