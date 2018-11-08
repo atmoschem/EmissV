@@ -9,7 +9,7 @@
 #'
 #' @format A list of numeric vectors.
 #'
-#' #' @seealso \code{\link{speciation} and \code{\link{read}}
+#' @seealso \code{\link{speciation}} and \code{\link{read}}
 #'
 #' @references
 #' Li, M., Zhang, Q., Streets, D. G., He, K. B., Cheng, Y. F., Emmons, L. K., ... & Su, H. (2014).

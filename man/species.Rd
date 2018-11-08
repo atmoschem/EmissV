@@ -4,7 +4,7 @@
 \name{species}
 \alias{species}
 \title{Species mapping tables}
-\format{An object of class \code{list} of length 8.}
+\format{A list of numeric vectors.}
 \usage{
 data(species)
 }
@@ -30,5 +30,8 @@ names(species[[1]])
 Li, M., Zhang, Q., Streets, D. G., He, K. B., Cheng, Y. F., Emmons, L. K., ... & Su, H. (2014).
 Mapping Asian anthropogenic emissions of non-methane volatile organic compounds to multiple
 chemical mechanisms. Atmos. Chem. Phys, 14(11), 5617-5638.
+}
+\seealso{
+\code{\link{speciation}} and \code{\link{read}}
 }
 \keyword{datasets}
