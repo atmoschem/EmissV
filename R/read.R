@@ -73,27 +73,27 @@ read <- function(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
       if(is.null(spec)){
         return(rz)
       }else{
-        if(verbose)  cat("using the folloing speciation:\n")
+        if(verbose)  cat("using the folloing speciation:\n") # nocov start
         rz_spec <- list()
         for(i in 1:length(spec)){
           if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
           rz_spec[[i]] <- rz * spec[i]
         }
         names(rz_spec) <- names(spec)
-        return(rz_spec)
+        return(rz_spec)                                      # nocov end
       }
     }else{
       if(is.null(spec)){
         return(var)
       }else{
-        if(verbose)  cat("using the folloing speciation:\n")
+        if(verbose)  cat("using the folloing speciation:\n") # nocov start
         var_spec <- list()
         for(i in 1:length(spec)){
           if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
           var_spec[[i]] <- var * spec[i]
         }
         names(var_spec) <- names(spec)
-        return(var_spec)
+        return(var_spec)                                     # nocov and
       }
     }
   }
