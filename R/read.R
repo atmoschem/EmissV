@@ -68,7 +68,8 @@ read <- function(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
         varold <- varold + var
       }
     }
-    if(as_raster){         # nocov
+    if(as_raster){
+
       if(is.null(spec)){
         return(rz)
       }else{
@@ -94,7 +95,7 @@ read <- function(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
         names(var_spec) <- names(spec)
         return(var_spec)
       }
-    }                     # nocov
+    }
   }
   # if(version == "osm"){
   #   cat(paste("reading osm data from",file,"\n"))
