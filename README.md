@@ -154,8 +154,8 @@ Functions:
 - [streetDist](https://atmoschem.github.io/EmissV/reference/streetDist.html): distribution by OpenStreetnMap street (in progress)
 - [areaSource](https://atmoschem.github.io/EmissV/reference/areaSource.html): distribution of emissions by region
 - [totalEmission](https://atmoschem.github.io/EmissV/reference/totalEmission.html): total emissions
-- [totalVOC](https://atmoschem.github.io/EmissV/reference/totalVOC.html): total VOCs emission (this function will be discontinued in the next versions)
 - [emission](https://atmoschem.github.io/EmissV/reference/emission.html): Emissions to atmospheric models
+- [spetiate]()
 
 Sample datasets:
 

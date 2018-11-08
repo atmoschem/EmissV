@@ -5,6 +5,7 @@
 #' @return Matrix or raster
 #'
 #' @param file file name or names (variables are summed)
+#' @param spec numeric speciation vector of species
 #' @param version inventorie information
 #' @param as_raster return a raster (defoult) or matrix (with units)
 #' @param verbose display additional information
@@ -16,6 +17,8 @@
 #' @import raster
 #' @import ncdf4
 #' @importFrom units as_units set_units
+#'
+#' @seealso \code{\link{species}}
 #'
 #' @source read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 #'
@@ -32,7 +35,8 @@
 #' image(nox_d2, main = "NOx emissions from transport from EDGAR 3.4.1 for d2")
 #'}
 
-read <- function(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
+read <- function(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
+                 as_raster = T, verbose = T){
   if(version == "EDGAR 4.3.1 v2"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
@@ -64,11 +68,33 @@ read <- function(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
         varold <- varold + var
       }
     }
-    if(as_raster){
-      return(rz)
+    if(as_raster){         # nocov
+      if(is.null(spec)){
+        return(rz)
+      }else{
+        if(verbose)  cat("using the folloing speciation:\n")
+        rz_spec <- list()
+        for(i in 1:length(spec)){
+          if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
+          rz_spec[[i]] <- rz * spec[i]
+        }
+        names(rz_spec) <- names(spec)
+        return(rz_spec)
+      }
     }else{
-      return(var)
-    }
+      if(is.null(spec)){
+        return(var)
+      }else{
+        if(verbose)  cat("using the folloing speciation:\n")
+        var_spec <- list()
+        for(i in 1:length(spec)){
+          if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
+          var_spec[[i]] <- var * spec[i]
+        }
+        names(var_spec) <- names(spec)
+        return(var_spec)
+      }
+    }                     # nocov
   }
   # if(version == "osm"){
   #   cat(paste("reading osm data from",file,"\n"))
