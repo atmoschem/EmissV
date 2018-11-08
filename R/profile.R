@@ -1,3 +1,4 @@
+
 #' Temporal profile for veicular emissions
 #'
 #' @description set of houtly profiles that represent the mean activity for each day of the week. These profiles comes from traffic counts of toll stations located in São Paulo city, for summer and winters of 2012, 2013 and 2014.

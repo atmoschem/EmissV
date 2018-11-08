@@ -1,3 +1,8 @@
+## EmissV 0.665.0 (2018-11-07)
+- new speciation fuction for total emissions
+- added speciation dataset (veicular-iag, mic, +)
+- read has speciation integated
+
 ## EmissV 0.664.9 (2018-07-10)
 - fix #20
 

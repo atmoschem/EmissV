@@ -7,10 +7,13 @@
 read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 }
 \usage{
-read(file, version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T)
+read(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
+  as_raster = T, verbose = T)
 }
 \arguments{
 \item{file}{file name or names (variables are summed)}
+
+\item{spec}{numeric speciation vector of species}
 
 \item{version}{inventorie information}
 
@@ -40,4 +43,6 @@ image(nox_d2, main = "NOx emissions from transport from EDGAR 3.4.1 for d2")
 }
 \seealso{
 \code{\link{rasterSource}} and \code{\link{gridInfo}}
+
+\code{\link{species}}
 }
