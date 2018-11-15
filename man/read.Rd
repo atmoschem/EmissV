@@ -4,18 +4,20 @@
 \alias{read}
 \title{Read NetCDF data from global inventaries}
 \source{
-read abbout EDGAR at http://edgar.jrc.ec.europa.eu
+Read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 }
 \usage{
-read(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
-  as_raster = T, verbose = T)
+read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
+  version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T)
 }
 \arguments{
 \item{file}{file name or names (variables are summed)}
 
-\item{spec}{numeric speciation vector of species}
+\item{coef}{coef to merge different sources into one emission}
 
-\item{version}{inventorie information}
+\item{spec}{numeric speciation vector to split emission into different species}
+
+\item{version}{inventory name and verion}
 
 \item{as_raster}{return a raster (defoult) or matrix (with units)}
 
@@ -25,7 +27,8 @@ read(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
 Matrix or raster
 }
 \description{
-Read data from global inventoris
+Read data from global inventories, can read several files and merge into one emission
+and/or split into several species (speciation process)
 }
 \examples{
 \donttest{

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Total VOCs emissions — totalVOC • EmissV</title>
+<title>Calculate Total VOCs emissions (depreciated) — totalVOC • EmissV</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,12 @@
 
 
 
-<meta property="og:title" content="Calculate Total VOCs emissions — totalVOC" />
+<meta property="og:title" content="Calculate Total VOCs emissions (depreciated) — totalVOC" />
 
-<meta property="og:description" content="Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+<meta property="og:description" content="Calculates Volatile Organic Compounds (COVs) emited by the process of exhaust
+(through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+This function calculates the total emission using emission factors and then speciate into one of
+the available species. A better approach is to use 'speciate()' function and 'species' dataset.
 Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald" />
 <meta name="twitter:card" content="summary" />
 
@@ -62,7 +65,7 @@ Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.664.9</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.665.0.1</span>
       </span>
     </div>
 
@@ -96,14 +99,17 @@ Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Total VOCs emissions</h1>
+    <h1>Calculate Total VOCs emissions (depreciated)</h1>
     
     <div class="hidden name"><code>totalVOC.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).</p>
+    <p>Calculates Volatile Organic Compounds (COVs) emited by the process of exhaust
+(through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).</p>
+<p>This function calculates the total emission using emission factors and then speciate into one of
+the available species. A better approach is to use 'speciate()' function and 'species' dataset.</p>
 <p>Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald</p>
     
     </div>
@@ -141,7 +147,7 @@ Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='totalEmission.html'>totalEmission</a></code> and <code><a href='vehicles.html'>vehicles</a></code></p></div>
+    <div class='dont-index'><p><code>speciate</code> and <code><a href='species.html'>species</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

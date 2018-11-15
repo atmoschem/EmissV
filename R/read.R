@@ -1,12 +1,14 @@
 #' Read NetCDF data from global inventaries
 #'
-#' @description Read data from global inventoris
+#' @description Read data from global inventories, can read several files and merge into one emission
+#' and/or split into several species (speciation process)
 #'
 #' @return Matrix or raster
 #'
 #' @param file file name or names (variables are summed)
-#' @param spec numeric speciation vector of species
-#' @param version inventorie information
+#' @param coef coef to merge different sources into one emission
+#' @param spec numeric speciation vector to split emission into different species
+#' @param version inventory name and verion
 #' @param as_raster return a raster (defoult) or matrix (with units)
 #' @param verbose display additional information
 #'
@@ -20,7 +22,7 @@
 #'
 #' @seealso \code{\link{species}}
 #'
-#' @source read abbout EDGAR at http://edgar.jrc.ec.europa.eu
+#' @source Read abbout EDGAR at http://edgar.jrc.ec.europa.eu
 #'
 #' @examples \donttest{
 #' d1     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
@@ -35,8 +37,8 @@
 #' image(nox_d2, main = "NOx emissions from transport from EDGAR 3.4.1 for d2")
 #'}
 
-read <- function(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
-                 as_raster = T, verbose = T){
+read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
+                 version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
   if(version == "EDGAR 4.3.1 v2"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
@@ -62,10 +64,10 @@ read <- function(file = file.choose(), spec = NULL, version = "EDGAR 4.3.1 v2",
         r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
         raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
         names(r) <- name
-        rz       <- rz + r
+        rz       <- rz + r * coef[i]
       }else{
         var    <- units::set_units(1000 * var,"g m-2 s-1")
-        varold <- varold + var
+        varold <- varold + var * coef[i]
       }
     }
     if(as_raster){

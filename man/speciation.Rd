@@ -2,7 +2,7 @@
 % Please edit documentation in R/speciation.R
 \name{speciation}
 \alias{speciation}
-\title{Speciation of emissions in different compounds.}
+\title{Speciation of emissions in different compounds}
 \usage{
 speciation(total, spec = NULL, verbose = T)
 }
