@@ -1,13 +1,63 @@
 #' Species mapping tables
 #'
-#' @description set of tables for speciation.
+#' @description Set of tables for speciation:
 #'
-#' specie map from 1 to 4 are from Li et al, 2014 taken into account several sources of pollutants.
-#' specie map 5 to 8 is a list of veicular voc speciation by fuel and emission process from USP-IAG
-#' tunel experiments (ref2) emited by the process of exhaust (through the exhaust pipe),
-#' liquid (carter and evaporative) and vapor (fuel transfer operations).
+#' \describe{
+#'   \item{voc_radm2_mic}{Volatile organic compounds for RADM2}
+#'   \item{voc_cbmz_mic}{Volatile organic compounds for CBMZ}
+#'   \item{voc_moz_mic}{Volatile organic compounds for MOZART}
+#'   \item{voc_saprc99_mic}{volatile organic compounds for SAPRC99}
+#'   \item{veicularvoc_radm2_iag}{Vehicular volatile organic compounds for RADM2 (MOL)}
+#'   \item{veicularvoc_cbmz_iag}{Vehicular volatile organic compounds for CBMZ (MOL)}
+#'   \item{veicularvoc_moz_iag}{Vehicular volatile organic compounds for MOZART (MOL)}
+#'   \item{veicularvoc_saprc99_iag}{Vehicular volatile organic compounds for SAPRC99 (MOL)}
+#'   \item{pm_madesorgan_iag}{Particulate matter for made/sorgan}
+#'   \item{pm25_madesorgan_iag}{Fine particulate matter for made/sorgan}
+#'   \item{nox_iag}{Nox split Perez Martínez et al (2014)}
+#'   \item{nox_bcom}{Nox split usin Perez Martínez et al (2014)}
+#'   \item{voc_radm2_edgar432}{Volatile organic compounds species from EDGAR 4.3.2 for RADM2 (MOL)}
+#'   \item{voc_moz_edgar432}{Volatile organic compounds species from EDGAR 4.3.2 for MOZART (MOL)}
+#' }
 #'
-#' @format A list of numeric vectors.
+#' - Volatile organic compounds species map from 1 to 4 are from Li et al (2014) taken into account
+#' several sources of pollutants.
+#'
+#' - Volatile organic compounds from vehicular activity species map 5 to 8 is a by fuel and emission
+#' process from USP-IAG tunel experiments (Rafee et al., 2017) emited by the process of exhaust
+#' (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+#'
+#' - Particulate matter speciesmap for made/sorgan emissions 9 and 10.
+#'
+#' - Nox split using Perez Martínez et al (2014) data (11).
+#'
+#' - Nox split using mean of Ntziachristos and Zamaras (2016) data (12).
+#'
+#' - Volatile organic compounds species map 13 and 14 are the corespondence from EDGAR 4.3.2 VOC
+#' specialization to RADM2 and MOZART.
+#'
+#' @details iag-voc: After estimating all the emissions of NMHC, it was used the speciation
+#' presented in (RAFEE et al., 2017). This speciation is based on tunnel measurements
+#' in São Paulo, depends on the type of fuel (E25, E100 and B5) and provides the
+#' mass of each chemical compound as mol/g. This speciation splits the NMHC
+#' from evaporative, liquid and exhaust emissions of E25, E100 and B5, into minimum
+#' compounds required for the Carbon Bond Mechanism (CBMZ) (ZAVERI; PETERS, 1999). Atmospheric
+#' simulations using the same pollutants in Brazil have resulted in good agreement with
+#' observations (ANDRADE et al., 2015).
+#'
+#' iag-pm: data tunnel experiments at São Paulo in Perez Martínez et al (2014)
+#'
+#' iag-nox: common NOx split for São Paulo Metropolitan area.
+#'
+#' bcom-nox: mean of Ntziachristos and Zamaras (2016) data.
+#'
+#' mic: from Li et al (2014).
+#'
+#' edgar: Edgar 4.3.2 emissions Crippa et al. (2018).
+#'
+#' @note The units are mass ratio (mass/mass) or MOL (MOL), this last case do not change the
+#' default 'mm' into 'emission()' function.
+#'
+#' @format List of numeric vectors with the 'names()' of the species and the values of each species.
 #'
 #' @seealso \code{\link{speciation}} and \code{\link{read}}
 #'
@@ -16,15 +66,47 @@
 #' Mapping Asian anthropogenic emissions of non-methane volatile organic compounds to multiple
 #' chemical mechanisms. Atmos. Chem. Phys, 14(11), 5617-5638.
 #'
+#' Huang, G., Brook, R., Crippa, M., Janssens-Maenhout, G., Schieberle, C., Dore, C., ... &
+#' Friedrich, R. (2017). Speciation of anthropogenic emissions of non-methane volatile organic
+#' compounds: a global gridded data set for 1970–2012. Atmospheric Chemistry and Physics, 17(12),
+#' 7683.
+#'
+#' Abou Rafee, S. A., Martins, L. D., Kawashima, A. B., Almeida, D. S., Morais, M. V. B.,
+#' Souza, R. V. A., Oliveira, M. B. L., Souza, R. A. F., Medeiros, A. S. S., Urbina, V.,
+#' Freitas, E. D., Martin, S. T., and Martins, J. A.: Contributions of mobile, stationary and
+#' biogenic sources to air pollution in the Amazon rainforest: a numerical study with the
+#' WRF-Chem model, Atmos. Chem. Phys., 17, 7977-7995, https://doi.org/10.5194/acp-17-7977-2017,
+#' 2017.
+#'
+#' Martins, L. D., Andrade, M. F. D., Freitas, E., Pretto, A., Gatti, L. V., Junior, O. M.
+#' A., et al. (2006). Emission factors for gas-powered vehicles traveling through
+#' road tunnels in Sao Paulo, Brazil. Environ. Sci. Technol. 40, 6722–6729. doi: 10.1021/es052441u
+#'
+#' Pérez-Martínez, P. J., Miranda, R. M., Nogueira, T., Guardani, M. L., Fornaro, A., Ynoue, R., &
+#' Andrade, M. F. (2014). Emission factors of air pollutants from vehicles measured inside road
+#' tunnels in São Paulo: case study comparison. International Journal of Environmental Science
+#' and Technology, 11(8), 2155-2168.
+#'
+#' ANDRADE, M. d. F. et al. Air quality forecasting system for southeastern brazil. Frontiers in
+#' Environmental Science, Frontiers, v. 3, p. 1–12, 2015.
+#'
+#' Ntziachristos and Zamaras. 2016. Passneger cars, light commercial trucks, heavy-duty vehicles
+#' including buses and motor cycles. In: EEA, EMEP. EEA air pollutant emission inventory
+#' guidebook-2009. European Environment Agency, Copenhagen, 2016.
+#'
+#' Crippa, M., Guizzardi, D., Muntean, M., Schaaf, E., Dentener, F., Aardenne, J. A. V., ... &
+#' Janssens-Maenhout, G. (2018). Gridded emissions of air pollutants for the period 1970–2012
+#' within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.
+#'
 #' @examples
 #' # load the mapping tables
 #' data(species)
 #' # names of eath mapping tables
 #' names(species)
-#' # name of a specific (first) mapping table
-#' names(species[1])
 #' # names of species contained in the (first) mapping table
 #' names(species[[1]])
+#' # name of a specific (first) mapping table
+#' species[1]
 #' @usage data(species)
 #' @docType data
 "species"

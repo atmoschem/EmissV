@@ -1,4 +1,4 @@
-#' Speciation of emissions in different compounds.
+#' Speciation of emissions in different compounds
 #'
 #' @description Distribute the total mass of estimated emissions into model species.
 #'

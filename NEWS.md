@@ -1,6 +1,13 @@
-## EmissV 0.665.0 (2018-11-07)
+## EmissV 0.665.0.1 evil-power version (2018-11-13)
+- added speciation dataset (pm-iag, bcom and edgar 4.3.2)
+- read has speciation integated to split emissions into different species
+- read has coef to merge different inputs to one specie
+- new temporal profiles 'data(perfil)' for sectors from Oliver et al. (2003)
+- Lost of new references
+
+## EmissV 0.665.0 turbo version (2018-11-07)
 - new speciation fuction for total emissions
-- added speciation dataset (veicular-iag, mic, +)
+- added speciation dataset (veicular-iag and mic)
 - read has speciation integated
 
 ## EmissV 0.664.9 (2018-07-10)

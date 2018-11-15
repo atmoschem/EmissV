@@ -2,7 +2,7 @@
 % Please edit documentation in R/totalvoc.R
 \name{totalVOC}
 \alias{totalVOC}
-\title{Calculate Total VOCs emissions}
+\title{Calculate Total VOCs emissions (depreciated)}
 \format{Return a list with the daily total emission by territory.}
 \usage{
 totalVOC(v, ef, pol, verbose = T)
@@ -17,9 +17,13 @@ totalVOC(v, ef, pol, verbose = T)
 \item{verbose}{display additional information}
 }
 \description{
-Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+Calculates Volatile Organic Compounds (COVs) emited by the process of exhaust
+(through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 
- Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
+This function calculates the total emission using emission factors and then speciate into one of
+the available species. A better approach is to use 'speciate()' function and 'species' dataset.
+
+Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 }
 \note{
 The same ef can be used to totalEmission and voc
@@ -49,5 +53,5 @@ print(EF_COV)
 COV_total <- totalVOC(veic,EF_COV,pol = COV[10])
 }
 \seealso{
-\code{\link{totalEmission}} and \code{\link{vehicles}}
+\code{\link{speciate}} and \code{\link{species}}
 }

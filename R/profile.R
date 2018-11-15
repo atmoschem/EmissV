@@ -1,11 +1,68 @@
-
 #' Temporal profile for veicular emissions
 #'
-#' @description set of houtly profiles that represent the mean activity for each day of the week. These profiles comes from traffic counts of toll stations located in São Paulo city, for summer and winters of 2012, 2013 and 2014.
+#' @description Set of hourly profiles that represents the mean activity for each hour of the week.
 #'
-#' @format A list of data frames by hour and weekday.
+#' \describe{
+#'   \item{LDV}{Light Duty vehicles}
+#'   \item{HDV}{Heavy Duty vehicles}
+#'   \item{PC_JUNE_2012}{passenger cars counted in June 2012}
+#'   \item{PC_JUNE_2013}{passenger cars counted in June 2013}
+#'   \item{PC_JUNE_2014}{passenger cars counted in June 2014}
+#'   \item{LCV_JUNE_2012}{light comercial vehicles counted in June 2012}
+#'   \item{LCV_JUNE_2012}{light comercial vehicles counted in June 2013}
+#'   \item{LCV_JUNE_2012}{light comercial vehicles counted in June 2014}
+#'   \item{MC_JUNE_2012}{Motorcycles counted in June 2012}
+#'   \item{MC_JUNE_2013}{Motorcycles counted in June 2013}
+#'   \item{MC_JUNE_2014}{Motorcycles counted in June 2014}
+#'   \item{HGV_JUNE_2012}{Heavy good vehicles counted in June 2012}
+#'   \item{HGV_JUNE_2013}{Heavy good vehicles counted in June 2013}
+#'   \item{HGV_JUNE_2014}{Heavy good vehicles counted in June 2014}
+#'   \item{PC_JANUARY_2012}{passenger cars counted in january 2012}
+#'   \item{PC_JANUARY_2013}{passenger cars counted in january 2013}
+#'   \item{PC_JANUARY_2014}{passenger cars counted in january 2014}
+#'   \item{LCV_JANUARY_2012}{light comercial vehicles counted in january 2012}
+#'   \item{LCV_JANUARY_2012}{light comercial vehicles counted in january 2013}
+#'   \item{LCV_JANUARY_2012}{light comercial vehicles counted in january 2014}
+#'   \item{MC_JANUARY_2012}{Motorcycles counted in january 2012}
+#'   \item{MC_JANUARY_2014}{Motorcycles counted in january 2014}
+#'   \item{HGV_JANUARY_2012}{Heavy good vehicles counted in january 2012}
+#'   \item{HGV_JANUARY_2013}{Heavy good vehicles counted in january 2013}
+#'   \item{HGV_JANUARY_2014}{Heavy good vehicles counted in january 2014}
+#'   \item{POW}{Power generation emission profile}
+#'   \item{IND}{Industrial emission profile}
+#'   \item{RES}{Residencial emission profile}
+#'   \item{TRA}{Transport emission profile}
+#'   \item{AGR}{Agriculture emission profile}
+#'   \item{SHP}{Emission profile for ships}
+#'   \item{SLV}{Solvent use emission constant profile}
+#'   \item{WBD}{Waste burning emisssion constant profile}
 #'
-#' @note The profile is normalized by days (but is balanced for a complete week) so diary emission x profile = hourly emission.
+#' }
+#'
+#' @details
+#'
+#' - Profiles 1 to 2 are from traffic count at São Paulo city from Perez Martínez et al (2014).
+#'
+#' - Profiles 3 to 25 comes from traffic counted of toll stations located in São Paulo city,
+#' for summer and winters of 2012, 2013 and 2014.
+#'
+#' - Profiles 26 to 33 are for different sectors from Oliver et al (2003).
+#'
+#' @references
+#'
+#' Pérez-Martínez, P. J., Miranda, R. M., Nogueira, T., Guardani, M. L., Fornaro, A., Ynoue, R., &
+#' Andrade, M. F. (2014). Emission factors of air pollutants from vehicles measured inside road
+#' tunnels in São Paulo: case study comparison. International Journal of Environmental Science
+#' and Technology, 11(8), 2155-2168.
+#'
+#' Olivier, J., J. Peters, C. Granier, G. Pétron, J.F. Müller, and S. Wallens,
+#' Present and future surface emissions of atmospheric compounds, POET Report #2,
+#' EU project EVK2-1999-00011, 2003.
+#'
+#' @format A list of data frames with activity by hour and weekday.
+#'
+#' @note The profile is normalized by days (but is balanced for a complete week) it means
+#' diary_emission x profile = hourly_emission.
 #'
 #' @examples
 #' # load the data
@@ -28,7 +85,7 @@
 #'\donttest{
 #' # view all profiles in perfil data
 #' for(i in 1:length(names(perfil))){
-#'   print(paste("profile",i,names(perfil)[i]))
+#'   cat(paste("profile",i,names(perfil)[i]))
 #'   plot.perfil(perfil[[i]],names(perfil)[i])
 #' }
 #' }

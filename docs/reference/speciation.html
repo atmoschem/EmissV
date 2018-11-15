@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate total emissions — totalEmission • EmissV</title>
+<title>Speciation of emissions in different compounds — speciation • EmissV</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Calculate total emissions — totalEmission" />
+<meta property="og:title" content="Speciation of emissions in different compounds — speciation" />
 
-<meta property="og:description" content="Caculate the total emission with:
-Emission(pollutant) = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )
-where n is the type of the veicle" />
+<meta property="og:description" content="Distribute the total mass of estimated emissions into model species." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -97,35 +95,29 @@ where n is the type of the veicle" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate total emissions</h1>
+    <h1>Speciation of emissions in different compounds</h1>
     
-    <div class="hidden name"><code>totalEmission.Rd</code></div>
+    <div class="hidden name"><code>speciation.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Caculate the total emission with:</p>
-<p>Emission(pollutant) = sum( Vehicles(n) * Km_day_use(n) * Emission_Factor(n,pollutant) )</p>
-<p>where n is the type of the veicle</p>
+    <p>Distribute the total mass of estimated emissions into model species.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>totalEmission</span>(<span class='no'>v</span>, <span class='no'>ef</span>, <span class='no'>pol</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>speciation</span>(<span class='no'>total</span>, <span class='kw'>spec</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>v</th>
-      <td><p>dataframe with the vehicle data</p></td>
+      <th>total</th>
+      <td><p>emissions from totalEmissions</p></td>
     </tr>
     <tr>
-      <th>ef</th>
-      <td><p>emission factor</p></td>
-    </tr>
-    <tr>
-      <th>pol</th>
-      <td><p>pollutant name in ef</p></td>
+      <th>spec</th>
+      <td><p>numeric speciation vector of species</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -133,17 +125,9 @@ where n is the type of the veicle" />
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>Return a list with the daily total emission by interest area (cityes, states, countries, etc).</p>
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>the units (set_units("value",unit) where the recomended unit is g/d) must be used to make the ef data.frame</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='rasterSource.html'>rasterSource</a></code>, <code><a href='lineSource.html'>lineSource</a></code> and <code><a href='emission.html'>emission</a></code></p></div>
+    <div class='dont-index'><p><code><a href='species.html'>species</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -165,8 +149,7 @@ where n is the type of the veicle" />
 #&gt; Diesel Urban Busses          298061  207072  138392
 #&gt; Diesel Intercity Busses        8222    5712    3817
 #&gt; Gasohol Motorcycles         1213830  843285  563592
-#&gt; Flex Motorcycles              88390   61407   41040</div><div class='input'>
-<span class='no'>EmissionFactors</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='emissionFactor.html'>emissionFactor</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example emission factor (values calculated from CETESB 2015):
+#&gt; Flex Motorcycles              88390   61407   41040</div><div class='input'><span class='no'>EmissionFactors</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='emissionFactor.html'>emissionFactor</a></span>(<span class='kw'>example</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using a example emission factor (values calculated from CETESB 2015):
 #&gt;                                       CO            PM
 #&gt; Light Duty Vehicles Gasohol  1.75 [g/km] 0.0013 [g/km]
 #&gt; Light Duty Vehicles Ethanol 10.04 [g/km] 0.0000 [g/km]
@@ -175,19 +158,24 @@ where n is the type of the veicle" />
 #&gt; Diesel Urban Busses          0.77 [g/km] 0.1052 [g/km]
 #&gt; Diesel Intercity Busses      1.48 [g/km] 0.1693 [g/km]
 #&gt; Gasohol Motorcycles          1.61 [g/km] 0.0000 [g/km]
-#&gt; Flex Motorcycles             0.75 [g/km] 0.0000 [g/km]</div><div class='input'>
-<span class='no'>TOTAL</span> <span class='kw'>&lt;-</span> <span class='fu'>totalEmission</span>(<span class='no'>veic</span>,<span class='no'>EmissionFactors</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"CO"</span>,<span class='st'>"PM"</span>))</div><div class='output co'>#&gt; Total of CO : 1676996.43578795 t year-1 
-#&gt; Total of PM : 15071.8124616163 t year-1 </div></pre>
+#&gt; Flex Motorcycles             0.75 [g/km] 0.0000 [g/km]</div><div class='input'><span class='no'>TOTAL</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='totalEmission.html'>totalEmission</a></span>(<span class='no'>veic</span>,<span class='no'>EmissionFactors</span>,<span class='kw'>pol</span> <span class='kw'>=</span> <span class='st'>"PM"</span>)</div><div class='output co'>#&gt; Total of PM : 15071.8124616163 t year-1 </div><div class='input'><span class='no'>pm_iag</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='kw'>E_PM25I</span> <span class='kw'>=</span> <span class='fl'>0.0509200</span>,
+            <span class='kw'>E_PM25J</span> <span class='kw'>=</span> <span class='fl'>0.1527600</span>,
+            <span class='kw'>E_ECI</span>   <span class='kw'>=</span> <span class='fl'>0.1196620</span>,
+            <span class='kw'>E_ECJ</span>   <span class='kw'>=</span> <span class='fl'>0.0076380</span>,
+            <span class='kw'>E_ORGI</span>  <span class='kw'>=</span> <span class='fl'>0.0534660</span>,
+            <span class='kw'>E_ORGJ</span>  <span class='kw'>=</span> <span class='fl'>0.2279340</span>,
+            <span class='kw'>E_SO4I</span>  <span class='kw'>=</span> <span class='fl'>0.0063784</span>,
+            <span class='kw'>E_SO4J</span>  <span class='kw'>=</span> <span class='fl'>0.0405216</span>,
+            <span class='kw'>E_NO3J</span>  <span class='kw'>=</span> <span class='fl'>0.0024656</span>,
+            <span class='kw'>E_NO3I</span>  <span class='kw'>=</span> <span class='fl'>0.0082544</span>,
+            <span class='kw'>E_PM10</span>  <span class='kw'>=</span> <span class='fl'>0.3300000</span>)
+<span class='no'>PM</span> <span class='kw'>&lt;-</span> <span class='fu'>speciation</span>(<span class='no'>TOTAL</span>,<span class='no'>pm_iag</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#note">Note</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>

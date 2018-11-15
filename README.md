@@ -155,11 +155,12 @@ Functions:
 - [areaSource](https://atmoschem.github.io/EmissV/reference/areaSource.html): distribution of emissions by region
 - [totalEmission](https://atmoschem.github.io/EmissV/reference/totalEmission.html): total emissions
 - [emission](https://atmoschem.github.io/EmissV/reference/emission.html): Emissions to atmospheric models
-- [spetiate]()
+- [speciation](https://atmoschem.github.io/EmissV/reference/speciation.html): Speciation of emissions in different compounds
 
 Sample datasets:
 
-- Perfil: vehicle counting profile for vehicular activity
+- [Species](https://atmoschem.github.io/EmissV/reference/species.html): species mapping tables
+- [Perfil](https://atmoschem.github.io/EmissV/reference/perfil.html): vehicle counting profile for vehicular activity
 - Sample of an image of persistent lights of the Defense Meteorological Satellite Program (DMSP)
 - CETESB 2015 emission factors as ```emissionFactor(example=T)```
 - DETRAN 2016 data and SP vahicle distribution as ```vehicles(example=T)```
@@ -170,10 +171,7 @@ Sample datasets:
 
 Bug reports, suggestions, and code contributions are all welcome. Please see [CONTRIBUTING.md](https://github.com/atmoschem/EmissV/blob/master/CONTRIBUTING.md) for details. Note that this project adopt the [Contributor Code of Conduct](https://github.com/atmoschem/EmissV/blob/master/CONDUCT.md) and by participating in this project you agree to abide by its terms.
 
-#### About this package
 
-EmissV is a tool developed during Daniel Schuch's post-doctorate at the at the Department of Atmospheric Sciences, University of São Paulo ([IAG-USP](http://www.iag.usp.br/atmosfericas/)) supervised by professor Edmilson Dias de Freitas.
-
-#### License
+### License
 
 EmissV is published under the terms of the [MIT License](https://opensource.org/licenses/MIT). Copyright [(c)](https://raw.githubusercontent.com/atmoschem/emissv/master/LICENSE) 2018 Daniel Schuch.

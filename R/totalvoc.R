@@ -1,8 +1,12 @@
-#' Calculate Total VOCs emissions
+#' Calculate Total VOCs emissions (depreciated)
 #'
-#'@description Calculate Volatile Organic Compounds (COVs) emited by the process of exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
+#'@description Calculates Volatile Organic Compounds (COVs) emited by the process of exhaust
+#'(through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).
 #'
-#'  Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
+#' This function calculates the total emission using emission factors and then speciate into one of
+#' the available species. A better approach is to use 'speciate()' function and 'species' dataset.
+#'
+#' Avaliable COVs are: eth, hc3, hc5, hc8, ol2, olt, oli, iso, tol, xyl, ket, ch3oh and ald
 #'
 #'@format Return a list with the daily total emission by territory.
 #'
@@ -13,7 +17,7 @@
 #'
 #'@note The same ef can be used to totalEmission and voc
 #'
-#'@seealso \code{\link{totalEmission}} and \code{\link{vehicles}}
+#'@seealso \code{\link{speciate}} and \code{\link{species}}
 #'
 #'@export
 #'
