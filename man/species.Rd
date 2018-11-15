@@ -72,10 +72,11 @@ default 'mm' into 'emission()' function.
 # load the mapping tables
 data(species)
 # names of eath mapping tables
-names(species)
+for(i in 1:length(names(species)))
+    cat(paste0("specie map ",i," ",names(species)[i],"\\n"))
 # names of species contained in the (first) mapping table
 names(species[[1]])
-# name of a specific (first) mapping table
+# The first mapping table / species and values
 species[1]
 }
 \references{

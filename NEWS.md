@@ -1,3 +1,7 @@
+## EmissV 0.665.0.2 evil-power version 2 (2018-11-13)
+- fix 'read()' for 'as_raster = F' and several inputs
+- small fix on messages and examples
+
 ## EmissV 0.665.0.1 evil-power version (2018-11-13)
 - added speciation dataset (pm-iag, bcom and edgar 4.3.2)
 - read has speciation integated to split emissions into different species

@@ -43,19 +43,20 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     var  <- ncdf4::ncvar_get(ed,name[1])
-    varold <- units::as_units(0.0 * var,"g m-2 s-1")
+    varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var  <- apply(var,1,rev)
-    r    <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
-
-    rz <- raster::raster(0.0 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
-    values(rz) <- rep(0,ncell(rz))
-    raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+    if(as_raster){
+      r  <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      rz <- raster::raster(0.0 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+    }
 
     if(verbose)
       cat(paste0("reading ",name," (",version,") units are g m-2 s-1 ...\n"))
 
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"\n")
+      cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       name <- names(ed$var)
       var  <- ncdf4::ncvar_get(ed,name[1])
@@ -63,11 +64,11 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
         raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
-        names(r) <- name
+        names(r) <- name[1]
         rz       <- rz + r * coef[i]
       }else{
         var    <- units::set_units(1000 * var,"g m-2 s-1")
-        varold <- varold + var * coef[i]
+        varall <- varall + var * coef[i]
       }
     }
     if(as_raster){
@@ -75,7 +76,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       if(is.null(spec)){
         return(rz)
       }else{
-        if(verbose)  cat("using the folloing speciation:\n") # nocov start
+        if(verbose)  cat("using the following speciation:\n") # nocov start
         rz_spec <- list()
         for(i in 1:length(spec)){
           if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
@@ -86,13 +87,13 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }
     }else{
       if(is.null(spec)){
-        return(var)
+        return(varall)
       }else{
-        if(verbose)  cat("using the folloing speciation:\n") # nocov start
+        if(verbose)  cat("using the following speciation:\n") # nocov start
         var_spec <- list()
         for(i in 1:length(spec)){
           if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
-          var_spec[[i]] <- var * spec[i]
+          var_spec[[i]] <- varall * spec[i]
         }
         names(var_spec) <- names(spec)
         return(var_spec)                                     # nocov end

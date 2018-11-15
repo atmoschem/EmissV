@@ -85,7 +85,7 @@
 #'\donttest{
 #' # view all profiles in perfil data
 #' for(i in 1:length(names(perfil))){
-#'   cat(paste("profile",i,names(perfil)[i]))
+#'   cat(paste("profile",i,names(perfil)[i],"\n"))
 #'   plot.perfil(perfil[[i]],names(perfil)[i])
 #' }
 #' }

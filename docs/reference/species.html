@@ -88,7 +88,7 @@ specialization to RADM2 and MOZART." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.665.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.665.0.2</span>
       </span>
     </div>
 
@@ -227,14 +227,24 @@ within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.</p>
     <pre class="examples"><div class='input'><span class='co'># load the mapping tables</span>
 <span class='fu'>data</span>(<span class='no'>species</span>)
 <span class='co'># names of eath mapping tables</span>
-<span class='fu'>names</span>(<span class='no'>species</span>)</div><div class='output co'>#&gt;  [1] "voc_radm2_mic"         "voc_cbmz_mic"          "voc_moz_mic"          
-#&gt;  [4] "voc_saprc99_mic"       "veicularvoc_radm2_iag" "veicularvoc_cbmz_iag" 
-#&gt;  [7] "veicularvoc_cb05_iag"  "veicularvoc_moz_iag"   "pm_madesorgan_iag"    
-#&gt; [10] "pm25_madesorgan_iag"   "nox_iag"               "nox_bcom"             
-#&gt; [13] "voc_radm2_edgar432"    "voc_moze_dgar432"     </div><div class='input'><span class='co'># names of species contained in the (first) mapping table</span>
+<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'>length</span>(<span class='fu'>names</span>(<span class='no'>species</span>)))
+    <span class='fu'>cat</span>(<span class='fu'>paste0</span>(<span class='st'>"specie map "</span>,<span class='no'>i</span>,<span class='st'>" "</span>,<span class='fu'>names</span>(<span class='no'>species</span>)[<span class='no'>i</span>],<span class='st'>"\n"</span>))</div><div class='output co'>#&gt; specie map 1 voc_radm2_mic
+#&gt; specie map 2 voc_cbmz_mic
+#&gt; specie map 3 voc_moz_mic
+#&gt; specie map 4 voc_saprc99_mic
+#&gt; specie map 5 veicularvoc_radm2_iag
+#&gt; specie map 6 veicularvoc_cbmz_iag
+#&gt; specie map 7 veicularvoc_cb05_iag
+#&gt; specie map 8 veicularvoc_moz_iag
+#&gt; specie map 9 pm_madesorgan_iag
+#&gt; specie map 10 pm25_madesorgan_iag
+#&gt; specie map 11 nox_iag
+#&gt; specie map 12 nox_bcom
+#&gt; specie map 13 voc_radm2_edgar432
+#&gt; specie map 14 voc_moze_dgar432</div><div class='input'><span class='co'># names of species contained in the (first) mapping table</span>
 <span class='fu'>names</span>(<span class='no'>species</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='output co'>#&gt;  [1] "E_ALD"    "E_KET"    "E_TOL"    "E_XYL"    "E_OLT"    "E_OLI"   
 #&gt;  [7] "E_OL2"    "E_HCHO"   "E_ETH"    "E_CH3OH"  "E_C2H5OH" "E_HC3"   
-#&gt; [13] "E_HC5"   </div><div class='input'><span class='co'># name of a specific (first) mapping table</span>
+#&gt; [13] "E_HC5"   </div><div class='input'><span class='co'># The first mapping table / species and values</span>
 <span class='no'>species</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt; $voc_radm2_mic
 #&gt;       E_ALD       E_KET       E_TOL       E_XYL       E_OLT       E_OLI 
 #&gt; 0.014285714 0.011038961 0.102272727 0.102272727 0.024675325 0.024675325 
