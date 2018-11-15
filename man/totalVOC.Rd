@@ -53,5 +53,5 @@ print(EF_COV)
 COV_total <- totalVOC(veic,EF_COV,pol = COV[10])
 }
 \seealso{
-\code{\link{speciate}} and \code{\link{species}}
+\code{\link{speciation}} and \code{\link{species}}
 }

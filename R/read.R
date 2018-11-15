@@ -95,7 +95,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
           var_spec[[i]] <- var * spec[i]
         }
         names(var_spec) <- names(spec)
-        return(var_spec)                                     # nocov and
+        return(var_spec)                                     # nocov end
       }
     }
   }
