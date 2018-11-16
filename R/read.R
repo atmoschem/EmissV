@@ -41,9 +41,9 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
 
   if(is.list(coef))
-    coef <- as.numeric(as.character(unlist(coef)))
+    coef <- as.numeric(as.character(unlist(coef))) #nocov
   if(is.list(spec))
-    spec <- as.numeric(as.character(unlist(spec)))
+    spec <- as.numeric(as.character(unlist(spec))) #nocov
 
 
   if(version == "EDGAR 4.3.1 v2"){

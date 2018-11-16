@@ -82,7 +82,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       r                 <- raster::flip(r,2)
 
       if(missing(pol)){
-        legenda <- paste("Emission [",units::deparse_unit(VAR_e),"]")
+        legenda <- paste("Emission [",units::deparse_unit(VAR_e),"]") # nocov
       }else{
         legenda <- paste("Emissions of", pol ,"[",units::deparse_unit(VAR_e),"]")
       }
