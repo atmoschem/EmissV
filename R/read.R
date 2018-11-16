@@ -39,6 +39,13 @@
 
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T){
+
+  if(is.list(coef))
+    coef <- as.numeric(as.character(unlist(coef)))
+  if(is.list(spec))
+    spec <- as.numeric(as.character(unlist(spec)))
+
+
   if(version == "EDGAR 4.3.1 v2"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
@@ -46,8 +53,10 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var  <- apply(var,1,rev)
     if(as_raster){
-      r  <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
-      rz <- raster::raster(0.0 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      # r  <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      # rz <- raster::raster(0.0 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      r  <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+      rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
       values(rz) <- rep(0,ncell(rz))
       raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
     }
@@ -62,7 +71,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       var  <- ncdf4::ncvar_get(ed,name[1])
       if(as_raster){
         var <- apply(var,1,rev)
-        r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+        r   <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
         raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
         names(r) <- name[1]
         rz       <- rz + r * coef[i]
@@ -74,13 +83,13 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     if(as_raster){
 
       if(is.null(spec)){
-        return(rz)
+        return(raster::rotate(rz))
       }else{
         if(verbose)  cat("using the following speciation:\n") # nocov start
         rz_spec <- list()
         for(i in 1:length(spec)){
           if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
-          rz_spec[[i]] <- rz * spec[i]
+          rz_spec[[i]] <- raster::rotate(rz * spec[i])
         }
         names(rz_spec) <- names(spec)
         return(rz_spec)                                      # nocov end
