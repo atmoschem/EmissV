@@ -55,6 +55,9 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     if(class(inventory)[1]=="RasterLayer"){
       VAR_e <- rasterSource(inventory,grid,verbose = verbose)
     }
+    ## SET THE ORIGINAL UNITS from read
+    ## g m-2 s-1
+    VAR_e = units::set_units(VAR_e,"g m-2 s-1")
 
     if(aerosol){
       ##  ug m-2 s-1
