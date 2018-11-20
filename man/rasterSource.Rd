@@ -9,7 +9,7 @@ Exemple data is a low resolution cutting from image of persistent lights of the 
 Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
 }
 \usage{
-rasterSource(r, grid, nlevels = "all", verbose = T)
+rasterSource(r, grid, nlevels = "all", conservative = T, verbose = T)
 }
 \arguments{
 \item{r}{input raster object}
@@ -17,6 +17,8 @@ rasterSource(r, grid, nlevels = "all", verbose = T)
 \item{grid}{grid object with the grid information}
 
 \item{nlevels}{number of vertical levels off the emission array}
+
+\item{conservative}{TRUE (default) to conserve total mass, FALSE to conserve flux}
 
 \item{verbose}{display additional information}
 }

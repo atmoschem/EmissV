@@ -53,7 +53,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       cat("Using raster from inventory ...\n")
     # input is g m-2 s-1
     if(class(inventory)[1]=="RasterLayer"){
-      VAR_e <- rasterSource(inventory,grid,verbose = verbose)
+      VAR_e <- rasterSource(inventory,grid,conservative = F,verbose = verbose)
     }
     ## SET THE ORIGINAL UNITS from read
     ## g m-2 s-1

@@ -106,7 +106,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>rasterSource</span>(<span class='no'>r</span>, <span class='no'>grid</span>, <span class='kw'>nlevels</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+    <pre class="usage"><span class='fu'>rasterSource</span>(<span class='no'>r</span>, <span class='no'>grid</span>, <span class='kw'>nlevels</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>conservative</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,6 +122,10 @@
     <tr>
       <th>nlevels</th>
       <td><p>number of vertical levels off the emission array</p></td>
+    </tr>
+    <tr>
+      <th>conservative</th>
+      <td><p>TRUE (default) to conserve total mass, FALSE to conserve flux</p></td>
     </tr>
     <tr>
       <th>verbose</th>

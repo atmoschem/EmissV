@@ -7,6 +7,7 @@
 #' @param r input raster object
 #' @param grid grid object with the grid information
 #' @param nlevels number of vertical levels off the emission array
+#' @param conservative TRUE (default) to conserve total mass, FALSE to conserve flux
 #' @param verbose display additional information
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{lineSource}}
@@ -29,7 +30,7 @@
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 
-rasterSource <- function(r,grid,nlevels="all",verbose = T){
+rasterSource <- function(r,grid,nlevels="all",conservative = T,verbose = T){
 
   col   <- grid$Horizontal[1]
   rol   <- grid$Horizontal[2]
@@ -40,14 +41,16 @@ rasterSource <- function(r,grid,nlevels="all",verbose = T){
                           crs=sp::proj4string(r))
 
   if(is.na(grid$z[1])){
-    total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
+    if(conservative)
+      total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
 
     X    <- raster::resample(r,box,method = "bilinear") # non-conservative transformation
     X    <- raster::flip(X,2)
     X    <- raster::t(X)
     X    <- raster::as.matrix(X)
     X[is.na(X)] <- 0             # for low resolution input data
-    X    <- X * total_box/sum(X) # to conserve mass
+    if(conservative)
+      X    <- X * total_box/sum(X) # to conserve mass
 
     if(verbose)
       cat(paste("Grid output:",col,"columns",rol,"rows\n"))
