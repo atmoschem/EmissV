@@ -32,8 +32,8 @@
 
 <meta property="og:title" content="Read NetCDF data from global inventaries — read" />
 
-<meta property="og:description" content="Read data from global inventories, can read several files and merge into one emission
-and/or split into several species (speciation process)" />
+<meta property="og:description" content="Read data from global inventories, can read several files and merge into one
+emission and/or split into several species (speciation process)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -103,13 +103,14 @@ and/or split into several species (speciation process)" />
 
     <div class="ref-description">
     
-    <p>Read data from global inventories, can read several files and merge into one emission
-and/or split into several species (speciation process)</p>
+    <p>Read data from global inventories, can read several files and merge into one
+emission and/or split into several species (speciation process)</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>read</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>file.choose</span>(), <span class='kw'>coef</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fl'>1</span>, <span class='fu'>length</span>(<span class='no'>file</span>)), <span class='kw'>spec</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"EDGAR 4.3.1 v2"</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"EDGAR"</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>categories</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>T</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,7 +129,15 @@ and/or split into several species (speciation process)</p>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>inventory name and verion</p></td>
+      <td><p>inventory name 'EDGAR' or 'MACCITY'</p></td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td><p>the desired month of the inventary (MACCITY)</p></td>
+    </tr>
+    <tr>
+      <th>categories</th>
+      <td><p>considered categories (MACCITY variable names), empty for all</p></td>
     </tr>
     <tr>
       <th>as_raster</th>
@@ -142,11 +151,25 @@ and/or split into several species (speciation process)</p>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>Read abbout EDGAR at http://edgar.jrc.ec.europa.eu</p>
+    <p>Read abbout EDGAR at http://edgar.jrc.ec.europa.eu and MACCITY at
+http://accent.aero.jussieu.fr/MACC_metadata.php</p>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Matrix or raster</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Janssens-Maenhout, G., Dentener, F., Van Aardenne, J., Monni, S., Pagliari, V., Orlandini,
+L., ... &amp; Wankmüller, R. (2012). EDGAR-HTAP: a harmonized gridded air pollution emission dataset
+based on national inventories. European Commission Joint Research Centre Institute for
+Environment and Sustainability. JRC 68434 UR 25229 EUR 25229, ISBN 978-92-79-23123-0.</p>
+<p>Lamarque, J.-F., Bond, T. C., Eyring, V., Granier, C., Heil, A., Klimont, Z., Lee, D., Liousse,
+C., Mieville, A., Owen, B., Schultz, M. G., Shindell, D., Smith, S. J., Stehfest, E.,
+Van Aardenne, J., Cooper, O. R., Kainuma, M., Mahowald, N., McConnell, J. R., Naik, V.,
+Riahi, K., and van Vuuren, D. P.: Historical (1850-2000) gridded anthropogenic and biomass
+burning emissions of reactive gases and aerosols: methodology and application,
+Atmos. Chem. Phys., 10, 7017-7039, doi:10.5194/acp-10-7017-2010, 2010.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -165,6 +188,8 @@ and/or split into several species (speciation process)</p>
       <li><a href="#source">Source</a></li>
 
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

@@ -4,11 +4,13 @@
 \alias{read}
 \title{Read NetCDF data from global inventaries}
 \source{
-Read abbout EDGAR at http://edgar.jrc.ec.europa.eu
+Read abbout EDGAR at http://edgar.jrc.ec.europa.eu and MACCITY at
+http://accent.aero.jussieu.fr/MACC_metadata.php
 }
 \usage{
 read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
-  version = "EDGAR 4.3.1 v2", as_raster = T, verbose = T)
+  version = "EDGAR", month = 1, categories, as_raster = T,
+  verbose = T)
 }
 \arguments{
 \item{file}{file name or names (variables are summed)}
@@ -17,7 +19,11 @@ read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{version}{inventory name and verion}
+\item{version}{inventory name 'EDGAR' or 'MACCITY'}
+
+\item{month}{the desired month of the inventary (MACCITY)}
+
+\item{categories}{considered categories (MACCITY variable names), empty for all}
 
 \item{as_raster}{return a raster (defoult) or matrix (with units)}
 
@@ -27,8 +33,8 @@ read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
 Matrix or raster
 }
 \description{
-Read data from global inventories, can read several files and merge into one emission
-and/or split into several species (speciation process)
+Read data from global inventories, can read several files and merge into one
+emission and/or split into several species (speciation process)
 }
 \examples{
 \donttest{
@@ -43,6 +49,19 @@ nox_d2 <- rasterSource(nox,d2)
 image(nox_d1, main = "NOx emissions from transport from EDGAR 3.4.1 for d1")
 image(nox_d2, main = "NOx emissions from transport from EDGAR 3.4.1 for d2")
 }
+}
+\references{
+Janssens-Maenhout, G., Dentener, F., Van Aardenne, J., Monni, S., Pagliari, V., Orlandini,
+L., ... & Wankmüller, R. (2012). EDGAR-HTAP: a harmonized gridded air pollution emission dataset
+based on national inventories. European Commission Joint Research Centre Institute for
+Environment and Sustainability. JRC 68434 UR 25229 EUR 25229, ISBN 978-92-79-23123-0.
+
+Lamarque, J.-F., Bond, T. C., Eyring, V., Granier, C., Heil, A., Klimont, Z., Lee, D., Liousse,
+C., Mieville, A., Owen, B., Schultz, M. G., Shindell, D., Smith, S. J., Stehfest, E.,
+Van Aardenne, J., Cooper, O. R., Kainuma, M., Mahowald, N., McConnell, J. R., Naik, V.,
+Riahi, K., and van Vuuren, D. P.: Historical (1850-2000) gridded anthropogenic and biomass
+burning emissions of reactive gases and aerosols: methodology and application,
+Atmos. Chem. Phys., 10, 7017-7039, doi:10.5194/acp-10-7017-2010, 2010.
 }
 \seealso{
 \code{\link{rasterSource}} and \code{\link{gridInfo}}
