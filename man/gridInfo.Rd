@@ -4,12 +4,14 @@
 \alias{gridInfo}
 \title{Read grid information from a NetCDF file}
 \usage{
-gridInfo(file = file.choose(), z = F, verbose = T)
+gridInfo(file = file.choose(), z = F, geo = F, verbose = T)
 }
 \arguments{
-\item{file}{file name/path to a wrfinput of wrfchemi file}
+\item{file}{file name/path to a wrfinput, wrfchemi or geog_em file}
 
 \item{z}{TRUE for read wrfinput vertical coordinades}
+
+\item{geo}{True for use geog_em files}
 
 \item{verbose}{display additional information}
 }

@@ -23,7 +23,7 @@ Set of tables for speciation:
   \item{pm_madesorgan_iag}{Particulate matter for made/sorgan}
   \item{pm25_madesorgan_iag}{Fine particulate matter for made/sorgan}
   \item{nox_iag}{Nox split Perez Martínez et al (2014)}
-  \item{nox_bcom}{Nox split usin Perez Martínez et al (2014)}
+  \item{nox_bcom}{Nox split usin Ntziachristos and Zamaras (2016)}
   \item{voc_radm2_edgar432}{Volatile organic compounds species from EDGAR 4.3.2 for RADM2 (MOL)}
   \item{voc_moz_edgar432}{Volatile organic compounds species from EDGAR 4.3.2 for MOZART (MOL)}
 }
@@ -108,7 +108,7 @@ and Technology, 11(8), 2155-2168.
 ANDRADE, M. d. F. et al. Air quality forecasting system for southeastern brazil. Frontiers in
 Environmental Science, Frontiers, v. 3, p. 1–12, 2015.
 
-Ntziachristos and Zamaras. 2016. Passneger cars, light commercial trucks, heavy-duty vehicles
+Ntziachristos L. and Samaras Z. 2016. Passneger cars, light commercial trucks, heavy-duty vehicles
 including buses and motor cycles. In: EEA, EMEP. EEA air pollutant emission inventory
 guidebook-2009. European Environment Agency, Copenhagen, 2016.
 

@@ -1,3 +1,8 @@
+## EmissV 0.665.0.3 evil-power version 3 (2019-01-29)
+- read  update
+- GridInfo update
+- adictional doc update
+
 ## EmissV 0.665.0.2 evil-power version 2 (2018-11-13)
 - fix 'read()' for 'as_raster = F' and several inputs
 - small fix on messages and examples

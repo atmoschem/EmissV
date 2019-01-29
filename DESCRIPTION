@@ -1,7 +1,7 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
 Date: 2018-09-27
-Version: 0.665.0.2
+Version: 0.665.0.3
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -27,6 +27,6 @@ Suggests: testthat, covr, osmar, rgdal
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 URL: https://atmoschem.github.io/EmissV
 BugReports: https://github.com/atmoschem/EmissV/issues

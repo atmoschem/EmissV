@@ -2,8 +2,9 @@
 #'
 #' @description Return a list containing information of a regular grid / domain
 #'
-#' @param file file name/path to a wrfinput of wrfchemi file
+#' @param file file name/path to a wrfinput, wrfchemi or geog_em file
 #' @param z TRUE for read wrfinput vertical coordinades
+#' @param geo True for use geog_em files
 #' @param verbose display additional information
 #'
 #' @note just WRF-Chem is suported by now
@@ -31,12 +32,18 @@
 #' text(grid_d3$xlim[1],grid_d3$Ylim[2],"d3",pos=2, offset = 0.0)
 #'}
 
-gridInfo <- function(file = file.choose(),z=F,verbose = T){
+gridInfo <- function(file = file.choose(),z=F,geo = F,verbose = T){
     if(verbose)
       cat(paste("Grid information from:",file,"\n"))
     wrf <- ncdf4::nc_open(file)
-    lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
-    lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
+    if(geo){
+      lat <- ncdf4::ncvar_get(wrf,varid = "XLAT_M")
+      lon <- ncdf4::ncvar_get(wrf,varid = "XLONG_M")
+    }else{
+      lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
+      lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
+    }
+
     time<- ncdf4::ncvar_get(wrf,varid = "Times")
     dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
     if(z){
