@@ -64,7 +64,7 @@ emission and/or split into several species (speciation process)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.0.4</span>
       </span>
     </div>
 
@@ -111,8 +111,8 @@ emission and/or split into several species (speciation process)</p>
     </div>
 
     <pre class="usage"><span class='fu'>read</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.choose'>file.choose</a></span>(), <span class='kw'>coef</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>file</span>)), <span class='kw'>spec</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"EDGAR"</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>categories</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>T</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"EDGAR"</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>categories</span>,
+  <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -123,7 +123,7 @@ emission and/or split into several species (speciation process)</p>
     </tr>
     <tr>
       <th>coef</th>
-      <td><p>coef to merge different sources into one emission</p></td>
+      <td><p>coef to merge different sources (file) into one emission</p></td>
     </tr>
     <tr>
       <th>spec</th>
@@ -131,15 +131,19 @@ emission and/or split into several species (speciation process)</p>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>inventory name 'EDGAR' or 'MACCITY'</p></td>
+      <td><p>inventory name 'EDGAR', 'MACCITY' or 'GAINS'</p></td>
     </tr>
     <tr>
       <th>month</th>
       <td><p>the desired month of the inventary (MACCITY)</p></td>
     </tr>
     <tr>
+      <th>year</th>
+      <td><p>scenario index (GAINS)</p></td>
+    </tr>
+    <tr>
       <th>categories</th>
-      <td><p>considered categories (MACCITY variable names), empty for all</p></td>
+      <td><p>considered categories (MACCITY, GAINS variable names), empty for all</p></td>
     </tr>
     <tr>
       <th>as_raster</th>
@@ -160,6 +164,10 @@ http://accent.aero.jussieu.fr/MACC_metadata.php</p>
 
     <p>Matrix or raster</p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr</p>
+    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Janssens-Maenhout, G., Dentener, F., Van Aardenne, J., Monni, S., Pagliari, V., Orlandini,
@@ -172,6 +180,8 @@ Van Aardenne, J., Cooper, O. R., Kainuma, M., Mahowald, N., McConnell, J. R., Na
 Riahi, K., and van Vuuren, D. P.: Historical (1850-2000) gridded anthropogenic and biomass
 burning emissions of reactive gases and aerosols: methodology and application,
 Atmos. Chem. Phys., 10, 7017-7039, doi:10.5194/acp-10-7017-2010, 2010.</p>
+<p>Z Klimont, S. J. Smith and J Cofala The last decade of global anthropogenic sulfur dioxide:
+2000–2011 emissions Environmental Research Letters 8, 014003, 2013</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -190,6 +200,8 @@ Atmos. Chem. Phys., 10, 7017-7039, doi:10.5194/acp-10-7017-2010, 2010.</p>
       <li><a href="#source">Source</a></li>
 
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#references">References</a></li>
 

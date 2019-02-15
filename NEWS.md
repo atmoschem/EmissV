@@ -1,5 +1,9 @@
+## EmissV 0.665.0.4 evil-power version 3 (2019-01-29)
+- read suppor 'GEIA' format for ECCAD emissions and Scenarios 
+- Fix 'MACCITY' option from read
+
 ## EmissV 0.665.0.3 evil-power version 3 (2019-01-29)
-- read  update
+- read update
 - GridInfo update
 - adictional doc update
 
