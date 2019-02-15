@@ -37,8 +37,8 @@ gridInfo <- function(file = file.choose(),z=F,geo = F,verbose = T){
       cat(paste("Grid information from:",file,"\n"))
     wrf <- ncdf4::nc_open(file)
     if(geo){
-      lat <- ncdf4::ncvar_get(wrf,varid = "XLAT_M")
-      lon <- ncdf4::ncvar_get(wrf,varid = "XLONG_M")
+      lat <- ncdf4::ncvar_get(wrf,varid = "XLAT_M")      # nocov
+      lon <- ncdf4::ncvar_get(wrf,varid = "XLONG_M")     # nocov
     }else{
       lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
       lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
