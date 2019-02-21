@@ -76,6 +76,11 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  " (",version,")",
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
+
+    data <- as.Date('1850-01-01')   # units is days since 1850-01-01 00:00
+    data <- data + ncdf4::ncvar_get(ed,'time')[year]
+    cat(paste0("scenario: ",format(data,"%Y")," year\n"))
+
     var    <- ncdf4::ncvar_get(ed,name[1])
     var    <- var[,,year]
     varall <- units::as_units(0.0 * var,"g m-2 s-1")

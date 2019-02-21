@@ -3,7 +3,7 @@
 \docType{data}
 \name{perfil}
 \alias{perfil}
-\title{Temporal profile for veicular emissions}
+\title{Temporal profile for emissions}
 \format{A list of data frames with activity by hour and weekday.}
 \usage{
 data(perfil)

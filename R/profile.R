@@ -1,4 +1,4 @@
-#' Temporal profile for veicular emissions
+#' Temporal profile for emissions
 #'
 #' @description Set of hourly profiles that represents the mean activity for each hour of the week.
 #'
