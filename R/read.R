@@ -79,7 +79,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
 
     data <- as.Date('1850-01-01')   # units is days since 1850-01-01 00:00
     data <- data + ncdf4::ncvar_get(ed,'time')[year]
-    cat(paste0("scenario: ",format(data,"%Y")," year\n"))
+    cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
     var    <- ncdf4::ncvar_get(ed,name[1])
     var    <- var[,,year]
