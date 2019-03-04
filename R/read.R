@@ -70,7 +70,12 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
 
   if(version == "GAINS"){                          # nocov start
     ed   <- ncdf4::nc_open(file[1])
-    name <- names(ed$var[c(-1,-2,-3,-4)])
+    name <- names(ed$var)
+    name <- grep('date',         name, invert = T, value = T)
+    name <- grep('crs',          name, invert = T, value = T)
+    name <- grep('gridcell_area',name, invert = T, value = T)
+    name <- grep('emis_all',     name, invert = T, value = T)
+
     if(verbose)
       cat(paste0("reading",
                  " (",version,")",
@@ -102,7 +107,11 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
-        name <- names(ed$var[c(-1,-2,-3,-4)])
+        name <- names(ed$var)
+        name <- grep('date',         name, invert = T, value = T)
+        name <- grep('crs',          name, invert = T, value = T)
+        name <- grep('gridcell_area',name, invert = T, value = T)
+        name <- grep('emis_all',     name, invert = T, value = T)
       }else{
         name <- categories
       }

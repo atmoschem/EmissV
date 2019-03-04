@@ -21,8 +21,8 @@
 #'   \item{PC_JANUARY_2013}{passenger cars counted in january 2013}
 #'   \item{PC_JANUARY_2014}{passenger cars counted in january 2014}
 #'   \item{LCV_JANUARY_2012}{light comercial vehicles counted in january 2012}
-#'   \item{LCV_JANUARY_2012}{light comercial vehicles counted in january 2013}
-#'   \item{LCV_JANUARY_2012}{light comercial vehicles counted in january 2014}
+#'   \item{LCV_JANUARY_2013}{light comercial vehicles counted in january 2013}
+#'   \item{LCV_JANUARY_2014}{light comercial vehicles counted in january 2014}
 #'   \item{MC_JANUARY_2012}{Motorcycles counted in january 2012}
 #'   \item{MC_JANUARY_2014}{Motorcycles counted in january 2014}
 #'   \item{HGV_JANUARY_2012}{Heavy good vehicles counted in january 2012}
