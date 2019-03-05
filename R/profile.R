@@ -9,8 +9,8 @@
 #'   \item{PC_JUNE_2013}{passenger cars counted in June 2013}
 #'   \item{PC_JUNE_2014}{passenger cars counted in June 2014}
 #'   \item{LCV_JUNE_2012}{light comercial vehicles counted in June 2012}
-#'   \item{LCV_JUNE_2012}{light comercial vehicles counted in June 2013}
-#'   \item{LCV_JUNE_2012}{light comercial vehicles counted in June 2014}
+#'   \item{LCV_JUNE_2013}{light comercial vehicles counted in June 2013}
+#'   \item{LCV_JUNE_2014}{light comercial vehicles counted in June 2014}
 #'   \item{MC_JUNE_2012}{Motorcycles counted in June 2012}
 #'   \item{MC_JUNE_2013}{Motorcycles counted in June 2013}
 #'   \item{MC_JUNE_2014}{Motorcycles counted in June 2014}
