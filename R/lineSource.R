@@ -59,7 +59,7 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
   wrf_grid <- function(filewrf, type = "wrfinput", epsg = 4326, grid = NULL){
     if(type == 'info'){
       if(is.null(grid)){
-        stop('grid nod found!')
+        stop('grid nod found!') # nocov
       }
       lat    <- grid$Lat
       lon    <- grid$Lon
@@ -71,25 +71,25 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
       cat(paste0("Number of lat points ", n.lat, "\n"))
       cat(paste0("Number of lon points ", n.lon, "\n"))
     }else{
-      cat(paste("using grid info from:", filewrf, "\n"))
-      wrf <- ncdf4::nc_open(filewrf)
-      if(type == "wrfinput"){
-        lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT")
-        lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG")
+      cat(paste("using grid info from:", filewrf, "\n"))    # nocov
+      wrf <- ncdf4::nc_open(filewrf)                        # nocov
+      if(type == "wrfinput"){                               # nocov
+        lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT")     # nocov
+        lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG")    # nocov
       } else if(type == "geo"){                             # nocov
         lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT_M")   # nocov
         lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG_M")  # nocov
       }
-      time   <- ncdf4::ncvar_get(wrf, varid = "Times")
-      dx     <- ncdf4::ncatt_get(wrf, varid = 0,
-                                 attname = "DX")$value
-      n.lat  <- ncdf4::ncatt_get(wrf, varid = 0,
-                                 attname = "SOUTH-NORTH_PATCH_END_UNSTAG")$value
-      n.lon  <- ncdf4::ncatt_get(wrf, varid = 0,
-                                 attname = "WEST-EAST_PATCH_END_UNSTAG")$value
-      cat(paste0("Number of lat points ", n.lat, "\n"))
-      cat(paste0("Number of lon points ", n.lon, "\n"))
-      ncdf4::nc_close(wrf)
+      time   <- ncdf4::ncvar_get(wrf, varid = "Times")      # nocov
+      dx     <- ncdf4::ncatt_get(wrf, varid = 0,            # nocov
+                                 attname = "DX")$value      # nocov
+      n.lat  <- ncdf4::ncatt_get(wrf, varid = 0,            # nocov
+                                 attname = "SOUTH-NORTH_PATCH_END_UNSTAG")$value  # nocov
+      n.lon  <- ncdf4::ncatt_get(wrf, varid = 0,            # nocov
+                                 attname = "WEST-EAST_PATCH_END_UNSTAG")$value  # nocov
+      cat(paste0("Number of lat points ", n.lat, "\n"))     # nocov
+      cat(paste0("Number of lon points ", n.lon, "\n"))     # nocov
+      ncdf4::nc_close(wrf)                                  # nocov
     }
     r.lat  <- range(lon)
     r.lon  <- range(lat)
@@ -144,9 +144,9 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
     net$id <- NULL
     g <- sf::st_as_sf(g)
     if (!missing(sr)) {
-      message("Transforming spatial objects to 'sr' ")
-      net <- sf::st_transform(net, sr)
-      g <- sf::st_transform(g, sr)
+      message("Transforming spatial objects to 'sr' ") # nocov
+      net <- sf::st_transform(net, sr)                 # nocov
+      g <- sf::st_transform(g, sr)                     # nocov
     }
     if (type == "lines") {
       netdf <- sf::st_set_geometry(net, NULL)
@@ -195,9 +195,9 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
                     epsg = 4326,
                     grid = grid)
     }else{
-      g <- wrf_grid(filewrf = grid$File,
-                    type = type,
-                    epsg = 4326)
+      g <- wrf_grid(filewrf = grid$File, # nocov
+                    type = type,         # nocov
+                    epsg = 4326)         # nocov
     }
 
     roads2 <- s
@@ -232,7 +232,7 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
     if(variable == "length"){
       r <- r / cellStats(r,'sum')
     }else{
-      r <- sum(s[[variable]])  * ( r / cellStats(r,'sum') )
+      r <- sum(s[[variable]])  * ( r / cellStats(r,'sum') )      # nocov
     }
 
     if(as_raster){
