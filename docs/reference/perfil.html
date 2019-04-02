@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Temporal profile for emissions — perfil" />
 
-<meta property="og:description" content="Set of hourly profiles that represents the mean activity for each hour of the week.
+<meta property="og:description" content="Set of hourly profiles that represents the mean activity for each hour (local time) of the week.
 
   LDVLight Duty vehicles
   HDVHeavy Duty vehicles
@@ -42,9 +42,9 @@
   LCV_JUNE_2012light comercial vehicles counted in June 2012
   LCV_JUNE_2013light comercial vehicles counted in June 2013
   LCV_JUNE_2014light comercial vehicles counted in June 2014
-  MC_JUNE_2012Motorcycles counted in June 2012
-  MC_JUNE_2013Motorcycles counted in June 2013
-  MC_JUNE_2014Motorcycles counted in June 2014
+  MC_JUNE_2012motorcycles counted in June 2012
+  MC_JUNE_2013motorcycles counted in June 2013
+  MC_JUNE_2014motorcycles counted in June 2014
   HGV_JUNE_2012Heavy good vehicles counted in June 2012
   HGV_JUNE_2013Heavy good vehicles counted in June 2013
   HGV_JUNE_2014Heavy good vehicles counted in June 2014
@@ -66,7 +66,12 @@
   AGRAgriculture emission profile
   SHPEmission profile for ships
   SLVSolvent use emission constant profile
-  WBDWaste burning emisssion constant profile" />
+  WBDWaste burning emisssion constant profile
+  PC_nov_2018passenger cars at Janio Quadros on November 2018
+  HGV_nov_2018heavy good vehicles at Janio Quadros on November 2018
+  TOTAL_nov_2018total vehicle at Janio Quadros on November 2018
+  PC_out_2018passenger cars at Anhanguera-Castello Branco on October 2018
+  MC_out_2018Motorcycles cars at Anhanguera-Castello Branco on October 2018" />
 
 <meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
@@ -99,7 +104,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.0.5</span>
       </span>
     </div>
 
@@ -140,7 +145,7 @@
 
     <div class="ref-description">
     
-    <p>Set of hourly profiles that represents the mean activity for each hour of the week.</p>
+    <p>Set of hourly profiles that represents the mean activity for each hour (local time) of the week.</p>
 <dl class='dl-horizontal'>
   <dt>LDV</dt><dd><p>Light Duty vehicles</p></dd>
   <dt>HDV</dt><dd><p>Heavy Duty vehicles</p></dd>
@@ -150,9 +155,9 @@
   <dt>LCV_JUNE_2012</dt><dd><p>light comercial vehicles counted in June 2012</p></dd>
   <dt>LCV_JUNE_2013</dt><dd><p>light comercial vehicles counted in June 2013</p></dd>
   <dt>LCV_JUNE_2014</dt><dd><p>light comercial vehicles counted in June 2014</p></dd>
-  <dt>MC_JUNE_2012</dt><dd><p>Motorcycles counted in June 2012</p></dd>
-  <dt>MC_JUNE_2013</dt><dd><p>Motorcycles counted in June 2013</p></dd>
-  <dt>MC_JUNE_2014</dt><dd><p>Motorcycles counted in June 2014</p></dd>
+  <dt>MC_JUNE_2012</dt><dd><p>motorcycles counted in June 2012</p></dd>
+  <dt>MC_JUNE_2013</dt><dd><p>motorcycles counted in June 2013</p></dd>
+  <dt>MC_JUNE_2014</dt><dd><p>motorcycles counted in June 2014</p></dd>
   <dt>HGV_JUNE_2012</dt><dd><p>Heavy good vehicles counted in June 2012</p></dd>
   <dt>HGV_JUNE_2013</dt><dd><p>Heavy good vehicles counted in June 2013</p></dd>
   <dt>HGV_JUNE_2014</dt><dd><p>Heavy good vehicles counted in June 2014</p></dd>
@@ -175,6 +180,11 @@
   <dt>SHP</dt><dd><p>Emission profile for ships</p></dd>
   <dt>SLV</dt><dd><p>Solvent use emission constant profile</p></dd>
   <dt>WBD</dt><dd><p>Waste burning emisssion constant profile</p></dd>
+  <dt>PC_nov_2018</dt><dd><p>passenger cars at Janio Quadros on November 2018</p></dd>
+  <dt>HGV_nov_2018</dt><dd><p>heavy good vehicles at Janio Quadros on November 2018</p></dd>
+  <dt>TOTAL_nov_2018</dt><dd><p>total vehicle at Janio Quadros on November 2018</p></dd>
+  <dt>PC_out_2018</dt><dd><p>passenger cars at Anhanguera-Castello Branco on October 2018</p></dd>
+  <dt>MC_out_2018</dt><dd><p>Motorcycles cars at Anhanguera-Castello Branco on October 2018</p></dd>
 
     </dl>
     
@@ -192,6 +202,8 @@
 <p>- Profiles 3 to 25 comes from traffic counted of toll stations located in São Paulo city,
 for summer and winters of 2012, 2013 and 2014.</p>
 <p>- Profiles 26 to 33 are for different sectors from Oliver et al (2003).</p>
+<p>- Profiles 34 to 36 are for volumetric mechanized traffic count at Janio Quadros tunnel on NOvember 2018.</p>
+<p>- Profiles 37 to 38 are for volumetric mechanized traffic count at Anhanguera-Castello Branco on October 2018.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -229,7 +241,7 @@ EU project EVK2-1999-00011, 2003.</p>
 <span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>perfil</span>))){
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='st'>"profile"</span>,<span class='no'>i</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>perfil</span>)[<span class='no'>i</span>],<span class='st'>"\n"</span>))
   <span class='fu'>plot.perfil</span>(<span class='no'>perfil</span><span class='kw'>[[</span><span class='no'>i</span>]],<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>perfil</span>)[<span class='no'>i</span>])
-}</div><div class='output co'>#&gt; profile 1 LDV </div><div class='img'><img src='perfil-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 2 HDV </div><div class='img'><img src='perfil-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 3 PC_JUNE_2012 </div><div class='img'><img src='perfil-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 4 PC_JUNE_2013 </div><div class='img'><img src='perfil-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 5 PC_JUNE_2014 </div><div class='img'><img src='perfil-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 6 LCV_JUNE_2012 </div><div class='img'><img src='perfil-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 7 LCV_JUNE_2013 </div><div class='img'><img src='perfil-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 8 LCV_JUNE_2014 </div><div class='img'><img src='perfil-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 9 MC_JUNE_2012 </div><div class='img'><img src='perfil-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 10 MC_JUNE_2013 </div><div class='img'><img src='perfil-10.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 11 MC_JUNE_2014 </div><div class='img'><img src='perfil-11.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 12 HGV_JUNE_2012 </div><div class='img'><img src='perfil-12.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 13 HGV_JUNE_2013 </div><div class='img'><img src='perfil-13.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 14 HGV_JUNE_2014 </div><div class='img'><img src='perfil-14.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 15 PC_JANUARY_2012 </div><div class='img'><img src='perfil-15.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 16 PC_JANUARY_2013 </div><div class='img'><img src='perfil-16.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 17 PC_JANUARY_2014 </div><div class='img'><img src='perfil-17.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 18 LCV_JANUARY_2012 </div><div class='img'><img src='perfil-18.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 19 LCV_JANUARY_2013 </div><div class='img'><img src='perfil-19.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 20 LCV_JANUARY_2014 </div><div class='img'><img src='perfil-20.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 21 MC_JANUARY_2012 </div><div class='img'><img src='perfil-21.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 22 MC_JANUARY_2014 </div><div class='img'><img src='perfil-22.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 23 HGV_JANUARY_2012 </div><div class='img'><img src='perfil-23.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 24 HGV_JANUARY_2013 </div><div class='img'><img src='perfil-24.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 25 HGV_JANUARY_2014 </div><div class='img'><img src='perfil-25.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 26 POW </div><div class='img'><img src='perfil-26.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 27 IND </div><div class='img'><img src='perfil-27.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 28 RES </div><div class='img'><img src='perfil-28.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 29 TRA </div><div class='img'><img src='perfil-29.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 30 AGR </div><div class='img'><img src='perfil-30.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 31 SHP </div><div class='img'><img src='perfil-31.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 32 SLV </div><div class='img'><img src='perfil-32.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 33 WBD </div><div class='img'><img src='perfil-33.png' alt='' width='700' height='433' /></div><div class='input'>
+}</div><div class='output co'>#&gt; profile 1 LDV </div><div class='img'><img src='perfil-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 2 HDV </div><div class='img'><img src='perfil-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 3 PC_JUNE_2012 </div><div class='img'><img src='perfil-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 4 PC_JUNE_2013 </div><div class='img'><img src='perfil-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 5 PC_JUNE_2014 </div><div class='img'><img src='perfil-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 6 LCV_JUNE_2012 </div><div class='img'><img src='perfil-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 7 LCV_JUNE_2013 </div><div class='img'><img src='perfil-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 8 LCV_JUNE_2014 </div><div class='img'><img src='perfil-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 9 MC_JUNE_2012 </div><div class='img'><img src='perfil-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 10 MC_JUNE_2013 </div><div class='img'><img src='perfil-10.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 11 MC_JUNE_2014 </div><div class='img'><img src='perfil-11.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 12 HGV_JUNE_2012 </div><div class='img'><img src='perfil-12.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 13 HGV_JUNE_2013 </div><div class='img'><img src='perfil-13.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 14 HGV_JUNE_2014 </div><div class='img'><img src='perfil-14.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 15 PC_JANUARY_2012 </div><div class='img'><img src='perfil-15.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 16 PC_JANUARY_2013 </div><div class='img'><img src='perfil-16.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 17 PC_JANUARY_2014 </div><div class='img'><img src='perfil-17.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 18 LCV_JANUARY_2012 </div><div class='img'><img src='perfil-18.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 19 LCV_JANUARY_2013 </div><div class='img'><img src='perfil-19.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 20 LCV_JANUARY_2014 </div><div class='img'><img src='perfil-20.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 21 MC_JANUARY_2012 </div><div class='img'><img src='perfil-21.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 22 MC_JANUARY_2014 </div><div class='img'><img src='perfil-22.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 23 HGV_JANUARY_2012 </div><div class='img'><img src='perfil-23.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 24 HGV_JANUARY_2013 </div><div class='img'><img src='perfil-24.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 25 HGV_JANUARY_2014 </div><div class='img'><img src='perfil-25.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 26 POW </div><div class='img'><img src='perfil-26.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 27 IND </div><div class='img'><img src='perfil-27.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 28 RES </div><div class='img'><img src='perfil-28.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 29 TRA </div><div class='img'><img src='perfil-29.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 30 AGR </div><div class='img'><img src='perfil-30.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 31 SHP </div><div class='img'><img src='perfil-31.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 32 SLV </div><div class='img'><img src='perfil-32.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 33 WBD </div><div class='img'><img src='perfil-33.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 34 PC_nov_2018 </div><div class='img'><img src='perfil-34.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 35 HGV_nov_2018 </div><div class='img'><img src='perfil-35.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 36 TOTAL_nov_2018 </div><div class='img'><img src='perfil-36.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 37 PC_out_2018 </div><div class='img'><img src='perfil-37.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; profile 38 MC_out_2018 </div><div class='img'><img src='perfil-38.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

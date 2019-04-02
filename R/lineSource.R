@@ -1,18 +1,25 @@
-#' Distribution of emissions by streets
+#' Distribution of emissions by lines
 #'
-#' @description Create a distribution from sp spatial lines data frame or spatial lines.
+#' @description Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or
+#' spatial lines.
 #'
-#' Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe
+#' There 3 modes available to create the emission grid:
+#' - using gridInfo function output (defoult)
+#' - using the patch to "wrfinput" (output from real.exe) file or "geo" for (output from geog.exe)
+#' - "sf" (and "sp") uses a grid in SpatialPolygons format
 #'
-#' The "sf" (and "sp") uses a grid in SpatialPolygons format instead of create from a model input.
+#' The variable is the column of the data.frame with contains the variable to be used as emissions,
+#' by defoult the idstribution taken into acount the lench distribution of lines into each grid cell
+#' and the output is normalized.
 #'
 #' @param s SpatialLinesDataFrame of SpatialLines object
-#' @param grid grid object with the grid information
+#' @param grid grid object with the grid information or filename
 #' @param as_raster output format, TRUE for raster, FALSE for matrix
 #' @param verbose display additional information
-#' @param type "wrfinput", "geo", "sp" or "sf" for grid type
+#' @param type "info" (default), "wrfinput", "geo", "sp" or "sf" for grid type
 #' @param gcol grid points for a "sp" or "sf" type
 #' @param grow grid points for a "sp" or "sf" type
+#' @param variable variable to use, default is line length
 #' @export
 #'
 #' @importFrom methods as
@@ -44,29 +51,46 @@
 #'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 #'
 
-lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput",
-                       gcol = 100, grow = 100){
+lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
+                       gcol = 100, grow = 100, variable = "length"){
 
-  wrf_grid <- function(filewrf, type = "wrfinput", epsg = 4326){
-    cat(paste("using grid info from:", filewrf, "\n"))
-    wrf <- ncdf4::nc_open(filewrf)
-    if(type == "wrfinput"){
-      lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT")
-      lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG")
-    } else if(type == "geo"){                             # nocov
-      lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT_M")   # nocov
-      lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG_M")  # nocov
+  cat('using',variable,'as emission variable\n')
+
+  wrf_grid <- function(filewrf, type = "wrfinput", epsg = 4326, grid = NULL){
+    if(type == 'info'){
+      if(is.null(grid)){
+        stop('grid nod found!')
+      }
+      lat    <- grid$Lat
+      lon    <- grid$Lon
+      time   <- grid$Times
+      dx     <- grid$DX
+      n.lon  <- grid$Horizontal[1]
+      n.lat  <- grid$Horizontal[2]
+
+      cat(paste0("Number of lat points ", n.lat, "\n"))
+      cat(paste0("Number of lon points ", n.lon, "\n"))
+    }else{
+      cat(paste("using grid info from:", filewrf, "\n"))
+      wrf <- ncdf4::nc_open(filewrf)
+      if(type == "wrfinput"){
+        lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT")
+        lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG")
+      } else if(type == "geo"){                             # nocov
+        lat    <- ncdf4::ncvar_get(wrf, varid = "XLAT_M")   # nocov
+        lon    <- ncdf4::ncvar_get(wrf, varid = "XLONG_M")  # nocov
+      }
+      time   <- ncdf4::ncvar_get(wrf, varid = "Times")
+      dx     <- ncdf4::ncatt_get(wrf, varid = 0,
+                                 attname = "DX")$value
+      n.lat  <- ncdf4::ncatt_get(wrf, varid = 0,
+                                 attname = "SOUTH-NORTH_PATCH_END_UNSTAG")$value
+      n.lon  <- ncdf4::ncatt_get(wrf, varid = 0,
+                                 attname = "WEST-EAST_PATCH_END_UNSTAG")$value
+      cat(paste0("Number of lat points ", n.lat, "\n"))
+      cat(paste0("Number of lon points ", n.lon, "\n"))
+      ncdf4::nc_close(wrf)
     }
-    time   <- ncdf4::ncvar_get(wrf, varid = "Times")
-    dx     <- ncdf4::ncatt_get(wrf, varid = 0,
-                               attname = "DX")$value
-    n.lat  <- ncdf4::ncatt_get(wrf, varid = 0,
-                               attname = "SOUTH-NORTH_PATCH_END_UNSTAG")$value
-    n.lon  <- ncdf4::ncatt_get(wrf, varid = 0,
-                               attname = "WEST-EAST_PATCH_END_UNSTAG")$value
-    cat(paste0("Number of lat points ", n.lat, "\n"))
-    cat(paste0("Number of lon points ", n.lon, "\n"))
-    ncdf4::nc_close(wrf)
     r.lat  <- range(lon)
     r.lon  <- range(lat)
 
@@ -164,27 +188,53 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "wrfinput",
     }
   }
 
-  if(type %in% c("wrfinput","geo")){
-    g <- wrf_grid(filewrf = grid$File,
-                  type = type,
-                  epsg = 4326)
+  if(type %in% c("wrfinput","geo","info")){
+    if(type == 'info'){
+      g <- wrf_grid(filewrf = NA,
+                    type = type,
+                    epsg = 4326,
+                    grid = grid)
+    }else{
+      g <- wrf_grid(filewrf = grid$File,
+                    type = type,
+                    epsg = 4326)
+    }
+
     roads2 <- s
-    #  Calculate the length
-    roads2$length <- sf::st_length(sf::st_as_sf(roads2))
-    # just length
-    roads3 <- roads2[, "length"]
-    # calculate the length of streets in each cell
-    roads4 <- emis_grid(spobj = roads3, g = g, sr = 4326, type = "lines")
-    # normalyse
-    roads4$length <- roads4$length / sum(roads4$length)
+    if(variable == "length"){
+      #  Calculate the length
+      roads2$length <- sf::st_length(sf::st_as_sf(roads2))
+      # just length
+      roads3 <- roads2[, "length"]
+      # calculate the length of streets in each cell
+      roads4 <- emis_grid(spobj = roads3, g = g, type = "lines") # sr = 4326
+      # normalyse
+      # roads4$length <- roads4$length / sum(roads4$length)
+    }else{
+      # calculate with 'variable' columns instead of 'length'
+      roads3 <- s[, variable]                                    # nocov
+      names(roads3) <- c("length","geo")                         # nocov
+      roads4 <- emis_grid(spobj = roads3, g = g, type = "lines") # nocov
+    }
     # converts to Spatial
     roads4sp <- as(roads4, "Spatial")
     # make a raster
-    r <- raster::raster(ncol = grid$Horizontal[1], nrow = grid$Horizontal[2])
-    raster::extent(r) <- raster::extent(roads4sp)
-    r <- raster::rasterize(roads4sp, r, field = roads4sp$length,
-                           update = TRUE, updateValue = "NA")
+    r <- raster::raster(ncol = grid$Horizontal[1], nrow = grid$Horizontal[2],
+                        xmn=min(grid$Lon),xmx=max(grid$Lon),
+                        ymn=min(grid$Lat),ymx=max(grid$Lat))
+    r <- raster::rasterize(roads4sp, r, field = roads4sp$length, fun = sum,
+                           update = TRUE, updateValue = "all")
+    # r <- fasterize::fasterize(roads4sp, r, field = 'length', fun = sum)
+
     r[is.na(r[])] <- 0
+    crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+    # normalyse for roads use
+    if(variable == "length"){
+      r <- r / cellStats(r,'sum')
+    }else{
+      r <- sum(s[[variable]])  * ( r / cellStats(r,'sum') )
+    }
+
     if(as_raster){
       return(r)
     } else {

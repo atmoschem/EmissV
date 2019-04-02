@@ -46,7 +46,11 @@ pointSource <- function(emissions, grid, verbose=T){
         xy <- xyFromCell(emis,id.cell)
         lon <- xy[1]
         lat <- xy[2]
-        cat(paste("grid position","lat=",lat,"lon=",lon,"\n"))
+        if(lat == -765779648826607744){
+          cat('point:',i,'is outside the grid domain!\n')
+        }else{
+          cat(paste("grid position","lat=",lat,"lon=",lon,"\n"))
+        }
       }
       emis[id.cell] <- emissions$e[i]
     }

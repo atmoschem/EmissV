@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Distribution of emissions by streets — lineSource • EmissV</title>
+<title>Distribution of emissions by lines — lineSource • EmissV</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,17 @@
 
 
 
-<meta property="og:title" content="Distribution of emissions by streets — lineSource" />
+<meta property="og:title" content="Distribution of emissions by lines — lineSource" />
 
-<meta property="og:description" content="Create a distribution from sp spatial lines data frame or spatial lines.
-Use &quot;wrfinput&quot; for a gridInfo from an output from real.exe and &quot;geo&quot; for a output from geog.exe
-The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format instead of create from a model input." />
+<meta property="og:description" content="Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or
+spatial lines.
+There 3 modes available to create the emission grid:
+- using gridInfo function output (defoult)
+- using the patch to &quot;wrfinput&quot; (output from real.exe) file or &quot;geo&quot; for (output from geog.exe)
+- &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format
+The variable is the column of the data.frame with contains the variable to be used as emissions,
+by defoult the idstribution taken into acount the lench distribution of lines into each grid cell
+and the output is normalized." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,7 +71,7 @@ The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format in
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.0.5</span>
       </span>
     </div>
 
@@ -99,21 +105,27 @@ The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format in
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Distribution of emissions by streets</h1>
+    <h1>Distribution of emissions by lines</h1>
     
     <div class="hidden name"><code>lineSource.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a distribution from sp spatial lines data frame or spatial lines.</p>
-<p>Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe</p>
-<p>The "sf" (and "sp") uses a grid in SpatialPolygons format instead of create from a model input.</p>
+    <p>Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or
+spatial lines.</p>
+<p>There 3 modes available to create the emission grid:
+- using gridInfo function output (defoult)
+- using the patch to "wrfinput" (output from real.exe) file or "geo" for (output from geog.exe)
+- "sf" (and "sp") uses a grid in SpatialPolygons format</p>
+<p>The variable is the column of the data.frame with contains the variable to be used as emissions,
+by defoult the idstribution taken into acount the lench distribution of lines into each grid cell
+and the output is normalized.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>lineSource</span>(<span class='no'>s</span>, <span class='no'>grid</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"wrfinput"</span>,
-  <span class='kw'>gcol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>grow</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
+    <pre class="usage"><span class='fu'>lineSource</span>(<span class='no'>s</span>, <span class='no'>grid</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"info"</span>,
+  <span class='kw'>gcol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>grow</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>variable</span> <span class='kw'>=</span> <span class='st'>"length"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -124,7 +136,7 @@ The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format in
     </tr>
     <tr>
       <th>grid</th>
-      <td><p>grid object with the grid information</p></td>
+      <td><p>grid object with the grid information or filename</p></td>
     </tr>
     <tr>
       <th>as_raster</th>
@@ -136,7 +148,7 @@ The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format in
     </tr>
     <tr>
       <th>type</th>
-      <td><p>"wrfinput", "geo", "sp" or "sf" for grid type</p></td>
+      <td><p>"info" (default), "wrfinput", "geo", "sp" or "sf" for grid type</p></td>
     </tr>
     <tr>
       <th>gcol</th>
@@ -145,6 +157,10 @@ The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format in
     <tr>
       <th>grow</th>
       <td><p>grid points for a "sp" or "sf" type</p></td>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <td><p>variable to use, default is line length</p></td>
     </tr>
     </table>
     
@@ -164,9 +180,9 @@ The &quot;sf&quot; (and &quot;sp&quot;) uses a grid in SpatialPolygons format in
 <span class='no'>roads</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sf/topics/st_as_sf'>st_as_sf</a></span>(<span class='no'>road_lines</span>)
 
 <span class='no'>d3</span>    <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d03"</span>))</div><div class='output co'>#&gt; Grid information from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d03 </div><div class='input'>
-<span class='no'>roadLength</span> <span class='kw'>&lt;-</span> <span class='fu'>lineSource</span>(<span class='no'>roads</span>,<span class='no'>d3</span>,<span class='kw'>as_raster</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using grid info from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d03 
+<span class='no'>roadLength</span> <span class='kw'>&lt;-</span> <span class='fu'>lineSource</span>(<span class='no'>roads</span>,<span class='no'>d3</span>,<span class='kw'>as_raster</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using length as emission variable
 #&gt; Number of lat points 51
-#&gt; Number of lon points 51</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3</span></div><div class='output co'>#&gt; <span class='message'>Transforming spatial objects to 'sr' </span></div><div class='output co'>#&gt; <span class='message'>although coordinates are longitude/latitude, st_intersection assumes that they are planar</span></div><div class='output co'>#&gt; <span class='warning'>Warning: layer(s) with no data ignored</span></div><div class='input'><span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>roadLength</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,<span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Length of roads"</span>,
+#&gt; Number of lon points 51</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3</span></div><div class='output co'>#&gt; <span class='message'>although coordinates are longitude/latitude, st_intersection assumes that they are planar</span></div><div class='input'><span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>roadLength</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,<span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Length of roads"</span>,
            <span class='kw'>sp.layout</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='st'>"sp.lines"</span>, <span class='no'>road_lines</span>))</div><div class='img'><img src='lineSource-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></pre>

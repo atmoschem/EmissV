@@ -2,35 +2,43 @@
 % Please edit documentation in R/lineSource.R
 \name{lineSource}
 \alias{lineSource}
-\title{Distribution of emissions by streets}
+\title{Distribution of emissions by lines}
 \source{
 OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 }
 \usage{
-lineSource(s, grid, as_raster = F, verbose = T, type = "wrfinput",
-  gcol = 100, grow = 100)
+lineSource(s, grid, as_raster = F, verbose = T, type = "info",
+  gcol = 100, grow = 100, variable = "length")
 }
 \arguments{
 \item{s}{SpatialLinesDataFrame of SpatialLines object}
 
-\item{grid}{grid object with the grid information}
+\item{grid}{grid object with the grid information or filename}
 
 \item{as_raster}{output format, TRUE for raster, FALSE for matrix}
 
 \item{verbose}{display additional information}
 
-\item{type}{"wrfinput", "geo", "sp" or "sf" for grid type}
+\item{type}{"info" (default), "wrfinput", "geo", "sp" or "sf" for grid type}
 
 \item{gcol}{grid points for a "sp" or "sf" type}
 
 \item{grow}{grid points for a "sp" or "sf" type}
+
+\item{variable}{variable to use, default is line length}
 }
 \description{
-Create a distribution from sp spatial lines data frame or spatial lines.
+Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or
+spatial lines.
 
-Use "wrfinput" for a gridInfo from an output from real.exe and "geo" for a output from geog.exe
+There 3 modes available to create the emission grid:
+- using gridInfo function output (defoult)
+- using the patch to "wrfinput" (output from real.exe) file or "geo" for (output from geog.exe)
+- "sf" (and "sp") uses a grid in SpatialPolygons format
 
-The "sf" (and "sp") uses a grid in SpatialPolygons format instead of create from a model input.
+The variable is the column of the data.frame with contains the variable to be used as emissions,
+by defoult the idstribution taken into acount the lench distribution of lines into each grid cell
+and the output is normalized.
 }
 \examples{
 \donttest{
