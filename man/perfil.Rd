@@ -61,7 +61,7 @@ for summer and winters of 2012, 2013 and 2014.
 
 - Profiles 26 to 33 are for different sectors from Oliver et al (2003).
 
-- Profiles 34 to 36 are for volumetric mechanized traffic count at Janio Quadros tunnel on NOvember 2018.
+- Profiles 34 to 36 are for volumetric mechanized traffic count at Janio Quadros tunnel on November 2018.
 
 - Profiles 37 to 38 are for volumetric mechanized traffic count at Anhanguera-Castello Branco on October 2018.
 }
