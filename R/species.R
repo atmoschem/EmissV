@@ -90,10 +90,6 @@
 #' ANDRADE, M. d. F. et al. Air quality forecasting system for southeastern brazil. Frontiers in
 #' Environmental Science, Frontiers, v. 3, p. 1–12, 2015.
 #'
-#' Ntziachristos L. and Samaras Z. 2016. Passneger cars, light commercial trucks, heavy-duty vehicles
-#' including buses and motor cycles. In: EEA, EMEP. EEA air pollutant emission inventory
-#' guidebook-2009. European Environment Agency, Copenhagen, 2016.
-#'
 #' Crippa, M., Guizzardi, D., Muntean, M., Schaaf, E., Dentener, F., Aardenne, J. A. V., ... &
 #' Janssens-Maenhout, G. (2018). Gridded emissions of air pollutants for the period 1970–2012
 #' within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.
