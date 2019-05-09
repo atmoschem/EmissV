@@ -12,7 +12,23 @@ citEntry(entry = "article",
          textVersion  =
            paste("Schuch, D. Ibarra-Espinosa, S. and Freitas, E. D. (2018).",
                  "EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models.",
-                 "The Journal of Open Source Software, DOI:10.21105/joss.00662.")
+                 "The Journal of Open Source Software, DOI:10.21105/joss.00662")
+)
+
+citEntry(entry = "article",
+         title          = "EmissV: A preprocessor for WRF-Chem model",
+         journal		    = "Journal of Atmospheric Science Research",
+         author         = personList(person("Daniel", "Schuch"),
+                                     person("Sergio", "Ibarra-Espinosa"),
+                                     person("Edmilson", "Dias de Freitas"),
+                                     person("Maria", "Andrade")),
+         year           = "2018",
+         url            = "https://www.bilpublishing.com/index.php/jasr/article/download/347/365",
+
+         textVersion  =
+           paste("Schuch, D. Ibarra-Espinosa, S., Freitas, E. D. and Andrade, M. (2018).",
+                 "EmissV: A preprocessor for WRF-Chem model.",
+                 "Journal of Atmospheric Science Research, DOI:10.30564/jasr.v1i1.347")
 )
 
 citation(auto = meta)

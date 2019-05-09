@@ -10,7 +10,7 @@ http://accent.aero.jussieu.fr/MACC_metadata.php
 \usage{
 read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
   version = "EDGAR", month = 1, year = 1, categories,
-  as_raster = T, verbose = T)
+  as_raster = T, skip_missing = F, verbose = T)
 }
 \arguments{
 \item{file}{file name or names (variables are summed)}
@@ -28,6 +28,8 @@ read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
 \item{categories}{considered categories (MACCITY, GAINS variable names), empty for all}
 
 \item{as_raster}{return a raster (defoult) or matrix (with units)}
+
+\item{skip_missing}{return a zero emission for missing variables and a warning}
 
 \item{verbose}{display additional information}
 }

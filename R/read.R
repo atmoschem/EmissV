@@ -13,6 +13,7 @@
 #' @param year scenario index (GAINS)
 #' @param categories considered categories (MACCITY, GAINS variable names), empty for all
 #' @param as_raster return a raster (defoult) or matrix (with units)
+#' @param skip_missing return a zero emission for missing variables and a warning
 #' @param verbose display additional information
 #'
 #' @note for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
@@ -61,12 +62,37 @@
 
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  version = "EDGAR", month = 1, year = 1, categories,
-                 as_raster = T, verbose = T){
+                 as_raster = T, skip_missing = F, verbose = T){
 
   if(is.list(coef))
     coef <- as.numeric(as.character(unlist(coef))) #nocov
   if(is.list(spec))
     spec <- as.numeric(as.character(unlist(spec))) #nocov
+
+  if(!missing(categories) && skip_missing == T){   # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    if(!(categories %in% names(ed$var))){
+      cat('category',categories,'is missing, returning zero emission grid!\n')
+      version = "ZEROS"
+      # warning(categories,' is missing on file: ',file,' using zero emission!\n')
+      varall    <- matrix(NA, ncol = 360, nrow = 720)
+      if(as_raster){
+        rz <- raster::raster(0.0 * varall,xmn=0,xmx=360,ymn=-90,ymx=90)
+        values(rz) <- rep(0,ncell(rz))
+        raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+      }
+
+      # if(as_raster){
+      #   r      <- raster::raster(x = matrix(0,nrow = 360,ncol = 720),xmn=0,xmx=360,ymn=-90,ymx=90)
+      #   raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+      #   rz     <- r
+      #   # return(r)
+      # }else{
+      #   # return(matrix(0,nrow = 720,ncol = 360))
+      #   varall <- matrix(0,nrow = 720,ncol = 360)
+      # }
+    }
+  }                                                # nocov end
 
   if(version == "GAINS"){                          # nocov start
     ed   <- ncdf4::nc_open(file[1])
