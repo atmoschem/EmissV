@@ -67,9 +67,13 @@ gridInfo <- function(file = file.choose(),z=F,geo = F,verbose = T){
     ncdf4::nc_close(wrf)
     lx  <- range(lon)
     ly  <- range(lat)
+    nxi <- dim(lat)[1]
+    nxj <- dim(lat)[2]
     OUT <- list(File = file, Times = time, Lat = lat, Lon = lon, z = z,
-                Horizontal = dim(lat), DX = dx, xlim = lx, Ylim = ly,
+                Horizontal = dim(lat), DX = dx, xlim = lx, ylim = ly,
                 Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
-                           y = c(ly[2],ly[2],ly[1],ly[1],ly[2])))
+                           y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
+                boundary = list(x = c(lon[1,],lon[,nxj],lon[nxi,],rev(lon[,1])),
+                                y = c(lat[1,],lat[,nxj],lat[nxi,],rev(lat[,1]))))
     return(OUT)
 }

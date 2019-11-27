@@ -1,3 +1,7 @@
+## EmissV 0.665.1.1 (2019-12-27)
+- gridInfo update: boundary of domain simulation added to output
+- gridinfo: change output parameter Ylim for ylim
+
 ## EmissV 0.665.1.0 (2019-03-28)
 - lineSource updates: faster, new options for grid generation and support for variables and length
 - new profile data from 2018 traffic count
