@@ -73,7 +73,7 @@ gridInfo <- function(file = file.choose(),z=F,geo = F,verbose = T){
                 Horizontal = dim(lat), DX = dx, xlim = lx, ylim = ly,
                 Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
                            y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
-                boundary = list(x = c(lon[1,],lon[,nxj],lon[nxi,],rev(lon[,1])),
-                                y = c(lat[1,],lat[,nxj],lat[nxi,],rev(lat[,1]))))
+                boundary = list(x = c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
+                                y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))))
     return(OUT)
 }
