@@ -8,9 +8,18 @@ Read abbout EDGAR at http://edgar.jrc.ec.europa.eu and MACCITY at
 http://accent.aero.jussieu.fr/MACC_metadata.php
 }
 \usage{
-read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
-  version = "EDGAR", month = 1, year = 1, categories,
-  as_raster = T, skip_missing = F, verbose = T)
+read(
+  file = file.choose(),
+  coef = rep(1, length(file)),
+  spec = NULL,
+  version = "EDGAR_v432",
+  month = 1,
+  year = 1,
+  categories,
+  as_raster = T,
+  skip_missing = F,
+  verbose = T
+)
 }
 \arguments{
 \item{file}{file name or names (variables are summed)}
@@ -19,7 +28,7 @@ read(file = file.choose(), coef = rep(1, length(file)), spec = NULL,
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{version}{inventory name 'EDGAR', 'MACCITY' or 'GAINS'}
+\item{version}{inventory name 'EDGAR_v432','EDGAR_v432','MACCITY' or 'GAINS'}
 
 \item{month}{the desired month of the inventary (MACCITY)}
 

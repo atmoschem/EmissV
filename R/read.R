@@ -8,7 +8,7 @@
 #' @param file file name or names (variables are summed)
 #' @param coef coef to merge different sources (file) into one emission
 #' @param spec numeric speciation vector to split emission into different species
-#' @param version inventory name 'EDGAR', 'MACCITY' or 'GAINS'
+#' @param version inventory name 'EDGAR_v432','EDGAR_v432','MACCITY' or 'GAINS'
 #' @param month the desired month of the inventary (MACCITY)
 #' @param year scenario index (GAINS)
 #' @param categories considered categories (MACCITY, GAINS variable names), empty for all
@@ -61,7 +61,7 @@
 #'}
 
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
-                 version = "EDGAR", month = 1, year = 1, categories,
+                 version = "EDGAR_v432", month = 1, year = 1, categories,
                  as_raster = T, skip_missing = F, verbose = T){
 
   if(is.list(coef))
@@ -101,6 +101,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     name <- grep('crs',          name, invert = T, value = T)
     name <- grep('gridcell_area',name, invert = T, value = T)
     name <- grep('emis_all',     name, invert = T, value = T)
+    name <- grep('emiss_sum',    name, invert = T, value = T)
 
     if(verbose)
       cat(paste0("reading",
@@ -208,7 +209,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
   }                                                # nocov end
 
-  if(version == "EDGAR"){
+  if(version == "EDGAR_v432"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     if(verbose)
@@ -240,6 +241,52 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }
     }
   }
+
+  if(version == "EDGAR_HTAPv2"){  # nocov start
+    for(i in 1:length(file)){
+      cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
+      if(missing(categories)){
+        name <- names(ed$var)
+        name <- grep('date',         name, invert = T, value = T)
+        name <- grep('crs',          name, invert = T, value = T)
+        name <- grep('gridcell_area',name, invert = T, value = T)
+        name <- grep('emis_all',     name, invert = T, value = T)
+        name <- grep('emiss_sum',    name, invert = T, value = T)
+      }else{
+        name <- categories
+      }
+      ed   <- ncdf4::nc_open(file[i])
+      var  <- ncdf4::ncvar_get(ed,name[1])
+      var  <- apply(var,1,rev)
+      if(as_raster){
+        r  <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+        rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+        values(rz) <- rep(0,ncell(rz))
+        raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+      }
+      var_a  <- units::as_units(0.0 * var,"g m-2 s-1")
+      varall <- units::as_units(0.0 * var,"g m-2 s-1")
+      var    <- units::as_units(0.0 * var,"g m-2 s-1")
+      for(j in 1:length(name)){
+        cat(paste0("using ",name[j]),"\n")
+        var_a  <- ncdf4::ncvar_get(ed,name[j])
+        var_a  <- apply(var_a,1,rev)
+        var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
+        var    <- var + var_a
+      }
+      if(as_raster){
+        var    <- ncdf4::ncvar_get(ed,name[1])
+        var    <- apply(var,1,rev)
+        r   <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+        raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        names(r) <- name[1]
+        rz       <- rz + r * coef[i]
+      }else{
+        var    <- units::set_units(1000 * var,"g m-2 s-1")
+        varall <- varall + var * coef[i]
+      }
+    }
+  } # nocov end
 
   if(as_raster){
     if(is.null(spec)){

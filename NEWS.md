@@ -1,3 +1,6 @@
+## EmissV 0.665.1.1 (2020-03-19)
+- read update: support for EDGAR_v432 and EDGAR_v432 added
+
 ## EmissV 0.665.1.1 (2019-12-27)
 - gridInfo update: boundary of domain simulation added to output
 - gridinfo: change output parameter Ylim for ylim

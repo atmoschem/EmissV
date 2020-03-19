@@ -5,8 +5,17 @@
 \title{Emissions in the format for atmospheric models}
 \format{matrix of emission}
 \usage{
-emission(total, pol, area, grid, inventory = NULL, mm = 1,
-  aerosol = F, plot = F, verbose = T)
+emission(
+  total,
+  pol,
+  area,
+  grid,
+  inventory = NULL,
+  mm = 1,
+  aerosol = F,
+  plot = F,
+  verbose = T
+)
 }
 \arguments{
 \item{total}{list of total emission}

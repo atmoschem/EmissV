@@ -4,8 +4,14 @@
 \alias{streetDist}
 \title{Distribution by OpenStreetnMap street}
 \usage{
-streetDist(emission = 1, dist = c(1, 0, 0, 0, 0), grid = NULL,
-  osm = NULL, epsg = 31983, warnings = FALSE)
+streetDist(
+  emission = 1,
+  dist = c(1, 0, 0, 0, 0),
+  grid = NULL,
+  osm = NULL,
+  epsg = 31983,
+  warnings = FALSE
+)
 }
 \arguments{
 \item{emission}{Numeric;  emissions.}

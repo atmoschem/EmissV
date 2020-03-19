@@ -4,9 +4,17 @@
 \alias{vehicles}
 \title{Tool to set-up vehicle data table}
 \usage{
-vehicles(total_v, area_name = names(total_v), distribution, type,
-  category = NA, fuel = NA, vnames = NA, example = F,
-  verbose = T)
+vehicles(
+  total_v,
+  area_name = names(total_v),
+  distribution,
+  type,
+  category = NA,
+  fuel = NA,
+  vnames = NA,
+  example = F,
+  verbose = T
+)
 }
 \arguments{
 \item{total_v}{total of vehicles by area (area length)}

@@ -47,7 +47,7 @@ pointSource <- function(emissions, grid, verbose=T){
         lon <- xy[1]
         lat <- xy[2]
         if(lat == -765779648826607744){
-          cat('point:',i,'is outside the grid domain!\n')
+          cat('point:',i,'is outside the grid domain!\n') #nocov
         }else{
           cat(paste("grid position","lat=",lat,"lon=",lon,"\n"))
         }

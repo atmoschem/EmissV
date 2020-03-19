@@ -7,8 +7,16 @@
 OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 }
 \usage{
-lineSource(s, grid, as_raster = F, verbose = T, type = "info",
-  gcol = 100, grow = 100, variable = "length")
+lineSource(
+  s,
+  grid,
+  as_raster = F,
+  verbose = T,
+  type = "info",
+  gcol = 100,
+  grow = 100,
+  variable = "length"
+)
 }
 \arguments{
 \item{s}{SpatialLinesDataFrame of SpatialLines object}

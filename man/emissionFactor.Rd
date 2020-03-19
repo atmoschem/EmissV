@@ -5,8 +5,14 @@
 \title{Tool to set-up emission factors}
 \format{data frame}
 \usage{
-emissionFactor(ef, poluttant = names(ef), vnames = NA, unit = "g/km",
-  example = F, verbose = T)
+emissionFactor(
+  ef,
+  poluttant = names(ef),
+  vnames = NA,
+  unit = "g/km",
+  example = F,
+  verbose = T
+)
 }
 \arguments{
 \item{ef}{list with emission factors}
