@@ -23,7 +23,7 @@ citEntry(entry = "article",
                                      person("Edmilson", "Dias de Freitas"),
                                      person("Maria", "Andrade")),
          year           = "2018",
-         url            = "https://www.bilpublishing.com/index.php/jasr/article/download/347/365",
+         url            = "https://ojs.bilpublishing.com/index.php/jasr/article/view/347",
 
          textVersion  =
            paste("Schuch, D. Ibarra-Espinosa, S., Freitas, E. D. and Andrade, M. (2018).",

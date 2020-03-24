@@ -28,7 +28,6 @@
 #' @import sf
 #' @import raster
 #' @import ncdf4
-#' @import lwgeom
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
