@@ -142,6 +142,7 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
     net <- sf::st_as_sf(spobj)
     net$id <- NULL
     g <- sf::st_as_sf(g)
+    sf::st_crs(g) <- sf::st_crs(net)                   # NEW for PROJ 7.0.0
     if (!missing(sr)) {
       message("Transforming spatial objects to 'sr' ") # nocov
       net <- sf::st_transform(net, sr)                 # nocov

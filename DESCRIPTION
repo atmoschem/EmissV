@@ -1,6 +1,6 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
-Date: 2020-03-19
+Date: 2020-03-29
 Version: 0.665.2.0
 Authors@R: c(
   person(given = "Daniel",
@@ -27,7 +27,8 @@ Suggests:
     testthat (>= 2.1.0),
     covr,
     osmar,
-    rgdal
+    rgdal,
+    eixport
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

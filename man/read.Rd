@@ -54,16 +54,27 @@ for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad
 }
 \examples{
 \donttest{
+dir.create(file.path(tempdir(), "EDGARv432"))
+eixport::get_edgar(dataset = "v432_AP",txt = FALSE,copyright = FALSE,
+                   destpath = file.path(tempdir(),"EDGARv432"),
+                   pol = c("NOx"),sector = c("TRO","ENE","IND"),
+                   year = 2012)
+folder <- setwd(file.path(tempdir(), "EDGARv432"))
+unzip('2012_NOx_ENE.zip')
+unzip('2012_NOx_IND.zip')
+unzip('2012_NOx_TRO.zip')
+
+nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR_v432')
+setwd(folder)
+
+sp::spplot(nox, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="NOx emissions from EDGAR")
+
 d1     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 d2     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-print("download and untar EDGAR data from:")
-print("http://edgar.jrc.ec.europa.eu/gallery.php?release=v431_v2&substance=NOx&sector=TRO")
-nox    <- read("v431_v2_REFERENCE_NOx_2010_10_TRO.0.1x0.1.nc")
-sp::spplot(nox, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="NOx emissions from EDGAR")
 nox_d1 <- rasterSource(nox,d1)
 nox_d2 <- rasterSource(nox,d2)
-image(nox_d1, main = "NOx emissions from transport from EDGAR 3.4.1 for d1")
-image(nox_d2, main = "NOx emissions from transport from EDGAR 3.4.1 for d2")
+image(nox_d1, axe = FALSE, main = "NOx emissions from transport-energy-industry for d1 (2012)")
+image(nox_d2, axe = FALSE, main = "NOx emissions from transport-energy-industry for d2 (2012)")
 }
 }
 \references{

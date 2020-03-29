@@ -22,9 +22,7 @@
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
 #' test  <- rasterSource(x,grid)
-#' \donttest{
-#' image(test,axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
-#'}
+#' image(test, axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'
 #'@source Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}

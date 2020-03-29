@@ -1,3 +1,6 @@
+## EmissV 0.665.2.0 (2020-03-25)
+- New version on CRAN
+
 ## EmissV 0.665.1.1 (2020-03-19)
 - read update: support for EDGAR_v432 and EDGAR_v432 added
 
