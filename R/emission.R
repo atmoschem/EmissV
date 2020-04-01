@@ -12,6 +12,7 @@
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param plot TRUE for plot the final emissions
+#' @param positive TRUE (defoult) to check negative values and replace for zero
 #' @param verbose display additional information
 #'
 #' @note if Inventory is provided, the firsts tree arguments are not be used by the funciton.
@@ -46,7 +47,7 @@
 #'
 
 emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
-                     plot = F, verbose = T){
+                     plot = F, positive = T,verbose = T){
 
   if(!is.null(inventory)){
     if(verbose)
@@ -99,7 +100,12 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
 
       print(a)
     }
-    return(VAR_e)
+    if(positive){
+      VAR_e <- check_positive(VAR_e)
+      return(VAR_e)
+    }else{
+      return(VAR_e) # nocov
+    }
   }
 
   if(verbose){
@@ -142,7 +148,6 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     # put the units (to back the unit)
     VAR_e <- VAR_e * unidade
   }
-  # return(VAR_e)
 
   dx <- grid$DX
   dx <- dx*units::as_units("km")
@@ -185,6 +190,23 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
 
     print(a)
   }
+  if(positive){
+    VAR_e <- check_positive(VAR_e)
+    return(VAR_e)
+  }else{
+    return(VAR_e) # nocov
+  }
+}
 
-  return(VAR_e)
+check_positive <- function(emiss){
+  warn <- FALSE
+  for(i in 1:length(emiss)){
+    if(drop_units(emiss[i]) < 0){
+      warn <- TRUE                                     # nocov
+      emiss[i] = 0                                     # nocov
+    }
+  }
+  if(warn)
+    warning('Negative values found, replaced by zero') # nocov
+  return(emiss)
 }

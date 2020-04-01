@@ -14,6 +14,7 @@ emission(
   mm = 1,
   aerosol = F,
   plot = F,
+  positive = T,
   verbose = T
 )
 }
@@ -33,6 +34,8 @@ emission(
 \item{aerosol}{TRUE for aerosols and FALSE (defoult) for gazes}
 
 \item{plot}{TRUE for plot the final emissions}
+
+\item{positive}{TRUE (defoult) to check negative values and replace for zero}
 
 \item{verbose}{display additional information}
 }

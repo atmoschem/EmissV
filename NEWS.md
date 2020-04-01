@@ -1,3 +1,7 @@
+## EmissV 0.665.2.1 (2020-04-01)
+- New version for CRAN in fuction of new PROJ and GDAL
+- function emission checks for negative values by defoult
+
 ## EmissV 0.665.2.0 (2020-03-25)
 - New version on CRAN
 
