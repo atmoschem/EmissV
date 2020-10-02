@@ -1,3 +1,6 @@
+## EmissV 0.665.3.0 (2020-09-28)
+- New version for CRAN without hi-res dmsp image
+
 ## EmissV 0.665.2.1 (2020-04-01)
 - New version for CRAN in fuction of new PROJ and GDAL
 - function emission checks for negative values by defoult

@@ -3,7 +3,9 @@
 \name{totalVOC}
 \alias{totalVOC}
 \title{Calculate Total VOCs emissions (depreciated)}
-\format{Return a list with the daily total emission by territory.}
+\format{
+Return a list with the daily total emission by territory.
+}
 \usage{
 totalVOC(v, ef, pol, verbose = T)
 }

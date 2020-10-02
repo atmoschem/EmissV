@@ -3,7 +3,9 @@
 \name{plumeRise}
 \alias{plumeRise}
 \title{Calculate plume rise height.}
-\format{data.frame with the input, rise (m) and effective higt (m)}
+\format{
+data.frame with the input, rise (m) and effective higt (m)
+}
 \usage{
 plumeRise(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
 }

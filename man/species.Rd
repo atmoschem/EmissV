@@ -4,7 +4,9 @@
 \name{species}
 \alias{species}
 \title{Species mapping tables}
-\format{List of numeric vectors with the 'names()' of the species and the values of each species.}
+\format{
+List of numeric vectors with the 'names()' of the species and the values of each species.
+}
 \usage{
 data(species)
 }

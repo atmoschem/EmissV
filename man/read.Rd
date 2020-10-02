@@ -55,14 +55,20 @@ for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad
 \examples{
 \donttest{
 dir.create(file.path(tempdir(), "EDGARv432"))
-eixport::get_edgar(dataset = "v432_AP",txt = FALSE,copyright = FALSE,
-                   destpath = file.path(tempdir(),"EDGARv432"),
-                   pol = c("NOx"),sector = c("TRO","ENE","IND"),
-                   year = 2012)
 folder <- setwd(file.path(tempdir(), "EDGARv432"))
-unzip('2012_NOx_ENE.zip')
-unzip('2012_NOx_IND.zip')
-unzip('2012_NOx_TRO.zip')
+
+url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
+file1 <- 'v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip'
+file2 <- 'v432_NOx_2012_IPCC_1A2.0.1x0.1.zip'
+file3 <- 'v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip'
+
+download.file(paste0(url,'/ENE/',file1), file1)
+download.file(paste0(url,'/IND/',file2), file2)
+download.file(paste0(url,'/TRO/',file3), file3)
+
+unzip('v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip')
+unzip('v432_NOx_2012_IPCC_1A2.0.1x0.1.zip')
+unzip('v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip')
 
 nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR_v432')
 setwd(folder)

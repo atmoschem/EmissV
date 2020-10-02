@@ -3,7 +3,9 @@
 \name{emissionFactor}
 \alias{emissionFactor}
 \title{Tool to set-up emission factors}
-\format{data frame}
+\format{
+data frame
+}
 \usage{
 emissionFactor(
   ef,

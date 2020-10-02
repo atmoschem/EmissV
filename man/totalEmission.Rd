@@ -3,7 +3,9 @@
 \name{totalEmission}
 \alias{totalEmission}
 \title{Calculate total emissions}
-\format{Return a list with the daily total emission by interest area (cityes, states, countries, etc).}
+\format{
+Return a list with the daily total emission by interest area (cityes, states, countries, etc).
+}
 \usage{
 totalEmission(v, ef, pol, verbose = T)
 }

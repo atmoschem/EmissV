@@ -49,14 +49,20 @@
 #'
 #' @examples \donttest{
 #' dir.create(file.path(tempdir(), "EDGARv432"))
-#' eixport::get_edgar(dataset = "v432_AP",txt = FALSE,copyright = FALSE,
-#'                    destpath = file.path(tempdir(),"EDGARv432"),
-#'                    pol = c("NOx"),sector = c("TRO","ENE","IND"),
-#'                    year = 2012)
 #' folder <- setwd(file.path(tempdir(), "EDGARv432"))
-#' unzip('2012_NOx_ENE.zip')
-#' unzip('2012_NOx_IND.zip')
-#' unzip('2012_NOx_TRO.zip')
+#'
+#' url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
+#' file1 <- 'v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip'
+#' file2 <- 'v432_NOx_2012_IPCC_1A2.0.1x0.1.zip'
+#' file3 <- 'v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip'
+#'
+#' download.file(paste0(url,'/ENE/',file1), file1)
+#' download.file(paste0(url,'/IND/',file2), file2)
+#' download.file(paste0(url,'/TRO/',file3), file3)
+#'
+#' unzip('v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip')
+#' unzip('v432_NOx_2012_IPCC_1A2.0.1x0.1.zip')
+#' unzip('v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip')
 #'
 #' nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR_v432')
 #' setwd(folder)
@@ -74,6 +80,14 @@
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  version = "EDGAR_v432", month = 1, year = 1, categories,
                  as_raster = T, skip_missing = F, verbose = T){
+
+  if(length(coef) != length(file)){ # nocov start
+    cat('file and coef has different length, check the read arguments!\n')
+    cat('file:\n ')
+    cat(paste0(1:length(file),' ',file,'\n'))
+    cat('coef:\n ')
+    cat(paste0(1:length(coef),' ',coef,'\n'))
+  }                                 # nocov end
 
   if(is.list(coef))
     coef <- as.numeric(as.character(unlist(coef))) #nocov
@@ -116,7 +130,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
 
     if(verbose)
       cat(paste0("reading",
-                 " (",version,")",
+                 " ",version," ",
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
 
@@ -142,7 +156,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
 
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
+      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
@@ -178,7 +192,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     name <- names(ed$var)
     if(verbose)
       cat(paste0("reading",
-                 " (",version,")",
+                 " ",version," ",
                  " emissions for ",
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
@@ -194,7 +208,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
 
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
+      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
@@ -224,7 +238,10 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     if(verbose)
-      cat(paste0("reading ",name," (",version,") output unit is g m-2 s-1 ...\n"))
+      cat(paste0("reading",
+                 " ",version," ",
+                 " emissions",
+                 ", output unit is g m-2 s-1 ...\n"))
     var    <- ncdf4::ncvar_get(ed,name)
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
@@ -236,9 +253,9 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
 
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       name <- names(ed$var)
+      cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
       var  <- ncdf4::ncvar_get(ed,name)
       if(as_raster){
         var <- apply(var,1,rev)
@@ -254,8 +271,13 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   }
 
   if(version == "EDGAR_HTAPv2"){  # nocov start
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version," ",
+                 " emissions",
+                 ", output unit is g m-2 s-1 ...\n"))
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.2f",coef[i]),"\n")
+      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
       if(missing(categories)){
         name <- names(ed$var)
         name <- grep('date',         name, invert = T, value = T)

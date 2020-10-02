@@ -3,7 +3,9 @@
 \name{emission}
 \alias{emission}
 \title{Emissions in the format for atmospheric models}
-\format{matrix of emission}
+\format{
+matrix of emission
+}
 \usage{
 emission(
   total,
