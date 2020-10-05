@@ -32,7 +32,7 @@
 #'                            "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
 #'}
 #'
-#'@source Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
+#'@source Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){

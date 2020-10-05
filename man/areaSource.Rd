@@ -7,7 +7,7 @@
 a raster
 }
 \source{
-Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
+Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
 }
 \usage{
 areaSource(s, r, grid = NA, name = "", as_frac = F, verbose = T)

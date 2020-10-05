@@ -24,7 +24,7 @@
 #' test  <- rasterSource(x,grid)
 #' image(test, axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'
-#'@source Data avaliable \url{http://www.ospo.noaa.gov/Operations/DMSP/index.html}
+#'@source Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 

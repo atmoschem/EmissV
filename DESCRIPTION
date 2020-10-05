@@ -34,5 +34,5 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-URL: https://atmoschem.github.io/EmissV
+URL: https://atmoschem.github.io/EmissV/
 BugReports: https://github.com/atmoschem/EmissV/issues
