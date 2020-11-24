@@ -1,6 +1,8 @@
 # EmissV
 [![Linux Build](https://travis-ci.org/atmoschem/EmissV.svg?branch=master)](https://travis-ci.org/atmoschem/EmissV) [![windown Build](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv) [![Coverage Status](https://img.shields.io/codecov/c/github/atmoschem/EmissV/master.svg)](https://codecov.io/github/atmoschem/EmissV?branch=master) [![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
-
+  [![R build
+    status](https://github.com/atmoschem/EmissV/workflows/R-CMD-check/badge.svg)](https://github.com/atmoschem/EmissV/actions)
+    
 ![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo.png)
 
 This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
