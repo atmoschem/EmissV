@@ -12,7 +12,7 @@ read(
   file = file.choose(),
   coef = rep(1, length(file)),
   spec = NULL,
-  version = "EDGAR_v432",
+  version = "EDGAR",
   month = 1,
   year = 1,
   categories,
@@ -28,7 +28,7 @@ read(
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{version}{inventory name 'EDGAR_v432','EDGAR_v432','MACCITY' or 'GAINS'}
+\item{version}{inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS' or 'VULCAN'}
 
 \item{month}{the desired month of the inventary (MACCITY)}
 
@@ -70,7 +70,7 @@ unzip('v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip')
 unzip('v432_NOx_2012_IPCC_1A2.0.1x0.1.zip')
 unzip('v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip')
 
-nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR_v432')
+nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR')
 setwd(folder)
 
 sp::spplot(nox, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="NOx emissions from EDGAR")
@@ -98,6 +98,10 @@ Atmos. Chem. Phys., 10, 7017-7039, doi:10.5194/acp-10-7017-2010, 2010.
 
 Z Klimont, S. J. Smith and J Cofala The last decade of global anthropogenic sulfur dioxide:
 2000–2011 emissions Environmental Research Letters 8, 014003, 2013
+
+Gurney, Kevin R., Jianming Liang, Risa Patarasuk, Yang Song, Jianhua Huang, and
+Geoffrey Roest (2019) The Vulcan Version 3.0 High-Resolution Fossil Fuel CO2 Emissions
+for the United States. Nature Scientific Data.
 }
 \seealso{
 \code{\link{rasterSource}} and \code{\link{gridInfo}}

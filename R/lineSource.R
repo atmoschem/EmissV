@@ -227,7 +227,7 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
     # r <- fasterize::fasterize(roads4sp, r, field = 'length', fun = sum)
 
     r[is.na(r[])] <- 0
-    crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+    crs(r) <- "+proj=longlat"
     # normalyse for roads use
     if(variable == "length"){
       r <- r / cellStats(r,'sum')

@@ -1,12 +1,12 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
-Date: 2020-09-28
-Version: 0.665.3.0
+Date: 2020-12-11
+Version: 0.665.4.0
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
          role = c("aut", "cre"),
-         email = "schuch@usp.br",
+         email = "d.schuch@northeastern.edu",
          comment = c(ORCID = "0000-0001-5977-4519")),
   person(given = "Sergio",
          family = "Ibarra-Espinosa",
@@ -14,7 +14,7 @@ Authors@R: c(
          email = "sergio.ibarra@usp.br",
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
-Maintainer: Daniel Schuch <schuch@usp.br>
+Maintainer: Daniel Schuch <d.schuch@northeastern.edu>
 Description: Creates emissions for use in air quality models. Vehicular emissions 
   are estimated by a top-down approach, total emissions are calculated using the 
   statistical description of the fleet of vehicles, the emission is spatially 

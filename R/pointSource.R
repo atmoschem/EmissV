@@ -36,7 +36,7 @@ pointSource <- function(emissions, grid, verbose=T){
     r.lon  <- range(grid$Lon)
     emis   <- raster::raster(nrows=rol,ncols=col,
                              xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2]
-                             ,crs="+proj=longlat +ellps=GRS80 +no_defs")
+                             ,crs="+proj=longlat")
     values(emis) <- rep(0,ncell(emis))
 
     for(i in 1:length(emissions[[1]])){
@@ -62,7 +62,7 @@ pointSource <- function(emissions, grid, verbose=T){
     z      <- grid$z
     emis   <- raster::brick(nrows=rol,ncols=col,nl = dim(z)[3],
                              xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2]
-                             ,crs="+proj=longlat +ellps=GRS80 +no_defs")
+                             ,crs="+proj=longlat")
     values(emis) <- rep(0,ncell(emis))
 
     for(i in 1:length(emissions[[1]])){

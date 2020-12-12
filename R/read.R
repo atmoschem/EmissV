@@ -8,7 +8,7 @@
 #' @param file file name or names (variables are summed)
 #' @param coef coef to merge different sources (file) into one emission
 #' @param spec numeric speciation vector to split emission into different species
-#' @param version inventory name 'EDGAR_v432','EDGAR_v432','MACCITY' or 'GAINS'
+#' @param version inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS' or 'VULCAN'
 #' @param month the desired month of the inventary (MACCITY)
 #' @param year scenario index (GAINS)
 #' @param categories considered categories (MACCITY, GAINS variable names), empty for all
@@ -47,6 +47,10 @@
 #' Z Klimont, S. J. Smith and J Cofala The last decade of global anthropogenic sulfur dioxide:
 #' 2000–2011 emissions Environmental Research Letters 8, 014003, 2013
 #'
+#' Gurney, Kevin R., Jianming Liang, Risa Patarasuk, Yang Song, Jianhua Huang, and
+#' Geoffrey Roest (2019) The Vulcan Version 3.0 High-Resolution Fossil Fuel CO2 Emissions
+#' for the United States. Nature Scientific Data.
+#'
 #' @examples \donttest{
 #' dir.create(file.path(tempdir(), "EDGARv432"))
 #' folder <- setwd(file.path(tempdir(), "EDGARv432"))
@@ -64,7 +68,7 @@
 #' unzip('v432_NOx_2012_IPCC_1A2.0.1x0.1.zip')
 #' unzip('v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip')
 #'
-#' nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR_v432')
+#' nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR')
 #' setwd(folder)
 #'
 #' sp::spplot(nox, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="NOx emissions from EDGAR")
@@ -78,7 +82,7 @@
 #'}
 
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
-                 version = "EDGAR_v432", month = 1, year = 1, categories,
+                 version = "EDGAR", month = 1, year = 1, categories,
                  as_raster = T, skip_missing = F, verbose = T){
 
   if(length(coef) != length(file)){ # nocov start
@@ -104,7 +108,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       if(as_raster){
         rz <- raster::raster(0.0 * varall,xmn=0,xmx=360,ymn=-90,ymx=90)
         values(rz) <- rep(0,ncell(rz))
-        raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        raster::crs(rz) <- "+proj=longlat"
       }
 
       # if(as_raster){
@@ -143,7 +147,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     r      <- raster::raster(x = var,xmn=-180,xmx=180,ymn=-90,ymx=90)
-    raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+    raster::crs(r) <- "+proj=longlat"
     # area   <- raster::area(r)
     # area   <- raster::flip(area,2)
     # area   <- raster::t(area)
@@ -152,7 +156,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     if(as_raster){
       rz <- raster::raster(0.0 * var, xmn=-180,xmx=180,ymn=-90,ymx=90)
       values(rz) <- rep(0,ncell(rz))
-      raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+      raster::crs(rz) <- "+proj=longlat"
     }
 
     for(i in 1:length(file)){
@@ -178,7 +182,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }
       if(as_raster){
         r   <- raster::raster(x = var,xmn=-180,xmx=180,ymn=-90,ymx=90)
-        raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        raster::crs(r) <- "+proj=longlat"
         names(r) <- name[1]
         rz       <- rz + r * coef[i]
       }else{
@@ -204,7 +208,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       r  <- raster::raster(x = 0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
       rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
       values(rz) <- rep(0,ncell(rz))
-      raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+      raster::crs(rz) <- "+proj=longlat"
     }
 
     for(i in 1:length(file)){
@@ -224,7 +228,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }
       if(as_raster){
         r   <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
-        raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        raster::crs(r) <- "+proj=longlat"
         names(r) <- name[1]
         rz       <- rz + r * coef[i]
       }else{
@@ -234,7 +238,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
   }                                                # nocov end
 
-  if(version == "EDGAR_v432"){
+  if(version == "EDGAR" || version == "EDGAR_v432"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     if(verbose)
@@ -248,8 +252,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     if(as_raster){
       r  <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
       rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
-      values(rz) <- rep(0,ncell(rz))
-      raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+      raster::values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat"
     }
 
     for(i in 1:length(file)){
@@ -260,7 +264,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       if(as_raster){
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
-        raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        raster::crs(r) <- "+proj=longlat"
         names(r) <- name[1]
         rz       <- rz + r * coef[i]
       }else{
@@ -295,7 +299,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
         r  <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
         rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
         values(rz) <- rep(0,ncell(rz))
-        raster::crs(rz) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        raster::crs(rz) <- "+proj=longlat"
       }
       var_a  <- units::as_units(0.0 * var,"g m-2 s-1")
       varall <- units::as_units(0.0 * var,"g m-2 s-1")
@@ -311,7 +315,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
         var    <- ncdf4::ncvar_get(ed,name[1])
         var    <- apply(var,1,rev)
         r   <- raster::raster(x = 1000 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
-        raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
+        raster::crs(r) <- "+proj=longlat"
         names(r) <- name[1]
         rz       <- rz + r * coef[i]
       }else{
@@ -320,6 +324,62 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }
     }
   } # nocov end
+
+  if(version == "VULCAN"){                   # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- names(ed$var)
+    name <- grep('time_bnds',         name, invert = T, value = T)
+    name <- grep('crs',          name, invert = T, value = T)
+    name <- grep('lat',name, invert = T, value = T)
+    name <- grep('lon',     name, invert = T, value = T)
+
+    var   <- ncdf4::ncvar_get(ed,name[1])
+    lat   <- ncdf4::ncvar_get(ed,'lat')
+    lon   <- ncdf4::ncvar_get(ed,'lon')
+    crs   <- ncdf4::ncvar_get(ed,'crs')
+    times <- ncdf4::ncvar_get(ed,'time_bnds')
+    inicial  <- as.POSIXct('2010-01-01 00:00:00',tz = 'GMT')
+
+    time_start <- inicial + 60*60*24* times[1,]
+    time_end   <- inicial + 60*60*24* times[2,]
+
+    if(year > length(time_end)){
+      stop('wrong armument value, year must be lesser than ',length(time_end),'\n  for ', file)
+    }
+
+    # Mg km-2 year-1
+    unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
+
+    cat(' crs:',  crs,                           '\n',
+        'var:',   name[1],                       '\n',
+        'units:', unidades,                      '\n',
+        'dim:',   dim(lat),                      '\n',
+        'year:',  format(time_start[year], "%Y"),'\n')
+
+    var   <- var[,,year]
+    var[is.na(var)] <- 0
+
+    if(as_raster){
+      max_lon <- max(lon,na.rm = T)
+      max_lat <- max(lat,na.rm = T)
+      min_lon <- min(lon,na.rm = T)
+      min_lat <- min(lat,na.rm = T)
+
+      var <- t(var)
+      var <- apply(var, 2, rev)
+
+      r   <- raster::raster(x   = var,
+                            xmn = min_lon,
+                            xmx = max_lon,
+                            ymn = min_lat,
+                            ymx = max_lat)
+      raster::crs(r) <- "+proj=longlat"
+      names(r) <- name[1]
+      return(r)
+    }else{
+      return(var)
+    }
+  }                                                        # nocov end
 
   if(as_raster){
     if(is.null(spec)){

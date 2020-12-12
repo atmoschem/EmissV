@@ -1,3 +1,7 @@
+## EmissV 0.665.3.0 (2020-12-11)
+- Removing the warning (due to Migration to PROJ6/GDAL3) on read() changing all "+proj=longlat +ellps=GRS80 +no_defs" tp "+proj=longlat"
+- read() support 'VULCAN' dataset
+
 ## EmissV 0.665.3.0 (2020-09-28)
 - New version for CRAN without hi-res dmsp image
 
