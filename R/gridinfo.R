@@ -9,7 +9,7 @@
 #'
 #' @note just WRF-Chem is suported by now
 #'
-#' @import ncdf4
+#' @import ncdf4 sp
 #'
 #' @export
 #'
@@ -74,6 +74,9 @@ gridInfo <- function(file = file.choose(),z=F,geo = F,verbose = T){
                 Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
                            y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
                 boundary = list(x = c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
-                                y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))))
+                                y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
+                poligon = sp::Polygon(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
+                                                c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
+                                             ncol = 2)))
     return(OUT)
 }
