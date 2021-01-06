@@ -80,7 +80,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       r.lon <- range(grid$Lon)
       r     <- raster::raster(nrows=rol,ncols=col,
                               xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                              crs= "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+                              crs= "+proj=longlat")
 
       raster::values(r) <- as.matrix(as.numeric(VAR_e),ncol = col,nrow = row,byrow = T)
       r                 <- raster::flip(r,2)
@@ -176,7 +176,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     r.lon <- range(grid$Lon)
     r     <- raster::raster(nrows=rol,ncols=col,
                             xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                            crs= "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+                            crs= "+proj=longlat")
 
     raster::values(r) <- as.matrix(as.numeric(VAR_e),ncol = col,nrow = row,byrow = T)
     r                 <- raster::flip(r,2)
@@ -191,14 +191,14 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     print(a)
   }
   if(positive){
-    VAR_e <- check_positive(VAR_e)
+    VAR_e <- check_positive(VAR_e,pol)
     return(VAR_e)
   }else{
     return(VAR_e) # nocov
   }
 }
 
-check_positive <- function(emiss){
+check_positive <- function(emiss,pol){
   warn <- FALSE
   for(i in 1:length(emiss)){
     if(drop_units(emiss[i]) < 0){
@@ -207,6 +207,6 @@ check_positive <- function(emiss){
     }
   }
   if(warn)
-    warning('Negative values found, replaced by zero') # nocov
+    warning('Negative values found, replaced by zero in',pol) # nocov
   return(emiss)
 }

@@ -16,7 +16,7 @@
 #'
 #' @export
 #'
-#' @import raster
+#' @import raster sp
 #'
 #' @examples
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
@@ -34,9 +34,14 @@ rasterSource <- function(r,grid,nlevels="all",conservative = T,verbose = T){
   rol   <- grid$Horizontal[2]
   r.lat <- range(grid$Lat)
   r.lon <- range(grid$Lon)
+  # box   <- raster::raster(nrows=rol,ncols=col,
+  #                         xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
+  #                         crs=sp::proj4string(r))
+
   box   <- raster::raster(nrows=rol,ncols=col,
                           xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                          crs=sp::proj4string(r))
+                          crs='+proj=longlat')
+
 
   if(is.na(grid$z[1])){
     if(conservative)
