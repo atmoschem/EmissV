@@ -8,7 +8,7 @@
 #' @param file file name or names (variables are summed)
 #' @param coef coef to merge different sources (file) into one emission
 #' @param spec numeric speciation vector to split emission into different species
-#' @param version inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS' or 'VULCAN'
+#' @param version inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS','RCP' or 'VULCAN'
 #' @param month the desired month of the inventary (MACCITY)
 #' @param year scenario index (GAINS)
 #' @param categories considered categories (MACCITY, GAINS variable names), empty for all
@@ -17,6 +17,8 @@
 #' @param verbose display additional information
 #'
 #' @note for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
+#'
+#' @note for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb
 #'
 #' @seealso \code{\link{rasterSource}} and \code{\link{gridInfo}}
 #'
@@ -98,7 +100,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(is.list(spec))
     spec <- as.numeric(as.character(unlist(spec))) #nocov
 
-  if(!missing(categories) && skip_missing == T){   # nocov start
+  if(!missing(categories) && skip_missing == T){   #nocov start
     ed   <- ncdf4::nc_open(file[1])
     if(!(categories %in% names(ed$var))){
       cat('category',categories,'is missing, returning zero emission grid!\n')
@@ -126,11 +128,12 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(version == "GAINS"){                          # nocov start
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
-    name <- grep('date',         name, invert = T, value = T)
-    name <- grep('crs',          name, invert = T, value = T)
-    name <- grep('gridcell_area',name, invert = T, value = T)
-    name <- grep('emis_all',     name, invert = T, value = T)
-    name <- grep('emiss_sum',    name, invert = T, value = T)
+    name <- grep('date',             name, invert = T, value = T)
+    name <- grep('crs',              name, invert = T, value = T)
+    name <- grep('gridcell_area',    name, invert = T, value = T)
+    name <- grep('emis_all',         name, invert = T, value = T)
+    name <- grep('emiss_sum',        name, invert = T, value = T)
+    name <- grep('molecular_weight', name, invert = T, value = T)
 
     if(verbose)
       cat(paste0("reading",
@@ -164,10 +167,11 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
-        name <- grep('date',         name, invert = T, value = T)
-        name <- grep('crs',          name, invert = T, value = T)
-        name <- grep('gridcell_area',name, invert = T, value = T)
-        name <- grep('emis_all',     name, invert = T, value = T)
+        name <- grep('date',             name, invert = T, value = T)
+        name <- grep('crs',              name, invert = T, value = T)
+        name <- grep('gridcell_area',    name, invert = T, value = T)
+        name <- grep('emis_all',         name, invert = T, value = T)
+        name <- grep('molecular_weight', name, invert = T, value = T)
       }else{
         name <- categories
       }
@@ -182,6 +186,69 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }
       if(as_raster){
         r   <- raster::raster(x = var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+        raster::crs(r) <- "+proj=longlat"
+        names(r) <- name[1]
+        rz       <- rz + r * coef[i]
+      }else{
+        varall <- varall + var * coef[i]
+      }
+    }
+  }                                              # nocov end
+
+  if(version == "RCP"){                          # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- names(ed$var)
+    name <- grep('date',             name, invert = T, value = T)
+    name <- grep('crs',              name, invert = T, value = T)
+    name <- grep('gridcell_area',    name, invert = T, value = T)
+    name <- grep('emis_all',         name, invert = T, value = T)
+    name <- grep('emiss_sum',        name, invert = T, value = T)
+    name <- grep('molecular_weight', name, invert = T, value = T)
+
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version," ",
+                 " emissions",
+                 ", output unit is g m-2 s-1 ...\n"))
+
+    data <- as.Date('1850-01-01')   # units is days since 1850-01-01 00:00
+    data <- data + ncdf4::ncvar_get(ed,'time')[year]
+    cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
+
+    var    <- ncdf4::ncvar_get(ed,name[1])
+    var    <- var[,,year]
+    varall <- units::as_units(0.0 * var,"g m-2 s-1")
+    var    <- apply(0.0 * var,1,rev)
+    r      <- raster::raster(x = var,xmn=0,xmx=360,ymn=-90,ymx=90)
+    raster::crs(r) <- "+proj=longlat"
+    if(as_raster){
+      rz <- raster::raster(0.0 * var, xmn=-0,xmx=360,ymn=-90,ymx=90)
+      values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat"
+    }
+
+    for(i in 1:length(file)){
+      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
+      ed   <- ncdf4::nc_open(file[i])
+      if(missing(categories)){
+        name <- names(ed$var)
+        name <- grep('date',             name, invert = T, value = T)
+        name <- grep('crs',              name, invert = T, value = T)
+        name <- grep('gridcell_area',    name, invert = T, value = T)
+        name <- grep('emis_all',         name, invert = T, value = T)
+        name <- grep('molecular_weight', name, invert = T, value = T)
+      }else{
+        name <- categories
+      }
+      for(j in 1:length(name)){
+        cat(paste0("using ",name[j]),"\n")
+        var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
+        var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
+        var_a  <- apply(var_a,1,rev)
+        var    <- var + var_a
+      }
+      if(as_raster){
+        r   <- raster::raster(x = var,xmn=0,xmx=360,ymn=-90,ymx=90)
         raster::crs(r) <- "+proj=longlat"
         names(r) <- name[1]
         rz       <- rz + r * coef[i]

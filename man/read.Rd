@@ -28,7 +28,7 @@ read(
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{version}{inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS' or 'VULCAN'}
+\item{version}{inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS','RCP' or 'VULCAN'}
 
 \item{month}{the desired month of the inventary (MACCITY)}
 
@@ -51,6 +51,8 @@ emission and/or split into several species (speciation process)
 }
 \note{
 for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
+
+for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb
 }
 \examples{
 \donttest{
