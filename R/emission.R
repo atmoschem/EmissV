@@ -50,8 +50,14 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
                      plot = F, positive = T,verbose = T){
 
   if(!is.null(inventory)){
-    if(verbose)
-      cat("Using raster from inventory ...\n")
+    if(verbose){
+      if(missing(pol)){
+        cat("Using raster from inventory ...\n") # nocov
+      }else{
+        cat("Using raster from inventory for",pol,"...\n")
+      }
+    }
+
     # input is g m-2 s-1
     if(class(inventory)[1]=="RasterLayer"){
       VAR_e <- rasterSource(inventory,grid,conservative = F,verbose = verbose)
@@ -101,7 +107,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
       print(a)
     }
     if(positive){
-      VAR_e <- check_positive(VAR_e)
+      VAR_e <- check_positive(VAR_e,pol)
       return(VAR_e)
     }else{
       return(VAR_e) # nocov
@@ -198,15 +204,20 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
   }
 }
 
-check_positive <- function(emiss,pol){
+check_positive <- function(emiss,pol = '?'){
   warn <- FALSE
   for(i in 1:length(emiss)){
-    if(drop_units(emiss[i]) < 0){
-      warn <- TRUE                                     # nocov
-      emiss[i] = 0                                     # nocov
+    if(is.na(drop_units(emiss[i]))){
+      warn <- TRUE                         # nocov
+      emiss[i] = 0                         # nocov
+    }else{
+      if(drop_units(emiss[i]) < 0){
+        warn <- TRUE                       # nocov
+        emiss[i] = 0                       # nocov
+      }
     }
   }
   if(warn)
-    warning('Negative values found, replaced by zero in',pol) # nocov
+    warning('Negative or NA values found, replaced by zero in ',pol) # nocov
   return(emiss)
 }

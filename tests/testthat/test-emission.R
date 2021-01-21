@@ -2,22 +2,24 @@ context("emission")
 
 test_that("final emission works", {
 
+  g          <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
+  g$map_proj <- 2 # using old method
+
   expect_equal(emission(totalEmission(vehicles(example = TRUE,verbose = F),
                                       emissionFactor(example = TRUE,verbose = F),
                                       pol = c("CO"),verbose = T),
                         "FISH",
                         list(SP = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[22,1],
                                              raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
-                                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                             g,
                                              name = "SP",verbose = F),
                              RJ = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[17,1],
                                              raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
-                                             gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                             g,
                                              name = "RJ",verbose = F)),
-                        gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
+                        g,
                         verbose = F),
                cat(paste("FISH","not found in total !\n")))
-
 
   expect_equal(sum(emission(totalEmission(vehicles(example = TRUE,verbose = F),
                                           emissionFactor(example = TRUE,verbose = F),
@@ -25,44 +27,44 @@ test_that("final emission works", {
                             "CO",
                             list(SP = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[22,1],
                                                  raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
-                                                 gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                                 g,
                                                  name = "SP",verbose = F),
                                  RJ = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[17,1],
                                                  raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
-                                                 gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                                 g,
                                                  name = "RJ",verbose = F)),
-                            gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
+                            g,
                             mm=28,
                             verbose = T,
                             aerosol = T,
                             plot = T)
   ),
-  units::as_units(362.58086806097963972206343896687030792236328125, "ug*m^-2*s^-1"))
+  units::as_units(361.41688129791686, "ug*m^-2*s^-1"))
+
+  # g$map_proj <- 1 # using new method
 
   expect_equal(sum(emission(totalEmission(vehicles(example = TRUE,verbose = F),
                                           emissionFactor(example = TRUE,verbose = F),
                                           pol = c("CO"),verbose = F),
                             "CO",
-                            list(SP = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[22,1],
+                            list(SP = areaSource(raster::shapefile(paste0(system.file("extdata", package = "EmissV"),"/BR.shp"))[17,1],
                                                  raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff")),
-                                                 gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01")),
+                                                 g,
                                                  name = "SP",verbose = F)),
-                            gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),verbose = F),
+                            g,
                             mm=28,
                             verbose = T,
                             aerosol = F,
                             plot = T)
-  ),
-  units::as_units(306.59299639647224466898478567600250244140625, "ug*m^-2*s^-1"))
+  ) > units::as_units(1, "ug*m^-2*s^-1"),
+  TRUE)
 
   expect_equal(nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
-                            grid = gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),
-                                            verbose = F),
+                            grid = g,
                             mm=1,plot = T,verbose = T)
   ),
   nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
-               grid = gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"),
-                               verbose = F),
+               grid = g,
                mm=1,plot = T, aerosol = T)
   ))
 })

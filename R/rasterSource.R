@@ -17,11 +17,12 @@
 #' @export
 #'
 #' @import raster sp
+#' @importFrom rgdal project
 #'
 #' @examples
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
-#' test  <- rasterSource(x,grid)
+#' test  <- rasterSource(x, grid, verbose = TRUE)
 #' image(test, axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'
 #'@source Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
@@ -30,33 +31,59 @@
 
 rasterSource <- function(r,grid,nlevels="all",conservative = T,verbose = T){
 
-  col   <- grid$Horizontal[1]
-  rol   <- grid$Horizontal[2]
-  r.lat <- range(grid$Lat)
-  r.lon <- range(grid$Lon)
-  # box   <- raster::raster(nrows=rol,ncols=col,
-  #                         xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-  #                         crs=sp::proj4string(r))
-
-  box   <- raster::raster(nrows=rol,ncols=col,
-                          xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                          crs='+proj=longlat')
-
+  if(grid$map_proj == 1){
+    dx    <- grid$DX*1000            # nocov start
+    dy    <- grid$DX*1000            # using meters
+    ncols <- grid$Horizontal[1]
+    nrows <- grid$Horizontal[2]
+    projcoords <- rgdal::project(grid$coords,
+                                 grid$geogrd.proj)
+    xmn <- projcoords[1,1] - dx/2.0  # Left border
+    ymx <- projcoords[1,2] + dy/2.0  # upper border
+    xmx <- xmn + ncols*dx            # Right border
+    ymn <- ymx - nrows*dy            # Bottom border
+    # Create a raster
+    box <- suppressWarnings(
+      raster::raster(resolution = dx,
+                     xmn = xmn,
+                     xmx = xmx,
+                     ymn = ymn,
+                     ymx = ymx,
+                     crs = grid$geogrd.proj))  # nocov end
+  }else{
+    col   <- grid$Horizontal[1]
+    rol   <- grid$Horizontal[2]
+    r.lat <- range(grid$Lat)
+    r.lon <- range(grid$Lon)
+    box   <- raster::raster(nrows=rol,ncols=col,
+                            xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
+                            crs='+proj=longlat')
+  }
 
   if(is.na(grid$z[1])){
-    if(conservative)
-      total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
+    # if(conservative)
+    #   total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
 
-    X    <- raster::resample(r,box,method = "bilinear") # non-conservative transformation
+    # to reduce the memory
+    box_ll <- suppressWarnings( projectRaster(box, crs='+proj=longlat') )
+    r      <- raster::crop(r,raster::extent(box_ll))
+    if(conservative)
+      total_box <- cellStats(r,"sum",na.rm=TRUE)
+
+    r    <- suppressWarnings(raster::projectRaster(r,crs = raster::crs(box))) # to the new projection
+    X    <- raster::resample(r,box,method = "bilinear")                       # non-conservative transformation
     X    <- raster::flip(X,2)
     X    <- raster::t(X)
     X    <- raster::as.matrix(X)
     X[is.na(X)] <- 0             # for low resolution input data
+
     if(conservative)
       X    <- X * total_box/sum(X) # to conserve mass
 
     if(verbose)
-      cat(paste("Grid output:",col,"columns",rol,"rows\n"))
+      cat(paste("Grid output:",grid$Horizontal[1],
+                "columns",grid$Horizontal[2],"rows\n"))
+
   }else{
     if(nlevels == "all"){
       nlevels <- dim(grid$z)[3]
@@ -65,7 +92,9 @@ rasterSource <- function(r,grid,nlevels="all",conservative = T,verbose = T){
     }
     # total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
 
-    X    <- raster::resample(r,box,method = "bilinear") # non-conservative transformation
+    r    <- suppressWarnings(raster::projectRaster(r,crs = raster::crs(box))) # to the new projection
+    r    <- raster::crop(r,box)
+    X    <- raster::resample(r,box,method = "bilinear")                       # non-conservative transformation
     X    <- raster::flip(X,2)
     X    <- raster::t(X)
     Y    <- raster::as.matrix(X)

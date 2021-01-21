@@ -26,7 +26,7 @@ areaSource(s, r, grid = NA, name = "", as_frac = F, verbose = T)
 \item{verbose}{display additional data}
 }
 \description{
-Calculate the spatial distribution by a raster kasked by shape/model grid information.
+Calculate the spatial distribution by a raster masked by shape/model grid information.
 }
 \details{
 About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}

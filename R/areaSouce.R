@@ -1,6 +1,6 @@
 #' Distribution of emissions by area
 #'
-#' @description Calculate the spatial distribution by a raster kasked by shape/model grid information.
+#' @description Calculate the spatial distribution by a raster masked by shape/model grid information.
 #'
 #' @param s input shape object
 #' @param r input raster object
@@ -41,22 +41,54 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
     cat(paste("processing ",name,"area ... \n",sep = ""))
   }
 
-  sp       <- raster::mask(r,sp::spTransform(s,sp::CRS(sp::proj4string(r))))
-  sp_soma  <- raster::cellStats(sp,"sum")
+  sp <- suppressWarnings( raster::mask(r,sp::spTransform(s,sp::CRS(sp::proj4string(r)))) )
+
   if(!is.na(grid[1])){
-    col    <- grid$Horizontal[1]
-    rol    <- grid$Horizontal[2]
-    r.lat  <- range(grid$Lat)
-    r.lon  <- range(grid$Lon)
-    box    <- raster::raster(nrows=rol,ncols=col,
-                             xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                             crs=sp::CRS(sp::proj4string(r)))
-    sp     <- raster::crop(sp / sp_soma ,box)
-    sp_r   <- raster::cellStats(sp,"sum")
+    if(grid$map_proj == 1){
+      dx    <- grid$DX*1000  # using meters
+      dy    <- grid$DX*1000
+      ncols <- grid$Horizontal[1]
+      nrows <- grid$Horizontal[2]
+      projcoords <- rgdal::project(grid$coords,
+                                   grid$geogrd.proj)
+      xmn <- projcoords[1,1] - dx/2.0  # Left border
+      ymx <- projcoords[1,2] + dy/2.0  # upper border
+      xmx <- xmn + ncols*dx            # Right border
+      ymn <- ymx - nrows*dy            # Bottom border
+      # Create a raster
+      box <- suppressWarnings(
+        raster::raster(resolution = dx,
+                       xmn = xmn,
+                       xmx = xmx,
+                       ymn = ymn,
+                       ymx = ymx,
+                       crs = grid$geogrd.proj))
+    }else{
+      col   <- grid$Horizontal[1]
+      rol   <- grid$Horizontal[2]
+      r.lat <- range(grid$Lat)
+      r.lon <- range(grid$Lon)
+      box   <- raster::raster(nrows=rol,ncols=col,
+                              xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
+                              crs='+proj=longlat')
+    }
+
+    sp      <- suppressWarnings(raster::projectRaster(sp,crs = raster::crs(box))) # to the new projection
+    sp_soma <- raster::cellStats(sp,"sum")
+    sp      <- raster::crop(sp,box)
+    sp_r    <- raster::cellStats(sp,"sum") / sp_soma
+    sp      <- raster::resample(sp,box,method = "bilinear")
+    sp      <- sp_r * sp / raster::cellStats(sp,"sum")
     if(verbose)
       cat(paste("fraction of ",name,"area inside the domain = ",sp_r,"\n", sep =""))
-    if(as_frac) return(sp_r)
+    if(as_frac)
+      return(sp_r)
     return(sp)
   }
   return(sp)
 }
+
+
+# library(raster)
+# r <- raster
+# s <- shape

@@ -4,7 +4,6 @@
 #'
 #' @param file file name/path to a wrfinput, wrfchemi or geog_em file
 #' @param z TRUE for read wrfinput vertical coordinades
-#' @param geo True for use geog_em files
 #' @param verbose display additional information
 #'
 #' @note just WRF-Chem is suported by now
@@ -32,51 +31,106 @@
 #' text(grid_d3$xlim[1],grid_d3$Ylim[2],"d3",pos=2, offset = 0.0)
 #'}
 
-gridInfo <- function(file = file.choose(),z=F,geo = F,verbose = T){
+gridInfo <- function(file = file.choose(),z=F,verbose = T){
     if(verbose)
       cat(paste("Grid information from:",file,"\n"))
-    wrf <- ncdf4::nc_open(file)
-    if(geo){
-      lat <- ncdf4::ncvar_get(wrf,varid = "XLAT_M")      # nocov
-      lon <- ncdf4::ncvar_get(wrf,varid = "XLONG_M")     # nocov
-    }else{
-      lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
-      lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
-    }
 
-    time<- ncdf4::ncvar_get(wrf,varid = "Times")
-    dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
-    if(z){
-      PHB <- ncdf4::ncvar_get(wrf,varid = "PHB")        # 3d
-      PH  <- ncdf4::ncvar_get(wrf,varid = "PH")         # 3d
-      HGT <- ncdf4::ncvar_get(wrf,varid = "HGT")        # 2d
-      z   <- PH
-      if(length(time) == 1){                            # just one time
-        for(i in 1:dim(PH)[3]){
-          z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT    # 9.81 return values < 0, ~10-5
-        }                                               # this is for an alternative use
-      }else{                                            # for multiple times (test version)
-        for(i in 1:dim(PH)[3]){                         # nocov
-          z[,,i,]   <- (PH[,,i,] + PHB[,,i,])/9.8 - HGT # nocov
-        }
-      }
+     wrf <- ncdf4::nc_open(file)
 
-    }else{
-      z <- NA
-    }
-    ncdf4::nc_close(wrf)
-    lx  <- range(lon)
-    ly  <- range(lat)
-    nxi <- dim(lat)[1]
-    nxj <- dim(lat)[2]
-    OUT <- list(File = file, Times = time, Lat = lat, Lon = lon, z = z,
-                Horizontal = dim(lat), DX = dx, xlim = lx, ylim = ly,
-                Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
-                           y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
-                boundary = list(x = c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
-                                y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
-                poligon = sp::Polygon(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
-                                                c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
-                                             ncol = 2)))
-    return(OUT)
+     coordNC <- tryCatch(suppressWarnings(ncdf4::nc_open(file)),
+                         error=function(cond) {message(cond); return(NA)}) # nocov
+
+     coordvarList = names(coordNC[['var']])
+     if ("XLONG_M" %in% coordvarList & "XLAT_M" %in% coordvarList) {
+       inNCLon <- ncdf4::ncvar_get(coordNC, "XLONG_M")  # nocov
+       inNCLat <- ncdf4::ncvar_get(coordNC, "XLAT_M")   # nocov
+     } else if ("XLONG" %in% coordvarList & "XLAT" %in% coordvarList) {
+       inNCLon <- ncdf4::ncvar_get(coordNC, "XLONG")
+       inNCLat <- ncdf4::ncvar_get(coordNC, "XLAT")
+     } else if ("lon" %in% coordvarList & "lat" %in% coordvarList) { # nocov
+       inNCLon <- ncdf4::ncvar_get(coordNC, "lon")      # nocov
+       inNCLat <- ncdf4::ncvar_get(coordNC, "lat")      # nocov
+     } else {
+       stop('Error: Latitude and longitude fields not found (tried: XLAT_M/XLONG_M, XLAT/XLONG, lat/lon') # nocov
+     }
+
+     nrows <- dim(inNCLon)[2]
+     ncols <- dim(inNCLon)[1]
+
+     # Reverse column order to get UL in UL
+     x <- as.vector(inNCLon[,ncol(inNCLon):1])
+     y <- as.vector(inNCLat[,ncol(inNCLat):1])
+
+     coords <- as.matrix(cbind(x, y))
+
+     # Get geogrid and projection info
+     map_proj <- ncdf4::ncatt_get(coordNC, varid=0, attname="MAP_PROJ")$value
+     cen_lat  <- ncdf4::ncatt_get(coordNC, varid=0, attname="CEN_LAT")$value
+     cen_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="STAND_LON")$value
+     truelat1 <- ncdf4::ncatt_get(coordNC, varid=0, attname="TRUELAT1")$value
+     truelat2 <- ncdf4::ncatt_get(coordNC, varid=0, attname="TRUELAT2")$value
+     if (map_proj==1) {
+       geogrd.proj <- paste0("+proj=lcc +lat_1=",
+                             truelat1, " +lat_2=", truelat2, " +lat_0=",
+                             cen_lat, " +lon_0=", cen_lon,
+                             " +x_0=0 +y_0=0 +a=6370000 +b=6370000 +units=m +no_defs")
+     } else {
+       stop('Error: Projection type not supported (currently this tool only works for Lambert Conformal Conic projections).') # nocov
+     }
+
+     dx <- ncdf4::ncatt_get(coordNC, varid=0, attname="DX")$value
+     dy <- ncdf4::ncatt_get(coordNC, varid=0, attname="DY")$value
+     if ( dx != dy ) {
+       stop(paste0('Error: Asymmetric grid cells not supported. DX=', dx, ', DY=', dy)) # nocov
+     }
+
+     lat <- inNCLat
+     lon <- inNCLon
+
+     # if(geo){
+     #   lat <- ncdf4::ncvar_get(wrf,varid = "XLAT_M")      # nocov
+     #   lon <- ncdf4::ncvar_get(wrf,varid = "XLONG_M")     # nocov
+     # }else{
+     #   lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
+     #   lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
+     # }
+
+     time<- ncdf4::ncvar_get(wrf,varid = "Times")
+     dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
+     if(z){
+       PHB <- ncdf4::ncvar_get(wrf,varid = "PHB")        # 3d
+       PH  <- ncdf4::ncvar_get(wrf,varid = "PH")         # 3d
+       HGT <- ncdf4::ncvar_get(wrf,varid = "HGT")        # 2d
+       z   <- PH
+       if(length(time) == 1){                            # just one time
+         for(i in 1:dim(PH)[3]){
+           z[,,i]   <- (PH[,,i] + PHB[,,i])/9.8 - HGT    # 9.81 return values < 0, ~10-5
+         }                                               # this is for an alternative use
+       }else{                                            # for multiple times (test version)
+         for(i in 1:dim(PH)[3]){                         # nocov
+           z[,,i,]   <- (PH[,,i,] + PHB[,,i,])/9.8 - HGT # nocov
+         }
+       }
+
+     }else{
+       z <- NA
+     }
+     ncdf4::nc_close(wrf)
+     lx  <- range(lon)
+     ly  <- range(lat)
+     nxi <- dim(lat)[1]
+     nxj <- dim(lat)[2]
+     OUT <- list(File = file, Times = time, Lat = lat, Lon = lon, z = z,
+                 Horizontal = dim(lat), DX = dx, xlim = lx, ylim = ly,
+                 Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
+                            y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
+                 boundary = list(x = c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
+                                 y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
+                 poligon = sp::Polygon(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
+                                                 c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
+                                              ncol = 2)),
+                 map_proj    = map_proj,
+                 coords      = coords,
+                 geogrd.proj = geogrd.proj)
+     return(OUT)
 }
