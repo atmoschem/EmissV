@@ -38,6 +38,8 @@ rasterSource <- function(r,grid,nlevels="all",conservative = T,verbose = T){
     nrows <- grid$Horizontal[2]
     projcoords <- rgdal::project(grid$coords,
                                  grid$geogrd.proj)
+    # projcoords <- sp::spTransform(x      = grid$coords,
+    #                               CRSobj = grid$geogrd.proj)
     xmn <- projcoords[1,1] - dx/2.0  # Left border
     ymx <- projcoords[1,2] + dy/2.0  # upper border
     xmx <- xmn + ncols*dx            # Right border
