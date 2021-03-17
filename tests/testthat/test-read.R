@@ -1,6 +1,6 @@
 context("read")
 
 test_that("read edgar works", {
-  expect_equal(dim(read("edgar_co_test.nc",as_raster = F)),
+  expect_equal(dim(read("edgar_co_test.nc",as_raster = F,version = 'EDGAR')),
                c(36,18))
 })

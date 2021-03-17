@@ -59,11 +59,11 @@ test_that("final emission works", {
   ) > units::as_units(1, "ug*m^-2*s^-1"),
   TRUE)
 
-  expect_equal(nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
+  expect_equal(nrow(emission(inventory = read("edgar_co_test.nc",version = "EDGAR"),pol = "FISH",
                             grid = g,
                             mm=1,plot = T,verbose = T)
   ),
-  nrow(emission(inventory = read("edgar_co_test.nc"),pol = "FISH",
+  nrow(emission(inventory = read("edgar_co_test.nc",version = "EDGAR"),pol = "FISH",
                grid = g,
                mm=1,plot = T, aerosol = T)
   ))
