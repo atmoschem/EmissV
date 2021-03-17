@@ -54,7 +54,7 @@ totalEmission <- function(v,ef,pol,verbose = T){
 
       if(verbose){
         # if (utils::packageVersion("units") <= "0.5-1")
-        #   units::install_conversion_constant("g/d", "t/year", 365/1000000 )
+        #   units::install_conversion_constant("g/d", "t/year", 365/1000000 ) ## to use units::install_unit instead
         total_t_y <- units::set_units(total,"t/year")
         cat(paste("Total of",pol[i],":",sum(total_t_y),units::deparse_unit(total_t_y),"\n"))
       }

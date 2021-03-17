@@ -169,7 +169,8 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = F,
     if(exists("ud_units$MOL"))
       units::remove_symbolic_unit("MOL") # nocov
     if(!exists("ud_units$MOL"))
-      units::install_conversion_constant("MOL", "g", const = mm) # new conversion
+      # units::install_conversion_constant("MOL", "g", const = mm) # old conversion function
+      units::install_unit("MOL", paste(mm,"g"))                    # new conversion function
     VAR_e   =  units::set_units(VAR_e,"MOL/d")
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2

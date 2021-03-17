@@ -84,8 +84,18 @@
 #'}
 
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
-                 version = "EDGAR", month = 1, year = 1, categories,
+                 version = NA, month = 1, year = 1, categories,
                  as_raster = T, skip_missing = F, verbose = T){
+
+  if(is.na(version)){
+    cat('versions supported:\n')
+    cat('   EDGAR\n')
+    cat('   EDGAR_HTAPv2\n')
+    cat('   GAINS\n')
+    cat('   RCP\n')
+    cat('   MACCITY\n')
+    cat('   VULCAN (only reading)\n')
+  }
 
   if(length(coef) != length(file)){ # nocov start
     cat('file and coef has different length, check the read arguments!\n')
