@@ -18,6 +18,8 @@
 #'
 #' @note for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
 #'
+#' @note VULCAN is not fully supported, only for visualization purposes
+#'
 #' @note for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb
 #'
 #' @seealso \code{\link{rasterSource}} and \code{\link{gridInfo}}
@@ -87,7 +89,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  version = NA, month = 1, year = 1, categories,
                  as_raster = T, skip_missing = F, verbose = T){
 
-  if(is.na(version)){
+  if(is.na(version)){                 # nocov start
     cat('versions supported:\n')
     cat('   EDGAR\n')
     cat('   EDGAR_HTAPv2\n')
@@ -95,6 +97,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     cat('   RCP\n')
     cat('   MACCITY\n')
     cat('   VULCAN (only reading)\n')
+    stop('check version argument')    # nocov end
   }
 
   if(length(coef) != length(file)){ # nocov start

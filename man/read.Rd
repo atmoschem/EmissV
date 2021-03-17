@@ -12,7 +12,7 @@ read(
   file = file.choose(),
   coef = rep(1, length(file)),
   spec = NULL,
-  version = "EDGAR",
+  version = NA,
   month = 1,
   year = 1,
   categories,
@@ -51,6 +51,8 @@ emission and/or split into several species (speciation process)
 }
 \note{
 for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
+
+VULCAN is not fully supported, only for visualization purposes
 
 for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb
 }
