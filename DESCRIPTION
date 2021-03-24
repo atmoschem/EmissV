@@ -1,12 +1,12 @@
 Package: EmissV
 Title: Vehicular Emissions by Top-Down Methods
-Date: 2021-03-22
-Version: 0.665.4.0
+Date: 2021-03-24
+Version: 0.665.5.0
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
          role = c("aut", "cre"),
-         email = "d.schuch@northeastern.edu",
+         email = "underschuch@gmail.com",
          comment = c(ORCID = "0000-0001-5977-4519")),
   person(given = "Sergio",
          family = "Ibarra-Espinosa",
@@ -14,13 +14,13 @@ Authors@R: c(
          email = "sergio.ibarra@usp.br",
          comment = c(ORCID = "0000-0002-3162-1905"))
   )
-Maintainer: Daniel Schuch <d.schuch@northeastern.edu>
-Description: Creates emissions for use in air quality models. Vehicular emissions 
-  are estimated by a top-down approach, total emissions are calculated using the 
-  statistical description of the fleet of vehicles, the emission is spatially 
-  distributed according to satellite images or openstreetmap data 
-  <https://www.openstreetmap.org> and then distributed temporarily 
-  (Vara-Vela et al., 2016, <doi:10.5194/acp-16-777-2016>).
+Maintainer: Daniel Schuch <underschuch@gmail.com>
+Description: Processing tools to create emissions for use in numerical air 
+  quality models. Emissions can be calculated both using emission factors 
+  and activity data or using pollutant inventories. Functions to process 
+  individual point emissions, line emissions and area emissions of pollutants 
+  are available as well as methods to incorporate alternative data for Spatial 
+  distribution of emissions such as openstreetmap data or satellite images.
 Depends: R (>= 3.4)
 Imports: ncdf4, units(>= 0.5-1), raster, sp, sf, methods, data.table, rgdal
 Suggests: 
