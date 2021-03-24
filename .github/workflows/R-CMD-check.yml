@@ -23,7 +23,7 @@ jobs:
       matrix:
         config:
           - { os: windows-latest, r: "release" }
-          - { os: macOS-latest, r: "release" }
+          - { os: macOS-latest, r: "release", dispatch: 'yes'}
           - {
               os: ubuntu-20.04,
               r: "release",
