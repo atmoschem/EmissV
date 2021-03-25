@@ -5,7 +5,7 @@
     
 ![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo_true.png)
 
-This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
+This package provides tools to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
 ## Installation
 
