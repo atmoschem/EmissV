@@ -8,21 +8,29 @@
 
 <title>Summary • EmissV</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="pkgdown.css" rel="stylesheet">
@@ -30,7 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Summary" />
+
 
 
 
@@ -44,9 +54,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -60,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
       </span>
     </div>
 
@@ -68,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,9 +90,13 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/atmoschem/EmissV/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -89,6 +104,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -191,71 +207,72 @@
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
 <p>The following example creates an area source for São Paulo State (Brasil). The <code>vehicles</code> function creates a <code>data.frame</code> with information about the São Paulo Fleet using data from [@detran2016], the <code>emissionFactors</code> creates a <code>data.frame</code> with emission factors for CO and PM [@cetesbEV2015]. The <code>totalEmission</code> calculates the total emissions of CO for these vehicles and this emission factors. The next 3 lines opens different data: wrf file, a raster and the area shapefiles. These data are the input for <code>areaSouce</code> that creates an area source based on an image of persistent lights of the Defense Meteorological Satellite Program (DMSP) for São Paulo and Minas Gerais (Brasil) states and finally the function <code>emission</code> calculates the CO emissions.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(EmissV)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">fleet &lt;-<span class="st"> </span><span class="kw"><a href="reference/vehicles.html">vehicles</a></span>(<span class="dt">example =</span> T)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#                              Category   Type Fuel      Use       SP ...</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co"># Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co"># Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co"># Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co"># Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co"># Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co"># dropping the fleet from Rio de Janeiro (RJ), Parana (PR) and Santa Catarina (SC)</span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">fleet &lt;-<span class="st"> </span>fleet[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">6</span>,<span class="op">-</span><span class="dv">8</span>,<span class="op">-</span><span class="dv">9</span>)]</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">EF     &lt;-<span class="st"> </span><span class="kw"><a href="reference/emissionFactor.html">emissionFactor</a></span>(<span class="dt">example =</span> T)</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co"># using a example emission factor (values calculated from CETESB 2015):</span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#                                     CO          PM</span></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co"># Light Duty Vehicles Gasohol  1.75 g/km 0.0013 g/km</span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co"># Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km</span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co"># Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km</span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co"># Diesel Trucks                0.45 g/km 0.0612 g/km</span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co"># Diesel Urban Busses          0.77 g/km 0.1052 g/km</span></a>
-<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co"># Diesel Intercity Busses      1.48 g/km 0.1693 g/km</span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co"># Gasohol Motorcycles          1.61 g/km 0.0000 g/km</span></a>
-<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co"># Flex Motorcycles             0.75 g/km 0.0000 g/km</span></a>
-<a class="sourceLine" id="cb1-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb1-30" data-line-number="30">TOTAL  &lt;-<span class="st"> </span><span class="kw"><a href="reference/totalEmission.html">totalEmission</a></span>(fleet,EF,<span class="dt">pol =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"CO"</span>),<span class="dt">verbose =</span> T)</a>
-<a class="sourceLine" id="cb1-31" data-line-number="31"><span class="co"># Total of CO : 1128297.0993334 t year-1</span></a>
-<a class="sourceLine" id="cb1-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb1-33" data-line-number="33">grid   &lt;-<span class="st"> </span><span class="kw"><a href="reference/gridInfo.html">gridInfo</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb1-34" data-line-number="34">                   <span class="st">"/wrfinput_d02"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
-<a class="sourceLine" id="cb1-35" data-line-number="35"><span class="co"># Grid information from: .../EmissV/extdata/wrfinput_d02</span></a>
-<a class="sourceLine" id="cb1-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb1-37" data-line-number="37">raster &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb1-38" data-line-number="38">                         <span class="st">"/dmsp_hi-res.tiff"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
-<a class="sourceLine" id="cb1-39" data-line-number="39"></a>
-<a class="sourceLine" id="cb1-40" data-line-number="40">shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb1-41" data-line-number="41">                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">12</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb1-42" data-line-number="42">                            </a>
-<a class="sourceLine" id="cb1-43" data-line-number="43">Minas_Gerais &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Minas Gerais"</span>)</a>
-<a class="sourceLine" id="cb1-44" data-line-number="44"><span class="co"># processing Minas Gerais area ...</span></a>
-<a class="sourceLine" id="cb1-45" data-line-number="45"><span class="co"># fraction of Minas Gerais area inside the domain = 0.0147607845622591</span></a>
-<a class="sourceLine" id="cb1-46" data-line-number="46"></a>
-<a class="sourceLine" id="cb1-47" data-line-number="47">shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb1-48" data-line-number="48">                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">22</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb1-49" data-line-number="49">                            </a>
-<a class="sourceLine" id="cb1-50" data-line-number="50">Sao_Paulo &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Sao Paulo"</span>)</a>
-<a class="sourceLine" id="cb1-51" data-line-number="51"><span class="co"># processing Sao Paulo area ...</span></a>
-<a class="sourceLine" id="cb1-52" data-line-number="52"><span class="co"># fraction of Sao Paulo area inside the domain = 0.473260323300595</span></a>
-<a class="sourceLine" id="cb1-53" data-line-number="53"></a>
-<a class="sourceLine" id="cb1-54" data-line-number="54">sp<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/sp/topics/spplot">spplot</a></span>(raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/merge">merge</a></span>(<span class="kw">drop_units</span>(TOTAL<span class="op">$</span>CO[[<span class="dv">1</span>]]) <span class="op">*</span><span class="st"> </span>Sao_Paulo, </a>
-<a class="sourceLine" id="cb1-55" data-line-number="55">                         <span class="kw">drop_units</span>(TOTAL<span class="op">$</span>CO[[<span class="dv">2</span>]]) <span class="op">*</span><span class="st"> </span>Minas_Gerais),</a>
-<a class="sourceLine" id="cb1-56" data-line-number="56">           <span class="dt">scales =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">draw=</span><span class="ot">TRUE</span>),<span class="dt">ylab=</span><span class="st">"Lat"</span>,<span class="dt">xlab=</span><span class="st">"Lon"</span>,</a>
-<a class="sourceLine" id="cb1-57" data-line-number="57">           <span class="co"># main=list(label="Emissions of CO [g/d]"),</span></a>
-<a class="sourceLine" id="cb1-58" data-line-number="58">           <span class="dt">col.regions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#031638"</span>,<span class="st">"#001E48"</span>,<span class="st">"#002756"</span>,<span class="st">"#003062"</span>,</a>
-<a class="sourceLine" id="cb1-59" data-line-number="59">                           <span class="st">"#003A6E"</span>,<span class="st">"#004579"</span>,<span class="st">"#005084"</span>,<span class="st">"#005C8E"</span>,</a>
-<a class="sourceLine" id="cb1-60" data-line-number="60">                           <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,</a>
-<a class="sourceLine" id="cb1-61" data-line-number="61">                           <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span>))</a>
-<a class="sourceLine" id="cb1-62" data-line-number="62"></a>
-<a class="sourceLine" id="cb1-63" data-line-number="63">CO_emissions &lt;-<span class="st"> </span><span class="kw"><a href="reference/emission.html">emission</a></span>(TOTAL,<span class="st">"CO"</span>,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">SP =</span> Sao_Paulo, <span class="dt">MG =</span> Minas_Gerais),</a>
-<a class="sourceLine" id="cb1-64" data-line-number="64">                         grid,<span class="dt">mm=</span><span class="dv">28</span>, <span class="dt">plot =</span> T)</a>
-<a class="sourceLine" id="cb1-65" data-line-number="65"><span class="co"># calculating emissions for CO using molar mass = 28 ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/EmissV/">EmissV</a></span><span class="op">)</span>
+
+<span class="va">fleet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/vehicles.html">vehicles</a></span><span class="op">(</span>example <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):</span>
+<span class="co">#                              Category   Type Fuel      Use       SP ...</span>
+<span class="co"># Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...</span>
+<span class="co"># Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...</span>
+<span class="co"># Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...</span>
+<span class="co"># Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...</span>
+<span class="co"># Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...</span>
+<span class="co"># Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...</span>
+<span class="co"># Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...</span>
+<span class="co"># Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...</span>
+
+<span class="co"># dropping the fleet from Rio de Janeiro (RJ), Parana (PR) and Santa Catarina (SC)</span>
+<span class="va">fleet</span> <span class="op">&lt;-</span> <span class="va">fleet</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>,<span class="op">-</span><span class="fl">8</span>,<span class="op">-</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span>
+
+<span class="va">EF</span>     <span class="op">&lt;-</span> <span class="fu"><a href="reference/emissionFactor.html">emissionFactor</a></span><span class="op">(</span>example <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># using a example emission factor (values calculated from CETESB 2015):</span>
+<span class="co">#                                     CO          PM</span>
+<span class="co"># Light Duty Vehicles Gasohol  1.75 g/km 0.0013 g/km</span>
+<span class="co"># Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km</span>
+<span class="co"># Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km</span>
+<span class="co"># Diesel Trucks                0.45 g/km 0.0612 g/km</span>
+<span class="co"># Diesel Urban Busses          0.77 g/km 0.1052 g/km</span>
+<span class="co"># Diesel Intercity Busses      1.48 g/km 0.1693 g/km</span>
+<span class="co"># Gasohol Motorcycles          1.61 g/km 0.0000 g/km</span>
+<span class="co"># Flex Motorcycles             0.75 g/km 0.0000 g/km</span>
+
+<span class="va">TOTAL</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/totalEmission.html">totalEmission</a></span><span class="op">(</span><span class="va">fleet</span>,<span class="va">EF</span>,pol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CO"</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># Total of CO : 1128297.0993334 t year-1</span>
+
+<span class="va">grid</span>   <span class="op">&lt;-</span> <span class="fu"><a href="reference/gridInfo.html">gridInfo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                   <span class="st">"/wrfinput_d02"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Grid information from: .../EmissV/extdata/wrfinput_d02</span>
+
+<span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                         <span class="st">"/dmsp_hi-res.tiff"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">shape</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                            <span class="st">"/BR.shp"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">[</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">]</span>
+                            
+<span class="va">Minas_Gerais</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/areaSource.html">areaSource</a></span><span class="op">(</span><span class="va">shape</span>,<span class="va">raster</span>,<span class="va">grid</span>,name <span class="op">=</span> <span class="st">"Minas Gerais"</span><span class="op">)</span>
+<span class="co"># processing Minas Gerais area ...</span>
+<span class="co"># fraction of Minas Gerais area inside the domain = 0.0147607845622591</span>
+
+<span class="va">shape</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                            <span class="st">"/BR.shp"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">[</span><span class="fl">22</span>,<span class="fl">1</span><span class="op">]</span>
+                            
+<span class="va">Sao_Paulo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/areaSource.html">areaSource</a></span><span class="op">(</span><span class="va">shape</span>,<span class="va">raster</span>,<span class="va">grid</span>,name <span class="op">=</span> <span class="st">"Sao Paulo"</span><span class="op">)</span>
+<span class="co"># processing Sao Paulo area ...</span>
+<span class="co"># fraction of Sao Paulo area inside the domain = 0.473260323300595</span>
+
+<span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sp/man/spplot.html">spplot</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/merge.html">merge</a></span><span class="op">(</span><span class="fu">drop_units</span><span class="op">(</span><span class="va">TOTAL</span><span class="op">$</span><span class="va">CO</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="va">Sao_Paulo</span>, 
+                         <span class="fu">drop_units</span><span class="op">(</span><span class="va">TOTAL</span><span class="op">$</span><span class="va">CO</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,
+           scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>draw<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,ylab<span class="op">=</span><span class="st">"Lat"</span>,xlab<span class="op">=</span><span class="st">"Lon"</span>,
+           <span class="co"># main=list(label="Emissions of CO [g/d]"),</span>
+           col.regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#031638"</span>,<span class="st">"#001E48"</span>,<span class="st">"#002756"</span>,<span class="st">"#003062"</span>,
+                           <span class="st">"#003A6E"</span>,<span class="st">"#004579"</span>,<span class="st">"#005084"</span>,<span class="st">"#005C8E"</span>,
+                           <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,
+                           <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span><span class="va">TOTAL</span>,<span class="st">"CO"</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,
+                         <span class="va">grid</span>,mm<span class="op">=</span><span class="fl">28</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># calculating emissions for CO using molar mass = 28 ...</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Emissions of CO using nocturnal lights."></p>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="CO emissions ready for use in air quality model."></p>
 <p>The emissions of CO calculated in this example can be seen in Figure 1 in <code>g/d</code> (by pixel) and the final emissions on Figure 2 in <code>MOL h-1 km-1</code> (by model grid cell). This emissions can be written to WRF-Chem emission files using some package that makes the interface with NetCDF format such as <strong>ncdf4</strong> [@ncdf4], <strong>RNetCDF</strong> [@RNetCDF], <strong>ncdf.tools</strong> [@ncdftools] or with the <strong>eixport</strong> [@eixport]. Some output values (also figures generated by EmissV) might differ slightly depending on the EmissV package-version (as well as different versios of ncdf4, units, raster, sf, lwgeom, etc) and changes to the sample files.</p>
@@ -275,7 +292,14 @@
 
   </div>
 
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
+  </div>
+
 </div>
+
 
 
       <footer>
@@ -284,13 +308,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
