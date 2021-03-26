@@ -118,7 +118,7 @@ emis_file <- list.files(path = file.path(tempdir(), "EMISSION"),
 wrf_put(NO,  file = emis_file, name = "E_NO",  verbose = TRUE)
 wrf_put(NO2, file = emis_file, name = "E_NO2", verbose = TRUE)
 ```
-Other R-packages are available to write netcdf sush as [ncdf4](https://CRAN.R-project.org/package=ncdf4), [RNetCDF](https://CRAN.R-project.org/package=RNetCDF), [tidync](https://CRAN.R-project.org/package=tidync) are available on [CRAN](https://cran.r-project.org/). Other languages sush as [NCL leanguage](https://www.ncl.ucar.edu/) and the Python package [wrf-python](https://wrf-python.readthedocs.io/en/latest/), and preprocessor [anthro_emiss](https://www2.acom.ucar.edu/wrf-chem/wrf-chem-tools-community) are aternative to write in NetCDF formst.
+Other R-packages are available to write netcdf sush as [ncdf4](https://CRAN.R-project.org/package=ncdf4), [RNetCDF](https://CRAN.R-project.org/package=RNetCDF), [tidync](https://CRAN.R-project.org/package=tidync) are available on [CRAN](https://cran.r-project.org/). Other languages sush as [NCL leanguage](https://www.ncl.ucar.edu/) and the Python package [wrf-python](https://wrf-python.readthedocs.io/en/latest/), and preprocessor [anthro_emiss](https://www2.acom.ucar.edu/wrf-chem/wrf-chem-tools-community) are aternative to write NetCDF files.
 
 Check the [wrf_create](https://atmoschem.github.io/eixport/reference/wrf_create.html), [wrf_put](https://atmoschem.github.io/eixport/reference/wrf_put.html) and [to_wrf](https://atmoschem.github.io/eixport/reference/to_wrf.html) to more information and customize for your application.
 
