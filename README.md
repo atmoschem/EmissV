@@ -97,7 +97,7 @@ g   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01"
 NO  <- emission(grid = g, inventory = NOx$E_NO, pol = "NO", mm = 30.01,   plot = T)
 NO2 <- emission(grid = g, inventory = NOx$E_NO2,pol = "NO2",mm = 46.0055, plot = T)
 ```
-The next step is to save the emission in a emission file using the [eixport](https://github.com/atmoschem/eixport) R-package:
+The next step is to save the emission in a emission file, in the next example is using the [eixport](https://github.com/atmoschem/eixport) R-package:
 
 ```r
 library(eixport)
@@ -118,6 +118,7 @@ emis_file <- list.files(path = file.path(tempdir(), "EMISSION"),
 wrf_put(NO,  file = emis_file, name = "E_NO",  verbose = TRUE)
 wrf_put(NO2, file = emis_file, name = "E_NO2", verbose = TRUE)
 ```
+Other R-packages are available to write netcdf sush as [ncdf4](https://CRAN.R-project.org/package=ncdf4), [RNetCDF](https://CRAN.R-project.org/package=RNetCDF), [tidync](https://CRAN.R-project.org/package=tidync) are available on [CRAN](https://cran.r-project.org/) and the preprocessor [anthro_emiss](https://www2.acom.ucar.edu/wrf-chem/wrf-chem-tools-community).
 
 Check the [wrf_create](https://atmoschem.github.io/eixport/reference/wrf_create.html), [wrf_put](https://atmoschem.github.io/eixport/reference/wrf_put.html) and [to_wrf](https://atmoschem.github.io/eixport/reference/to_wrf.html) to more information and customize for your application.
 
