@@ -44,19 +44,84 @@ No additional steps for windows installation.
 Detailed instructions can be found at [netcdf](https://www.unidata.ucar.edu/software/netcdf/), [libudunits2-dev](https://r-quantities.github.io/units/) and [sf](https://r-spatial.github.io/sf/#installing) developers page.
 
 ### Package installation
-To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.665.1.0)*:
+To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.665.5.1)*:
 
 ```r
 install.packages("EmissV")
 ```
-To install the *development version (0.665.1.0)*:
+To install the *development version (0.665.5.1)*:
 
 ```r
 # install.packages("devtools")
 devtools::install_github("atmoschem/EmissV")
 ```
 
-## Using `EmissV`
+## Using `EmissV` with EDGAR 5.0 emissions
+
+`EmissV` can be used to process emissions of [atmospheric pollutants](https://en.wikipedia.org/wiki/Air_pollution#Sources) and [green house gases](https://en.wikipedia.org/wiki/Greenhouse_gas) from inventoryes such as [EDGAR](https://data.europa.eu/doi/10.2904/JRC_DATASET_EDGAR), [RCP](https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=welcome#), [GAINS](https://iiasa.ac.at/web/home/research/researchPrograms/air/GAINS.html) and other datasets in [NetCDF](https://www.unidata.ucar.edu/software/netcdf/) format, the [GEIA-ACCENT](http://accent.aero.jussieu.fr/database_table_inventories.php) emission data portal makes available some of these inventoryes. You can verify the supported format with:
+
+```r
+EmissV::read()
+```
+
+To generate a simple emission it's a straightforward process in 4 steps:
+
+```r
+library(EmissV)
+### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ EDGAR 5.0 website and unzip inside a temporary directory
+# create the temporary directory to download the data
+dir.create(file.path(tempdir(), "EDGAR"))
+# download the total emissions of NOx from EDGAR v50_AP for 2015
+eixport::get_edgar(dataset = "v50_AP",
+                   pol     = 'NOx',
+                   sector  = "TOTALS",
+                   year    = 2015,
+                   type    = 'nc', ask = FALSE, copyright = FALSE,
+                   destpath = file.path(tempdir(), "EDGAR"))
+# unzip the file
+unzip(zipfile = paste0(file.path(tempdir(), "EDGAR"),'/v50_NOx_2015.0.1x0.1.zip'),
+      exdir   = paste0(file.path(tempdir(), "EDGAR")))
+
+### 2. read the emissions (using the spec argument to split NOx into NO and NO2)
+NOx <- read(paste0(file.path(tempdir(), "EDGAR"),'/v50_NOx_2015.0.1x0.1.nc'),
+            version = 'EDGAR',
+            spec    = c(E_NO  = 0.9 ,   # optional, 90% of NOx used to NO
+                        E_NO2 = 0.1 ))  # optional, 10% of NOx uset to NO2
+
+### 3. get the information from a WRF grid from a initial conditions file (wrfinput)
+g   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
+
+### 4. calculate the emissions for grid g
+NO  <- emission(grid = g, inventory = NOx$E_NO, pol = "NO", mm = 30.01,   plot = T)
+NO2 <- emission(grid = g, inventory = NOx$E_NO2,pol = "NO2",mm = 46.0055, plot = T)
+```
+The next step is to save the emission in a emission file using the [eixport](https://github.com/atmoschem/eixport) R-package:
+
+```r
+library(eixport)
+### create a temporary folder for emissions
+dir.create(file.path(tempdir(), "EMISSION"))
+
+### create the emision file
+wrf_create(wrfinput_dir = system.file("extdata", package = "EmissV"),
+           wrfchemi_dir = file.path(tempdir(), "EMISSION"),
+           domains      = 1)
+           
+### get the file path of the emission file
+emis_file <- list.files(path = file.path(tempdir(), "EMISSION"),
+                        pattern = "wrfchemi_d01",
+                        full.names = TRUE)
+
+### save the emission
+wrf_put(NO,  file = emis_file, name = "E_NO",  verbose = TRUE)
+wrf_put(NO2, file = emis_file, name = "E_NO2", verbose = TRUE)
+```
+
+check the [wrf_create](https://atmoschem.github.io/eixport/reference/wrf_create.html), [wrf_put](https://atmoschem.github.io/eixport/reference/wrf_put.html) and [to_wrf](https://atmoschem.github.io/eixport/reference/to_wrf.html) to more information and customize for your application.
+
+**NOTE**: The emission file must be compatible with the WRF-Chem options (many arguments are the same as the namelist.input from WRF) check the [eixport](https://atmoschem.github.io/eixport/reference/wrf_create.html) R-Package documentation and the [WRF-Chem manual](https://ruc.noaa.gov/wrf/wrf-chem/Users_guide.pdf) for more information.
+
+## Using `EmissV` to estimate vehicular emissions
 
 In EmissV the vehicular emissions are estimated by a top-down approach, i.e. the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc).The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.
 
