@@ -58,7 +58,7 @@ devtools::install_github("atmoschem/EmissV")
 
 ## Using `EmissV` with EDGAR 5.0 emissions
 
-`EmissV` can be used to process emissions of [atmospheric pollutants](https://en.wikipedia.org/wiki/Air_pollution#Sources) and [green house gases](https://en.wikipedia.org/wiki/Greenhouse_gas) from inventoryes such as [EDGAR](https://data.europa.eu/doi/10.2904/JRC_DATASET_EDGAR), [RCP](https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=welcome#), [GAINS](https://iiasa.ac.at/web/home/research/researchPrograms/air/GAINS.html) and other datasets in [NetCDF](https://www.unidata.ucar.edu/software/netcdf/) format, the [GEIA-ACCENT](http://accent.aero.jussieu.fr/database_table_inventories.php) emission data portal makes available some of these inventoryes. You can verify the supported format with:
+`EmissV` can be used to process emissions of [atmospheric pollutants](https://en.wikipedia.org/wiki/Air_pollution#Sources) and [green house gases](https://en.wikipedia.org/wiki/Greenhouse_gas) from inventories such as [EDGAR](https://data.europa.eu/doi/10.2904/JRC_DATASET_EDGAR), [RCP](https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=welcome#), [GAINS](https://iiasa.ac.at/web/home/research/researchPrograms/air/GAINS.html) and other datasets in [NetCDF](https://www.unidata.ucar.edu/software/netcdf/) format, the [GEIA-ACCENT](http://accent.aero.jussieu.fr/database_table_inventories.php) emission data portal makes available some of these inventories. You can verify the supported format with:
 
 ```r
 EmissV::read()
@@ -68,7 +68,9 @@ To generate a simple emission it's a straightforward process in 4 steps:
 
 ```r
 library(EmissV)
-### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ EDGAR 5.0 website and unzip inside a temporary directory
+### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package 
+### or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ 
+### EDGAR 5.0 website and unzip inside a temporary directory
 # create the temporary directory to download the data
 dir.create(file.path(tempdir(), "EDGAR"))
 # download the total emissions of NOx from EDGAR v50_AP for 2015
@@ -117,7 +119,7 @@ wrf_put(NO,  file = emis_file, name = "E_NO",  verbose = TRUE)
 wrf_put(NO2, file = emis_file, name = "E_NO2", verbose = TRUE)
 ```
 
-check the [wrf_create](https://atmoschem.github.io/eixport/reference/wrf_create.html), [wrf_put](https://atmoschem.github.io/eixport/reference/wrf_put.html) and [to_wrf](https://atmoschem.github.io/eixport/reference/to_wrf.html) to more information and customize for your application.
+Check the [wrf_create](https://atmoschem.github.io/eixport/reference/wrf_create.html), [wrf_put](https://atmoschem.github.io/eixport/reference/wrf_put.html) and [to_wrf](https://atmoschem.github.io/eixport/reference/to_wrf.html) to more information and customize for your application.
 
 **NOTE**: The emission file must be compatible with the WRF-Chem options (many arguments are the same as the namelist.input from WRF) check the [eixport](https://atmoschem.github.io/eixport/reference/wrf_create.html) R-Package documentation and the [WRF-Chem manual](https://ruc.noaa.gov/wrf/wrf-chem/Users_guide.pdf) for more information.
 
