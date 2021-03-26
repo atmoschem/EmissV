@@ -455,9 +455,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     # initial == units: Mg km-2 year-1
     # final   == units: g m-2 s-1
 
-    #### CHECK THIS line
     # 'MgC km-2 year-1' to 'Mg km-2 year-1'
-    # var = 12.0107 * var
+    var = 12.0107 * var
 
     # 'Mg km-2 year-1' to 'g km-2 year-1'
     # var = 1000000 * var                 # x10**6
