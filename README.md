@@ -97,7 +97,7 @@ g   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01"
 NO  <- emission(grid = g, inventory = NOx$E_NO, pol = "NO", mm = 30.01,   plot = T)
 NO2 <- emission(grid = g, inventory = NOx$E_NO2,pol = "NO2",mm = 46.0055, plot = T)
 ```
-The next step is to save the emission in a emission file, in the next example is using the [eixport](https://github.com/atmoschem/eixport) R-package:
+The next step is to save the emission in a emission file, the next example show how to save emissions using the [eixport](https://github.com/atmoschem/eixport) R-package:
 
 ```r
 library(eixport)
