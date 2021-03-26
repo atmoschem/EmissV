@@ -91,13 +91,22 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
 
   if(is.na(version)){                 # nocov start
     cat('versions supported:\n')
-    cat('   EDGAR\n')
-    cat('   EDGAR_HTAPv2\n')
-    cat('   GAINS\n')
-    cat('   RCP\n')
-    cat('   MACCITY\n')
-    cat('   VULCAN (only reading)\n')
+    cat(' - EDGAR\n')
+    cat(' - EDGAR_HTAPv2\n')
+    cat(' - GAINS\n')
+    cat(' - RCP\n')
+    cat(' - MACCITY\n')
+    cat(' - VULCAN\n')
     stop('check version argument')    # nocov end
+  }
+
+  raster_to_ncdf <- function(r,na_value = 0){
+    N_times <- dim(r)[3]
+    a       <- array(na_value,c(dim(r)[2],dim(r)[1],N_times))
+    for(i in 1:N_times){
+      a[,,i] <- as.matrix(t(raster::flip(r[[i]],2)))
+    }
+    return(a)
   }
 
   if(length(coef) != length(file)){ # nocov start
@@ -408,15 +417,16 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(version == "VULCAN"){                   # nocov start
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
-    name <- grep('time_bnds',         name, invert = T, value = T)
-    name <- grep('crs',          name, invert = T, value = T)
-    name <- grep('lat',name, invert = T, value = T)
-    name <- grep('lon',     name, invert = T, value = T)
+    name <- grep('time_bnds',name, invert = T, value = T)
+    name <- grep('crs',      name, invert = T, value = T)
+    name <- grep('lat',      name, invert = T, value = T)
+    name <- grep('lon',      name, invert = T, value = T)
 
-    var   <- ncdf4::ncvar_get(ed,name[1])
-    lat   <- ncdf4::ncvar_get(ed,'lat')
-    lon   <- ncdf4::ncvar_get(ed,'lon')
-    crs   <- ncdf4::ncvar_get(ed,'crs')
+    # var   <- ncdf4::ncvar_get(ed,name[1])
+    # lat   <- ncdf4::ncvar_get(ed,'lat')
+    # lon   <- ncdf4::ncvar_get(ed,'lon')
+    # crs   <- ncdf4::ncvar_get(ed,'crs')
+    var   <- raster::stack(file[1])            # WARNINGS
     times <- ncdf4::ncvar_get(ed,'time_bnds')
     inicial  <- as.POSIXct('2010-01-01 00:00:00',tz = 'GMT')
 
@@ -430,34 +440,60 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     # Mg km-2 year-1
     unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
 
-    cat(' crs:',  crs,                           '\n',
-        'var:',   name[1],                       '\n',
-        'units:', unidades,                      '\n',
-        'dim:',   dim(lat),                      '\n',
+    # cat(' crs:',  crs,                           '\n',
+    #     'var:',   name[1],                       '\n',
+    #     'units:', unidades,                      '\n',
+    #     'dim:',   dim(lat),                      '\n',
+    #     'year:',  format(time_start[year], "%Y"),'\n')
+
+    # var   <- var[,,year]
+    # var[is.na(var)] <- 0
+    var               <- var[[year]]
+    var[is.na(var[])] <- 0
+
+    # UNIT conversion
+    # initial == units: Mg km-2 year-1
+    # final   == units: g m-2 s-1
+
+    #### CHECK THIS line
+    # 'MgC km-2 year-1' to 'Mg km-2 year-1'
+    # var = 12.0107 * var
+
+    # 'Mg km-2 year-1' to 'g km-2 year-1'
+    # var = 1000000 * var                 # x10**6
+    # 'g km-2 year-1' to 'g km-2 s-1'
+    var = var / (365 * 24 * 60 * 60)
+    # 'g km-2 s-1' to 'g m-2 s-1'
+    # var = var / (1000 * 1000)           # /10**6
+
+    cat(' var:',  name[1],                       '\n',
+        'units:', 'g m-2 s-1',                   '\n',
         'year:',  format(time_start[year], "%Y"),'\n')
 
-    var   <- var[,,year]
-    var[is.na(var)] <- 0
-
     if(as_raster){
-      max_lon <- max(lon,na.rm = T)
-      max_lat <- max(lat,na.rm = T)
-      min_lon <- min(lon,na.rm = T)
-      min_lat <- min(lat,na.rm = T)
-
-      var <- t(var)
-      var <- apply(var, 2, rev)
-
-      r   <- raster::raster(x   = var,
-                            xmn = min_lon,
-                            xmx = max_lon,
-                            ymn = min_lat,
-                            ymx = max_lat)
-      raster::crs(r) <- "+proj=longlat"
-      names(r) <- name[1]
-      return(r)
-    }else{
       return(var)
+      # max_lon <- max(lon,na.rm = T)
+      # max_lat <- max(lat,na.rm = T)
+      # min_lon <- min(lon,na.rm = T)
+      # min_lat <- min(lat,na.rm = T)
+      #
+      # var <- t(var)
+      # var <- apply(var, 2, rev)
+      #
+      # r   <- raster::raster(x   = var,
+      #                       xmn = min_lon,
+      #                       xmx = max_lon,
+      #                       ymn = min_lat,
+      #                       ymx = max_lat)
+      # raster::crs(r) <- "+proj=longlat"
+      # names(r) <- name[1]
+      # return(r)
+    }else{
+      a <- raster_to_ncdf(var)
+      if(dim(a)[3] == 1) a <- a[,,1,drop = T]
+
+      return(a)
+      # return(var)
     }
   }                                                        # nocov end
 
