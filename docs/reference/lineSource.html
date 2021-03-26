@@ -8,21 +8,29 @@
 
 <title>Distribution of emissions by lines — lineSource • EmissV</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +38,8 @@
 
 
 
-<meta property="og:title" content="Distribution of emissions by lines — lineSource" />
 
+<meta property="og:title" content="Distribution of emissions by lines — lineSource" />
 <meta property="og:description" content="Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or
 spatial lines.
 There 3 modes available to create the emission grid:
@@ -41,7 +49,7 @@ There 3 modes available to create the emission grid:
 The variable is the column of the data.frame with contains the variable to be used as emissions,
 by defoult the idstribution taken into acount the lench distribution of lines into each grid cell
 and the output is normalized." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -55,9 +63,10 @@ and the output is normalized." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +80,7 @@ and the output is normalized." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
       </span>
     </div>
 
@@ -79,7 +88,7 @@ and the output is normalized." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -90,9 +99,13 @@ and the output is normalized." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/atmoschem/EmissV/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -100,18 +113,18 @@ and the output is normalized." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Distribution of emissions by lines</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/lineSource.R'><code>R/lineSource.R</code></a></small>
     <div class="hidden name"><code>lineSource.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or
 spatial lines.</p>
 <p>There 3 modes available to create the emission grid:
@@ -121,12 +134,19 @@ spatial lines.</p>
 <p>The variable is the column of the data.frame with contains the variable to be used as emissions,
 by defoult the idstribution taken into acount the lench distribution of lines into each grid cell
 and the output is normalized.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>lineSource</span>(<span class='no'>s</span>, <span class='no'>grid</span>, <span class='kw'>as_raster</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"info"</span>,
-  <span class='kw'>gcol</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>grow</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>variable</span> <span class='kw'>=</span> <span class='st'>"length"</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>lineSource</span><span class='op'>(</span>
+  <span class='va'>s</span>,
+  <span class='va'>grid</span>,
+  as_raster <span class='op'>=</span> <span class='cn'>F</span>,
+  verbose <span class='op'>=</span> <span class='cn'>T</span>,
+  type <span class='op'>=</span> <span class='st'>"info"</span>,
+  gcol <span class='op'>=</span> <span class='fl'>100</span>,
+  grow <span class='op'>=</span> <span class='fl'>100</span>,
+  variable <span class='op'>=</span> <span class='st'>"length"</span>
+<span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -163,44 +183,41 @@ and the output is normalized.</p>
       <td><p>variable to use, default is line length</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>OpenstreetMap data avaliable <a href='https://www.openstreetmap.org/'>https://www.openstreetmap.org/</a> and <a href='https://download.geofabrik.de/'>https://download.geofabrik.de/</a></p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='gridInfo.html'>gridInfo</a></code> and <code><a href='rasterSource.html'>rasterSource</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>roads</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/osmar/topics/get_osm'>get_osm</a></span>(<span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/osmar/topics/osmsource_file'>complete_file</a></span>(),
-                        <span class='kw'>source</span> <span class='kw'>=</span> <span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/osmar/topics/osmsource_file'>osmsource_file</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata"</span>,
-                        <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"EmissV"</span>),<span class='st'>"/streets.osm.xz"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>)))</div><div class='output co'>#&gt; <span class='warning'>Warning: number of columns of result is not a multiple of vector length (arg 1)</span></div><div class='input'><span class='no'>road_lines</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>osmar</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/osmar/topics/as_sp'>as_sp</a></span>(<span class='no'>roads</span>,<span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"lines"</span>)
-<span class='no'>roads</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sf/topics/st_as_sf'>st_as_sf</a></span>(<span class='no'>road_lines</span>)
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='va'>roads</span> <span class='op'>&lt;-</span> <span class='fu'>osmar</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/osmar/man/get_osm.html'>get_osm</a></span><span class='op'>(</span><span class='fu'>osmar</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/osmar/man/osmsource_file.html'>complete_file</a></span><span class='op'>(</span><span class='op'>)</span>,
+                        source <span class='op'>=</span> <span class='fu'>osmar</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/osmar/man/osmsource_file.html'>osmsource_file</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,
+                        package<span class='op'>=</span><span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/streets.osm.xz"</span>,sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: number of columns of result is not a multiple of vector length (arg 1)</span></div><div class='input'><span class='va'>road_lines</span> <span class='op'>&lt;-</span> <span class='fu'>osmar</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/osmar/man/as_sp.html'>as_sp</a></span><span class='op'>(</span><span class='va'>roads</span>,what <span class='op'>=</span> <span class='st'>"lines"</span><span class='op'>)</span>
+<span class='va'>roads</span> <span class='op'>&lt;-</span> <span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_as_sf.html'>st_as_sf</a></span><span class='op'>(</span><span class='va'>road_lines</span><span class='op'>)</span>
 
-<span class='no'>d3</span>    <span class='kw'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"EmissV"</span>),<span class='st'>"/wrfinput_d03"</span>))</div><div class='output co'>#&gt; Grid information from: C:/Users/Schuch/Documents/EmissV/inst/extdata/wrfinput_d03 </div><div class='input'>
-<span class='no'>roadLength</span> <span class='kw'>&lt;-</span> <span class='fu'>lineSource</span>(<span class='no'>roads</span>,<span class='no'>d3</span>,<span class='kw'>as_raster</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; using length as emission variable
+<span class='va'>d3</span>    <span class='op'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, package <span class='op'>=</span> <span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/wrfinput_d03"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Grid information from: C:/Users/under/AppData/Local/Temp/Rtmp4O5ozV/temp_libpath128c4a983308/EmissV/extdata/wrfinput_d03 </div><div class='input'>
+<span class='va'>roadLength</span> <span class='op'>&lt;-</span> <span class='fu'>lineSource</span><span class='op'>(</span><span class='va'>roads</span>,<span class='va'>d3</span>,as_raster<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; using length as emission variable
 #&gt; Number of lat points 51
-#&gt; Number of lon points 51</div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3</span></div><div class='output co'>#&gt; <span class='message'>although coordinates are longitude/latitude, st_intersection assumes that they are planar</span></div><div class='input'><span class='kw pkg'>sp</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sp/topics/spplot'>spplot</a></span>(<span class='no'>roadLength</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>draw</span><span class='kw'>=</span><span class='fl'>TRUE</span>), <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"Lat"</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"Lon"</span>,<span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Length of roads"</span>,
-           <span class='kw'>sp.layout</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='st'>"sp.lines"</span>, <span class='no'>road_lines</span>))</div><div class='img'><img src='lineSource-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; Number of lon points 51</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'sf' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1</span></div><div class='output co'>#&gt; <span class='message'>although coordinates are longitude/latitude, st_intersection assumes that they are planar</span></div><div class='input'><span class='fu'>sp</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>roadLength</span>, scales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>draw<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>, ylab<span class='op'>=</span><span class='st'>"Lat"</span>, xlab<span class='op'>=</span><span class='st'>"Lon"</span>,main<span class='op'>=</span><span class='st'>"Length of roads"</span>,
+           sp.layout<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"sp.lines"</span>, <span class='va'>road_lines</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='lineSource-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
+
 
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#source">Source</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -208,13 +225,16 @@ and the output is normalized.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

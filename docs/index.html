@@ -5,24 +5,25 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vehicular Emissions by Top-Down Methods • EmissV</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Vehicular Emissions by Top-Down Methods">
-<meta property="og:description" content="Creates emissions for use in air quality models. Vehicular emissions 
-  are estimated by a top-down approach, total emissions are calculated using the 
-  statistical description of the fleet of vehicles, the emission is spatially 
-  distributed according to satellite images or openstreetmap data 
-  &lt;https://www.openstreetmap.org&gt; and then distributed temporarily 
-  (Vara-Vela et al., 2016, &lt;doi:10.5194/acp-16-777-2016&gt;).">
-<meta name="twitter:card" content="summary">
+<title>Tools for create emissions for air quality models • EmissV</title>
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Tools for create emissions for air quality models">
+<meta property="og:description" content="Processing tools to create emissions for use in numerical air 
+  quality models. Emissions can be calculated both using emission factors 
+  and activity data or using pollutant inventories. Functions to process 
+  individual point emissions, line emissions and area emissions of pollutants 
+  are available as well as methods to incorporate alternative data for Spatial 
+  distribution of emissions such as openstreetmap data or satellite images.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
       </span>
     </div>
 
@@ -43,7 +44,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -54,7 +55,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/atmoschem/EmissV/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -63,6 +71,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="contents col-md-9">
 <div id="emissv" class="section level1">
@@ -70,7 +79,7 @@
 <a href="#emissv" class="anchor"></a>EmissV</h1></div>
 
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo_true.png" alt="hex_logo"></p>
-<p>This package provides some methods to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
+<p>This package provides tools to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as <a href="https://ruc.noaa.gov/wrf/wrf-chem/">WRF-Chem</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -83,26 +92,26 @@
 <h3 class="hasAnchor">
 <a href="#to-ubuntu" class="anchor"></a>To Ubuntu</h3>
 <p>The following steps are required for installation on Ubuntu:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="fu">sudo</span> apt-get --yes --force-yes update -qq</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="co"># netcdf dependencies:</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="fu">sudo</span> apt-get install --yes libnetcdf-dev netcdf-bin</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="co"># units/udunits2 dependency:</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="fu">sudo</span> apt-get install --yes libudunits2-dev</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co"># sf dependencies (without libudunits2-dev):</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="fu">sudo</span> apt-get install --yes libgdal-dev libgeos-dev libproj-dev</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get --yes --force-yes update -qq</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># netcdf dependencies:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install --yes libnetcdf-dev netcdf-bin</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># units/udunits2 dependency:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install --yes libudunits2-dev</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sf dependencies (without libudunits2-dev):</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install --yes libgdal-dev libgeos-dev libproj-dev</span></code></pre></div>
 </div>
 <div id="to-fedora" class="section level3">
 <h3 class="hasAnchor">
 <a href="#to-fedora" class="anchor"></a>To Fedora</h3>
 <p>The following steps are required for installation on Fedora:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1">  <span class="fu">sudo</span> dnf update</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="co"># netcdf dependencies:</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="fu">sudo</span> yum install netcdf-devel</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="co"># units/udunits2 dependency:</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="fu">sudo</span> yum install udunits2-devel</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="co"># sf dependencies (without libudunits2-dev):</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="fu">sudo</span> yum install gdal-devel proj-devel proj-epsg proj-nad geos-devel</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> dnf update</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># netcdf dependencies:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> yum install netcdf-devel</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># units/udunits2 dependency:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> yum install udunits2-devel</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sf dependencies (without libudunits2-dev):</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> yum install gdal-devel proj-devel proj-epsg proj-nad geos-devel</span></code></pre></div>
 </div>
 <div id="to-windows" class="section level3">
 <h3 class="hasAnchor">
@@ -113,85 +122,149 @@
 <div id="package-installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#package-installation" class="anchor"></a>Package installation</h3>
-<p>To install the <em><a href="https://cran.r-project.org/package=EmissV">CRAN</a> version (0.664.9)</em>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"EmissV"</span>)</a></code></pre></div>
-<p>To install the <em>development version (0.665.0.1)</em>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"atmoschem/EmissV"</span>)</a></code></pre></div>
+<p>To install the <em><a href="https://cran.r-project.org/package=EmissV">CRAN</a> version (0.665.5.1)</em>:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"EmissV"</span><span class="op">)</span></code></pre></div>
+<p>To install the <em>development version (0.665.5.1)</em>:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"atmoschem/EmissV"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="using-emissv" class="section level2">
+<div id="using-emissv-with-edgar-50-emissions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-emissv" class="anchor"></a>Using <code>EmissV</code>
-</h2>
+<a href="#using-emissv-with-edgar-50-emissions" class="anchor"></a>Using <code>EmissV</code> with EDGAR 5.0 emissions</h2>
+<p><code>EmissV</code> can be used to process emissions of <a href="https://en.wikipedia.org/wiki/Air_pollution#Sources">atmospheric pollutants</a> and <a href="https://en.wikipedia.org/wiki/Greenhouse_gas">green house gases</a> from inventories such as <a href="https://data.europa.eu/doi/10.2904/JRC_DATASET_EDGAR">EDGAR</a>, <a href="https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&amp;page=welcome#">RCP</a>, <a href="https://iiasa.ac.at/web/home/research/researchPrograms/air/GAINS.html">GAINS</a> and other datasets in <a href="https://www.unidata.ucar.edu/software/netcdf/">NetCDF</a> format, the <a href="http://accent.aero.jussieu.fr/database_table_inventories.php">GEIA-ACCENT</a> emission data portal makes available some of these inventories. You can verify the supported format with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">EmissV</span><span class="fu">::</span><span class="fu"><a href="reference/read.html">read</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>To generate a simple emission it’s a straightforward process in 4 steps:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/EmissV/">EmissV</a></span><span class="op">)</span>
+<span class="co">### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package </span>
+<span class="co">### or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ </span>
+<span class="co">### EDGAR 5.0 website and unzip inside a temporary directory</span>
+<span class="co"># create the temporary directory to download the data</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># download the total emissions of NOx from EDGAR v50_AP for 2015</span>
+<span class="fu">eixport</span><span class="fu">::</span><span class="fu"><a href="https://atmoschem.github.io/eixport/reference/get_edgar.html">get_edgar</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"v50_AP"</span>,
+                   pol     <span class="op">=</span> <span class="st">'NOx'</span>,
+                   sector  <span class="op">=</span> <span class="st">"TOTALS"</span>,
+                   year    <span class="op">=</span> <span class="fl">2015</span>,
+                   type    <span class="op">=</span> <span class="st">'nc'</span>, ask <span class="op">=</span> <span class="cn">FALSE</span>, copyright <span class="op">=</span> <span class="cn">FALSE</span>,
+                   destpath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># unzip the file</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span>zipfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span>,<span class="st">'/v50_NOx_2015.0.1x0.1.zip'</span><span class="op">)</span>,
+      exdir   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">### 2. read the emissions (using the spec argument to split NOx into NO and NO2)</span>
+<span class="va">NOx</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read.html">read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span>,<span class="st">'/v50_NOx_2015.0.1x0.1.nc'</span><span class="op">)</span>,
+            version <span class="op">=</span> <span class="st">'EDGAR'</span>,
+            spec    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>E_NO  <span class="op">=</span> <span class="fl">0.9</span> ,   <span class="co"># optional, 90% of NOx used to NO</span>
+                        E_NO2 <span class="op">=</span> <span class="fl">0.1</span> <span class="op">)</span><span class="op">)</span>  <span class="co"># optional, 10% of NOx uset to NO2</span>
+
+<span class="co">### 3. get the information from a WRF grid from a initial conditions file (wrfinput)</span>
+<span class="va">g</span>   <span class="op">&lt;-</span> <span class="fu"><a href="reference/gridInfo.html">gridInfo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/wrfinput_d01"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">### 4. calculate the emissions for grid g</span>
+<span class="va">NO</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span>grid <span class="op">=</span> <span class="va">g</span>, inventory <span class="op">=</span> <span class="va">NOx</span><span class="op">$</span><span class="va">E_NO</span>, pol <span class="op">=</span> <span class="st">"NO"</span>, mm <span class="op">=</span> <span class="fl">30.01</span>,   plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">NO2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span>grid <span class="op">=</span> <span class="va">g</span>, inventory <span class="op">=</span> <span class="va">NOx</span><span class="op">$</span><span class="va">E_NO2</span>,pol <span class="op">=</span> <span class="st">"NO2"</span>,mm <span class="op">=</span> <span class="fl">46.0055</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<p>The next step is to save the emission in a emission file using the <a href="https://github.com/atmoschem/eixport">eixport</a> R-package:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/eixport/">eixport</a></span><span class="op">)</span>
+<span class="co">### create a temporary folder for emissions</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EMISSION"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co">### create the emision file</span>
+<span class="fu"><a href="https://atmoschem.github.io/eixport/reference/wrf_create.html">wrf_create</a></span><span class="op">(</span>wrfinput_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+           wrfchemi_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EMISSION"</span><span class="op">)</span>,
+           domains      <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+           
+<span class="co">### get the file path of the emission file</span>
+<span class="va">emis_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EMISSION"</span><span class="op">)</span>,
+                        pattern <span class="op">=</span> <span class="st">"wrfchemi_d01"</span>,
+                        full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co">### save the emission</span>
+<span class="fu"><a href="https://atmoschem.github.io/eixport/reference/wrf_put.html">wrf_put</a></span><span class="op">(</span><span class="va">NO</span>,  file <span class="op">=</span> <span class="va">emis_file</span>, name <span class="op">=</span> <span class="st">"E_NO"</span>,  verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://atmoschem.github.io/eixport/reference/wrf_put.html">wrf_put</a></span><span class="op">(</span><span class="va">NO2</span>, file <span class="op">=</span> <span class="va">emis_file</span>, name <span class="op">=</span> <span class="st">"E_NO2"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Check the <a href="https://atmoschem.github.io/eixport/reference/wrf_create.html">wrf_create</a>, <a href="https://atmoschem.github.io/eixport/reference/wrf_put.html">wrf_put</a> and <a href="https://atmoschem.github.io/eixport/reference/to_wrf.html">to_wrf</a> to more information and customize for your application.</p>
+<p><strong>NOTE</strong>: The emission file must be compatible with the WRF-Chem options (many arguments are the same as the namelist.input from WRF) check the <a href="https://atmoschem.github.io/eixport/reference/wrf_create.html">eixport</a> R-Package documentation and the <a href="https://ruc.noaa.gov/wrf/wrf-chem/Users_guide.pdf">WRF-Chem manual</a> for more information.</p>
+</div>
+<div id="using-emissv-to-estimate-vehicular-emissions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-emissv-to-estimate-vehicular-emissions" class="anchor"></a>Using <code>EmissV</code> to estimate vehicular emissions</h2>
 <p>In EmissV the vehicular emissions are estimated by a top-down approach, i.e. the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc).The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.</p>
 <p><strong>I.</strong> Total: emission of pollutants is estimated from the fleet, use and emission factors and for the interest area (cities, states, countries, etc).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(EmissV)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">fleet &lt;-<span class="st"> </span><span class="kw"><a href="reference/vehicles.html">vehicles</a></span>(<span class="dt">example =</span> T)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#                              Category   Type Fuel      Use       SP ...</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co"># Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co"># Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co"># Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co"># Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co"># Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">fleet &lt;-<span class="st"> </span>fleet[,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">6</span>,<span class="op">-</span><span class="dv">8</span>,<span class="op">-</span><span class="dv">9</span>)] <span class="co"># dropping RJ, PR and SC</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17">EF     &lt;-<span class="st"> </span><span class="kw"><a href="reference/emissionFactor.html">emissionFactor</a></span>(<span class="dt">example =</span> T)</a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co"># using a example emission factor (values calculated from CETESB 2015):</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#                                     CO          PM</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co"># Light duty Vehicles Gasohol  1.75 g/km 0.0013 g/km</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co"># Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co"># Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co"># Diesel trucks                0.45 g/km 0.0612 g/km</span></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co"># Diesel urban busses          0.77 g/km 0.1052 g/km</span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co"># Diesel intercity busses      1.48 g/km 0.1693 g/km</span></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co"># Gasohol motorcycles          1.61 g/km 0.0000 g/km</span></a>
-<a class="sourceLine" id="cb5-27" data-line-number="27"><span class="co"># Flex motorcycles             0.75 g/km 0.0000 g/km</span></a>
-<a class="sourceLine" id="cb5-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb5-29" data-line-number="29">TOTAL  &lt;-<span class="st"> </span><span class="kw"><a href="reference/totalEmission.html">totalEmission</a></span>(fleet,EF,<span class="dt">pol =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"CO"</span>),<span class="dt">verbose =</span> T)</a>
-<a class="sourceLine" id="cb5-30" data-line-number="30"><span class="co"># Total of CO : 1128297.0993334 t year-1</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/EmissV/">EmissV</a></span><span class="op">)</span>
+
+<span class="va">fleet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/vehicles.html">vehicles</a></span><span class="op">(</span>example <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):</span>
+<span class="co">#                              Category   Type Fuel      Use       SP ...</span>
+<span class="co"># Light Duty Vehicles Gasohol   LDV_E25    LDV  E25  41 km/d 11624342 ...</span>
+<span class="co"># Light Duty Vehicles Ethanol  LDV_E100    LDV E100  41 km/d   874627 ...</span>
+<span class="co"># Light Duty Vehicles Flex        LDV_F    LDV FLEX  41 km/d  9845022 ...</span>
+<span class="co"># Diesel Trucks               TRUCKS_B5 TRUCKS   B5 110 km/d   710634 ...</span>
+<span class="co"># Diesel Urban Busses           CBUS_B5    BUS   B5 165 km/d   792630 ...</span>
+<span class="co"># Diesel Intercity Busses       MBUS_B5    BUS   B5 165 km/d    21865 ...</span>
+<span class="co"># Gasohol Motorcycles          MOTO_E25   MOTO  E25 140 km/d  3227921 ...</span>
+<span class="co"># Flex Motorcycles               MOTO_F   MOTO FLEX 140 km/d   235056 ...</span>
+
+<span class="va">fleet</span> <span class="op">&lt;-</span> <span class="va">fleet</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>,<span class="op">-</span><span class="fl">8</span>,<span class="op">-</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span> <span class="co"># dropping RJ, PR and SC</span>
+
+<span class="va">EF</span>     <span class="op">&lt;-</span> <span class="fu"><a href="reference/emissionFactor.html">emissionFactor</a></span><span class="op">(</span>example <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># using a example emission factor (values calculated from CETESB 2015):</span>
+<span class="co">#                                     CO          PM</span>
+<span class="co"># Light duty Vehicles Gasohol  1.75 g/km 0.0013 g/km</span>
+<span class="co"># Light Duty Vehicles Ethanol 10.04 g/km 0.0000 g/km</span>
+<span class="co"># Light Duty Vehicles Flex     0.39 g/km 0.0010 g/km</span>
+<span class="co"># Diesel trucks                0.45 g/km 0.0612 g/km</span>
+<span class="co"># Diesel urban busses          0.77 g/km 0.1052 g/km</span>
+<span class="co"># Diesel intercity busses      1.48 g/km 0.1693 g/km</span>
+<span class="co"># Gasohol motorcycles          1.61 g/km 0.0000 g/km</span>
+<span class="co"># Flex motorcycles             0.75 g/km 0.0000 g/km</span>
+
+<span class="va">TOTAL</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/totalEmission.html">totalEmission</a></span><span class="op">(</span><span class="va">fleet</span>,<span class="va">EF</span>,pol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CO"</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># Total of CO : 1128297.0993334 t year-1</span></code></pre></div>
 <p><strong>II.</strong> Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), OpenStreet maps (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">raster &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">                         <span class="st">"/dmsp.tiff"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">grid   &lt;-<span class="st"> </span><span class="kw"><a href="reference/gridInfo.html">gridInfo</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">                   <span class="st">"/wrfinput_d02"</span>,<span class="dt">sep=</span><span class="st">""</span>))</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># Grid information from: .../EmissV/extdata/wrfinput_d02</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">12</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10">Minas_Gerais &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Minas Gerais"</span>)</a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co"># processing Minas Gerais area ...</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co"># fraction of Minas Gerais area inside the domain = 0.0145921494236101</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">shape  &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/shapefile">shapefile</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"EmissV"</span>),</a>
-<a class="sourceLine" id="cb6-15" data-line-number="15">                            <span class="st">"/BR.shp"</span>,<span class="dt">sep=</span><span class="st">""</span>),<span class="dt">verbose =</span> F)[<span class="dv">22</span>,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb6-16" data-line-number="16">Sao_Paulo &lt;-<span class="st"> </span><span class="kw"><a href="reference/areaSource.html">areaSource</a></span>(shape,raster,grid,<span class="dt">name =</span> <span class="st">"Sao Paulo"</span>)</a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co"># processing Sao Paulo area ...</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co"># fraction of Sao Paulo area inside the domain = 0.474658563750987</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20">sp<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/sp/topics/spplot">spplot</a></span>(raster<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/merge">merge</a></span>(<span class="kw">drop_units</span>(TOTAL<span class="op">$</span>CO[[<span class="dv">1</span>]]) <span class="op">*</span><span class="st"> </span>Sao_Paulo, </a>
-<a class="sourceLine" id="cb6-21" data-line-number="21">                         <span class="kw">drop_units</span>(TOTAL<span class="op">$</span>CO[[<span class="dv">2</span>]]) <span class="op">*</span><span class="st"> </span>Minas_Gerais),</a>
-<a class="sourceLine" id="cb6-22" data-line-number="22">           <span class="dt">scales =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">draw=</span><span class="ot">TRUE</span>),<span class="dt">ylab=</span><span class="st">"Lat"</span>,<span class="dt">xlab=</span><span class="st">"Lon"</span>,</a>
-<a class="sourceLine" id="cb6-23" data-line-number="23">           <span class="dt">main=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">label=</span><span class="st">"Emissions of CO [g/d]"</span>),</a>
-<a class="sourceLine" id="cb6-24" data-line-number="24">           <span class="dt">col.regions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"#031638"</span>,<span class="st">"#001E48"</span>,<span class="st">"#002756"</span>,<span class="st">"#003062"</span>,</a>
-<a class="sourceLine" id="cb6-25" data-line-number="25">                           <span class="st">"#003A6E"</span>,<span class="st">"#004579"</span>,<span class="st">"#005084"</span>,<span class="st">"#005C8E"</span>,</a>
-<a class="sourceLine" id="cb6-26" data-line-number="26">                           <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,</a>
-<a class="sourceLine" id="cb6-27" data-line-number="27">                           <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                         <span class="st">"/dmsp.tiff"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">grid</span>   <span class="op">&lt;-</span> <span class="fu"><a href="reference/gridInfo.html">gridInfo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                   <span class="st">"/wrfinput_d02"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Grid information from: .../EmissV/extdata/wrfinput_d02</span>
+
+<span class="va">shape</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                            <span class="st">"/BR.shp"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">[</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">]</span>
+<span class="va">Minas_Gerais</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/areaSource.html">areaSource</a></span><span class="op">(</span><span class="va">shape</span>,<span class="va">raster</span>,<span class="va">grid</span>,name <span class="op">=</span> <span class="st">"Minas Gerais"</span><span class="op">)</span>
+<span class="co"># processing Minas Gerais area ...</span>
+<span class="co"># fraction of Minas Gerais area inside the domain = 0.0145921494236101</span>
+
+<span class="va">shape</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/shapefile.html">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
+                            <span class="st">"/BR.shp"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">[</span><span class="fl">22</span>,<span class="fl">1</span><span class="op">]</span>
+<span class="va">Sao_Paulo</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/areaSource.html">areaSource</a></span><span class="op">(</span><span class="va">shape</span>,<span class="va">raster</span>,<span class="va">grid</span>,name <span class="op">=</span> <span class="st">"Sao Paulo"</span><span class="op">)</span>
+<span class="co"># processing Sao Paulo area ...</span>
+<span class="co"># fraction of Sao Paulo area inside the domain = 0.474658563750987</span>
+
+<span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sp/man/spplot.html">spplot</a></span><span class="op">(</span><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/merge.html">merge</a></span><span class="op">(</span><span class="fu">drop_units</span><span class="op">(</span><span class="va">TOTAL</span><span class="op">$</span><span class="va">CO</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="va">Sao_Paulo</span>, 
+                         <span class="fu">drop_units</span><span class="op">(</span><span class="va">TOTAL</span><span class="op">$</span><span class="va">CO</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">*</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,
+           scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>draw<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,ylab<span class="op">=</span><span class="st">"Lat"</span>,xlab<span class="op">=</span><span class="st">"Lon"</span>,
+           main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>label<span class="op">=</span><span class="st">"Emissions of CO [g/d]"</span><span class="op">)</span>,
+           col.regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#031638"</span>,<span class="st">"#001E48"</span>,<span class="st">"#002756"</span>,<span class="st">"#003062"</span>,
+                           <span class="st">"#003A6E"</span>,<span class="st">"#004579"</span>,<span class="st">"#005084"</span>,<span class="st">"#005C8E"</span>,
+                           <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,
+                           <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Figure 1 - Emissions of CO using nocturnal lights."></p>
 <p><strong>III.</strong> Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">CO_emissions &lt;-<span class="st"> </span><span class="kw"><a href="reference/emission.html">emission</a></span>(TOTAL,<span class="st">"CO"</span>,<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">SP =</span> Sao_Paulo, <span class="dt">MG =</span> Minas_Gerais),grid,<span class="dt">mm=</span><span class="dv">28</span>, <span class="dt">plot =</span> T)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># calculating emissions for CO using molar mass = 28 ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span><span class="va">TOTAL</span>,<span class="st">"CO"</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,<span class="va">grid</span>,mm<span class="op">=</span><span class="fl">28</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="co"># calculating emissions for CO using molar mass = 28 ...</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="Figure 2 - CO emissions ready for use in air quality model."></p>
 <p><strong>IV.</strong> Temporal distribution: the package has a set of hourly profiles that represent the mean activity for each day of the week calculated from traffic counts of toll stations located in São Paulo city.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(perfil)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(perfil)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">perfil</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">perfil</span><span class="op">)</span></code></pre></div>
 <p>The package has additional functions for read netcdf data, create line and point sources (with plume rise) and to estimate the total emissions of of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).</p>
 <p>Functions:</p>
 <ul>
@@ -249,11 +322,13 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=EmissV">https://​cloud.r-project.org/​package=EmissV</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/atmoschem/EmissV/">https://​github.com/​atmoschem/​EmissV/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/atmoschem/EmissV/issues">https://​github.com/​atmoschem/​EmissV/​issues</a>
 </li>
@@ -267,6 +342,12 @@
 </li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 <div class="citation">
 <h2>Citation</h2>
 <ul class="list-unstyled">
@@ -276,37 +357,41 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Daniel Schuch <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-5977-4519" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Sergio Ibarra-Espinosa <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3162-1905" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Daniel Schuch <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-5977-4519" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Sergio Ibarra-Espinosa <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-3162-1905" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/atmoschem/EmissV"><img src="https://travis-ci.org/atmoschem/EmissV.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/Schuch666/emissv"><img src="https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true" alt="Build status"></a></li>
+<li><a href="https://travis-ci.org/atmoschem/EmissV"><img src="https://travis-ci.org/atmoschem/EmissV.svg?branch=master" alt="Linux Build"></a></li>
+<li><a href="https://ci.appveyor.com/project/Schuch666/emissv"><img src="https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true" alt="windown Build"></a></li>
 <li><a href="https://codecov.io/github/atmoschem/EmissV?branch=master"><img src="https://img.shields.io/codecov/c/github/atmoschem/EmissV/master.svg" alt="Coverage Status"></a></li>
 <li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/hyperium/hyper.svg" alt="Licence:MIT"></a></li>
 <li><a href="http://cran.r-project.org/web/packages/EmissV"><img src="http://www.r-pkg.org/badges/version/EmissV" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://doi.org/10.5281/zenodo.1451027"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg" alt="DOI"></a></li>
 <li><a href="http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044"><img src="http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg" alt="status"></a></li>
+<li><a href="https://github.com/atmoschem/EmissV/actions"><img src="https://github.com/atmoschem/EmissV/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
 </div>
 </div>
+
 
       <footer><div class="copyright">
   <p>Developed by Daniel Schuch, Sergio Ibarra-Espinosa.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

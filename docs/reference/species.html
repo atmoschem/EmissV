@@ -8,21 +8,29 @@
 
 <title>Species mapping tables — species • EmissV</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +38,8 @@
 
 
 
-<meta property="og:title" content="Species mapping tables — species" />
 
+<meta property="og:title" content="Species mapping tables — species" />
 <meta property="og:description" content="Set of tables for speciation:
 
   voc_radm2_micVolatile organic compounds for RADM2
@@ -48,9 +56,10 @@
   nox_bcomNox split usin Ntziachristos and Zamaras (2016)
   voc_radm2_edgar432Volatile organic compounds species from EDGAR 4.3.2 for RADM2 (MOL)
   voc_moz_edgar432Volatile organic compounds species from EDGAR 4.3.2 for MOZART (MOL)
-" />
 
-<meta property="og:description" content="- Volatile organic compounds species map from 1 to 4 are from Li et al (2014) taken into account
+
+
+- Volatile organic compounds species map from 1 to 4 are from Li et al (2014) taken into account
 several sources of pollutants.
 - Volatile organic compounds from vehicular activity species map 5 to 8 is a by fuel and emission
 process from USP-IAG tunel experiments (Rafee et al., 2017) emited by the process of exhaust
@@ -60,7 +69,7 @@ process from USP-IAG tunel experiments (Rafee et al., 2017) emited by the proces
 - Nox split using mean of Ntziachristos and Zamaras (2016) data (12).
 - Volatile organic compounds species map 13 and 14 are the corespondence from EDGAR 4.3.2 VOC
 specialization to RADM2 and MOZART." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -74,9 +83,10 @@ specialization to RADM2 and MOZART." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,7 +100,7 @@ specialization to RADM2 and MOZART." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
       </span>
     </div>
 
@@ -98,7 +108,7 @@ specialization to RADM2 and MOZART." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -109,9 +119,13 @@ specialization to RADM2 and MOZART." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/atmoschem/EmissV/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -119,20 +133,20 @@ specialization to RADM2 and MOZART." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Species mapping tables</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/species.R'><code>R/species.R</code></a></small>
     <div class="hidden name"><code>species.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Set of tables for speciation:</p>
-<dl class='dl-horizontal'>
+<dl>
   <dt>voc_radm2_mic</dt><dd><p>Volatile organic compounds for RADM2</p></dd>
   <dt>voc_cbmz_mic</dt><dd><p>Volatile organic compounds for CBMZ</p></dd>
   <dt>voc_moz_mic</dt><dd><p>Volatile organic compounds for MOZART</p></dd>
@@ -147,9 +161,10 @@ specialization to RADM2 and MOZART." />
   <dt>nox_bcom</dt><dd><p>Nox split usin Ntziachristos and Zamaras (2016)</p></dd>
   <dt>voc_radm2_edgar432</dt><dd><p>Volatile organic compounds species from EDGAR 4.3.2 for RADM2 (MOL)</p></dd>
   <dt>voc_moz_edgar432</dt><dd><p>Volatile organic compounds species from EDGAR 4.3.2 for MOZART (MOL)</p></dd>
+
 </dl>
 
-    <p>- Volatile organic compounds species map from 1 to 4 are from Li et al (2014) taken into account
+<p>- Volatile organic compounds species map from 1 to 4 are from Li et al (2014) taken into account
 several sources of pollutants.</p>
 <p>- Volatile organic compounds from vehicular activity species map 5 to 8 is a by fuel and emission
 process from USP-IAG tunel experiments (Rafee et al., 2017) emited by the process of exhaust
@@ -159,15 +174,14 @@ process from USP-IAG tunel experiments (Rafee et al., 2017) emited by the proces
 <p>- Nox split using mean of Ntziachristos and Zamaras (2016) data (12).</p>
 <p>- Volatile organic compounds species map 13 and 14 are the corespondence from EDGAR 4.3.2 VOC
 specialization to RADM2 and MOZART.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>species</span>)</pre>
-        
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span></pre>
+
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>List of numeric vectors with the 'names()' of the species and the values of each species.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>iag-voc: After estimating all the emissions of NMHC, it was used the speciation
@@ -183,12 +197,10 @@ observations (ANDRADE et al., 2015).</p>
 <p>bcom-nox: mean of Ntziachristos and Zamaras (2016) data.</p>
 <p>mic: from Li et al (2014).</p>
 <p>edgar: Edgar 4.3.2 emissions Crippa et al. (2018).</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The units are mass ratio (mass/mass) or MOL (MOL), this last case do not change the
 default 'mm' into 'emission()' function.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Li, M., Zhang, Q., Streets, D. G., He, K. B., Cheng, Y. F., Emmons, L. K., ... &amp; Su, H. (2014).
@@ -213,24 +225,20 @@ tunnels in São Paulo: case study comparison. International Journal of Environme
 and Technology, 11(8), 2155-2168.</p>
 <p>ANDRADE, M. d. F. et al. Air quality forecasting system for southeastern brazil. Frontiers in
 Environmental Science, Frontiers, v. 3, p. 1–12, 2015.</p>
-<p>Ntziachristos L. and Samaras Z. 2016. Passneger cars, light commercial trucks, heavy-duty vehicles
-including buses and motor cycles. In: EEA, EMEP. EEA air pollutant emission inventory
-guidebook-2009. European Environment Agency, Copenhagen, 2016.</p>
 <p>Crippa, M., Guizzardi, D., Muntean, M., Schaaf, E., Dentener, F., Aardenne, J. A. V., ... &amp;
 Janssens-Maenhout, G. (2018). Gridded emissions of air pollutants for the period 1970–2012
 within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='speciation.html'>speciation</a></code> and <code><a href='read.html'>read</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># load the mapping tables</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>species</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span>
 <span class='co'># names of eath mapping tables</span>
-<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>species</span>)))
-    <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"specie map "</span>,<span class='no'>i</span>,<span class='st'>" "</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>species</span>)[<span class='no'>i</span>],<span class='st'>"\n"</span>))</div><div class='output co'>#&gt; specie map 1 voc_radm2_mic
+<span class='kw'>for</span><span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"specie map "</span>,<span class='va'>i</span>,<span class='st'>" "</span>,<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span>,<span class='st'>"\n"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; specie map 1 voc_radm2_mic
 #&gt; specie map 2 voc_cbmz_mic
 #&gt; specie map 3 voc_moz_mic
 #&gt; specie map 4 voc_saprc99_mic
@@ -244,10 +252,12 @@ within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.</p>
 #&gt; specie map 12 nox_bcom
 #&gt; specie map 13 voc_radm2_edgar432
 #&gt; specie map 14 voc_moze_dgar432</div><div class='input'><span class='co'># names of species contained in the (first) mapping table</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>species</span><span class='kw'>[[</span><span class='fl'>1</span>]])</div><div class='output co'>#&gt;  [1] "E_ALD"    "E_KET"    "E_TOL"    "E_XYL"    "E_OLT"    "E_OLI"   
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] "E_ALD"    "E_KET"    "E_TOL"    "E_XYL"    "E_OLT"    "E_OLI"   
 #&gt;  [7] "E_OL2"    "E_HCHO"   "E_ETH"    "E_CH3OH"  "E_C2H5OH" "E_HC3"   
 #&gt; [13] "E_HC5"   </div><div class='input'><span class='co'># The first mapping table / species and values</span>
-<span class='no'>species</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt; $voc_radm2_mic
+<span class='va'>species</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; $voc_radm2_mic
 #&gt;       E_ALD       E_KET       E_TOL       E_XYL       E_OLT       E_OLI 
 #&gt; 0.014285714 0.011038961 0.102272727 0.102272727 0.024675325 0.024675325 
 #&gt;       E_OL2      E_HCHO       E_ETH     E_CH3OH    E_C2H5OH       E_HC3 
@@ -256,25 +266,13 @@ within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.</p>
 #&gt; 0.503896104 
 #&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#references">References</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -282,13 +280,16 @@ within EDGAR v4.3.2. Earth System Science Data, 10(4), 1987-2013.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -8,21 +8,29 @@
 
 <title>Calculate plume rise height. — plumeRise • EmissV</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Calculate plume rise height. — plumeRise" />
 
+<meta property="og:title" content="Calculate plume rise height. — plumeRise" />
 <meta property="og:description" content="Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -82,9 +91,13 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/atmoschem/EmissV/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -92,24 +105,23 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculate plume rise height.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/plumerise.R'><code>R/plumerise.R</code></a></small>
     <div class="hidden name"><code>plumeRise.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>plumeRise</span>(<span class='no'>df</span>, <span class='kw'>imax</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>ermax</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>, <span class='kw'>Hmax</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>plumeRise</span><span class='op'>(</span><span class='va'>df</span>, imax <span class='op'>=</span> <span class='fl'>10</span>, ermax <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>100</span>, Hmax <span class='op'>=</span> <span class='cn'>T</span>, verbose <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -134,11 +146,10 @@
       <td><p>display additional information</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>data.frame with the input, rise (m) and effective higt (m)</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The input data.frame must contains the folloging colluns:</p>
@@ -154,28 +165,27 @@
 <p>- Ustar: atriction velocity, used only for neutral ABL (m/s)</p>
 <p>- Wstar: scale of convectie velocity, used only for convective ABL (m/s)</p>
 <p>Addcitionaly some combination of ws, Wstar and Ustar can produce inacurate results, Weil (1979) propose a geometric limit of 0.62 * (h - Hs) for the rise value.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The plume rise formulas are from Brigs (1975):"Brigs, G. A. Plume rise predictions, Lectures on Air Pollution and Environmental Impact Analyses. Amer. Meteor. Soc. p. 59-111, 1975." and Arya 1999: "Arya, S.P., 1999, Air Pollution Meteorology and Dispersion, Oxford University Press, New York, 310 p."</p>
 <p>The limits are from Weil (1979): "WEIL, J.C. Assessmet of plume rise and dispersion models using LIDAR data, PPSP-MP-24. Prepared by Environmental Center, Martin Marietta Corporation, for Maryland Department of Natural Resources. 1979."</p>
 <p>The example is data from a chimney of the Candiota thermoelectric powerplant from Arabage et al (2006) "Arabage, M. C.; Degrazia, G. A.; Moraes O. L. Simulação euleriana da dispersão local da pluma de poluente atmosférico de Candiota-RS. Revista Brasileira de Meteorologia, v.21, n.2, p. 153-160, 2006."</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.11</span>,<span class='fl'>273.15</span> + <span class='fl'>3.16</span>,<span class='fl'>200</span>,-<span class='fl'>34.86</span>,<span class='fl'>3.11</span>,<span class='fl'>0.33</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.81</span>,<span class='fl'>273.15</span> + <span class='fl'>4.69</span>,<span class='fl'>300</span>,-<span class='fl'>34.83</span>,<span class='fl'>3.81</span>,<span class='fl'>0.40</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.23</span>,<span class='fl'>273.15</span> + <span class='fl'>5.53</span>,<span class='fl'>400</span>,-<span class='fl'>24.43</span>,<span class='fl'>3.23</span>,<span class='fl'>0.48</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.47</span>,<span class='fl'>273.15</span> + <span class='fl'>6.41</span>,<span class='fl'>500</span>,-<span class='fl'>15.15</span>,<span class='fl'>3.48</span>,<span class='fl'>0.52</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.37</span>,<span class='fl'>273.15</span> + <span class='fl'>6.35</span>,<span class='fl'>600</span>, -<span class='fl'>8.85</span>,<span class='fl'>3.37</span>,<span class='fl'>2.30</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.69</span>,<span class='fl'>273.15</span> + <span class='fl'>5.93</span>,<span class='fl'>800</span>,-<span class='fl'>10.08</span>,<span class='fl'>3.69</span>,<span class='fl'>2.80</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.59</span>,<span class='fl'>273.15</span> + <span class='fl'>6.08</span>,<span class='fl'>800</span>, -<span class='fl'>7.23</span>,<span class='fl'>3.49</span>,<span class='fl'>1.57</span>,
-                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>4.14</span>,<span class='fl'>273.15</span> + <span class='fl'>6.53</span>,<span class='fl'>900</span>,-<span class='fl'>28.12</span>,<span class='fl'>4.14</span>,<span class='fl'>0.97</span>),
-                     <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='no'>candiota</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/names'>names</a></span>(<span class='no'>candiota</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"z"</span>,<span class='st'>"r"</span>,<span class='st'>"Ve"</span>,<span class='st'>"Te"</span>,<span class='st'>"ws"</span>,<span class='st'>"Temp"</span>,<span class='st'>"h"</span>,<span class='st'>"L"</span>,<span class='st'>"Ustar"</span>,<span class='st'>"Wstar"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/row.names'>row.names</a></span>(<span class='no'>candiota</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"08:00"</span>,<span class='st'>"09:00"</span>,<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='fl'>10</span>:<span class='fl'>15</span>,<span class='st'>":00"</span>,<span class='kw'>sep</span><span class='kw'>=</span><span class='st'>""</span>))
-<span class='no'>candiota</span> <span class='kw'>&lt;-</span> <span class='fu'>plumeRise</span>(<span class='no'>candiota</span>,<span class='kw'>Hmax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; convective, h/L = -5.7372346528973 
+    <pre class="examples"><div class='input'><span class='va'>candiota</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.11</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>3.16</span>,<span class='fl'>200</span>,<span class='op'>-</span><span class='fl'>34.86</span>,<span class='fl'>3.11</span>,<span class='fl'>0.33</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.81</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>4.69</span>,<span class='fl'>300</span>,<span class='op'>-</span><span class='fl'>34.83</span>,<span class='fl'>3.81</span>,<span class='fl'>0.40</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.23</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>5.53</span>,<span class='fl'>400</span>,<span class='op'>-</span><span class='fl'>24.43</span>,<span class='fl'>3.23</span>,<span class='fl'>0.48</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.47</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>6.41</span>,<span class='fl'>500</span>,<span class='op'>-</span><span class='fl'>15.15</span>,<span class='fl'>3.48</span>,<span class='fl'>0.52</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.37</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>6.35</span>,<span class='fl'>600</span>, <span class='op'>-</span><span class='fl'>8.85</span>,<span class='fl'>3.37</span>,<span class='fl'>2.30</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.69</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>5.93</span>,<span class='fl'>800</span>,<span class='op'>-</span><span class='fl'>10.08</span>,<span class='fl'>3.69</span>,<span class='fl'>2.80</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>3.59</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>6.08</span>,<span class='fl'>800</span>, <span class='op'>-</span><span class='fl'>7.23</span>,<span class='fl'>3.49</span>,<span class='fl'>1.57</span>,
+                     <span class='fl'>150</span>,<span class='fl'>1</span>,<span class='fl'>20</span>,<span class='fl'>420</span>,<span class='fl'>4.14</span>,<span class='fl'>273.15</span> <span class='op'>+</span> <span class='fl'>6.53</span>,<span class='fl'>900</span>,<span class='op'>-</span><span class='fl'>28.12</span>,<span class='fl'>4.14</span>,<span class='fl'>0.97</span><span class='op'>)</span>,
+                     ncol <span class='op'>=</span> <span class='fl'>10</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>candiota</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>candiota</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>candiota</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"z"</span>,<span class='st'>"r"</span>,<span class='st'>"Ve"</span>,<span class='st'>"Te"</span>,<span class='st'>"ws"</span>,<span class='st'>"Temp"</span>,<span class='st'>"h"</span>,<span class='st'>"L"</span>,<span class='st'>"Ustar"</span>,<span class='st'>"Wstar"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>candiota</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"08:00"</span>,<span class='st'>"09:00"</span>,<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>:</span><span class='fl'>15</span>,<span class='st'>":00"</span>,sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>candiota</span> <span class='op'>&lt;-</span> <span class='fu'>plumeRise</span><span class='op'>(</span><span class='va'>candiota</span>,Hmax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; convective, h/L = -5.7372346528973 
 #&gt; using weil max= 31 
 #&gt; convective, h/L = -8.61326442721792 
 #&gt; strong convective, h/L = -16.3733115022513 
@@ -185,7 +195,8 @@
 #&gt; strong convective, h/L = -67.7966101694915 
 #&gt; strong convective, h/L = -79.3650793650794 
 #&gt; strong convective, h/L = -110.650069156293 
-#&gt; strong convective, h/L = -32.0056899004267 </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>candiota</span>)</div><div class='output co'>#&gt;         z r Ve  Te   ws   Temp   h      L Ustar Wstar     rise       He
+#&gt; strong convective, h/L = -32.0056899004267 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>candiota</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;         z r Ve  Te   ws   Temp   h      L Ustar Wstar     rise       He
 #&gt; 08:00 150 1 20 420 3.11 276.31 200 -34.86  3.11  0.33  31.0000 181.0000
 #&gt; 09:00 150 1 20 420 3.81 277.84 300 -34.83  3.81  0.40  41.5831 191.5831
 #&gt; 10:00 150 1 20 420 3.23 278.68 400 -24.43  3.23  0.48 155.0000 305.0000
@@ -196,22 +207,13 @@
 #&gt; 15:00 150 1 20 420 4.14 279.68 900 -28.12  4.14  0.97 355.4518 505.4518</div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -219,13 +221,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
