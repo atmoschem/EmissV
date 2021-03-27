@@ -100,14 +100,14 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     stop('check version argument')    # nocov end
   }
 
-  raster_to_ncdf <- function(r,na_value = 0){
+  raster_to_ncdf <- function(r,na_value = 0){      # nocov start
     N_times <- dim(r)[3]
     a       <- array(na_value,c(dim(r)[2],dim(r)[1],N_times))
     for(i in 1:N_times){
       a[,,i] <- as.matrix(t(raster::flip(r[[i]],2)))
     }
     return(a)
-  }
+  }                                                # nocov end
 
   if(length(coef) != length(file)){ # nocov start
     cat('file and coef has different length, check the read arguments!\n')
