@@ -10,12 +10,12 @@ OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https
 lineSource(
   s,
   grid,
-  as_raster = F,
-  verbose = T,
+  as_raster = FALSE,
   type = "info",
   gcol = 100,
   grow = 100,
-  variable = "length"
+  variable = "length",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -25,8 +25,6 @@ lineSource(
 
 \item{as_raster}{output format, TRUE for raster, FALSE for matrix}
 
-\item{verbose}{display additional information}
-
 \item{type}{"info" (default), "wrfinput", "geo", "sp" or "sf" for grid type}
 
 \item{gcol}{grid points for a "sp" or "sf" type}
@@ -34,6 +32,11 @@ lineSource(
 \item{grow}{grid points for a "sp" or "sf" type}
 
 \item{variable}{variable to use, default is line length}
+
+\item{verbose}{display additional information}
+}
+\value{
+a raster object containing the spatial distribution of emissions
 }
 \description{
 Create a emission distribution from 'sp' or 'sf' spatial lines data.frame or

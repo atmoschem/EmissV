@@ -73,7 +73,7 @@ emission and/or split into several species (speciation process)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.2</span>
       </span>
     </div>
 
@@ -130,9 +130,9 @@ emission and/or split into several species (speciation process)</p>
   month <span class='op'>=</span> <span class='fl'>1</span>,
   year <span class='op'>=</span> <span class='fl'>1</span>,
   <span class='va'>categories</span>,
-  as_raster <span class='op'>=</span> <span class='cn'>T</span>,
-  skip_missing <span class='op'>=</span> <span class='cn'>F</span>,
-  verbose <span class='op'>=</span> <span class='cn'>T</span>
+  as_raster <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  skip_missing <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -241,8 +241,8 @@ for the United States. Nature Scientific Data.</p>
 <span class='fu'>sp</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>nox</span>, scales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>draw<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>, xlab<span class='op'>=</span><span class='st'>"Lat"</span>, ylab<span class='op'>=</span><span class='st'>"Lon"</span>,main<span class='op'>=</span><span class='st'>"NOx emissions from EDGAR"</span><span class='op'>)</span>
 </div><div class='img'><img src='read-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>d1</span>     <span class='op'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, package <span class='op'>=</span> <span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/wrfinput_d01"</span>,sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Grid information from: C:/Users/under/AppData/Local/Temp/RtmpyeKhA3/temp_libpath33e8410d2e7a/EmissV/extdata/wrfinput_d01 </div><div class='input'><span class='va'>d2</span>     <span class='op'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, package <span class='op'>=</span> <span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/wrfinput_d02"</span>,sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Grid information from: C:/Users/under/AppData/Local/Temp/RtmpyeKhA3/temp_libpath33e8410d2e7a/EmissV/extdata/wrfinput_d02 </div><div class='input'><span class='va'>nox_d1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rasterSource.html'>rasterSource</a></span><span class='op'>(</span><span class='va'>nox</span>,<span class='va'>d1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Grid information from: C:/Users/under/OneDrive/Documents/R/win-library/4.0/EmissV/extdata/wrfinput_d01 </div><div class='input'><span class='va'>d2</span>     <span class='op'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, package <span class='op'>=</span> <span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/wrfinput_d02"</span>,sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Grid information from: C:/Users/under/OneDrive/Documents/R/win-library/4.0/EmissV/extdata/wrfinput_d02 </div><div class='input'><span class='va'>nox_d1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rasterSource.html'>rasterSource</a></span><span class='op'>(</span><span class='va'>nox</span>,<span class='va'>d1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Grid output: 99 columns 93 rows</div><div class='input'><span class='va'>nox_d2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rasterSource.html'>rasterSource</a></span><span class='op'>(</span><span class='va'>nox</span>,<span class='va'>d2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Grid output: 87 columns 81 rows</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>nox_d1</span>, axe <span class='op'>=</span> <span class='cn'>FALSE</span>, main <span class='op'>=</span> <span class='st'>"NOx emissions from transport-energy-industry for d1 (2012)"</span><span class='op'>)</span>
 </div><div class='img'><img src='read-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>nox_d2</span>, axe <span class='op'>=</span> <span class='cn'>FALSE</span>, main <span class='op'>=</span> <span class='st'>"NOx emissions from transport-energy-industry for d2 (2012)"</span><span class='op'>)</span>

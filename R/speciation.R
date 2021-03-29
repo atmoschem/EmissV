@@ -6,6 +6,8 @@
 #' @param spec numeric speciation vector of species
 #' @param verbose display additional information
 #'
+#' @return  Return a list with the daily total emission by interest area (cityes, states, countries, etc).
+#'
 #' @export
 #'
 #' @seealso \code{\link{species}}
@@ -27,7 +29,7 @@
 #'             E_PM10  = 0.3300000)
 #' PM <- speciation(TOTAL,pm_iag)
 
-speciation <- function(total,spec=NULL,verbose = T){
+speciation <- function(total,spec=NULL,verbose = TRUE){
 
   if(is.null((spec)))
     cat("need to suply a speciation vector") # nocov

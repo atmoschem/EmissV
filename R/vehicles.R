@@ -28,6 +28,8 @@
 #' @param example a simple example
 #' @param verbose display additional information
 #'
+#' @return a fleet distribution data.frame for totalEmission function
+#'
 #' @seealso \code{\link{areaSource}} and  \code{\link{totalEmission}}
 #'
 #' @export
@@ -58,10 +60,11 @@
 #'                              "Flex motorcycles"))
 
 vehicles <- function(total_v,area_name = names(total_v), distribution, type,
-                     category = NA,fuel = NA,vnames = NA, example = F, verbose = T)
+                     category = NA,fuel = NA,vnames = NA, example = FALSE, verbose = TRUE)
   {
-  if(example == T){
-    cat("using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):\n")
+  if(example == TRUE){
+    if(verbose)
+      cat("using a example of vehicles (DETRAN 2016 data and SP vahicle distribution):\n")
     total_v = c(27332101, 6377484, 10277988, 7140439, 4772160)
     area_name = c("SP", "RJ", "MG", "PR", "SC")
     distribution = c( 0.4253, 0.0320, 0.3602, 0.0260,

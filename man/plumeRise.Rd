@@ -7,7 +7,7 @@
 data.frame with the input, rise (m) and effective higt (m)
 }
 \usage{
-plumeRise(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
+plumeRise(df, imax = 10, ermax = 1/100, Hmax = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{df}{data.frame with micrometeorological and emission data}
@@ -19,6 +19,9 @@ plumeRise(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
 \item{Hmax}{use weil limit for plume rise, see details}
 
 \item{verbose}{display additional information}
+}
+\value{
+a data.frame with effective height of emissions for pointSource function
 }
 \description{
 Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.

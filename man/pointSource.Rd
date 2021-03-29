@@ -4,7 +4,7 @@
 \alias{pointSource}
 \title{Emissions from point sources}
 \usage{
-pointSource(emissions, grid, verbose = T)
+pointSource(emissions, grid, verbose = TRUE)
 }
 \arguments{
 \item{emissions}{list of points}

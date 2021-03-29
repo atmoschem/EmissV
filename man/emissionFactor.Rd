@@ -3,17 +3,14 @@
 \name{emissionFactor}
 \alias{emissionFactor}
 \title{Tool to set-up emission factors}
-\format{
-data frame
-}
 \usage{
 emissionFactor(
   ef,
   poluttant = names(ef),
   vnames = NA,
   unit = "g/km",
-  example = F,
-  verbose = T
+  example = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -29,8 +26,13 @@ emissionFactor(
 
 \item{verbose}{display additional information}
 }
+\value{
+a emission factor data frame
+
+a emission factor data.frame for totalEmission function
+}
 \description{
-Return a data frame with vehicle information. Types argument defines the diary use:
+Return a data frame for emission for multiple pollutants.
 }
 \examples{
 EF <- emissionFactor(example = TRUE)

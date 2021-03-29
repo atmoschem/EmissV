@@ -6,10 +6,10 @@
 #' @param r input raster object
 #' @param grid grid with the output format
 #' @param name area name
-#' @param as_frac return a fraction instead of a raster
+#' @param as_frac return a fraction instead of the raster value
 #' @param verbose display additional data
 #'
-#' @format a raster
+#' @return a raster object containing the spatial distribution of emissions
 #'
 #' @export
 #'
@@ -35,7 +35,7 @@
 #'@source Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
-areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
+areaSource <- function(s,r,grid = NA,name = "",as_frac=FALSE,verbose = TRUE){
   if(verbose){
     if(name != "") name = paste0(name," ")
     cat(paste("processing ",name,"area ... \n",sep = ""))
@@ -87,8 +87,3 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=F,verbose = T){
   }
   return(sp)
 }
-
-
-# library(raster)
-# r <- raster
-# s <- shape

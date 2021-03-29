@@ -16,9 +16,9 @@ read(
   month = 1,
   year = 1,
   categories,
-  as_raster = T,
-  skip_missing = F,
-  verbose = T
+  as_raster = TRUE,
+  skip_missing = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{

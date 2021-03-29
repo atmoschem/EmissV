@@ -28,7 +28,7 @@
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
 #'
-pointSource <- function(emissions, grid, verbose=T){
+pointSource <- function(emissions, grid, verbose = TRUE){
   if(is.na(grid$z[1])){
     col    <- grid$Horizontal[1]
     rol    <- grid$Horizontal[2]

@@ -12,8 +12,8 @@ vehicles(
   category = NA,
   fuel = NA,
   vnames = NA,
-  example = F,
-  verbose = T
+  example = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -34,6 +34,9 @@ vehicles(
 \item{example}{a simple example}
 
 \item{verbose}{display additional information}
+}
+\value{
+a fleet distribution data.frame for totalEmission function
 }
 \description{
 Return a data frame with 4 columns (vehicle category, type, fuel and avarage kilometers driven) and an aditional column with the number of vehicles for each interest area (cityes, states, countries, etc).

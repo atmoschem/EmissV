@@ -3,11 +3,8 @@
 \name{totalEmission}
 \alias{totalEmission}
 \title{Calculate total emissions}
-\format{
-Return a list with the daily total emission by interest area (cityes, states, countries, etc).
-}
 \usage{
-totalEmission(v, ef, pol, verbose = T)
+totalEmission(v, ef, pol, verbose = TRUE)
 }
 \arguments{
 \item{v}{dataframe with the vehicle data}
@@ -17,6 +14,9 @@ totalEmission(v, ef, pol, verbose = T)
 \item{pol}{pollutant name in ef}
 
 \item{verbose}{display additional information}
+}
+\value{
+Return a list with the daily total emission by interest area (cityes, states, countries, etc).
 }
 \description{
 Caculate the total emission with:

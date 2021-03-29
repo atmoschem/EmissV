@@ -4,7 +4,7 @@
 \alias{speciation}
 \title{Speciation of emissions in different compounds}
 \usage{
-speciation(total, spec = NULL, verbose = T)
+speciation(total, spec = NULL, verbose = TRUE)
 }
 \arguments{
 \item{total}{emissions from totalEmissions}
@@ -12,6 +12,9 @@ speciation(total, spec = NULL, verbose = T)
 \item{spec}{numeric speciation vector of species}
 
 \item{verbose}{display additional information}
+}
+\value{
+Return a list with the daily total emission by interest area (cityes, states, countries, etc).
 }
 \description{
 Distribute the total mass of estimated emissions into model species.

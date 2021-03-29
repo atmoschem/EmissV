@@ -9,7 +9,7 @@ Exemple data is a low resolution cutting from image of persistent lights of the 
 Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
 }
 \usage{
-rasterSource(r, grid, nlevels = "all", conservative = T, verbose = T)
+rasterSource(r, grid, nlevels = "all", conservative = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{r}{input raster object}
@@ -34,7 +34,7 @@ About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteo
 \examples{
 grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
-test  <- rasterSource(x, grid, verbose = TRUE)
+test  <- rasterSource(x, grid)
 image(test, axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 
 }

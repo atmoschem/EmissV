@@ -14,10 +14,10 @@ emission(
   grid,
   inventory = NULL,
   mm = 1,
-  aerosol = F,
-  plot = F,
-  positive = T,
-  verbose = T
+  aerosol = FALSE,
+  plot = FALSE,
+  positive = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -40,6 +40,9 @@ emission(
 \item{positive}{TRUE (defoult) to check negative values and replace for zero}
 
 \item{verbose}{display additional information}
+}
+\value{
+a vector of emissions in MOL / mk2 h for gases and ug / m2 s for aerosols.
 }
 \description{
 Combine area sources and total emissions to model output

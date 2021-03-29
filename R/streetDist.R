@@ -10,7 +10,9 @@
 #' @param osm streets of OpenStreetMaps class sf
 #' @param epsg Numeric; spatial code for projecting spatial data
 #' @param warnings Logical; to show warnings.
+#'
 #' @return grid of polygon
+#'
 #' @export
 #'
 #' @importFrom data.table data.table
@@ -86,23 +88,23 @@ streetDist <- function(emission = 1,
   #motorway
   osm_m <- osm[osm$highway == "motorway" |
                  osm$highway == "motorway_link", ]
-  osm_m$x <- emission*dist[1]*osm_m$LKM/sum(osm_m$LKM, na.rm = T)
+  osm_m$x <- emission*dist[1]*osm_m$LKM/sum(osm_m$LKM, na.rm = TRUE)
   #trunk
   osm_t <- osm[osm$highway == "trunk" |
                  osm$highway == "trunk_link", ]
-  osm_t$x <- emission*dist[2]*osm_t$LKM/sum(osm_t$LKM, na.rm = T)
+  osm_t$x <- emission*dist[2]*osm_t$LKM/sum(osm_t$LKM, na.rm = TRUE)
   #primary
   osm_p <- osm[osm$highway == "primary" |
                  osm$highway == "primary_link", ]
-  osm_p$x <- emission*dist[3]*osm_p$LKM/sum(osm_p$LKM, na.rm = T)
+  osm_p$x <- emission*dist[3]*osm_p$LKM/sum(osm_p$LKM, na.rm = TRUE)
   #secondary
   osm_s <- osm[osm$highway == "secondary" |
                  osm$highway == "secondary_link", ]
-  osm_s$x <- emission*dist[4]*osm_s$LKM/sum(osm_s$LKM, na.rm = T)
+  osm_s$x <- emission*dist[4]*osm_s$LKM/sum(osm_s$LKM, na.rm = TRUE)
   #tertiary
   osm_te <- osm[osm$highway == "tertiary" |
                   osm$highway == "tertiary_link", ]
-  osm_te$x <- emission*dist[5]*osm_te$LKM/sum(osm_te$LKM, na.rm = T)
+  osm_te$x <- emission*dist[5]*osm_te$LKM/sum(osm_te$LKM, na.rm = TRUE)
   osm_all <- rbind(osm_m, osm_t, osm_p, osm_s, osm_te)
   if (warnings){
     osmgrid <- sf::st_intersection(osm_all, grid) # nocov
@@ -116,7 +118,7 @@ streetDist <- function(emission = 1,
                   by = id,
                   .SDcols = "x" ]
   gx <- data.frame(id = grid$id)
-  gx <- merge(gx, dfm, by="id", all.x = T)
+  gx <- merge(gx, dfm, by="id", all.x = TRUE)
   gx <- sf::st_transform(st_sf(gx, geometry = grid$geometry), sf::st_crs(grido))
 
   return(gx)

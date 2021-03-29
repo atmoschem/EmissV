@@ -1,7 +1,7 @@
 Package: EmissV
 Title: Tools for create emissions for air quality models
-Date: 2021-03-25
-Version: 0.665.5.1
+Date: 2021-03-29
+Version: 0.665.5.2
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -17,10 +17,13 @@ Authors@R: c(
 Maintainer: Daniel Schuch <underschuch@gmail.com>
 Description: Processing tools to create emissions for use in numerical air 
   quality models. Emissions can be calculated both using emission factors 
-  and activity data or using pollutant inventories. Functions to process 
-  individual point emissions, line emissions and area emissions of pollutants 
-  are available as well as methods to incorporate alternative data for Spatial 
-  distribution of emissions such as openstreetmap data or satellite images.
+  and activity data (Schuch et al 2018) <doi:10.21105/joss.00662> or using 
+  pollutant inventories (Schuch et al., 2018) <doi:10.30564/jasr.v1i1.347>. 
+  Functions to process individual point emissions, line emissions and 
+  area emissions of pollutants are available as well as methods to 
+  incorporate alternative data for Spatial distribution of emissions 
+  such as satellite images (Martins et al, 2012) <doi:10.3389/fenvs.2015.00009> 
+  or openstreetmap data (Andrade et al, 2015) <doi:10.3389/fenvs.2015.00009>.
 Depends: R (>= 3.4)
 Imports: ncdf4, units(>= 0.5-1), raster, sp, sf, methods, data.table, rgdal
 Suggests: 

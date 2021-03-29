@@ -10,6 +10,8 @@
 #' @param Hmax use weil limit for plume rise, see details
 #' @param verbose display additional information
 #'
+#' @return a data.frame with effective height of emissions for pointSource function
+#'
 #' @export
 #'
 #' @references The plume rise formulas are from Brigs (1975):"Brigs, G. A. Plume rise predictions, Lectures on Air Pollution and Environmental Impact Analyses. Amer. Meteor. Soc. p. 59-111, 1975." and Arya 1999: "Arya, S.P., 1999, Air Pollution Meteorology and Dispersion, Oxford University Press, New York, 310 p."
@@ -61,7 +63,7 @@
 #' print(candiota)
 #'
 
-plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = T, verbose = T)
+plumeRise <- function(df, imax = 10, ermax = 1/100, Hmax = TRUE, verbose = TRUE)
 {
   if(imax < 2) imax = 2
   g      <- 9.81      # m / s2

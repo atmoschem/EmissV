@@ -20,6 +20,9 @@
 #' @param gcol grid points for a "sp" or "sf" type
 #' @param grow grid points for a "sp" or "sf" type
 #' @param variable variable to use, default is line length
+#'
+#' @return a raster object containing the spatial distribution of emissions
+#'
 #' @export
 #'
 #' @importFrom methods as
@@ -50,10 +53,11 @@
 #'@source OpenstreetMap data avaliable \url{https://www.openstreetmap.org/} and \url{https://download.geofabrik.de/}
 #'
 
-lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
-                       gcol = 100, grow = 100, variable = "length"){
+lineSource <- function(s, grid, as_raster = FALSE, type = "info",
+                       gcol = 100, grow = 100, variable = "length",
+                       verbose = TRUE){
 
-  cat('using',variable,'as emission variable\n')
+  if(verbose) cat('using',variable,'as emission variable\n')
 
   wrf_grid <- function(filewrf, type = "wrfinput", epsg = 4326, grid = NULL){
     if(type == 'info'){
@@ -67,8 +71,10 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
       n.lon  <- grid$Horizontal[1]
       n.lat  <- grid$Horizontal[2]
 
-      cat(paste0("Number of lat points ", n.lat, "\n"))
-      cat(paste0("Number of lon points ", n.lon, "\n"))
+      if(verbose){
+        cat(paste0("Number of lat points ", n.lat, "\n"))
+        cat(paste0("Number of lon points ", n.lon, "\n"))
+      }
     }else{
       cat(paste("using grid info from:", filewrf, "\n"))    # nocov
       wrf <- ncdf4::nc_open(filewrf)                        # nocov
@@ -86,8 +92,10 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
                                  attname = "SOUTH-NORTH_PATCH_END_UNSTAG")$value  # nocov
       n.lon  <- ncdf4::ncatt_get(wrf, varid = 0,            # nocov
                                  attname = "WEST-EAST_PATCH_END_UNSTAG")$value  # nocov
-      cat(paste0("Number of lat points ", n.lat, "\n"))     # nocov
-      cat(paste0("Number of lon points ", n.lon, "\n"))     # nocov
+      if(verbose){
+        cat(paste0("Number of lat points ", n.lat, "\n"))     # nocov
+        cat(paste0("Number of lon points ", n.lon, "\n"))     # nocov
+      }
       ncdf4::nc_close(wrf)                                  # nocov
     }
     r.lat  <- range(lon)
@@ -144,7 +152,8 @@ lineSource <- function(s, grid, as_raster = F,verbose = T, type = "info",
     g <- sf::st_as_sf(g)
     sf::st_crs(g) <- sf::st_crs(net)                   # NEW for PROJ 7.0.0
     if (!missing(sr)) {
-      message("Transforming spatial objects to 'sr' ") # nocov
+      if(verbose)
+        message("Transforming spatial objects to 'sr' ") # nocov
       net <- sf::st_transform(net, sr)                 # nocov
       g <- sf::st_transform(g, sr)                     # nocov
     }

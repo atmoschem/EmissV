@@ -1,8 +1,8 @@
 #' Tool to set-up emission factors
 #'
-#' @description Return a data frame with vehicle information. Types argument defines the diary use:
+#' @description Return a data frame for emission for multiple pollutants.
 #'
-#' @format data frame
+#' @return a emission factor data frame
 #'
 #' @param ef list with emission factors
 #' @param poluttant poluttant names
@@ -10,6 +10,8 @@
 #' @param unit tring with unit from unit package, for default is "g/km"
 #' @param example TRUE to diaplay a simple example
 #' @param verbose display additional information
+#'
+#' @return a emission factor data.frame for totalEmission function
 #'
 #' @seealso \code{\link{areaSource}} and  \code{\link{totalEmission}}
 #'
@@ -29,9 +31,9 @@
 #'                                 "Flex Motorcycles"))
 #'
 
-emissionFactor <- function(ef,poluttant = names(ef), vnames = NA,unit = "g/km",example = F,verbose = T){
-  if(example == T){
-    cat("using a example emission factor (values calculated from CETESB 2015):\n")
+emissionFactor <- function(ef,poluttant = names(ef), vnames = NA,unit = "g/km",example = FALSE,verbose = TRUE){
+  if(example == TRUE){
+    if(verbose) cat("using a example emission factor (values calculated from CETESB 2015):\n")
     EF <- as.data.frame.matrix(matrix(NA,ncol = 2,nrow = 8))
     rownames(EF) <- c("Light Duty Vehicles Gasohol","Light Duty Vehicles Ethanol",
                       "Light Duty Vehicles Flex","Diesel Trucks","Diesel Urban Busses",

@@ -22,14 +22,14 @@
 #' @examples
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.tiff",sep=""))
-#' test  <- rasterSource(x, grid, verbose = TRUE)
+#' test  <- rasterSource(x, grid)
 #' image(test, axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
 #'
 #'@source Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 
-rasterSource <- function(r,grid,nlevels="all",conservative = T,verbose = T){
+rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE){
 
   if(grid$map_proj == 1){
     dx    <- grid$DX*1000            # nocov start

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.2</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Calculate the maximum height of rise based on Brigs (1975), the height is calculated using different formulations depending on stability and wind conditions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plumeRise</span><span class='op'>(</span><span class='va'>df</span>, imax <span class='op'>=</span> <span class='fl'>10</span>, ermax <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>100</span>, Hmax <span class='op'>=</span> <span class='cn'>T</span>, verbose <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plumeRise</span><span class='op'>(</span><span class='va'>df</span>, imax <span class='op'>=</span> <span class='fl'>10</span>, ermax <span class='op'>=</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>100</span>, Hmax <span class='op'>=</span> <span class='cn'>TRUE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,6 +150,9 @@
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>data.frame with the input, rise (m) and effective higt (m)</p>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a data.frame with effective height of emissions for pointSource function</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The input data.frame must contains the folloging colluns:</p>

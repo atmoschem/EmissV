@@ -6,7 +6,7 @@
 #'
 #' where n is the type of the veicle
 #'
-#'@format Return a list with the daily total emission by interest area (cityes, states, countries, etc).
+#'@return Return a list with the daily total emission by interest area (cityes, states, countries, etc).
 #'
 #'@param v dataframe with the vehicle data
 #'@param ef emission factor
@@ -28,7 +28,7 @@
 #'
 #' TOTAL <- totalEmission(veic,EmissionFactors,pol = c("CO","PM"))
 
-totalEmission <- function(v,ef,pol,verbose = T){
+totalEmission <- function(v,ef,pol,verbose = TRUE){
 
   TOTAL_veic <- as.matrix(v[5:ncol(v)])
   use        <- v$Use

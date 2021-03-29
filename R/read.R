@@ -87,7 +87,7 @@
 
 read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  version = NA, month = 1, year = 1, categories,
-                 as_raster = T, skip_missing = F, verbose = T){
+                 as_raster = TRUE, skip_missing = FALSE, verbose = TRUE){
 
   if(is.na(version)){                 # nocov start
     cat('versions supported:\n')
@@ -122,7 +122,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(is.list(spec))
     spec <- as.numeric(as.character(unlist(spec))) #nocov
 
-  if(!missing(categories) && skip_missing == T){   #nocov start
+  if(!missing(categories) && skip_missing == TRUE){   #nocov start
     ed   <- ncdf4::nc_open(file[1])
     if(!(categories %in% names(ed$var))){
       cat('category',categories,'is missing, returning zero emission grid!\n')
@@ -150,12 +150,12 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(version == "GAINS"){                          # nocov start
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
-    name <- grep('date',             name, invert = T, value = T)
-    name <- grep('crs',              name, invert = T, value = T)
-    name <- grep('gridcell_area',    name, invert = T, value = T)
-    name <- grep('emis_all',         name, invert = T, value = T)
-    name <- grep('emiss_sum',        name, invert = T, value = T)
-    name <- grep('molecular_weight', name, invert = T, value = T)
+    name <- grep('date',             name, invert = TRUE, value = TRUE)
+    name <- grep('crs',              name, invert = TRUE, value = TRUE)
+    name <- grep('gridcell_area',    name, invert = TRUE, value = TRUE)
+    name <- grep('emis_all',         name, invert = TRUE, value = TRUE)
+    name <- grep('emiss_sum',        name, invert = TRUE, value = TRUE)
+    name <- grep('molecular_weight', name, invert = TRUE, value = TRUE)
 
     if(verbose)
       cat(paste0("reading",
@@ -165,7 +165,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
 
     data <- as.Date('1850-01-01')   # units is days since 1850-01-01 00:00
     data <- data + ncdf4::ncvar_get(ed,'time')[year]
-    cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
+    if(verbose)
+      cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
     var    <- ncdf4::ncvar_get(ed,name[1])
     var    <- var[,,year]
@@ -189,16 +190,17 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
-        name <- grep('date',             name, invert = T, value = T)
-        name <- grep('crs',              name, invert = T, value = T)
-        name <- grep('gridcell_area',    name, invert = T, value = T)
-        name <- grep('emis_all',         name, invert = T, value = T)
-        name <- grep('molecular_weight', name, invert = T, value = T)
+        name <- grep('date',             name, invert = TRUE, value = TRUE)
+        name <- grep('crs',              name, invert = TRUE, value = TRUE)
+        name <- grep('gridcell_area',    name, invert = TRUE, value = TRUE)
+        name <- grep('emis_all',         name, invert = TRUE, value = TRUE)
+        name <- grep('molecular_weight', name, invert = TRUE, value = TRUE)
       }else{
         name <- categories
       }
       for(j in 1:length(name)){
-        cat(paste0("using ",name[j]),"\n")
+        if(verbose)
+          cat(paste0("using ",name[j]),"\n")
         var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
         # var_a  <- var_a / area
@@ -220,12 +222,12 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(version == "RCP"){                          # nocov start
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
-    name <- grep('date',             name, invert = T, value = T)
-    name <- grep('crs',              name, invert = T, value = T)
-    name <- grep('gridcell_area',    name, invert = T, value = T)
-    name <- grep('emis_all',         name, invert = T, value = T)
-    name <- grep('emiss_sum',        name, invert = T, value = T)
-    name <- grep('molecular_weight', name, invert = T, value = T)
+    name <- grep('date',             name, invert = TRUE, value = TRUE)
+    name <- grep('crs',              name, invert = TRUE, value = TRUE)
+    name <- grep('gridcell_area',    name, invert = TRUE, value = TRUE)
+    name <- grep('emis_all',         name, invert = TRUE, value = TRUE)
+    name <- grep('emiss_sum',        name, invert = TRUE, value = TRUE)
+    name <- grep('molecular_weight', name, invert = TRUE, value = TRUE)
 
     if(verbose)
       cat(paste0("reading",
@@ -235,7 +237,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
 
     data <- as.Date('1850-01-01')   # units is days since 1850-01-01 00:00
     data <- data + ncdf4::ncvar_get(ed,'time')[year]
-    cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
+    if(verbose)
+      cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
     var    <- ncdf4::ncvar_get(ed,name[1])
     var    <- var[,,year]
@@ -250,20 +253,22 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
 
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
+      if(verbose)
+        cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
-        name <- grep('date',             name, invert = T, value = T)
-        name <- grep('crs',              name, invert = T, value = T)
-        name <- grep('gridcell_area',    name, invert = T, value = T)
-        name <- grep('emis_all',         name, invert = T, value = T)
-        name <- grep('molecular_weight', name, invert = T, value = T)
+        name <- grep('date',             name, invert = TRUE, value = TRUE)
+        name <- grep('crs',              name, invert = TRUE, value = TRUE)
+        name <- grep('gridcell_area',    name, invert = TRUE, value = TRUE)
+        name <- grep('emis_all',         name, invert = TRUE, value = TRUE)
+        name <- grep('molecular_weight', name, invert = TRUE, value = TRUE)
       }else{
         name <- categories
       }
       for(j in 1:length(name)){
-        cat(paste0("using ",name[j]),"\n")
+        if(verbose)
+          cat(paste0("using ",name[j]),"\n")
         var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
@@ -301,7 +306,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     }
 
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
+      if(verbose)
+        cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
       ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
@@ -348,7 +354,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     for(i in 1:length(file)){
       ed   <- ncdf4::nc_open(file[i])
       name <- names(ed$var)
-      cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
+      if(verbose)
+        cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
       var  <- ncdf4::ncvar_get(ed,name)
       if(as_raster){
         var <- apply(var,1,rev)
@@ -370,14 +377,15 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
     for(i in 1:length(file)){
-      cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
+      if(verbose)
+        cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
       if(missing(categories)){
         name <- names(ed$var)
-        name <- grep('date',         name, invert = T, value = T)
-        name <- grep('crs',          name, invert = T, value = T)
-        name <- grep('gridcell_area',name, invert = T, value = T)
-        name <- grep('emis_all',     name, invert = T, value = T)
-        name <- grep('emiss_sum',    name, invert = T, value = T)
+        name <- grep('date',         name, invert = TRUE, value = TRUE)
+        name <- grep('crs',          name, invert = TRUE, value = TRUE)
+        name <- grep('gridcell_area',name, invert = TRUE, value = TRUE)
+        name <- grep('emis_all',     name, invert = TRUE, value = TRUE)
+        name <- grep('emiss_sum',    name, invert = TRUE, value = TRUE)
       }else{
         name <- categories
       }
@@ -394,7 +402,8 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       varall <- units::as_units(0.0 * var,"g m-2 s-1")
       var    <- units::as_units(0.0 * var,"g m-2 s-1")
       for(j in 1:length(name)){
-        cat(paste0("using ",name[j]),"\n")
+        if(verbose)
+          cat(paste0("using ",name[j]),"\n")
         var_a  <- ncdf4::ncvar_get(ed,name[j])
         var_a  <- apply(var_a,1,rev)
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
@@ -417,10 +426,10 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
   if(version == "VULCAN"){                   # nocov start
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
-    name <- grep('time_bnds',name, invert = T, value = T)
-    name <- grep('crs',      name, invert = T, value = T)
-    name <- grep('lat',      name, invert = T, value = T)
-    name <- grep('lon',      name, invert = T, value = T)
+    name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
+    name <- grep('crs',      name, invert = TRUE, value = TRUE)
+    name <- grep('lat',      name, invert = TRUE, value = TRUE)
+    name <- grep('lon',      name, invert = TRUE, value = TRUE)
 
     # var   <- ncdf4::ncvar_get(ed,name[1])
     # lat   <- ncdf4::ncvar_get(ed,'lat')
@@ -465,16 +474,17 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
     # 'g km-2 s-1' to 'g m-2 s-1'
     # var = var / (1000 * 1000)           # /10**6
 
-    cat(' var:',  name[1],                       '\n',
-        'units:', 'g m-2 s-1',                   '\n',
-        'year:',  format(time_start[year], "%Y"),'\n')
+    if(verbose)
+      cat(' var:',  name[1],                       '\n',
+          'units:', 'g m-2 s-1',                   '\n',
+          'year:',  format(time_start[year], "%Y"),'\n')
 
     if(as_raster){
       return(var)
-      # max_lon <- max(lon,na.rm = T)
-      # max_lat <- max(lat,na.rm = T)
-      # min_lon <- min(lon,na.rm = T)
-      # min_lat <- min(lat,na.rm = T)
+      # max_lon <- max(lon,na.rm = TRUE)
+      # max_lat <- max(lat,na.rm = TRUE)
+      # min_lon <- min(lon,na.rm = TRUE)
+      # min_lat <- min(lat,na.rm = TRUE)
       #
       # var <- t(var)
       # var <- apply(var, 2, rev)
@@ -489,7 +499,7 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       # return(r)
     }else{
       a <- raster_to_ncdf(var)
-      if(dim(a)[3] == 1) a <- a[,,1,drop = T]
+      if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
 
       return(a)
       # return(var)
