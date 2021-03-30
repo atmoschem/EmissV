@@ -92,11 +92,11 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
                                  attname = "SOUTH-NORTH_PATCH_END_UNSTAG")$value  # nocov
       n.lon  <- ncdf4::ncatt_get(wrf, varid = 0,            # nocov
                                  attname = "WEST-EAST_PATCH_END_UNSTAG")$value  # nocov
-      if(verbose){
+      if(verbose){                                            # nocov
         cat(paste0("Number of lat points ", n.lat, "\n"))     # nocov
         cat(paste0("Number of lon points ", n.lon, "\n"))     # nocov
       }
-      ncdf4::nc_close(wrf)                                  # nocov
+      ncdf4::nc_close(wrf)                                    # nocov
     }
     r.lat  <- range(lon)
     r.lon  <- range(lat)
@@ -152,10 +152,10 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
     g <- sf::st_as_sf(g)
     sf::st_crs(g) <- sf::st_crs(net)                   # NEW for PROJ 7.0.0
     if (!missing(sr)) {
-      if(verbose)
+      if(verbose)                                        # nocov
         message("Transforming spatial objects to 'sr' ") # nocov
-      net <- sf::st_transform(net, sr)                 # nocov
-      g <- sf::st_transform(g, sr)                     # nocov
+      net <- sf::st_transform(net, sr)                   # nocov
+      g <- sf::st_transform(g, sr)                       # nocov
     }
     if (type == "lines") {
       netdf <- sf::st_set_geometry(net, NULL)
