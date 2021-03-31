@@ -16,9 +16,9 @@
 #' @param skip_missing return a zero emission for missing variables and a warning
 #' @param verbose display additional information
 #'
-#' @note for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
+#' @note for 'GAINS' / Eclipse-v5a, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
 #'
-#' @note VULCAN is not fully supported, only for visualization purposes
+#' @note 'VULCAN' is not fully supported, only for visualization purposes
 #'
 #' @note for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb
 #'
@@ -376,9 +376,11 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
                  " ",version," ",
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
+    ed   <- ncdf4::nc_open(file[1])
     for(i in 1:length(file)){
       if(verbose)
         cat(paste0("from ",file[i]),"x",sprintf("%02.6f",coef[i]),"\n")
+      ed   <- ncdf4::nc_open(file[i])
       if(missing(categories)){
         name <- names(ed$var)
         name <- grep('date',         name, invert = TRUE, value = TRUE)
@@ -389,7 +391,6 @@ read <- function(file = file.choose(), coef = rep(1,length(file)), spec = NULL,
       }else{
         name <- categories
       }
-      ed   <- ncdf4::nc_open(file[i])
       var  <- ncdf4::ncvar_get(ed,name[1])
       var  <- apply(var,1,rev)
       if(as_raster){
