@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read NetCDF data from global inventaries — read • EmissV</title>
+<title>Read NetCDF data from global inventories — read • EmissV</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Read NetCDF data from global inventaries — read" />
-<meta property="og:description" content="Read data from global inventories, can read several files and merge into one
-emission and/or split into several species (speciation process)" />
+<meta property="og:title" content="Read NetCDF data from global inventories — read" />
+<meta property="og:description" content="Read data from global inventories. Several files can be read to produce one
+emission output and/or can be splited into several species" />
 
 
 
@@ -112,14 +112,14 @@ emission and/or split into several species (speciation process)" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read NetCDF data from global inventaries</h1>
+    <h1>Read NetCDF data from global inventories</h1>
     <small class="dont-index">Source: <a href='https://github.com/atmoschem/EmissV/blob/master/R/read.R'><code>R/read.R</code></a></small>
     <div class="hidden name"><code>read.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Read data from global inventories, can read several files and merge into one
-emission and/or split into several species (speciation process)</p>
+    <p>Read data from global inventories. Several files can be read to produce one
+emission output and/or can be splited into several species</p>
     </div>
 
     <pre class="usage"><span class='fu'>read</span><span class='op'>(</span>
@@ -144,7 +144,7 @@ emission and/or split into several species (speciation process)</p>
     </tr>
     <tr>
       <th>coef</th>
-      <td><p>coef to merge different sources (file) into one emission</p></td>
+      <td><p>coefficients to merge different sources (file) into one emission</p></td>
     </tr>
     <tr>
       <th>spec</th>
@@ -152,27 +152,36 @@ emission and/or split into several species (speciation process)</p>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS','RCP' or 'VULCAN'</p></td>
+      <td><p>Character; One of  of the following:</p><table class='table'>
+<tr><td><strong>argument</strong></td><td><strong>tested</strong></td><td><strong>region</strong></td><td><strong>resolution</strong></td><td><strong>projection</strong></td></tr>
+<tr><td>EDGAR</td><td>4.32 and 5.0</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr>
+<tr><td>EDGAR_HTAPv2</td><td>2.2</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr>
+<tr><td>GAINS</td><td>v5a</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr>
+<tr><td>RCP</td><td>RCP3PD Glb</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr>
+<tr><td>MACCITY</td><td>2010</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr>
+<tr><td>VULCAN</td><td>3.0</td><td>US</td><td>1 x 1 Km</td><td>lcc</td></tr>
+</table>
+</td>
     </tr>
     <tr>
       <th>month</th>
-      <td><p>the desired month of the inventary (MACCITY)</p></td>
+      <td><p>the desired month of the inventory (only for MACCITY)</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p>scenario index (GAINS)</p></td>
+      <td><p>scenario index (only for GAINS)</p></td>
     </tr>
     <tr>
       <th>categories</th>
-      <td><p>considered categories (MACCITY, GAINS variable names), empty for all</p></td>
+      <td><p>considered categories (for MACCITY/GAINS variable names), empty for use all</p></td>
     </tr>
     <tr>
       <th>as_raster</th>
-      <td><p>return a raster (defoult) or matrix (with units)</p></td>
+      <td><p>return a raster (default) or matrix (with units)</p></td>
     </tr>
     <tr>
       <th>skip_missing</th>
-      <td><p>return a zero emission for missing variables and a warning</p></td>
+      <td><p>return a zero emission and a warning for missing files/variables</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -189,9 +198,7 @@ http://accent.aero.jussieu.fr/MACC_metadata.php</p>
     <p>Matrix or raster</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr</p>
-<p>VULCAN is not fully supported, only for visualization purposes</p>
-<p>for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb</p>
+    <p>for EDGAR (all versions), GAINS, RCP and MACCTITY, please use flux (kg m-2 s-1) NetCDF file.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Janssens-Maenhout, G., Dentener, F., Van Aardenne, J., Monni, S., Pagliari, V., Orlandini,

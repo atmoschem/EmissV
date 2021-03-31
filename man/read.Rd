@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.R
 \name{read}
 \alias{read}
-\title{Read NetCDF data from global inventaries}
+\title{Read NetCDF data from global inventories}
 \source{
 Read abbout EDGAR at http://edgar.jrc.ec.europa.eu and MACCITY at
 http://accent.aero.jussieu.fr/MACC_metadata.php
@@ -24,21 +24,30 @@ read(
 \arguments{
 \item{file}{file name or names (variables are summed)}
 
-\item{coef}{coef to merge different sources (file) into one emission}
+\item{coef}{coefficients to merge different sources (file) into one emission}
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{version}{inventory name 'EDGAR' (for 4.32 and 5.0),'EDGAR_HTAPv2','MACCITY','GAINS','RCP' or 'VULCAN'}
+\item{version}{Character; One of  of the following:
+\tabular{lllll}{
+  \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
+  EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 °\tab  longlat\cr
+  EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+  GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
+  RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
+  MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
+  VULCAN\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+}}
 
-\item{month}{the desired month of the inventary (MACCITY)}
+\item{month}{the desired month of the inventory (only for MACCITY)}
 
-\item{year}{scenario index (GAINS)}
+\item{year}{scenario index (only for GAINS)}
 
-\item{categories}{considered categories (MACCITY, GAINS variable names), empty for all}
+\item{categories}{considered categories (for MACCITY/GAINS variable names), empty for use all}
 
-\item{as_raster}{return a raster (defoult) or matrix (with units)}
+\item{as_raster}{return a raster (default) or matrix (with units)}
 
-\item{skip_missing}{return a zero emission for missing variables and a warning}
+\item{skip_missing}{return a zero emission and a warning for missing files/variables}
 
 \item{verbose}{display additional information}
 }
@@ -46,15 +55,11 @@ read(
 Matrix or raster
 }
 \description{
-Read data from global inventories, can read several files and merge into one
-emission and/or split into several species (speciation process)
+Read data from global inventories. Several files can be read to produce one
+emission output and/or can be splited into several species
 }
 \note{
-for 'GAINS' version, please use flux (kg m-2 s-1) NetCDF file from https://eccad3.sedoo.fr
-
-VULCAN is not fully supported, only for visualization purposes
-
-for 'RCP' version, use the flux (kg m-2 s-1) Netcdf file from https://www.iiasa.ac.at/web-apps/tnt/RcpDb
+for EDGAR (all versions), GAINS, RCP and MACCTITY, please use flux (kg m-2 s-1) NetCDF file.
 }
 \examples{
 \donttest{
