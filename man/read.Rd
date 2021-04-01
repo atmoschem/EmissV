@@ -10,9 +10,9 @@ http://accent.aero.jussieu.fr/MACC_metadata.php
 \usage{
 read(
   file = file.choose(),
+  version = NA,
   coef = rep(1, length(file)),
   spec = NULL,
-  version = NA,
   month = 1,
   year = 1,
   categories,
@@ -24,10 +24,6 @@ read(
 \arguments{
 \item{file}{file name or names (variables are summed)}
 
-\item{coef}{coefficients to merge different sources (file) into one emission}
-
-\item{spec}{numeric speciation vector to split emission into different species}
-
 \item{version}{Character; One of  of the following:
 \tabular{lllll}{
   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
@@ -38,6 +34,10 @@ read(
   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
   VULCAN\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
 }}
+
+\item{coef}{coefficients to merge different sources (file) into one emission}
+
+\item{spec}{numeric speciation vector to split emission into different species}
 
 \item{month}{the desired month of the inventory (only for MACCITY)}
 
@@ -67,29 +67,24 @@ dir.create(file.path(tempdir(), "EDGARv432"))
 folder <- setwd(file.path(tempdir(), "EDGARv432"))
 
 url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
-file1 <- 'v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip'
-file2 <- 'v432_NOx_2012_IPCC_1A2.0.1x0.1.zip'
-file3 <- 'v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip'
+file <- 'v432_NOx_2012.0.1x0.1.zip'
 
-download.file(paste0(url,'/ENE/',file1), file1)
-download.file(paste0(url,'/IND/',file2), file2)
-download.file(paste0(url,'/TRO/',file3), file3)
+download.file(paste0(url,'/TOTALS/',file), file)
 
-unzip('v432_NOx_2012_IPCC_1A1a.0.1x0.1.zip')
-unzip('v432_NOx_2012_IPCC_1A2.0.1x0.1.zip')
-unzip('v432_NOx_2012_IPCC_1A3b.0.1x0.1.zip')
+unzip('v432_NOx_2012.0.1x0.1.zip')
 
-nox    <- read(file = dir(pattern = '.nc'),version = 'EDGAR')
+nox  <- read(file    = dir(pattern = '.nc'),
+             version = 'EDGAR',
+             spec    = c(E_NO  = 0.9 ,   # 90\% of NOx is NO
+                         E_NO2 = 0.1 ))  # 10\% of NOx is NO2
 setwd(folder)
 
-sp::spplot(nox, scales = list(draw=TRUE), xlab="Lat", ylab="Lon",main="NOx emissions from EDGAR")
+sp::spplot(nox$E_NO, scales = list(draw=TRUE),
+           xlab="Lat", ylab="Lon",
+           main="NO emissions from EDGAR (in g / m2 s)")
 
-d1     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-d2     <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
-nox_d1 <- rasterSource(nox,d1)
-nox_d2 <- rasterSource(nox,d2)
-image(nox_d1, axe = FALSE, main = "NOx emissions from transport-energy-industry for d1 (2012)")
-image(nox_d2, axe = FALSE, main = "NOx emissions from transport-energy-industry for d2 (2012)")
+d1  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
+NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01, plot = TRUE)
 }
 }
 \references{

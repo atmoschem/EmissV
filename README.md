@@ -43,16 +43,36 @@ No additional steps for windows installation.
 
 Detailed instructions can be found at [netcdf](https://www.unidata.ucar.edu/software/netcdf/), [libudunits2-dev](https://r-quantities.github.io/units/) and [sf](https://r-spatial.github.io/sf/#installing) developers page.
 
+### To [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) (miniconda / anaconda)
+
+First create a new environment called rspatial *(or a better name)*:
+```bash
+  conda create -n rspatial -y
+  conda activate rspatial
+```
+
+and to install some requisites:
+```bash
+  conda install -c conda-forge r-sf -y
+  conda install -c conda-forge r-rgdal -y
+  conda install -c conda-forge r-lwgeom -y
+```
+
 ### Package installation
-To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.665.5.1)*:
+To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.665.5.2)*:
 
 ```r
 install.packages("EmissV")
 ```
-To install the *development version (0.665.5.1)*:
 
+To install the *development version (0.665.5.3)* using [remotes](https://CRAN.R-project.org/package=remotes):
 ```r
-# install.packages("devtools")
+require("remotes")
+remotes::install_github("atmoschem/EmissV")
+```
+or to install the *development version (0.665.5.3)* using [devtools](https://CRAN.R-project.org/package=devtools):
+```r
+require("devtools")
 devtools::install_github("atmoschem/EmissV")
 ```
 

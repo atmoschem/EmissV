@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.3</span>
       </span>
     </div>
 
@@ -122,15 +122,30 @@
 <p>No additional steps for windows installation.</p>
 <p>Detailed instructions can be found at <a href="https://www.unidata.ucar.edu/software/netcdf/">netcdf</a>, <a href="https://r-quantities.github.io/units/">libudunits2-dev</a> and <a href="https://r-spatial.github.io/sf/#installing">sf</a> developers page.</p>
 </div>
+<div id="to-conda-miniconda--anaconda" class="section level3">
+<h3 class="hasAnchor">
+<a href="#to-conda-miniconda--anaconda" class="anchor"></a>To <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a> (miniconda / anaconda)</h3>
+<p>First create a new environment called rspatial <em>(or a better name)</em>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> create -n rspatial -y</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> activate rspatial</span></code></pre></div>
+<p>and to install some requisites:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install -c conda-forge r-sf -y</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install -c conda-forge r-rgdal -y</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install -c conda-forge r-lwgeom -y</span></code></pre></div>
+</div>
 <div id="package-installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#package-installation" class="anchor"></a>Package installation</h3>
-<p>To install the <em><a href="https://cran.r-project.org/package=EmissV">CRAN</a> version (0.665.5.1)</em>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>To install the <em><a href="https://cran.r-project.org/package=EmissV">CRAN</a> version (0.665.5.2)</em>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"EmissV"</span><span class="op">)</span></code></pre></div>
-<p>To install the <em>development version (0.665.5.1)</em>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<p>To install the <em>development version (0.665.5.3)</em> using <a href="https://CRAN.R-project.org/package=remotes">remotes</a>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">"remotes"</a></span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"atmoschem/EmissV"</span><span class="op">)</span></code></pre></div>
+<p>or to install the <em>development version (0.665.5.3)</em> using <a href="https://CRAN.R-project.org/package=devtools">devtools</a>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://devtools.r-lib.org/">"devtools"</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"atmoschem/EmissV"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -138,10 +153,10 @@
 <h2 class="hasAnchor">
 <a href="#using-emissv-with-edgar-50-emissions" class="anchor"></a>Using <code>EmissV</code> with EDGAR 5.0 emissions</h2>
 <p><code>EmissV</code> can be used to process emissions of <a href="https://en.wikipedia.org/wiki/Air_pollution#Sources">atmospheric pollutants</a> and <a href="https://en.wikipedia.org/wiki/Greenhouse_gas">green house gases</a> from inventories such as <a href="https://data.europa.eu/doi/10.2904/JRC_DATASET_EDGAR">EDGAR</a>, <a href="https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&amp;page=welcome#">RCP</a>, <a href="https://iiasa.ac.at/web/home/research/researchPrograms/air/GAINS.html">GAINS</a> and other datasets in <a href="https://www.unidata.ucar.edu/software/netcdf/">NetCDF</a> format, the <a href="http://accent.aero.jussieu.fr/database_table_inventories.php">GEIA-ACCENT</a> and <a href="https://eccad3.sedoo.fr/">ECCAD</a> emission data portal makes available some of these inventories. You can verify the supported format with:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">EmissV</span><span class="fu">::</span><span class="fu"><a href="reference/read.html">read</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>To generate a simple emission it’s a straightforward process in 4 steps:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/EmissV/">EmissV</a></span><span class="op">)</span>
 <span class="co">### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package </span>
 <span class="co">### or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ </span>
@@ -172,7 +187,7 @@
 <span class="va">NO</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span>grid <span class="op">=</span> <span class="va">g</span>, inventory <span class="op">=</span> <span class="va">NOx</span><span class="op">$</span><span class="va">E_NO</span>, pol <span class="op">=</span> <span class="st">"NO"</span>, mm <span class="op">=</span> <span class="fl">30.01</span>,   plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">NO2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span>grid <span class="op">=</span> <span class="va">g</span>, inventory <span class="op">=</span> <span class="va">NOx</span><span class="op">$</span><span class="va">E_NO2</span>,pol <span class="op">=</span> <span class="st">"NO2"</span>,mm <span class="op">=</span> <span class="fl">46.0055</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>The next step is to save the emission in a emission file, the next example show how to save emissions using the <a href="https://github.com/atmoschem/eixport">eixport</a> R-package:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/eixport/">eixport</a></span><span class="op">)</span>
 <span class="co">### create a temporary folder for emissions</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EMISSION"</span><span class="op">)</span><span class="op">)</span>
@@ -199,7 +214,7 @@
 <a href="#using-emissv-to-estimate-vehicular-emissions" class="anchor"></a>Using <code>EmissV</code> to estimate vehicular emissions</h2>
 <p>In EmissV the vehicular emissions are estimated by a top-down approach, i.e. the emissions are calculated using the statistical description of the fleet at avaliable level (National, Estadual, City, etc).The following steps show an example workflow for calculating vehicular emissions, these emissions are initially temporally and spatially disaggregated, and then distributed spatially and temporally.</p>
 <p><strong>I.</strong> Total: emission of pollutants is estimated from the fleet, use and emission factors and for the interest area (cities, states, countries, etc).</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/EmissV/">EmissV</a></span><span class="op">)</span>
 
 <span class="va">fleet</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/vehicles.html">vehicles</a></span><span class="op">(</span>example <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
@@ -231,7 +246,7 @@
 <span class="va">TOTAL</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/totalEmission.html">totalEmission</a></span><span class="op">(</span><span class="va">fleet</span>,<span class="va">EF</span>,pol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CO"</span><span class="op">)</span>,verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="co"># Total of CO : 1128297.0993334 t year-1</span></code></pre></div>
 <p><strong>II.</strong> Spatial distribution: The package has functions to read information from tables, georeferenced images (tiff), shapefiles (sh), OpenStreet maps (osm), global inventories in NetCDF format (nc) to calculate point, line and area sources.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,
                          <span class="st">"/dmsp.tiff"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span>
 
@@ -261,12 +276,12 @@
                            <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Figure 1 - Emissions of CO using nocturnal lights."></p>
 <p><strong>III.</strong> Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span><span class="va">TOTAL</span>,<span class="st">"CO"</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,<span class="va">grid</span>,mm<span class="op">=</span><span class="fl">28</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="co"># calculating emissions for CO using molar mass = 28 ...</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="Figure 2 - CO emissions ready for use in air quality model."></p>
 <p><strong>IV.</strong> Temporal distribution: the package has a set of hourly profiles that represent the mean activity for each day of the week calculated from traffic counts of toll stations located in São Paulo city.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">perfil</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">perfil</span><span class="op">)</span></code></pre></div>
 <p>The package has additional functions for read netcdf data, create line and point sources (with plume rise) and to estimate the total emissions of of volatile organic compounds from exhaust (through the exhaust pipe), liquid (carter and evaporative) and vapor (fuel transfer operations).</p>
