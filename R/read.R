@@ -1,7 +1,7 @@
 #' Read NetCDF data from global inventories
 #'
 #' @description Read data from global inventories. Several files can be read to produce one
-#' emission output and/or can be splited into several species
+#' emission output and/or can be splitted into several species
 #'
 #' @return Matrix or raster
 #'
@@ -9,16 +9,20 @@
 #' @param version Character; One of  of the following:
 #' \tabular{lllll}{
 #'   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
-#'   EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 °\tab  longlat\cr
+#'   EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 #'   EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
 #'   GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
 #'   RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
 #'   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
+#'   FFDAS\tab 2.2 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
+#'   ODIAC\tab 2020 \tab Global \tab 1 x 1 ° \tab  longlat\cr
 #'   VULCAN\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+#'   ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
 #'}
 #' @param coef coefficients to merge different sources (file) into one emission
 #' @param spec numeric speciation vector to split emission into different species
-#' @param month the desired month of the inventory (only for MACCITY)
+#' @param hour hour of the emission (only for ACES)
+#' @param month the desired month of the inventory (MACCITY and ODIAC)
 #' @param year scenario index (only for GAINS)
 #' @param categories considered categories (for MACCITY/GAINS variable names), empty for use all
 #' @param as_raster return a raster (default) or matrix (with units)
@@ -86,7 +90,7 @@
 #'}
 
 read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
-                 spec = NULL, month = 1, year = 1, categories,
+                 spec = NULL, year = 1,month = 1, hour = 1, categories,
                  as_raster = TRUE, skip_missing = FALSE, verbose = TRUE){
 
   if(is.na(version)){                 # nocov start
@@ -96,7 +100,10 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     cat(' - GAINS\n')
     cat(' - RCP\n')
     cat(' - MACCITY\n')
+    cat(' - FFDAS\n')
+    cat(' - ODIAC\n')
     cat(' - VULCAN\n')
+    cat(' - ACES\n')
     stop('check version argument')    # nocov end
   }
 
@@ -159,7 +166,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
 
     if(verbose)
       cat(paste0("reading",
-                 " ",version," ",
+                 " ",version,
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
 
@@ -231,7 +238,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
 
     if(verbose)
       cat(paste0("reading",
-                 " ",version," ",
+                 " ",version,
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
 
@@ -290,7 +297,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     name <- names(ed$var)
     if(verbose)
       cat(paste0("reading",
-                 " ",version," ",
+                 " ",version,
                  " emissions for ",
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
@@ -338,7 +345,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     name <- names(ed$var)
     if(verbose)
       cat(paste0("reading",
-                 " ",version," ",
+                 " ",version,
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
     var    <- ncdf4::ncvar_get(ed,name)
@@ -373,7 +380,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
   if(version == "EDGAR_HTAPv2"){  # nocov start
     if(verbose)
       cat(paste0("reading",
-                 " ",version," ",
+                 " ",version,
                  " emissions",
                  ", output unit is g m-2 s-1 ...\n"))
     ed   <- ncdf4::nc_open(file[1])
@@ -432,10 +439,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     name <- grep('lat',      name, invert = TRUE, value = TRUE)
     name <- grep('lon',      name, invert = TRUE, value = TRUE)
 
-    # var   <- ncdf4::ncvar_get(ed,name[1])
-    # lat   <- ncdf4::ncvar_get(ed,'lat')
-    # lon   <- ncdf4::ncvar_get(ed,'lon')
-    # crs   <- ncdf4::ncvar_get(ed,'crs')
     var   <- raster::stack(file[1])            # WARNINGS
     times <- ncdf4::ncvar_get(ed,'time_bnds')
     inicial  <- as.POSIXct('2010-01-01 00:00:00',tz = 'GMT')
@@ -448,16 +451,9 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     }
 
     # Mg km-2 year-1
-    unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
+    # unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
+    ncdf4::nc_close(ed)
 
-    # cat(' crs:',  crs,                           '\n',
-    #     'var:',   name[1],                       '\n',
-    #     'units:', unidades,                      '\n',
-    #     'dim:',   dim(lat),                      '\n',
-    #     'year:',  format(time_start[year], "%Y"),'\n')
-
-    # var   <- var[,,year]
-    # var[is.na(var)] <- 0
     var               <- var[[year]]
     var[is.na(var[])] <- 0
 
@@ -482,30 +478,135 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
 
     if(as_raster){
       return(var)
-      # max_lon <- max(lon,na.rm = TRUE)
-      # max_lat <- max(lat,na.rm = TRUE)
-      # min_lon <- min(lon,na.rm = TRUE)
-      # min_lat <- min(lat,na.rm = TRUE)
-      #
-      # var <- t(var)
-      # var <- apply(var, 2, rev)
-      #
-      # r   <- raster::raster(x   = var,
-      #                       xmn = min_lon,
-      #                       xmx = max_lon,
-      #                       ymn = min_lat,
-      #                       ymx = max_lat)
-      # raster::crs(r) <- "+proj=longlat"
-      # names(r) <- name[1]
-      # return(r)
     }else{
       a <- raster_to_ncdf(var)
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
-
       return(a)
-      # return(var)
     }
   }                                                        # nocov end
+
+  if(version == "FFDAS"){                       # nocov start
+    name  <- 'flux'
+    ed    <- ncdf4::nc_open(file[1])
+    var   <- raster::stack(file[1])             # WARNINGS
+    # kgC m-2 year-1
+    # unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
+    ncdf4::nc_close(ed)
+    var[is.na(var[])] <- 0
+
+    # UNIT conversion
+    # initial == units: kgC m-2 year-1
+    # final   == units: g m-2 s-1
+
+    # 'kgC m-2 year-1' to 'g m-2 year-1'
+    var = (1000 * 12.0107) * var
+
+    # 'g m-2 year-1' to 'g m-2 s-1'
+    var = var / (365 * 24 * 60 * 60)
+
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version," ",
+                 " emissions",
+                 ", output unit is g m-2 s-1 ...\n"))
+
+    if(as_raster){
+      return(var)
+    }else{
+      a <- raster_to_ncdf(var)
+      if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
+      return(a)
+    }
+  }
+
+  if(version == "ODIAC"){                       # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- names(ed$var)
+    name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
+    name <- grep('crs',      name, invert = TRUE, value = TRUE)
+    name <- grep('lat',      name, invert = TRUE, value = TRUE)
+    name <- grep('lon',      name, invert = TRUE, value = TRUE)
+
+    var   <- raster::stack(file[1],varname='land')
+    var2  <- raster::stack(file[1],varname='intl_bunker')
+    var   <- var[[month]] + var2[[month]]
+    var[is.na(var[])] <- 0
+
+    # unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
+    ncdf4::nc_close(ed)
+    # UNIT conversion
+    # initial == units: gC m-2 d-1
+    # final   == units: g  m-2 s-1
+
+    # 'gC m-2 d-1' to 'g m-2 d-1'
+    var = 12.0107 * var
+    # 'g m-2 d-1' to 'g m-2 s-1'
+    var = var / (24 * 60 * 60)
+
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version,
+                 " emissions for ",month.name[month],
+                 ", output unit is g m-2 s-1 ...\n"))
+
+    if(as_raster){
+      return(var)
+    }else{
+      a <- raster_to_ncdf(var)
+      if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
+      return(a)
+    }
+  }
+
+  if(version == "ACES"){                       # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- names(ed$var)
+    name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
+    name <- grep('crs',      name, invert = TRUE, value = TRUE)
+    name <- grep('lat',      name, invert = TRUE, value = TRUE)
+    name <- grep('lon',      name, invert = TRUE, value = TRUE)
+
+    times    <- ncdf4::ncvar_get(ed,'time_bnds')
+    inicial  <- as.POSIXct('2013-01-01 00:00:00',tz = 'GMT')
+
+    time_start <- inicial + 60*60* times[1,]
+    time_end   <- inicial + 60*60* times[2,]
+
+    if(hour > length(time_end)){
+      stop('wrong armument value, month must be lesser than ',length(time_end),'\n  for ', file)
+    }
+
+    if(verbose)
+      cat(' reading',name[1],
+          'from ACES dataset, output units: g m-2 s-1\n',
+          'time (',hour,'of',length(time_start),'):',
+          format(time_start[hour], "%Y-%m-%d %H:%M"),'\n')
+
+    var   <- raster::stack(file[1],varname=name) # warnings
+    var   <- var[[hour]]
+    var[is.na(var[])] <- 0
+
+    # unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
+    ncdf4::nc_close(ed)
+    # UNIT conversion
+    # initial == units: kg km-2 h-1
+    # final   == units: g  m-2 s-1
+
+    # 'kg km-2 h-1' to 'g km-2 h-1'
+    var = 1000 * var
+    # 'g km-2 h-1' to 'g km-2 s-1'
+    var = var / (60 * 60)
+    # 'g km-2 h-1' to 'g m-2 s-1'
+    var = 1000 * 1000 * var
+
+    if(as_raster){
+      return(var)
+    }else{
+      a <- raster_to_ncdf(var)
+      if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
+      return(a)
+    }
+  }
 
   if(as_raster){
     if(is.null(spec)){

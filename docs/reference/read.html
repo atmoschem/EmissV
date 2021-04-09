@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Read NetCDF data from global inventories — read" />
 <meta property="og:description" content="Read data from global inventories. Several files can be read to produce one
-emission output and/or can be splited into several species" />
+emission output and/or can be splitted into several species" />
 
 
 
@@ -119,7 +119,7 @@ emission output and/or can be splited into several species" />
 
     <div class="ref-description">
     <p>Read data from global inventories. Several files can be read to produce one
-emission output and/or can be splited into several species</p>
+emission output and/or can be splitted into several species</p>
     </div>
 
     <pre class="usage"><span class='fu'>read</span><span class='op'>(</span>
@@ -127,8 +127,9 @@ emission output and/or can be splited into several species</p>
   version <span class='op'>=</span> <span class='cn'>NA</span>,
   coef <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span><span class='op'>)</span>,
   spec <span class='op'>=</span> <span class='cn'>NULL</span>,
-  month <span class='op'>=</span> <span class='fl'>1</span>,
   year <span class='op'>=</span> <span class='fl'>1</span>,
+  month <span class='op'>=</span> <span class='fl'>1</span>,
+  hour <span class='op'>=</span> <span class='fl'>1</span>,
   <span class='va'>categories</span>,
   as_raster <span class='op'>=</span> <span class='cn'>TRUE</span>,
   skip_missing <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -151,7 +152,10 @@ emission output and/or can be splited into several species</p>
 <tr><td>GAINS</td><td>v5a</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr>
 <tr><td>RCP</td><td>RCP3PD Glb</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr>
 <tr><td>MACCITY</td><td>2010</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr>
+<tr><td>FFDAS</td><td>2.2</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr>
+<tr><td>ODIAC</td><td>2020</td><td>Global</td><td>1 x 1 °</td><td>longlat</td></tr>
 <tr><td>VULCAN</td><td>3.0</td><td>US</td><td>1 x 1 Km</td><td>lcc</td></tr>
+<tr><td>ACES</td><td>2020</td><td>NE US</td><td>1 x 1 km</td><td>lcc</td></tr>
 </table>
 </td>
     </tr>
@@ -164,12 +168,16 @@ emission output and/or can be splited into several species</p>
       <td><p>numeric speciation vector to split emission into different species</p></td>
     </tr>
     <tr>
-      <th>month</th>
-      <td><p>the desired month of the inventory (only for MACCITY)</p></td>
-    </tr>
-    <tr>
       <th>year</th>
       <td><p>scenario index (only for GAINS)</p></td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td><p>the desired month of the inventory (MACCITY and ODIAC)</p></td>
+    </tr>
+    <tr>
+      <th>hour</th>
+      <td><p>hour of the emission (only for ACES)</p></td>
     </tr>
     <tr>
       <th>categories</th>
@@ -237,7 +245,7 @@ for the United States. Nature Scientific Data.</p>
              version <span class='op'>=</span> <span class='st'>'EDGAR'</span>,
              spec    <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>E_NO  <span class='op'>=</span> <span class='fl'>0.9</span> ,   <span class='co'># 90% of NOx is NO</span>
                          E_NO2 <span class='op'>=</span> <span class='fl'>0.1</span> <span class='op'>)</span><span class='op'>)</span>  <span class='co'># 10% of NOx is NO2</span>
-</div><div class='output co'>#&gt; reading EDGAR  emissions, output unit is g m-2 s-1 ...
+</div><div class='output co'>#&gt; reading EDGAR emissions, output unit is g m-2 s-1 ...
 #&gt; from v432_NOx_2012.0.1x0.1.nc emi_nox x 1.000000 
 #&gt; using the following speciation:
 #&gt; E_NO = 0.9

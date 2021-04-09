@@ -13,8 +13,9 @@ read(
   version = NA,
   coef = rep(1, length(file)),
   spec = NULL,
-  month = 1,
   year = 1,
+  month = 1,
+  hour = 1,
   categories,
   as_raster = TRUE,
   skip_missing = FALSE,
@@ -27,21 +28,26 @@ read(
 \item{version}{Character; One of  of the following:
 \tabular{lllll}{
   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
-  EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 °\tab  longlat\cr
+  EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
   EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
   GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
   RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
+  FFDAS\tab 2.2 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
+  ODIAC\tab 2020 \tab Global \tab 1 x 1 ° \tab  longlat\cr
   VULCAN\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+  ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
 }}
 
 \item{coef}{coefficients to merge different sources (file) into one emission}
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{month}{the desired month of the inventory (only for MACCITY)}
-
 \item{year}{scenario index (only for GAINS)}
+
+\item{month}{the desired month of the inventory (MACCITY and ODIAC)}
+
+\item{hour}{hour of the emission (only for ACES)}
 
 \item{categories}{considered categories (for MACCITY/GAINS variable names), empty for use all}
 
@@ -56,7 +62,7 @@ Matrix or raster
 }
 \description{
 Read data from global inventories. Several files can be read to produce one
-emission output and/or can be splited into several species
+emission output and/or can be splitted into several species
 }
 \note{
 for EDGAR (all versions), GAINS, RCP and MACCTITY, please use flux (kg m-2 s-1) NetCDF file.
