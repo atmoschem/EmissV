@@ -489,6 +489,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     name  <- 'flux'
     ed    <- ncdf4::nc_open(file[1])
     var   <- raster::stack(file[1])             # WARNINGS
+    var   <- var[[1]]
     # kgC m-2 year-1
     # unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
     ncdf4::nc_close(ed)
