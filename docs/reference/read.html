@@ -73,7 +73,7 @@ emission output and/or can be splitted into several species" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.4</span>
       </span>
     </div>
 
@@ -131,6 +131,7 @@ emission output and/or can be splitted into several species</p>
   month <span class='op'>=</span> <span class='fl'>1</span>,
   hour <span class='op'>=</span> <span class='fl'>1</span>,
   <span class='va'>categories</span>,
+  reproject <span class='op'>=</span> <span class='cn'>TRUE</span>,
   as_raster <span class='op'>=</span> <span class='cn'>TRUE</span>,
   skip_missing <span class='op'>=</span> <span class='cn'>FALSE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
@@ -182,6 +183,10 @@ emission output and/or can be splitted into several species</p>
     <tr>
       <th>categories</th>
       <td><p>considered categories (for MACCITY/GAINS variable names), empty for use all</p></td>
+    </tr>
+    <tr>
+      <th>reproject</th>
+      <td><p>to project the output to "+proj=longlat" needed for emission function (only for VULCAN and ACES)</p></td>
     </tr>
     <tr>
       <th>as_raster</th>

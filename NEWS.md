@@ -1,3 +1,6 @@
+## EmissV 0.665.5.4 (2021-06-16)
+- added support for EDGAR, EDGAR_HTAPv2, GAINS, RCP, MACCITY, FFDAS, ODIAC, VULCAN and ACES inventories in read()
+ 
 ## EmissV 0.665.3.0 (2020-12-11)
 - Removing the warning (due to Migration to PROJ6/GDAL3) on read() changing all "+proj=longlat +ellps=GRS80 +no_defs" tp "+proj=longlat"
 - read() support 'VULCAN' dataset
