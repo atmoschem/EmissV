@@ -17,6 +17,7 @@ read(
   month = 1,
   hour = 1,
   categories,
+  reproject = TRUE,
   as_raster = TRUE,
   skip_missing = FALSE,
   verbose = TRUE
@@ -50,6 +51,8 @@ read(
 \item{hour}{hour of the emission (only for ACES)}
 
 \item{categories}{considered categories (for MACCITY/GAINS variable names), empty for use all}
+
+\item{reproject}{to project the output to "+proj=longlat" needed for emission function (only for VULCAN and ACES)}
 
 \item{as_raster}{return a raster (default) or matrix (with units)}
 

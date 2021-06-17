@@ -25,6 +25,7 @@
 #' @param month the desired month of the inventory (MACCITY and ODIAC)
 #' @param year scenario index (only for GAINS)
 #' @param categories considered categories (for MACCITY/GAINS variable names), empty for use all
+#' @param reproject to project the output to "+proj=longlat" needed for emission function (only for VULCAN and ACES)
 #' @param as_raster return a raster (default) or matrix (with units)
 #' @param skip_missing return a zero emission and a warning for missing files/variables
 #' @param verbose display additional information
@@ -91,7 +92,7 @@
 
 read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  spec = NULL, year = 1,month = 1, hour = 1, categories,
-                 as_raster = TRUE, skip_missing = FALSE, verbose = TRUE){
+                 reproject = TRUE, as_raster = TRUE, skip_missing = FALSE, verbose = TRUE){
 
   if(is.na(version)){                 # nocov start
     cat('versions supported:\n')
@@ -470,6 +471,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     var = var / (365 * 24 * 60 * 60)
     # 'g km-2 s-1' to 'g m-2 s-1'
     # var = var / (1000 * 1000)           # /10**6
+    if(reproject){
+      if(verbose)
+        cat('reprojecting to longlat... \n')
+      var <- projectRaster(var, crs="+proj=longlat")
+    }
 
     if(verbose)
       cat(' var:',  name[1],                       '\n',
@@ -599,6 +605,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     var = var / (60 * 60)
     # 'g km-2 h-1' to 'g m-2 s-1'
     var = 1000 * 1000 * var
+    if(reproject){
+      if(verbose)
+        cat('reprojecting to longlat... \n')
+      var <- projectRaster(var, crs="+proj=longlat")
+    }
 
     if(as_raster){
       return(var)

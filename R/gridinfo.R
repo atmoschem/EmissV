@@ -92,14 +92,6 @@ gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
      lat <- inNCLat
      lon <- inNCLon
 
-     # if(geo){
-     #   lat <- ncdf4::ncvar_get(wrf,varid = "XLAT_M")      # nocov
-     #   lon <- ncdf4::ncvar_get(wrf,varid = "XLONG_M")     # nocov
-     # }else{
-     #   lat <- ncdf4::ncvar_get(wrf,varid = "XLAT")
-     #   lon <- ncdf4::ncvar_get(wrf,varid = "XLONG")
-     # }
-
      time<- ncdf4::ncvar_get(wrf,varid = "Times")
      dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
      if(z){
