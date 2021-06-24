@@ -430,7 +430,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  } # nocov end
+  }                                          # nocov end
 
   if(version == "VULCAN"){                   # nocov start
     ed   <- ncdf4::nc_open(file[1])
@@ -489,7 +489,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                                        # nocov end
+  }                                              # nocov end
 
   if(version == "FFDAS"){                       # nocov start
     name  <- 'flux'
@@ -524,7 +524,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }
+  }                                             # nocov end
 
   if(version == "ODIAC"){                       # nocov start
     ed   <- ncdf4::nc_open(file[1])
@@ -563,7 +563,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }
+  }                                            # nocov end
 
   if(version == "ACES"){                       # nocov start
     ed   <- ncdf4::nc_open(file[1])
@@ -618,12 +618,12 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }
+  }                                                       # nocov end
 
   if(as_raster){
     if(is.null(spec)){
       if(version == 'GAINS'){
-        return(rz)                                          #nocov
+        return(rz)                                        #nocov
       }else{
         return(raster::rotate(rz))
       }

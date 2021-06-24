@@ -54,6 +54,7 @@ First create a new environment called rspatial *(or a better name)*:
 and to install some requisites:
 ```bash
   conda install -c conda-forge r-sf -y
+  conda install -c conda-forge r-rgdal -y
   conda install -c conda-forge r-lwgeom -y
 ```
 

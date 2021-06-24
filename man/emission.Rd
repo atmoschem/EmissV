@@ -16,7 +16,7 @@ emission(
   mm = 1,
   aerosol = FALSE,
   plot = FALSE,
-  positive = TRUE,
+  check = TRUE,
   verbose = TRUE
 )
 }
@@ -37,7 +37,7 @@ emission(
 
 \item{plot}{TRUE for plot the final emissions}
 
-\item{positive}{TRUE (defoult) to check negative values and replace for zero}
+\item{check}{TRUE (defoult) to check negative and NA values and replace it for zero}
 
 \item{verbose}{display additional information}
 }

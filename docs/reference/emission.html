@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.5</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
   mm <span class='op'>=</span> <span class='fl'>1</span>,
   aerosol <span class='op'>=</span> <span class='cn'>FALSE</span>,
   plot <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  positive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  check <span class='op'>=</span> <span class='cn'>TRUE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -169,8 +169,8 @@
       <td><p>TRUE for plot the final emissions</p></td>
     </tr>
     <tr>
-      <th>positive</th>
-      <td><p>TRUE (defoult) to check negative values and replace for zero</p></td>
+      <th>check</th>
+      <td><p>TRUE (defoult) to check negative and NA values and replace it for zero</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -238,7 +238,7 @@
 </div><div class='output co'>#&gt; processing RJ area ... 
 #&gt; fraction of RJ area inside the domain = 0.73404006445459</div><div class='input'>
 <span class='va'>e_CO</span>   <span class='op'>&lt;-</span> <span class='fu'>emission</span><span class='op'>(</span><span class='va'>TOTAL</span>,<span class='st'>"CO"</span>,<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>SP <span class='op'>=</span> <span class='va'>SP</span>, RJ <span class='op'>=</span> <span class='va'>RJ</span><span class='op'>)</span>,<span class='va'>grid</span>,mm<span class='op'>=</span><span class='fl'>28</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; calculating emissions for CO using molar mass = 28 ...</div><div class='output co'>#&gt; <span class='warning'>Warning: Negative or NA values found, replaced by zero in CO</span></div><div class='input'>
+</div><div class='output co'>#&gt; calculating emissions for CO using molar mass = 28 ...</div><div class='output co'>#&gt; <span class='warning'>Warning: 9207NA values found, replaced by zero in CO</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

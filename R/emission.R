@@ -12,7 +12,7 @@
 #' @param mm pollutant molar mass
 #' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param plot TRUE for plot the final emissions
-#' @param positive TRUE (defoult) to check negative values and replace for zero
+#' @param check TRUE (defoult) to check negative and NA values and replace it for zero
 #' @param verbose display additional information
 #'
 #' @return a vector of emissions in MOL / mk2 h for gases and ug / m2 s for aerosols.
@@ -49,7 +49,7 @@
 #'
 
 emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FALSE,
-                     plot = FALSE, positive = TRUE,verbose = TRUE){
+                     plot = FALSE, check = TRUE,verbose = TRUE){
 
   if(!is.null(inventory)){
     if(verbose){
@@ -108,7 +108,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FAL
 
       print(a)
     }
-    if(positive){
+    if(check){
       VAR_e <- check_positive(VAR_e,pol)
       return(VAR_e)
     }else{
@@ -199,7 +199,7 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FAL
 
     print(a)
   }
-  if(positive){
+  if(check){
     VAR_e <- check_positive(VAR_e,pol)
     return(VAR_e)
   }else{
@@ -208,19 +208,26 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FAL
 }
 
 check_positive <- function(emiss,pol = '?'){
-  warn <- FALSE
+  has_NAs  <- FALSE
+  negative <- FALSE
+  n_na  = 0
+  n_neg = 0
   for(i in 1:length(emiss)){
     if(is.na(drop_units(emiss[i]))){
-      warn <- TRUE                         # nocov
+      has_NAs  <- TRUE                     # nocov
       emiss[i] = 0                         # nocov
+      n_na     = n_na + 1                  # nocov
     }else{
       if(drop_units(emiss[i]) < 0){
-        warn <- TRUE                       # nocov
+        negative <- TRUE                   # nocov
         emiss[i] = 0                       # nocov
+        n_neg    = n_neg + 1               # nocov
       }
     }
   }
-  if(warn)
-    warning('Negative or NA values found, replaced by zero in ',pol) # nocov
+  if(negative)
+    warning(n_neg,'Negative values found, replaced by zero in ',pol) # nocov
+  if(has_NAs)
+    warning(n_na,'NA values found, replaced by zero in ',pol)        # nocov
   return(emiss)
 }
