@@ -25,7 +25,7 @@ Description: Processing tools to create emissions for use in numerical air
   such as satellite images (Martins et al, 2012) <doi:10.3389/fenvs.2015.00009> 
   or openstreetmap data (Andrade et al, 2015) <doi:10.3389/fenvs.2015.00009>.
 Depends: R (>= 3.4)
-Imports: ncdf4, units(>= 0.5-1), raster, sp, sf, methods, data.table, rgdal
+Imports: ncdf4, units(>= 0.5-1), raster, sp, sf, methods, data.table
 Suggests: 
     testthat (>= 2.1.0),
     covr,

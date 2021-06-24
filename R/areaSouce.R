@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-#' @import raster sp
+#' @import raster sp sf
 #'
 #' @examples
 #' shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
@@ -49,8 +49,13 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=FALSE,verbose = TRUE){
       dy    <- grid$DX*1000
       ncols <- grid$Horizontal[1]
       nrows <- grid$Horizontal[2]
-      projcoords <- rgdal::project(grid$coords,
-                                   grid$geogrd.proj)
+
+      # projcoords <- rgdal::project(grid$coords,grid$geogrd.proj)
+      pontos     <- sf::st_multipoint(x = grid$coords, dim = "XY")
+      coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
+      transform  <- sf::st_transform(x = coords, crs = grid$geogrd.proj)
+      projcoords <- sf::st_coordinates(transform)[,1:2]
+
       xmn <- projcoords[1,1] - dx/2.0  # Left border
       ymx <- projcoords[1,2] + dy/2.0  # upper border
       xmx <- xmn + ncols*dx            # Right border

@@ -1,3 +1,6 @@
+## EmissV 0.665.5.5 (2021-06-23)
+- substitution of rgdal to sf
+
 ## EmissV 0.665.5.4 (2021-06-16)
 - added support for EDGAR, EDGAR_HTAPv2, GAINS, RCP, MACCITY, FFDAS, ODIAC, VULCAN and ACES inventories in read()
  
