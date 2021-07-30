@@ -36,7 +36,8 @@ read(
   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
   FFDAS\tab 2.2 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
   ODIAC\tab 2020 \tab Global \tab 1 x 1 ° \tab  longlat\cr
-  VULCAN\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+  VULCAN-y\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+  VULCAN-h\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
   ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
 }}
 
@@ -44,11 +45,11 @@ read(
 
 \item{spec}{numeric speciation vector to split emission into different species}
 
-\item{year}{scenario index (only for GAINS)}
+\item{year}{scenario index (only for GAINS and VULCAN-y)}
 
 \item{month}{the desired month of the inventory (MACCITY and ODIAC)}
 
-\item{hour}{hour of the emission (only for ACES)}
+\item{hour}{hour of the emission (only for ACES and VULCAN-h)}
 
 \item{categories}{considered categories (for MACCITY/GAINS variable names), empty for use all}
 
