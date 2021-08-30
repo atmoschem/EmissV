@@ -435,6 +435,9 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
   }                                                   # nocov end
 
   if(version == "VULCAN" || version == "VULCAN-y"){   # nocov start
+    if(version == "VULCAN")
+      warning('using VULCAN-y (yearly) configuration!\n change version to VULCAN-y or VULCAN-h!')
+
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
