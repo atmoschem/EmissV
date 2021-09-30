@@ -104,6 +104,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     cat(' - MACCITY\n')
     cat(' - FFDAS\n')
     cat(' - ODIAC\n')
+    cat(' - ODIAC-tiff\n')
     cat(' - ACES\n')
     cat(' - VULCAN-y (annual)\n')
     cat(' - VULCAN-h (hourly)\n')
@@ -626,6 +627,37 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       return(a)
     }
   }                                            # nocov end
+
+  if(version == "ODIAC-tiff"){                       # nocov start
+    ed   <- ncdf4::nc_open(file[1])     # giving the names of the variables
+    name <- names(ed$var)
+
+    var   <- raster::stack(file[1],varname='Band1')
+    var[is.na(var[])] <- 0
+
+    ncdf4::nc_close(ed)
+    # UNIT conversion
+    # initial == units: tonne C/km^2/month
+    # final == units: g/m^2/sec
+
+    # 'tonne C/km^2/month' to 'gm/m^2/month'
+    var = 12.0107 * var
+    # 'gm/m^2/month' to 'g/m^2/sec'
+    var = var / (30.41667* 24 * 60 * 60)
+
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version,
+                 " emissions for ODIAC-tiff, output unit is g/m^2/sec  ...\n"))
+
+    if(as_raster){
+      return(var)
+    }else{
+      a <- raster_to_ncdf(var)
+      if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
+      return(a)
+    }
+  }                                        # nocov end
 
   if(version == "ACES"){                       # nocov start
     ed   <- ncdf4::nc_open(file[1])
