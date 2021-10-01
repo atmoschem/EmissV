@@ -590,20 +590,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
   }                                             # nocov end
 
   if(version == "ODIAC"){                       # nocov start
-    ed   <- ncdf4::nc_open(file[1])
-    name <- names(ed$var)
-    name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
-    name <- grep('crs',      name, invert = TRUE, value = TRUE)
-    name <- grep('lat',      name, invert = TRUE, value = TRUE)
-    name <- grep('lon',      name, invert = TRUE, value = TRUE)
-
     var   <- raster::stack(file[1],varname='land')
     var2  <- raster::stack(file[1],varname='intl_bunker')
     var   <- var[[month]] + var2[[month]]
     var[is.na(var[])] <- 0
 
-    # unidades <- ncdf4::ncatt_get(ed,name[1],'units')$value
-    ncdf4::nc_close(ed)
     # UNIT conversion
     # initial == units: gC m-2 d-1
     # final   == units: g  m-2 s-1
@@ -629,13 +620,9 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
   }                                            # nocov end
 
   if(version == "ODIAC-tiff"){                       # nocov start
-    ed   <- ncdf4::nc_open(file[1])     # giving the names of the variables
-    name <- names(ed$var)
-
     var   <- raster::stack(file[1],varname='Band1')
     var[is.na(var[])] <- 0
 
-    ncdf4::nc_close(ed)
     # UNIT conversion
     # initial == units: tonne C/km^2/month
     # final == units: g/m^2/sec
@@ -648,7 +635,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     if(verbose)
       cat(paste0("reading",
                  " ",version,
-                 " emissions for ODIAC-tiff, output unit is g/m^2/sec  ...\n"))
+                 " emissions, output unit is g m-2 s-1  ...\n"))
 
     if(as_raster){
       return(var)
