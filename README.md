@@ -56,7 +56,7 @@ and to install some requisites:
   conda install -c conda-forge r-sf -y
   conda install -c conda-forge r-rgdal -y
   conda install -c conda-forge r-lwgeom -y
-  conda install -c conda-forge r-raster
+  conda install -c conda-forge r-raster -y
 ```
 
 ### Package installation
