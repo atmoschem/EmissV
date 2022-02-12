@@ -220,7 +220,12 @@ sp::spplot(raster::merge(drop_units(TOTAL$CO[[1]]) * Sao_Paulo,
 
 **III.** Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.
 ``` r
-CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),grid,mm=28, plot = T)
+CO_emissions <- emission(total = TOTAL,
+                         pol   = "CO",
+                         area  = list(SP = Sao_Paulo, MG = Minas_Gerais),
+                         grid  = grid,
+                         mm    = 28, 
+                         plot  = T)
 # calculating emissions for CO using molar mass = 28 ...
 ```
 ![*Figure 2* - CO emissions ready for use in air quality model.](https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png)

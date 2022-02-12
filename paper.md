@@ -127,8 +127,12 @@ sp::spplot(raster::merge(drop_units(TOTAL$CO[[1]]) * Sao_Paulo,
                            "#006897","#0074A1","#0081AA","#008FB3",
                            "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
 
-CO_emissions <- emission(TOTAL,"CO",list(SP = Sao_Paulo, MG = Minas_Gerais),
-                         grid,mm=28, plot = T)
+CO_emissions <- emission(total = TOTAL,
+                         pol   = "CO",
+                         area  = list(SP = Sao_Paulo, MG = Minas_Gerais),
+                         grid  = grid,
+                         mm    = 28, 
+                         plot  = T)
 # calculating emissions for CO using molar mass = 28 ...
 ```
 

@@ -4,13 +4,13 @@
 #'
 #' @format matrix of emission
 #'
+#' @param inventory a inventory raster from read
+#' @param grid grid information
+#' @param mm pollutant molar mass
+#' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param total list of total emission
 #' @param pol pollutant name
 #' @param area list of area sources or matrix with a spatial distribution
-#' @param grid grid information
-#' @param inventory a inventory raster from read
-#' @param mm pollutant molar mass
-#' @param aerosol TRUE for aerosols and FALSE (defoult) for gazes
 #' @param plot TRUE for plot the final emissions
 #' @param check TRUE (defoult) to check negative and NA values and replace it for zero
 #' @param verbose display additional information
@@ -45,11 +45,13 @@
 #' SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 #' RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
 #'
-#' e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ),grid,mm=28)
+#' e_CO   <- emission(total = TOTAL, pol = "CO", area = list(SP = SP, RJ = RJ),
+#'                    grid = grid, mm = 28)
 #'
 
-emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FALSE,
-                     plot = FALSE, check = TRUE,verbose = TRUE){
+emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
+                     total, pol, area,
+                     plot = FALSE,verbose = TRUE){
 
   if(!is.null(inventory)){
     if(verbose){
@@ -75,10 +77,14 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FAL
     else{
       ##  mol km-2 h-1
       VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
-      suppressWarnings( units::install_symbolic_unit("MOL") )
-      MOL <- units::as_units("MOL")
-      conversao <- units::as_units(1/mm, "MOL g-1")
-      VAR_e     <- VAR_e * conversao
+      ### removing deprecated install_symbolic_unit function for units v0.8-0+
+      # suppressWarnings( units::install_symbolic_unit("MOL") )
+      # MOL <- units::as_units("MOL")
+      # conversao <- units::as_units(1/mm, "MOL g-1")
+      # VAR_e     <- VAR_e * conversao
+      units::remove_unit("MOL")
+      units::install_unit("MOL", paste(mm,"g"))
+      VAR_e <- units::set_units(VAR_e,"MOL km-2 h-1")
     }
 
     if(plot == TRUE){
@@ -151,7 +157,9 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FAL
     }
     VAR_e[is.na(VAR_e)]     <- 0
 
-    VAR_e <- rasterSource(VAR_e,grid,verbose = FALSE)
+    # old code
+    # VAR_e <- rasterSource(VAR_e,grid,verbose = FALSE)
+    VAR_e <- raster_to_ncdf(VAR_e)
 
     # put the units (to back the unit)
     VAR_e <- VAR_e * unidade
@@ -168,11 +176,14 @@ emission <- function(total,pol,area,grid, inventory = NULL,mm = 1, aerosol = FAL
   }
   else{
     #  mol km^-2 hr^-1
-    if(exists("ud_units$MOL"))
-      units::remove_symbolic_unit("MOL") # nocov
-    if(!exists("ud_units$MOL"))
-      # units::install_conversion_constant("MOL", "g", const = mm) # old conversion function
-      units::install_unit("MOL", paste(mm,"g"))                    # new conversion function
+    ### removing deprecated install_symbolic_unit function for units v0.8-0+
+    ### if(exists("ud_units$MOL"))
+    ###   units::remove_symbolic_unit("MOL") # nocov
+    ### if(!exists("ud_units$MOL"))
+    ###   # units::install_conversion_constant("MOL", "g", const = mm) # old conversion function
+    ###   units::install_unit("MOL", paste(mm,"g"))                    # new conversion function
+    units::remove_unit("MOL")
+    units::install_unit("MOL", paste(mm,"g"))
     VAR_e   =  units::set_units(VAR_e,"MOL/d")
     VAR_e   =  units::set_units(VAR_e,"MOL/h")
     VAR_e   =  VAR_e / dx^2
@@ -226,8 +237,17 @@ check_positive <- function(emiss,pol = '?'){
     }
   }
   if(negative)
-    warning(n_neg,'Negative values found, replaced by zero in ',pol) # nocov
+    warning(n_neg,' Negative values found, replaced by zero in ',pol) # nocov
   if(has_NAs)
-    warning(n_na,'NA values found, replaced by zero in ',pol)        # nocov
+    warning(n_na,' NA values found, replaced by zero in ',pol)        # nocov
   return(emiss)
+}
+
+raster_to_ncdf <- function(r,na_value = 0){
+  N_times <- dim(r)[3]
+  a       <- array(na_value,c(dim(r)[2],dim(r)[1],N_times))
+  for(i in 1:N_times){
+    a[,,i] <- as.matrix(t(raster::flip(r[[i]],2)))
+  }
+  return(a)
 }

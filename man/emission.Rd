@@ -8,36 +8,36 @@ matrix of emission
 }
 \usage{
 emission(
+  inventory = NULL,
+  grid,
+  mm = 1,
+  aerosol = FALSE,
+  check = TRUE,
   total,
   pol,
   area,
-  grid,
-  inventory = NULL,
-  mm = 1,
-  aerosol = FALSE,
   plot = FALSE,
-  check = TRUE,
   verbose = TRUE
 )
 }
 \arguments{
+\item{inventory}{a inventory raster from read}
+
+\item{grid}{grid information}
+
+\item{mm}{pollutant molar mass}
+
+\item{aerosol}{TRUE for aerosols and FALSE (defoult) for gazes}
+
+\item{check}{TRUE (defoult) to check negative and NA values and replace it for zero}
+
 \item{total}{list of total emission}
 
 \item{pol}{pollutant name}
 
 \item{area}{list of area sources or matrix with a spatial distribution}
 
-\item{grid}{grid information}
-
-\item{inventory}{a inventory raster from read}
-
-\item{mm}{pollutant molar mass}
-
-\item{aerosol}{TRUE for aerosols and FALSE (defoult) for gazes}
-
 \item{plot}{TRUE for plot the final emissions}
-
-\item{check}{TRUE (defoult) to check negative and NA values and replace it for zero}
 
 \item{verbose}{display additional information}
 }
@@ -70,7 +70,8 @@ raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dms
 SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
 
-e_CO   <- emission(TOTAL,"CO",list(SP = SP, RJ = RJ),grid,mm=28)
+e_CO   <- emission(total = TOTAL, pol = "CO", area = list(SP = SP, RJ = RJ),
+                   grid = grid, mm = 28)
 
 }
 \seealso{
