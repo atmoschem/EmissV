@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.6.0</span>
       </span>
     </div>
 
@@ -270,8 +270,12 @@
                            <span class="st">"#006897"</span>,<span class="st">"#0074A1"</span>,<span class="st">"#0081AA"</span>,<span class="st">"#008FB3"</span>,
                            <span class="st">"#009EBD"</span>,<span class="st">"#00AFC8"</span>,<span class="st">"#00C2D6"</span>,<span class="st">"#00E3F0"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span><span class="va">TOTAL</span>,<span class="st">"CO"</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,
-                         <span class="va">grid</span>,mm<span class="op">=</span><span class="fl">28</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span>total <span class="op">=</span> <span class="va">TOTAL</span>,
+                         pol   <span class="op">=</span> <span class="st">"CO"</span>,
+                         area  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,
+                         grid  <span class="op">=</span> <span class="va">grid</span>,
+                         mm    <span class="op">=</span> <span class="fl">28</span>, 
+                         plot  <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="co"># calculating emissions for CO using molar mass = 28 ...</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Emissions of CO using nocturnal lights."></p>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="CO emissions ready for use in air quality model."></p>

@@ -80,7 +80,7 @@ and the output is normalized." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.6.0</span>
       </span>
     </div>
 
@@ -200,6 +200,10 @@ and the output is normalized.</p>
                         source <span class='op'>=</span> <span class='fu'>osmar</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/osmar/man/osmsource_file.html'>osmsource_file</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,
                         package<span class='op'>=</span><span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/streets.osm.xz"</span>,sep<span class='op'>=</span><span class='st'>""</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: number of columns of result is not a multiple of vector length (arg 1)</span></div><div class='input'><span class='va'>road_lines</span> <span class='op'>&lt;-</span> <span class='fu'>osmar</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/osmar/man/as_sp.html'>as_sp</a></span><span class='op'>(</span><span class='va'>roads</span>,what <span class='op'>=</span> <span class='st'>"lines"</span><span class='op'>)</span>
+
+<span class='co'># selecting only 2 roads</span>
+<span class='va'>road_lines</span> <span class='op'>&lt;-</span> <span class='va'>road_lines</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>,<span class='op'>]</span>
+
 <span class='va'>roads</span> <span class='op'>&lt;-</span> <span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_as_sf.html'>st_as_sf</a></span><span class='op'>(</span><span class='va'>road_lines</span><span class='op'>)</span>
 
 <span class='va'>d3</span>    <span class='op'>&lt;-</span> <span class='fu'><a href='gridInfo.html'>gridInfo</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, package <span class='op'>=</span> <span class='st'>"EmissV"</span><span class='op'>)</span>,<span class='st'>"/wrfinput_d03"</span><span class='op'>)</span><span class='op'>)</span>
@@ -207,7 +211,9 @@ and the output is normalized.</p>
 <span class='va'>roadLength</span> <span class='op'>&lt;-</span> <span class='fu'>lineSource</span><span class='op'>(</span><span class='va'>roads</span>,<span class='va'>d3</span>,as_raster<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; using length as emission variable
 #&gt; Number of lat points 51
-#&gt; Number of lon points 51</div><div class='output co'>#&gt; <span class='warning'>Warning: package 'sf' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='message'>Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1</span></div><div class='output co'>#&gt; <span class='message'>although coordinates are longitude/latitude, st_intersection assumes that they are planar</span></div><div class='input'><span class='fu'>sp</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>roadLength</span>, scales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>draw<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>, ylab<span class='op'>=</span><span class='st'>"Lat"</span>, xlab<span class='op'>=</span><span class='st'>"Lon"</span>,main<span class='op'>=</span><span class='st'>"Length of roads"</span>,
+#&gt; Number of lon points 51</div><div class='input'><span class='fu'>sp</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/spplot.html'>spplot</a></span><span class='op'>(</span><span class='va'>roadLength</span>,
+           scales <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>draw<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>,
+           ylab<span class='op'>=</span><span class='st'>"Lat"</span>, xlab<span class='op'>=</span><span class='st'>"Lon"</span>,main<span class='op'>=</span><span class='st'>"Length of roads"</span>,
            sp.layout<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"sp.lines"</span>, <span class='va'>road_lines</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='lineSource-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 

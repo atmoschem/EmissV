@@ -59,16 +59,10 @@ test_that("emission function works", {
   ) > units::as_units(1, "ug*m^-2*s^-1"),
   TRUE)
 
-  # g <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-  #
-  # expect_equal(nrow(emission(inventory = read("edgar_co_test.nc",version = "EDGAR"),
-  #                            pol       = "FISH",
-  #                            grid      = g,
-  #                            mm=1, plot = T, verbose = T)
-  # ),
-  # nrow(emission(inventory = read("edgar_co_test.nc",version = "EDGAR"),
-  #               pol = "FISH",
-  #               grid = g,
-  #               mm=1, plot = T, aerosol = T)
-  # ))
+  g   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
+  ed  <- read("edgar_co_test.nc",version = "EDGAR")
+  a   <- emission(inventory = ed,grid = g,plot = T,verbose = T, pol = 'FISH')
+  b   <- emission(inventory = ed,grid = g,plot = T,verbose = T,aerosol = T)
+
+  expect_equal(nrow(a),nrow(b))
 })

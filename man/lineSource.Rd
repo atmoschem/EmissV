@@ -57,12 +57,18 @@ roads <- osmar::get_osm(osmar::complete_file(),
                         source = osmar::osmsource_file(paste(system.file("extdata",
                         package="EmissV"),"/streets.osm.xz",sep="")))
 road_lines <- osmar::as_sp(roads,what = "lines")
+
+# selecting only 2 roads
+road_lines <- road_lines[1:2,]
+
 roads <- sf::st_as_sf(road_lines)
 
 d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))
 
 roadLength <- lineSource(roads,d3,as_raster=TRUE)
-sp::spplot(roadLength, scales = list(draw=TRUE), ylab="Lat", xlab="Lon",main="Length of roads",
+sp::spplot(roadLength,
+           scales = list(draw=TRUE),
+           ylab="Lat", xlab="Lon",main="Length of roads",
            sp.layout=list("sp.lines", road_lines))
 }
 

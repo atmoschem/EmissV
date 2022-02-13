@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.665.6.0</span>
       </span>
     </div>
 
@@ -95,14 +95,14 @@
 <h3 class="hasAnchor">
 <a href="#to-ubuntu" class="anchor"></a>To Ubuntu</h3>
 <p>The following steps are required for installation on Ubuntu:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get --yes --force-yes update -qq</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable <span class="at">--yes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> <span class="at">--force-yes</span> update <span class="at">-qq</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># netcdf dependencies:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install --yes libnetcdf-dev netcdf-bin</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install <span class="at">--yes</span> libnetcdf-dev netcdf-bin</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># units/udunits2 dependency:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install --yes libudunits2-dev</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install <span class="at">--yes</span> libudunits2-dev</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sf dependencies (without libudunits2-dev):</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install --yes libgdal-dev libgeos-dev libproj-dev</span></code></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install <span class="at">--yes</span> libgdal-dev libgeos-dev libproj-dev</span></code></pre></div>
 </div>
 <div id="to-fedora" class="section level3">
 <h3 class="hasAnchor">
@@ -126,12 +126,13 @@
 <h3 class="hasAnchor">
 <a href="#to-conda-miniconda--anaconda" class="anchor"></a>To <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a> (miniconda / anaconda)</h3>
 <p>First create a new environment called rspatial <em>(or a better name)</em>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> create -n rspatial -y</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> create <span class="at">-n</span> rspatial <span class="at">-y</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> activate rspatial</span></code></pre></div>
 <p>and to install some requisites:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install -c conda-forge r-sf -y</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install -c conda-forge r-rgdal -y</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install -c conda-forge r-lwgeom -y</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install <span class="at">-c</span> conda-forge r-sf <span class="at">-y</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install <span class="at">-c</span> conda-forge r-rgdal <span class="at">-y</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install <span class="at">-c</span> conda-forge r-lwgeom <span class="at">-y</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">conda</span> install <span class="at">-c</span> conda-forge r-raster <span class="at">-y</span></span></code></pre></div>
 </div>
 <div id="package-installation" class="section level3">
 <h3 class="hasAnchor">
@@ -146,7 +147,7 @@
 <p>or to install the <em>development version (0.665.5.3)</em> using <a href="https://CRAN.R-project.org/package=devtools">devtools</a>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://devtools.r-lib.org/">"devtools"</a></span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"atmoschem/EmissV"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"atmoschem/EmissV"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="using-emissv-with-edgar-50-emissions" class="section level2">
@@ -277,7 +278,12 @@
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_all.png" alt="Figure 1 - Emissions of CO using nocturnal lights."></p>
 <p><strong>III.</strong> Emission calculation: calculate the final emission from all different sources and converts to model units and resolution.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span><span class="va">TOTAL</span>,<span class="st">"CO"</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,<span class="va">grid</span>,mm<span class="op">=</span><span class="fl">28</span>, plot <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">CO_emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emission.html">emission</a></span><span class="op">(</span>total <span class="op">=</span> <span class="va">TOTAL</span>,
+                         pol   <span class="op">=</span> <span class="st">"CO"</span>,
+                         area  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SP <span class="op">=</span> <span class="va">Sao_Paulo</span>, MG <span class="op">=</span> <span class="va">Minas_Gerais</span><span class="op">)</span>,
+                         grid  <span class="op">=</span> <span class="va">grid</span>,
+                         mm    <span class="op">=</span> <span class="fl">28</span>, 
+                         plot  <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="co"># calculating emissions for CO using molar mass = 28 ...</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/atmoschem/EmissV/master/CO_final.png" alt="Figure 2 - CO emissions ready for use in air quality model."></p>
 <p><strong>IV.</strong> Temporal distribution: the package has a set of hourly profiles that represent the mean activity for each day of the week calculated from traffic counts of toll stations located in São Paulo city.</p>
@@ -303,8 +309,6 @@
 <a href="https://atmoschem.github.io/EmissV/reference/rasterSource.html">rasterSource</a>: distribution of emissions by a georeferenced image</li>
 <li>
 <a href="https://atmoschem.github.io/EmissV/reference/lineSource.html">lineSource</a>: distribution of emissions by line vectors</li>
-<li>
-<a href="https://atmoschem.github.io/EmissV/reference/streetDist.html">streetDist</a>: distribution by OpenStreetnMap street (in progress)</li>
 <li>
 <a href="https://atmoschem.github.io/EmissV/reference/areaSource.html">areaSource</a>: distribution of emissions by region</li>
 <li>

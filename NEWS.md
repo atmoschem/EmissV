@@ -1,6 +1,7 @@
 ## Version: 0.665.6.0 (2022-02-11)
 - changing deprecated install_symbolic_unit to install_unit for units v0.8-0+
 - order of emission function arguments changed
+- function streetDist temporarily removed
 
 ## EmissV 0.665.5.5 (2021-06-23)
 - substitution of rgdal to sf

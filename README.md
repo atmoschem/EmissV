@@ -248,7 +248,6 @@ Functions:
 - [plumeRise](https://atmoschem.github.io/EmissV/reference/plumeRise.html): calculate plume rise
 - [rasterSource](https://atmoschem.github.io/EmissV/reference/rasterSource.html): distribution of emissions by a georeferenced image
 - [lineSource](https://atmoschem.github.io/EmissV/reference/lineSource.html): distribution of emissions by line vectors
-- [streetDist](https://atmoschem.github.io/EmissV/reference/streetDist.html): distribution by OpenStreetnMap street (in progress)
 - [areaSource](https://atmoschem.github.io/EmissV/reference/areaSource.html): distribution of emissions by region
 - [totalEmission](https://atmoschem.github.io/EmissV/reference/totalEmission.html): total emissions
 - [emission](https://atmoschem.github.io/EmissV/reference/emission.html): Emissions to atmospheric models

@@ -45,8 +45,11 @@
 #' SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 #' RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
 #'
-#' e_CO   <- emission(total = TOTAL, pol = "CO", area = list(SP = SP, RJ = RJ),
-#'                    grid = grid, mm = 28)
+#' e_CO   <- emission(total = TOTAL,
+#'                    pol = "CO",
+#'                    area = list(SP = SP, RJ = RJ),
+#'                    grid = grid,
+#'                    mm = 28)
 #'
 
 emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,

@@ -72,7 +72,7 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
     box_ll <- suppressWarnings( projectRaster(box, crs='+proj=longlat') )
     r      <- raster::crop(r,raster::extent(box_ll))
     if(conservative)
-      total_box <- cellStats(r,"sum",na.rm=TRUE)
+      total_box <- cellStats(r,"sum",na.rm=TRUE) # nocov
 
     r    <- suppressWarnings(raster::projectRaster(r,crs = raster::crs(box))) # to the new projection
     X    <- raster::resample(r,box,method = "bilinear")                       # non-conservative transformation
@@ -80,9 +80,9 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
     X    <- raster::t(X)
     X    <- raster::as.matrix(X)
     X[is.na(X)] <- 0             # for low resolution input data
-
+    # to conserve mass
     if(conservative)
-      X    <- X * total_box/sum(X) # to conserve mass
+      X    <- X * total_box/sum(X) # nocov
 
     if(verbose)
       cat(paste("Grid output:",grid$Horizontal[1],

@@ -70,8 +70,11 @@ raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dms
 SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
 
-e_CO   <- emission(total = TOTAL, pol = "CO", area = list(SP = SP, RJ = RJ),
-                   grid = grid, mm = 28)
+e_CO   <- emission(total = TOTAL,
+                   pol = "CO",
+                   area = list(SP = SP, RJ = RJ),
+                   grid = grid,
+                   mm = 28)
 
 }
 \seealso{
