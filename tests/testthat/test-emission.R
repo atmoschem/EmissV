@@ -61,8 +61,8 @@ test_that("emission function works", {
 
   g   <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
   ed  <- read("edgar_co_test.nc",version = "EDGAR")
-  a   <- emission(inventory = ed,grid = g,plot = T,verbose = T, pol = 'FISH')
-  b   <- emission(inventory = ed,grid = g,plot = T,verbose = T,aerosol = T)
+  a   <- emission(inventory = ed,grid = g,plot = T,verbose = T, pol = 'FISH', mm = 2)
+  b   <- emission(inventory = ed,grid = g,plot = T,verbose = T,aerosol = T, mm = 2)
 
   expect_equal(nrow(a),nrow(b))
 })
