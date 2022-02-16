@@ -1,3 +1,6 @@
+## Version: 0.665.6.1 (2022-02-16)
+- Fixed the case of 1MOL=1g (units package return an error)
+
 ## Version: 0.665.6.0 (2022-02-11)
 - changing deprecated install_symbolic_unit to install_unit for units v0.8-0+
 - order of emission function arguments changed

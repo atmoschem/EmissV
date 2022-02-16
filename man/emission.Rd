@@ -48,7 +48,7 @@ a vector of emissions in MOL / mk2 h for gases and ug / m2 s for aerosols.
 Combine area sources and total emissions to model output
 }
 \note{
-if Inventory is provided, the firsts tree arguments are not be used by the funciton.
+if Inventory is provided, the firsts tree arguments are not be used by the function.
 
 Is a good practice use the set_units(fe,your_unity), where fe is your emission factory and your_unity is usually g/km on your emission factory
 

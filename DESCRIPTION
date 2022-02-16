@@ -1,7 +1,7 @@
 Package: EmissV
 Title: Tools for Create Emissions for Air Quality Models
-Date: 2022-02-13
-Version: 0.665.6.0
+Date: 2022-02-16
+Version: 0.665.6.1
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",

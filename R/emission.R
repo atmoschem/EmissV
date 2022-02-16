@@ -74,20 +74,19 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
     VAR_e = units::set_units(VAR_e,"g m-2 s-1")
 
     if(aerosol){
-      ##  ug m-2 s-1
+      ##  to ug m-2 s-1
       VAR_e = units::set_units(VAR_e,"ug m-2 s-1")
-    }
-    else{
-      ##  mol km-2 h-1
-      VAR_e   =  units::set_units(VAR_e,"g km-2 h-1")
-      ### removing deprecated install_symbolic_unit function for units v0.8-0+
-      # suppressWarnings( units::install_symbolic_unit("MOL") )
-      # MOL <- units::as_units("MOL")
-      # conversao <- units::as_units(1/mm, "MOL g-1")
-      # VAR_e     <- VAR_e * conversao
+    }else{
+      ##  to mol km-2 h-1
+      VAR_e =  units::set_units(VAR_e,"g km-2 h-1")
       units::remove_unit("MOL")
-      units::install_unit("MOL", paste(mm,"g"))
-      VAR_e <- units::set_units(VAR_e,"MOL km-2 h-1")
+      if(mm == 1){
+        units::install_unit("MOL","666 g") # avoiding the error when 1MOL=1g # nocov
+        VAR_e <- 666 * units::set_units(VAR_e,"MOL km-2 h-1")                # nocov
+      }else{
+        units::install_unit("MOL", paste(mm,"g"))
+        VAR_e <- units::set_units(VAR_e,"MOL km-2 h-1")
+      }
     }
 
     if(plot == TRUE){
@@ -132,7 +131,7 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
       if(mm == 1){
         cat(paste("calculating emissions for ",pol," ...\n",sep="")) # nocov
       }else{
-        cat(paste("calculating emissions for ",pol," using molar mass = ",mm," ...\n",sep=""))
+        cat(paste("calculating emissions for ",pol," using molar mass = ",mm," ...\n",sep="")) # nocov
       }
     }
   }
@@ -158,7 +157,7 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
     }else{
       VAR_e  <- area[[1]]
     }
-    VAR_e[is.na(VAR_e)]     <- 0
+    VAR_e[is.na(VAR_e)] <- 0
 
     # old code
     # VAR_e <- rasterSource(VAR_e,grid,verbose = FALSE)
@@ -179,16 +178,17 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
   }
   else{
     #  mol km^-2 hr^-1
-    ### removing deprecated install_symbolic_unit function for units v0.8-0+
-    ### if(exists("ud_units$MOL"))
-    ###   units::remove_symbolic_unit("MOL") # nocov
-    ### if(!exists("ud_units$MOL"))
-    ###   # units::install_conversion_constant("MOL", "g", const = mm) # old conversion function
-    ###   units::install_unit("MOL", paste(mm,"g"))                    # new conversion function
     units::remove_unit("MOL")
-    units::install_unit("MOL", paste(mm,"g"))
-    VAR_e   =  units::set_units(VAR_e,"MOL/d")
-    VAR_e   =  units::set_units(VAR_e,"MOL/h")
+    units::remove_unit("MOL")
+    if(mm == 1){
+      units::install_unit("MOL","666 g")  # avoiding the error when 1MOL=1g
+      VAR_e = 666 * units::set_units(VAR_e,"MOL/d")
+      VAR_e = units::set_units(VAR_e,"MOL/h")
+    }else{
+      units::install_unit("MOL", paste(mm,"g")) # nocov
+      VAR_e = units::set_units(VAR_e,"MOL/d")   # nocov
+      VAR_e = units::set_units(VAR_e,"MOL/h")   # nocov
+    }
     VAR_e   =  VAR_e / dx^2
   }
 
