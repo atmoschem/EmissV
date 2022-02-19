@@ -71,7 +71,8 @@ gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
      # Get geogrid and projection info
      map_proj <- ncdf4::ncatt_get(coordNC, varid=0, attname="MAP_PROJ")$value
      cen_lat  <- ncdf4::ncatt_get(coordNC, varid=0, attname="CEN_LAT")$value
-     cen_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="STAND_LON")$value
+     # cen_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="STAND_LON")$value
+     cen_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="CEN_LON")$value
      truelat1 <- ncdf4::ncatt_get(coordNC, varid=0, attname="TRUELAT1")$value
      truelat2 <- ncdf4::ncatt_get(coordNC, varid=0, attname="TRUELAT2")$value
 

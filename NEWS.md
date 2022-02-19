@@ -1,3 +1,6 @@
+## Version: 0.665.6.2 (2022-02-19)
+- update in gridInfo cen_lon
+
 ## Version: 0.665.6.1 (2022-02-16)
 - Fixed the case of 1MOL=1g (units package return an error)
 - Added support for Cylindrical Equidistant projection
