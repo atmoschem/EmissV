@@ -71,25 +71,48 @@ gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
      # Get geogrid and projection info
      map_proj <- ncdf4::ncatt_get(coordNC, varid=0, attname="MAP_PROJ")$value
      cen_lat  <- ncdf4::ncatt_get(coordNC, varid=0, attname="CEN_LAT")$value
-     # cen_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="STAND_LON")$value
      cen_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="CEN_LON")$value
      truelat1 <- ncdf4::ncatt_get(coordNC, varid=0, attname="TRUELAT1")$value
      truelat2 <- ncdf4::ncatt_get(coordNC, varid=0, attname="TRUELAT2")$value
+     ref_lon  <- ncdf4::ncatt_get(coordNC, varid=0, attname="STAND_LON")$value
 
      if(map_proj == 1){
        geogrd.proj <- paste0("+proj=lcc +lat_1=", truelat1,
                              " +lat_2=", truelat2,
                              " +lat_0=", cen_lat,
-                             " +lon_0=", cen_lon,
+                             " +lon_0=", ref_lon,
                              " +x_0=0 +y_0=0 +a=6370000 +b=6370000 +units=m +no_defs")
-     } else if(map_proj == 6){
-       geogrd.proj <- paste0("+proj=eqc +lat_ts=",0,   # nocov
-                             " +lat_0=",cen_lat,       # nocov
-                             " +lon_0=",cen_lon,       # nocov
-                             " +x_0=",0," +y_0=",0,    # nocov
-                             " +ellps=WGS84 +units=m") # nocov
+     } else if(map_proj == 2){                              # nocov
+       if(cen_lat > 0){                                     # nocov
+         hemis = 90                                         # nocov
+       }else{                                               # nocov
+         hemis = -90                                        # nocov
+       }
+       geogrd.proj <- paste0("+proj=stere +lat_0=",hemis,   # nocov
+                             " +lon_0=",ref_lon,            # nocov
+                             " +lat_ts=",truelat1,          # nocov
+                             " +x_0=0 +y_0=0",              # nocov
+                             " +a=6370000 +b=6370000",      # nocov
+                             " +units=m +no_defs")          # nocov
+     } else if(map_proj == 3){                              # nocov
+       geogrd.proj <-paste0("+proj=merc +lat_ts=",truelat1, # nocov
+                            " +lon_0=",ref_lon,             # nocov
+                            " +a=6370000 +b=6370000",       # nocov
+                            " +datum=WGS84")                # nocov
+     } else if(map_proj == 6){                              # nocov
+       geogrd.proj <- paste0("+proj=eqc +lat_ts=",0,        # nocov
+                             " +lat_0=",cen_lat,            # nocov
+                             " +lon_0=",ref_lon,            # nocov
+                             " +x_0=",0," +y_0=",0,         # nocov
+                             " +ellps=WGS84 +units=m")      # nocov
      } else {
-       stop('Error: Projection type not supported (currently this tool only works for Lambert Conformal and Cylindrical Equidistant).') # nocov
+       stop('Error: Projection type not supported (currently Lambert Conformal, Cylindrical Equidistant, Polar and lat-lon WRF grids are suported).') # nocov
+     }
+
+     dx <- ncdf4::ncatt_get(coordNC, varid=0, attname="DX")$value
+     dy <- ncdf4::ncatt_get(coordNC, varid=0, attname="DY")$value
+     if ( dx != dy ) {
+       stop(paste0('Error: Asymmetric grid cells not supported. DX=', dx, ', DY=', dy))  # nocov
      }
 
      dx <- ncdf4::ncatt_get(coordNC, varid=0, attname="DX")$value
