@@ -31,7 +31,6 @@ Suggests:
     covr,
     osmar,
     RCurl,
-    eixport,
     lwgeom,
     rgdal
 License: MIT + file LICENSE
