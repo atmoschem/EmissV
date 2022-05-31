@@ -34,7 +34,7 @@ speciation <- function(total,spec=NULL,verbose = TRUE){
   if(is.null((spec)))
     cat("need to suply a speciation vector") # nocov
 
-  if(class(total) == "list")
+  if(is.list(total))
     total <- total[[1]]                      # nocov
 
   SPEC <- list()
