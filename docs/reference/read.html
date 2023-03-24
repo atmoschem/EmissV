@@ -18,7 +18,7 @@ emission output and/or can be splitted into several species"><!-- mathjax --><sc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.665.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.665.6.6</span>
       </span>
     </div>
 
@@ -158,14 +158,17 @@ for the United States. Nature Scientific Data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E_NO = 0.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E_NO2 = 0.1</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="va">folder</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">sp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sp/man/spplot.html" class="external-link">spplot</a></span><span class="op">(</span><span class="va">nox</span><span class="op">$</span><span class="va">E_NO</span>, scales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>draw<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">           xlab<span class="op">=</span><span class="st">"Lat"</span>, ylab<span class="op">=</span><span class="st">"Lon"</span>,</span>
-<span class="r-in">           main<span class="op">=</span><span class="st">"NO emissions from EDGAR (in g / m2 s)"</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># creating a color scale</span></span>
+<span class="r-in"><span class="va">cor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#031057"</span>, <span class="st">"#0522FC"</span>,</span>
+<span class="r-in">                                     <span class="st">"#7E0AFA"</span>, <span class="st">"#EF0AFF"</span>,</span>
+<span class="r-in">                                     <span class="st">"#FFA530"</span>, <span class="st">"#FFF957"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">nox</span><span class="op">$</span><span class="va">E_NO</span>,xlab<span class="op">=</span><span class="st">"Lat"</span>, ylab<span class="op">=</span><span class="st">"Lon"</span>,</span>
+<span class="r-in">             col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,zlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6.5e-7</span>,<span class="fl">1.4e-5</span><span class="op">)</span>,</span>
+<span class="r-in">             main<span class="op">=</span><span class="st">"NO emissions from EDGAR (in g / m2 s)"</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="read-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">d1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="gridInfo.html">gridInfo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/wrfinput_d01"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Grid information from: C:/Users/schuch/AppData/Local/Temp/Rtmp2H8oV2/temp_libpath3ae4412c5669/EmissV/extdata/wrfinput_d01 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Grid information from: C:/Users/schuch/Documents/R/win-library/4.1/EmissV/extdata/wrfinput_d01 </span>
 <span class="r-in"><span class="va">NO</span>  <span class="op">&lt;-</span> <span class="fu"><a href="emission.html">emission</a></span><span class="op">(</span>grid <span class="op">=</span> <span class="va">d1</span>, inventory <span class="op">=</span> <span class="va">nox</span><span class="op">$</span><span class="va">E_NO</span>, pol <span class="op">=</span> <span class="st">"NO"</span>, mm <span class="op">=</span> <span class="fl">30.01</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Using raster from inventory for NO ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Grid output: 99 columns 93 rows</span>

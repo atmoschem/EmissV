@@ -88,10 +88,13 @@ nox  <- read(file    = dir(pattern = '.nc'),
              spec    = c(E_NO  = 0.9 ,   # 90\% of NOx is NO
                          E_NO2 = 0.1 ))  # 10\% of NOx is NO2
 setwd(folder)
-
-sp::spplot(nox$E_NO, scales = list(draw=TRUE),
-           xlab="Lat", ylab="Lon",
-           main="NO emissions from EDGAR (in g / m2 s)")
+# creating a color scale
+cor <- colorRampPalette(colors = c(c("#031057", "#0522FC",
+                                     "#7E0AFA", "#EF0AFF",
+                                     "#FFA530", "#FFF957")))
+raster::plot(nox$E_NO,xlab="Lat", ylab="Lon",
+             col = cor(12),zlim = c(-6.5e-7,1.4e-5),
+             main="NO emissions from EDGAR (in g / m2 s)")
 
 d1  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01, plot = TRUE)

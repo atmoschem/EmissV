@@ -40,12 +40,8 @@ raster <- raster::raster(paste(system.file("extdata", package = "EmissV"),
 grid   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d02",sep=""))
 SP     <- areaSource(shape,raster,grid,name = "SPMA")
 \donttest{
-sp::spplot(SP,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-           main=list(label="Spatial Distribution by Lights for Sao Paulo - Brazil"),
-           col.regions = c("#031638","#001E48","#002756","#003062",
-                           "#003A6E","#004579","#005084","#005C8E",
-                           "#006897","#0074A1","#0081AA","#008FB3",
-                           "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+raster::plot(SP,ylab="Lat",xlab="Lon",
+             main ="Spatial Distribution by Lights for Sao Paulo - Brazil")
 }
 
 }

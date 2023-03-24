@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EmissV</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.665.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.665.6.6</span>
       </span>
     </div>
 
@@ -149,16 +149,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total of CO : 1676996.43578795 t year-1 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">grid</span>   <span class="op">&lt;-</span> <span class="fu"><a href="gridInfo.html">gridInfo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/wrfinput_d01"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Grid information from: C:/Users/schuch/AppData/Local/Temp/Rtmp2H8oV2/temp_libpath3ae4412c5669/EmissV/extdata/wrfinput_d01 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Grid information from: C:/Users/schuch/Documents/R/win-library/4.1/EmissV/extdata/wrfinput_d01 </span>
 <span class="r-in"><span class="va">shape</span>  <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/shapefile.html" class="external-link">shapefile</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/BR.shp"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/dmsp.tiff"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">SP</span>     <span class="op">&lt;-</span> <span class="fu"><a href="areaSource.html">areaSource</a></span><span class="op">(</span><span class="va">shape</span><span class="op">[</span><span class="fl">22</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">raster</span>,<span class="va">grid</span>,name <span class="op">=</span> <span class="st">"SP"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> processing SP area ... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fraction of SP area inside the domain = 0.944981686027802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fraction of SP area inside the domain = 0.944981686036936</span>
 <span class="r-in"><span class="va">RJ</span>     <span class="op">&lt;-</span> <span class="fu"><a href="areaSource.html">areaSource</a></span><span class="op">(</span><span class="va">shape</span><span class="op">[</span><span class="fl">17</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">raster</span>,<span class="va">grid</span>,name <span class="op">=</span> <span class="st">"RJ"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> processing RJ area ... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> fraction of RJ area inside the domain = 0.73404006445459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fraction of RJ area inside the domain = 0.734040064556526</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">e_CO</span>   <span class="op">&lt;-</span> <span class="fu">emission</span><span class="op">(</span>total <span class="op">=</span> <span class="va">TOTAL</span>,</span>
 <span class="r-in">                   pol <span class="op">=</span> <span class="st">"CO"</span>,</span>

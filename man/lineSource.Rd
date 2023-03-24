@@ -53,23 +53,16 @@ and the output is normalized.
 }
 \examples{
 \donttest{
-roads <- osmar::get_osm(osmar::complete_file(),
-                        source = osmar::osmsource_file(paste(system.file("extdata",
-                        package="EmissV"),"/streets.osm.xz",sep="")))
-road_lines <- osmar::as_sp(roads,what = "lines")
-
-# selecting only 2 roads
-road_lines <- road_lines[1:2,]
-
-roads <- sf::st_as_sf(road_lines)
-
+# loading a shapefile with osm data for sao paulo metropolitan area
+roads <- sf::st_read(paste0(system.file("extdata",package="EmissV"),"/streets.shp"))
 d3    <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d03"))
 
-roadLength <- lineSource(roads,d3,as_raster=TRUE)
-sp::spplot(roadLength,
-           scales = list(draw=TRUE),
-           ylab="Lat", xlab="Lon",main="Length of roads",
-           sp.layout=list("sp.lines", road_lines))
+# calculating only for 2 streets
+roadLength <- lineSource(roads[1:2,],d3,as_raster=TRUE)
+
+# to generate a quick plot
+raster::plot(roadLength,ylab="Lat", xlab="Lon",main="Length of roads")
+# lines(road_lines)
 }
 
 
