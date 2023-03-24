@@ -1,7 +1,7 @@
 Package: EmissV
 Title: Tools for Create Emissions for Air Quality Models
-Date: 2022-05-31
-Version: 0.665.6.3
+Date: 2023-03-24
+Version: 0.665.6.6
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -25,14 +25,11 @@ Description: Processing tools to create emissions for use in numerical air
   such as satellite images (Martins et al, 2012) <doi:10.3389/fenvs.2015.00009> 
   or openstreetmap data (Andrade et al, 2015) <doi:10.3389/fenvs.2015.00009>.
 Depends: R (>= 3.4)
-Imports: ncdf4, units(>= 0.5-1), raster, sp, sf, methods, data.table
+Imports: ncdf4, units(>= 0.5-1), raster, sf, methods, data.table
 Suggests: 
     testthat (>= 2.1.0),
     covr,
-    osmar,
-    RCurl,
-    lwgeom,
-    rgdal
+    lwgeom
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

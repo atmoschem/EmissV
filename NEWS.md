@@ -1,3 +1,8 @@
+## Version: 0.665.6.6 (2023-03-24)
+- removed remain dependencies of sp package
+- removed suggest packages: osmar,RCurl,rgdal
+- updated on examples, documentation and site
+
 ## Version: 0.665.6.2 (2022-02-19)
 - update in gridInfo cen_lon
 

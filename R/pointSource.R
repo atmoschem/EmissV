@@ -8,7 +8,7 @@
 #'
 #' @return a raster
 #'
-#' @import sp raster
+#' @import raster
 #'
 #' @export
 #'
@@ -22,8 +22,8 @@
 #'
 #' p_emissions <- pointSource(emissions = p, grid = d1)
 #' \donttest{
-#' sp::spplot(p_emissions,scales = list(draw=TRUE), ylab="Lat", xlab="Lon",
-#'            main = "3 point sources for domain d1")
+#' raster::plot(p_emissions,ylab="Lat", xlab="Lon",
+#'              main = "3 point sources for domain d1")
 #'}
 #'
 #' @seealso \code{\link{gridInfo}} and \code{\link{rasterSource}}
@@ -40,8 +40,9 @@ pointSource <- function(emissions, grid, verbose = TRUE){
     values(emis) <- rep(0,ncell(emis))
 
     for(i in 1:length(emissions[[1]])){
-      id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
-                         cellnumbers=TRUE)[1]
+      id.cell <- raster::extract(emis,
+                                 cbind(emissions$lon[i],emissions$lat[i]),
+                                 cellnumbers=TRUE)[1]
       if(verbose){
         xy <- xyFromCell(emis,id.cell)
         lon <- xy[1]
@@ -66,7 +67,8 @@ pointSource <- function(emissions, grid, verbose = TRUE){
     values(emis) <- rep(0,ncell(emis))
 
     for(i in 1:length(emissions[[1]])){
-      id.cell <- extract(emis,SpatialPoints(cbind(emissions$lon[i],emissions$lat[i])),
+      id.cell <- extract(emis,
+                         cbind(emissions$lon[i],emissions$lat[i]),
                          cellnumbers=TRUE)[1]
       altura  <- z[rowFromCell(emis, id.cell),rowFromCell(emis, id.cell),]
       if(verbose){

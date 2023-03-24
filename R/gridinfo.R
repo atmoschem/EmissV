@@ -10,7 +10,7 @@
 #'
 #' @note just WRF-Chem is suported by now
 #'
-#' @import ncdf4 sp
+#' @import ncdf4
 #'
 #' @export
 #'
@@ -23,16 +23,15 @@
 #'                                       "/wrfinput_d03",sep=""))
 #' names(grid_d1)
 #' # for plot the shapes
-#' library(sp)
 #' shape   <- raster::shapefile(paste0(system.file("extdata", package = "EmissV"),
 #'                                                 "/BR.shp"))
-#' plot(shape,xlim = c(-55,-40),ylim = c(-30,-15), main="3 nested domains")
+#' raster::plot(shape,xlim = c(-55,-40),ylim = c(-30,-15), main="3 nested domains")
 #' axis(1); axis(2); box(); grid()
-#' lines(grid_d1$Box, col = "red")
+#' lines(grid_d1$boundary, col = "red")
 #' text(grid_d1$xlim[2],grid_d1$Ylim[1],"d1",pos=4, offset = 0.5)
-#' lines(grid_d2$Box, col = "red")
+#' lines(grid_d2$boundary, col = "red")
 #' text(grid_d2$xlim[2],grid_d2$Ylim[1],"d2",pos=4, offset = 0.5)
-#' lines(grid_d3$Box, col = "red")
+#' lines(grid_d3$boundary, col = "red")
 #' text(grid_d3$xlim[1],grid_d3$Ylim[2],"d3",pos=2, offset = 0.0)
 #'}
 
@@ -155,9 +154,12 @@ gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
                             y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
                  boundary = list(x = c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
                                  y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
-                 poligon = sp::Polygon(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
-                                                 c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
-                                              ncol = 2)),
+                 # polygon = sp::Polygon(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
+                 #                                 c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
+                 #                              ncol = 2)),
+                 polygon  = sf::st_polygon(x = list(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
+                                                              c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
+                                                           ncol = 2))),
                  map_proj    = map_proj,
                  coords      = coords,
                  geogrd.proj = geogrd.proj)

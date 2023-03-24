@@ -16,7 +16,7 @@
 #'
 #' @export
 #'
-#' @import raster sp sf
+#' @import raster sf
 #'
 #' @examples
 #' grid  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))

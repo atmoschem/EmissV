@@ -29,7 +29,7 @@
 #'
 #' @export
 #'
-#' @import units raster sp
+#' @import units raster
 #'
 #' @examples
 #' fleet  <- vehicles(example = TRUE)
@@ -107,14 +107,20 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
         legenda <- paste("Emissions of", pol ,"[",units::deparse_unit(VAR_e),"]")
       }
 
-      a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-                      main=list(label=legenda),
-                      col.regions = c("#031638","#001E48","#002756","#003062",
-                                      "#003A6E","#004579","#005084","#005C8E",
-                                      "#006897","#0074A1","#0081AA","#008FB3",
-                                      "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+      # a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
+      #                 main=list(label=legenda),
+      #                 col.regions = c("#031638","#001E48","#002756","#003062",
+      #                                 "#003A6E","#004579","#005084","#005C8E",
+      #                                 "#006897","#0074A1","#0081AA","#008FB3",
+      #                                 "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+      #
+      # print(a)
 
-      print(a)
+      plot(r,main = legenda,
+           col = c("#031638","#001E48","#002756","#003062",
+                   "#003A6E","#004579","#005084","#005C8E",
+                   "#006897","#0074A1","#0081AA","#008FB3",
+                   "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
     }
     if(check){
       VAR_e <- check_positive(VAR_e,pol)
@@ -153,7 +159,8 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
     area <- unname(area)
 
     if(length(area) > 1){
-      VAR_e  <- do.call(sp::merge,area)
+      # VAR_e  <- do.call(sp::merge,area)
+      VAR_e  <- Reduce(raster::merge, area)
     }else{
       VAR_e  <- area[[1]]
     }
@@ -204,14 +211,20 @@ emission <- function(inventory = NULL,grid,mm = 1, aerosol = FALSE,check = TRUE,
     raster::values(r) <- as.matrix(as.numeric(VAR_e),ncol = col,nrow = row,byrow = TRUE)
     r                 <- raster::flip(r,2)
 
-    a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
-                    main=list(label=paste("Emisions of", pol ,"[",deparse_unit(VAR_e),"]")),
-                    col.regions = c("#031638","#001E48","#002756","#003062",
-                                    "#003A6E","#004579","#005084","#005C8E",
-                                    "#006897","#0074A1","#0081AA","#008FB3",
-                                    "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+    # a <- sp::spplot(r,scales = list(draw=TRUE),ylab="Lat",xlab="Lon",
+    #                 main=list(label=paste("Emisions of", pol ,"[",deparse_unit(VAR_e),"]")),
+    #                 col.regions = c("#031638","#001E48","#002756","#003062",
+    #                                 "#003A6E","#004579","#005084","#005C8E",
+    #                                 "#006897","#0074A1","#0081AA","#008FB3",
+    #                                 "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+    # print(a)
 
-    print(a)
+    plot(r,#main = legenda,
+         col = c("#031638","#001E48","#002756","#003062",
+                 "#003A6E","#004579","#005084","#005C8E",
+                 "#006897","#0074A1","#0081AA","#008FB3",
+                 "#009EBD","#00AFC8","#00C2D6","#00E3F0"))
+
   }
   if(check){
     VAR_e <- check_positive(VAR_e,pol)
