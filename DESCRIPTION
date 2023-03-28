@@ -22,9 +22,9 @@ Description: Processing tools to create emissions for use in numerical air
   Functions to process individual point emissions, line emissions and 
   area emissions of pollutants are available as well as methods to 
   incorporate alternative data for Spatial distribution of emissions 
-  such as satellite images (Gavidia-Calderon et. al, 2018) 
-  <10.1016/j.atmosenv.2018.09.026> or openstreetmap data (Andrade et al, 2015) 
-  <doi:10.3389/fenvs.2015.00009>.
+  such as satellite images (Gavidia Calderon et. al, 2018) 
+  <doi:10.1016/j.atmosenv.2018.09.026> or openstreetmap data 
+  (Andrade et al, 2015) <doi:10.3389/fenvs.2015.00009>.
 Depends: R (>= 3.4)
 Imports: ncdf4, units(>= 0.5-1), raster, sf, methods, data.table
 Suggests: 
