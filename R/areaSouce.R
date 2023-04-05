@@ -41,35 +41,15 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=FALSE,verbose = TRUE){
 
   if(!is.na(grid[1])){
     if(grid$map_proj %in% c(1,2,3,6)){
-      dx    <- grid$DX*1000  # using meters
-      dy    <- grid$DX*1000
-      ncols <- grid$Horizontal[1]
-      nrows <- grid$Horizontal[2]
-
-      pontos     <- sf::st_multipoint(x = grid$coords, dim = "XY")
-      coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
-      transform  <- sf::st_transform(x = coords, crs = grid$geogrd.proj)
-      projcoords <- sf::st_coordinates(transform)[,1:2]
-
-      xmn <- projcoords[1,1] - dx/2.0  # Left border
-      ymx <- projcoords[1,2] + dy/2.0  # upper border
-      xmx <- xmn + ncols*dx            # Right border
-      ymn <- ymx - nrows*dy            # Bottom border
-      # Create a raster
-      box <- suppressWarnings(
-        raster::raster(resolution = dx,
-                       xmn = xmn,
-                       xmx = xmx,
-                       ymn = ymn,
-                       ymx = ymx,
-                       crs = grid$geogrd.proj))
+      box   <- grid$r
     }else{
       col   <- grid$Horizontal[1]
       rol   <- grid$Horizontal[2]
       r.lat <- range(grid$Lat)
       r.lon <- range(grid$Lon)
       box   <- raster::raster(nrows=rol,ncols=col,
-                              xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
+                              xmn=r.lon[1],xmx=r.lon[2],
+                              ymn=r.lat[1],ymx=r.lat[2],
                               crs='+proj=longlat')
     }
 
