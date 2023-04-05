@@ -30,10 +30,11 @@ Imports: ncdf4, units(>= 0.5-1), raster, sf, methods, data.table
 Suggests: 
     testthat (>= 2.1.0),
     covr,
+    rgeos,
     lwgeom
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 URL: https://atmoschem.github.io/EmissV/
 BugReports: https://github.com/atmoschem/EmissV/issues

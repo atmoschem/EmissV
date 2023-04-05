@@ -10,7 +10,7 @@
 #'
 #' @note just WRF-Chem is suported by now
 #'
-#' @import ncdf4
+#' @import ncdf4 sf
 #'
 #' @export
 #'
@@ -148,20 +148,41 @@ gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
      ly  <- range(lat)
      nxi <- dim(lat)[1]
      nxj <- dim(lat)[2]
+
+     pontos     <- sf::st_multipoint(x = coords, dim = "XY")
+     coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
+     transform  <- sf::st_transform(x = coords, crs = geogrd.proj)
+     projcoords <- sf::st_coordinates(transform)[,1:2]
+
+     xmn <- projcoords[1,1] - dx*1000/2.0  # Left border
+     ymx <- projcoords[1,2] + dx*1000/2.0  # upper border
+     xmx <- xmn + nxi*dx*1000              # Right border
+     ymn <- ymx - nxj*dx*1000              # Bottom border
+
+     # Create an empty raster
+     r <- suppressWarnings(
+       raster::raster(nrows = nxi,
+                      ncols = nxj,
+                      resolution = dx * 1000,
+                      xmn = xmn,
+                      xmx = xmx,
+                      ymn = ymn,
+                      ymx = ymx,
+                      crs = geogrd.proj))
+
      OUT <- list(File = file, Times = time, Lat = lat, Lon = lon, z = z,
                  Horizontal = dim(lat), DX = dx, xlim = lx, ylim = ly,
                  Box = list(x = c(lx[2],lx[1],lx[1],lx[2],lx[2]),
                             y = c(ly[2],ly[2],ly[1],ly[1],ly[2])),
                  boundary = list(x = c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
                                  y = c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
-                 # polygon = sp::Polygon(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
-                 #                                 c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
-                 #                              ncol = 2)),
                  polygon  = sf::st_polygon(x = list(matrix(c( c(lon[1,],lon[,nxj],rev(lon[nxi,]),rev(lon[,1])),
                                                               c(lat[1,],lat[,nxj],rev(lat[nxi,]),rev(lat[,1]))),
                                                            ncol = 2))),
                  map_proj    = map_proj,
                  coords      = coords,
-                 geogrd.proj = geogrd.proj)
+                 geogrd.proj = geogrd.proj,
+                 r           = r,
+                 grid        = raster::rasterToPolygons(r))
      return(OUT)
 }

@@ -80,12 +80,7 @@ pointSource <- function(emissions, grid, verbose = TRUE){
           cat(paste("  height=",sprintf("%03.2f",altura[k]),"m k=",k,"\n"))
         }
       }
-      # if(emissions$z[i] < altura[2]){
-      #   a     <- 1
-      #   cat(paste("Emission heigh between", altura[1],"and",altura[2],"at k=",a,
-      #               "for z=",emissions$z[i]))
-      #   cat("\n")
-      # }
+
       for(k in 2:length(altura)){
         if(emissions$z[i] >= altura[k-1] & emissions$z[i] < altura[k]){
           a <- k -1
@@ -99,6 +94,7 @@ pointSource <- function(emissions, grid, verbose = TRUE){
       }
       emis[id.cell][a] <- emissions$e[i]
     }
+
   }
   return(emis)
 }
