@@ -31,28 +31,7 @@
 rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE){
 
   if(grid$map_proj %in% c(1,2,3,6)){
-    dx    <- grid$DX*1000            # nocov start
-    dy    <- grid$DX*1000            # using meters
-    ncols <- grid$Horizontal[1]
-    nrows <- grid$Horizontal[2]
-
-    pontos     <- sf::st_multipoint(x = grid$coords, dim = "XY")
-    coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
-    transform  <- sf::st_transform(x = coords, crs = grid$geogrd.proj)
-    projcoords <- sf::st_coordinates(transform)[,1:2]
-
-    xmn <- projcoords[1,1] - dx/2.0  # Left border
-    ymx <- projcoords[1,2] + dy/2.0  # upper border
-    xmx <- xmn + ncols*dx            # Right border
-    ymn <- ymx - nrows*dy            # Bottom border
-    # Create a raster
-    box <- suppressWarnings(
-      raster::raster(resolution = dx,
-                     xmn = xmn,
-                     xmx = xmx,
-                     ymn = ymn,
-                     ymx = ymx,
-                     crs = grid$geogrd.proj))  # nocov end
+    box   <- grid$r
   }else{
     col   <- grid$Horizontal[1]
     rol   <- grid$Horizontal[2]
@@ -102,8 +81,11 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
       X[,,i] = Y
     }
 
-    if(verbose)
+    if(verbose){
+      col   <- grid$Horizontal[1]
+      rol   <- grid$Horizontal[2]
       cat(paste("Grid output:",col,"columns",rol,"rows",nlevels,"levels\n"))
+    }
   }
 
   return(X)

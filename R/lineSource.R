@@ -224,13 +224,10 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
     # converts to Spatial
     roads4sp <- as(roads4, "Spatial")
     # make a raster
-    # r <- raster::raster(ncol = grid$Horizontal[1], nrow = grid$Horizontal[2],
-    #                     xmn=min(grid$Lon),xmx=max(grid$Lon),
-    #                     ymn=min(grid$Lat),ymx=max(grid$Lat))
-    # r <- raster::rasterize(roads4sp, r, field = roads4sp$length, fun = sum,
-    #                        update = TRUE, updateValue = "all")
-    # updated to gridInfo
-    r <- raster::rasterize(roads4sp, grid$grid, field = roads4sp$length, fun = sum,
+    r <- raster::raster(ncol = grid$Horizontal[1], nrow = grid$Horizontal[2],
+                        xmn=min(grid$Lon),xmx=max(grid$Lon),
+                        ymn=min(grid$Lat),ymx=max(grid$Lat))
+    r <- raster::rasterize(roads4sp, r, field = roads4sp$length, fun = sum,
                            update = TRUE, updateValue = "all")
 
     r[is.na(r[])] <- 0

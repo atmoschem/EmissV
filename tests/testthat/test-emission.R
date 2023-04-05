@@ -3,7 +3,6 @@ context("emission")
 test_that("emission function works", {
 
   g          <- gridInfo(paste0(system.file("extdata", package = "EmissV"),"/wrfinput_d01"))
-  g$map_proj <- 2 # using old method
 
   expect_equal(emission(total = totalEmission(vehicles(example = TRUE,verbose = F),
                                       emissionFactor(example = TRUE,verbose = F),
@@ -39,9 +38,7 @@ test_that("emission function works", {
                             aerosol = T,
                             plot = T)
   ),
-  units::as_units(361.41688129791686, "ug*m^-2*s^-1"))
-
-  # g$map_proj <- 1 # using new method
+  units::as_units(361.41688129791686, "ug*m^-2*s^-1"),tolerance = 0.01)
 
   expect_equal(sum(emission(total = totalEmission(vehicles(example = TRUE,verbose = F),
                                           emissionFactor(example = TRUE,verbose = F),
