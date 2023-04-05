@@ -37,17 +37,15 @@ areaSource <- function(s,r,grid = NA,name = "",as_frac=FALSE,verbose = TRUE){
     cat(paste("processing ",name,"area ... \n",sep = ""))
   }
 
-  # sp <- suppressWarnings( raster::mask(r,sp::spTransform(s,sp::CRS(sp::proj4string(r)))) )
   sp <- suppressWarnings( raster::mask(r,sf::st_transform(sf::st_as_sf(s),crs = raster::crs(r,asText=TRUE))))
 
   if(!is.na(grid[1])){
-    if(grid$map_proj == 1){
+    if(grid$map_proj %in% c(1,2,3,6)){
       dx    <- grid$DX*1000  # using meters
       dy    <- grid$DX*1000
       ncols <- grid$Horizontal[1]
       nrows <- grid$Horizontal[2]
 
-      # projcoords <- rgdal::project(grid$coords,grid$geogrd.proj)
       pontos     <- sf::st_multipoint(x = grid$coords, dim = "XY")
       coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
       transform  <- sf::st_transform(x = coords, crs = grid$geogrd.proj)

@@ -30,7 +30,7 @@
 
 rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE){
 
-  if(grid$map_proj == 1){
+  if(grid$map_proj %in% c(1,2,3,6)){
     dx    <- grid$DX*1000            # nocov start
     dy    <- grid$DX*1000            # using meters
     ncols <- grid$Horizontal[1]
