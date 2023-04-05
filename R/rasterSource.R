@@ -36,7 +36,6 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
     ncols <- grid$Horizontal[1]
     nrows <- grid$Horizontal[2]
 
-    # projcoords <- rgdal::project(grid$coords,grid$geogrd.proj)
     pontos     <- sf::st_multipoint(x = grid$coords, dim = "XY")
     coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
     transform  <- sf::st_transform(x = coords, crs = grid$geogrd.proj)
@@ -65,9 +64,6 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
   }
 
   if(is.na(grid$z[1])){
-    # if(conservative)
-    #   total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
-
     # to reduce the memory
     box_ll <- suppressWarnings( projectRaster(box, crs='+proj=longlat') )
     r      <- raster::crop(r,raster::extent(box_ll))
@@ -94,7 +90,6 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
     }else{
       nlevels <- nlevels
     }
-    # total_box <- cellStats(raster::crop(r,box),"sum",na.rm=TRUE)
 
     r    <- suppressWarnings(raster::projectRaster(r,crs = raster::crs(box))) # to the new projection
     r    <- raster::crop(r,box)
@@ -106,7 +101,6 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
     for(i in 1:nlevels){
       X[,,i] = Y
     }
-    # X    <- X * total_box[1:nlevels]/sum(X) # to conserve mass
 
     if(verbose)
       cat(paste("Grid output:",col,"columns",rol,"rows",nlevels,"levels\n"))

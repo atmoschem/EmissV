@@ -215,8 +215,6 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
       roads3 <- roads2[, "length"]
       # calculate the length of streets in each cell
       roads4 <- emis_grid(spobj = roads3, g = g, type = "lines") # sr = 4326
-      # normalyse
-      # roads4$length <- roads4$length / sum(roads4$length)
     }else{
       # calculate with 'variable' columns instead of 'length'
       roads3 <- s[, variable]                                    # nocov
@@ -231,7 +229,6 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
                         ymn=min(grid$Lat),ymx=max(grid$Lat))
     r <- raster::rasterize(roads4sp, r, field = roads4sp$length, fun = sum,
                            update = TRUE, updateValue = "all")
-    # r <- fasterize::fasterize(roads4sp, r, field = 'length', fun = sum)
 
     r[is.na(r[])] <- 0
     crs(r) <- "+proj=longlat"
@@ -281,36 +278,5 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
     }else{
       return(roads4)
     }
-  } # nocov end
-  # OLD algorithm source:
-  # https://gis.stackexchange.com/questions/119993/convert-line-shapefile-to-raster-value-total-length-of-lines-within-cell
-  # print("take a coffee, this function may take a few minutes ...")
-  # if(verbose) print("cropping data for domain (1 of 4) ...")
-  # x   <- grid$Box$x
-  # y   <- grid$Box$y
-  # box <- sp::bbox(sp::SpatialPoints(cbind(x,y)))
-  # s   <- raster::crop(s,box) # tira ruas fora do dominio
-  #
-  # if(verbose) print("converting to a line segment pattern object (2 of 4) ...")
-  # roadsPSP <- spatstat::as.psp(as(s, 'SpatialLines'))
-  #
-  # if(verbose) print("Calculating lengths per cell (3 of 4) ...")
-  # n.lat        <- grid$Horizontal[2]
-  # n.lon        <- grid$Horizontal[1]
-  # limites      <- spatstat::owin(xrange=c(grid$xlim[1],grid$xlim[2]), yrange=c(grid$Ylim[1],grid$Ylim[2]))
-  # roadLengthIM <- spatstat::pixellate.psp(roadsPSP, W=limites,dimyx=c(n.lat,n.lon))
-  #
-  # if(verbose) print("Converting pixel image to raster in meters (4 of 4) ...")
-  # roadLength <- raster::raster(roadLengthIM, crs=sp::proj4string(s))
-  #
-  # if(as_raster) return(roadLength)
-  #
-  # if(verbose) print("Converting raster to matrix ...")
-  # roadLength <- raster::flip(roadLength,2)
-  # roadLength <- raster::t(roadLength)
-  # roadLength <- raster::as.matrix(roadLength)
-  # if(verbose)
-  #   print(paste("Grid output:",n.lon,"columns",n.lat,"rows"))
-  # return(roadLength/sum(roadLength))
-  # }
+  }
 }
