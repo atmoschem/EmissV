@@ -1,8 +1,15 @@
 # EmissV
-[![windown Build](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv) [![Coverage Status](https://img.shields.io/codecov/c/github/atmoschem/EmissV/master.svg)](https://codecov.io/github/atmoschem/EmissV?branch=master) [![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
-  [![R build
-    status](https://github.com/atmoschem/EmissV/workflows/R-CMD-check/badge.svg)](https://github.com/atmoschem/EmissV/actions)[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV)[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/EmissV)](https://cran.r-project.org/package=EmissV)[![metacran downloads](https://cranlogs.r-pkg.org/badges/EmissV)](https://cran.r-project.org/package=EmissV)
-    
+<!-- badges: start -->
+[![windown Build](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv) 
+[![Coverage Status](https://img.shields.io/codecov/c/github/atmoschem/EmissV/master.svg)](https://codecov.io/github/atmoschem/EmissV?branch=master) 
+[![R build status](https://github.com/atmoschem/EmissV/workflows/R-CMD-check/badge.svg)](https://github.com/atmoschem/EmissV/actions)
+[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT)  [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EmissV)](http://cran.r-project.org/web/packages/EmissV)
+[![cran checks](https://badges.cranchecks.info/worst/EmissV.svg)](https://cran.r-project.org/web/checks/check_results_EmissV.html)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/EmissV)](https://cran.r-project.org/package=EmissV)
+[![metacran downloads](https://cranlogs.r-pkg.org/badges/EmissV)](https://cran.r-project.org/package=EmissV)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
+<!-- badges: end -->  
+
 ![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo_true.png)
 
 This package provides tools to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
