@@ -44,11 +44,11 @@ pointSource <- function(emissions, grid, verbose = TRUE){
                                  cbind(emissions$lon[i],emissions$lat[i]),
                                  cellnumbers=TRUE)[1]
       if(verbose){
-        xy <- xyFromCell(emis,id.cell)
+        xy  <- xyFromCell(emis,id.cell)
         lon <- xy[1]
         lat <- xy[2]
-        if(lat == -765779648826607744){
-          cat('point:',i,'is outside the grid domain!\n') #nocov
+        if(is.na(lat)){
+          cat('point:',row.names(emissions)[i],'is outside the grid domain!\n') #nocov
         }else{
           cat(paste("grid position","lat=",lat,"lon=",lon,"\n"))
         }
