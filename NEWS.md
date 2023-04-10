@@ -2,6 +2,7 @@
 - removed remain dependencies of sp package
 - removed suggest packages: osmar,RCurl,rgdal
 - updated on examples, documentation and site
+- fixing in pointSource with verbose
 
 ## Version: 0.665.6.2 (2022-02-19)
 - update in gridInfo cen_lon
