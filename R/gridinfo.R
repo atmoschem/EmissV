@@ -4,6 +4,7 @@
 #'
 #' @param file file name/path to a wrfinput, wrfchemi or geog_em file
 #' @param z TRUE for read wrfinput vertical coordinades
+#' @param missing_time time if the variable Times is missing
 #' @param verbose display additional information
 #'
 #' @return a list with grid information from air quality model
@@ -35,7 +36,8 @@
 #' text(grid_d3$xlim[1],grid_d3$Ylim[2],"d3",pos=2, offset = 0.0)
 #'}
 
-gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
+gridInfo <- function(file = file.choose(),z = FALSE,
+                     missing_time = '1984-03-10',verbose = TRUE){
     if(verbose)
       cat(paste("Grid information from:",file,"\n"))
 
@@ -123,7 +125,11 @@ gridInfo <- function(file = file.choose(),z = FALSE,verbose = TRUE){
      lat <- inNCLat
      lon <- inNCLon
 
-     time<- ncdf4::ncvar_get(wrf,varid = "Times")
+     if("Times" %in% names(wrf$var)){
+       time <- ncdf4::ncvar_get(wrf,varid = "Times")
+     }else{
+       time <- as.POSIXlt(missing_time, tz = "UTC", format="%Y-%m-%d", optional=FALSE)
+     }
      dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
      if(z){
        PHB <- ncdf4::ncvar_get(wrf,varid = "PHB")        # 3d
