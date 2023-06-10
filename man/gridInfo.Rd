@@ -4,12 +4,19 @@
 \alias{gridInfo}
 \title{Read grid information from a NetCDF file}
 \usage{
-gridInfo(file = file.choose(), z = FALSE, verbose = TRUE)
+gridInfo(
+  file = file.choose(),
+  z = FALSE,
+  missing_time = "1984-03-10",
+  verbose = TRUE
+)
 }
 \arguments{
 \item{file}{file name/path to a wrfinput, wrfchemi or geog_em file}
 
 \item{z}{TRUE for read wrfinput vertical coordinades}
+
+\item{missing_time}{time if the variable Times is missing}
 
 \item{verbose}{display additional information}
 }

@@ -113,22 +113,16 @@ gridInfo <- function(file = file.choose(),z = FALSE,
      dx <- ncdf4::ncatt_get(coordNC, varid=0, attname="DX")$value
      dy <- ncdf4::ncatt_get(coordNC, varid=0, attname="DY")$value
      if ( dx != dy ) {
-       stop(paste0('Error: Asymmetric grid cells not supported. DX=', dx, ', DY=', dy))  # nocov
-     }
-
-     dx <- ncdf4::ncatt_get(coordNC, varid=0, attname="DX")$value
-     dy <- ncdf4::ncatt_get(coordNC, varid=0, attname="DY")$value
-     if ( dx != dy ) {
        stop(paste0('Error: Asymmetric grid cells not supported. DX=', dx, ', DY=', dy)) # nocov
      }
 
      lat <- inNCLat
      lon <- inNCLon
 
-     if("Times" %in% names(wrf$var)){
-       time <- ncdf4::ncvar_get(wrf,varid = "Times")
-     }else{
-       time <- as.POSIXlt(missing_time, tz = "UTC", format="%Y-%m-%d", optional=FALSE)
+     if("Times" %in% names(wrf$var)){                                                   # nocov
+       time <- ncdf4::ncvar_get(wrf,varid = "Times")                                    # nocov
+     }else{                                                                             # nocov
+       time <- as.POSIXlt(missing_time, tz = "UTC", format="%Y-%m-%d", optional=FALSE)  # nocov
      }
      dx  <- ncdf4::ncatt_get(wrf,varid = 0,attname = "DX")$value / 1000 # to km
      if(z){
