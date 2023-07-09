@@ -1,7 +1,7 @@
 Package: EmissV
 Title: Tools for Create Emissions for Air Quality Models
-Date: 2023-03-24
-Version: 0.665.6.6
+Date: 2023-07-04
+Version: 0.665.6.7
 Authors@R: c(
   person(given = "Daniel",
          family = "Schuch",
@@ -30,7 +30,6 @@ Imports: ncdf4, units(>= 0.5-1), raster, sf, methods, data.table
 Suggests: 
     testthat (>= 2.1.0),
     covr,
-    rgeos,
     lwgeom
 License: MIT + file LICENSE
 Encoding: UTF-8
