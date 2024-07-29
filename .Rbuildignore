@@ -16,3 +16,6 @@
 ^codecov\.yml$
 ^.github
 inst/extdata/dmsp_hi-res.tiff
+^_pkgdown\.yml$
+^pkgdown$
+^\.github$

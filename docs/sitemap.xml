@@ -1,81 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/paper.html</loc>
-  </url>
-  <url>
-    <loc>/reference/areaSource.html</loc>
-  </url>
-  <url>
-    <loc>/reference/emission.html</loc>
-  </url>
-  <url>
-    <loc>/reference/emissionFactor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gridInfo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lineSource.html</loc>
-  </url>
-  <url>
-    <loc>/reference/perfil.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plumeRise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pointSource.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rasterSource.html</loc>
-  </url>
-  <url>
-    <loc>/reference/read.html</loc>
-  </url>
-  <url>
-    <loc>/reference/speciation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/species.html</loc>
-  </url>
-  <url>
-    <loc>/reference/streetDist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/totalEmission.html</loc>
-  </url>
-  <url>
-    <loc>/reference/totalVOC.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vehicles.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://atmoschem.github.io/EmissV/404.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/authors.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/CONDUCT.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/CONTRIBUTING.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/index.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/LICENSE-text.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/LICENSE.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/news/index.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/paper.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/areaSource.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/emission.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/emissionFactor.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/EmissV-package.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/gridInfo.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/index.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/lineSource.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/perfil.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/plumeRise.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/pointSource.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/rasterSource.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/read.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/speciation.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/species.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/streetDist.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/totalEmission.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/totalVOC.html</loc></url>
+<url><loc>https://atmoschem.github.io/EmissV/reference/vehicles.html</loc></url>
 </urlset>
+

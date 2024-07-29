@@ -10,8 +10,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
 <!-- badges: end -->  
 
-![hex_logo](https://raw.githubusercontent.com/atmoschem/EmissV/master/hex_logo_true.png)
-
 This package provides tools to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
 
 ## Installation

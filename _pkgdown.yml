@@ -1,0 +1,4 @@
+url: https://atmoschem.github.io/EmissV/
+template:
+  bootstrap: 5
+  light-switch: true
