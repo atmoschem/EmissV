@@ -11,6 +11,7 @@
 #'   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
 #'   EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 #'   EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+#'   EDGARv8m\tab 8.1 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
 #'   GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
 #'   RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
 #'   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
@@ -45,6 +46,8 @@
 #'
 #' @source Read abbout EDGAR at http://edgar.jrc.ec.europa.eu and MACCITY at
 #' http://accent.aero.jussieu.fr/MACC_metadata.php
+#'
+#' More info for EDGARv8.1 https://edgar.jrc.ec.europa.eu/dataset_ap81 for short live species and https://edgar.jrc.ec.europa.eu/dataset_ghg80 for GHG
 #'
 #' @references
 #' Janssens-Maenhout, G., Dentener, F., Van Aardenne, J., Monni, S., Pagliari, V., Orlandini,
@@ -102,6 +105,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     cat('versions supported:\n')
     cat(' - EDGAR\n')
     cat(' - EDGAR_HTAPv2\n')
+    cat(' - EDGAR_v8m\n')
     cat(' - GAINS\n')
     cat(' - RCP\n')
     cat(' - MACCITY\n')
@@ -438,6 +442,45 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     }
   }                                                   # nocov end
 
+  if(version == "EDGARv8m"){ # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- names(ed$var)
+    cat(paste0("reading",
+               " ",version,
+               " emissions for ",
+               format(ISOdate(1996,month,1),"%B"),
+               ", output unit is g m-2 s-1 ...\n"))
+    var    <- ncdf4::ncvar_get(ed,name)
+    var    <- var[,,month,drop = T]
+    varall <- units::as_units(0.0 * var,"g m-2 s-1")
+    var    <- apply(0.0 * var,1,rev)
+    if(as_raster){
+      r  <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      rz <- raster::raster(0.0 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      raster::values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat"
+    }
+
+    for(i in 1:length(file)){
+      ed   <- ncdf4::nc_open(file[i])
+      name <- names(ed$var)
+      if(verbose)
+        cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
+      var  <- ncdf4::ncvar_get(ed,name)
+      var  <- var[,,month,drop = T]
+      if(as_raster){
+        var <- apply(var,1,rev)
+        r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+        raster::crs(r) <- "+proj=longlat"
+        names(r) <- name[1]
+        rz       <- rz + r * coef[i]
+      }else{
+        var    <- units::set_units(1000 * var,"g m-2 s-1")
+        varall <- varall + var * coef[i]
+      }
+    }
+  } # nocov end
+
   if(version == "VULCAN" || version == "VULCAN-y"){   # nocov start
     if(version == "VULCAN")
       warning('using VULCAN-y (yearly) configuration!\n change version to VULCAN-y or VULCAN-h!')
@@ -706,7 +749,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
 
   if(as_raster){
     if(is.null(spec)){
-      if(version == 'GAINS'){
+      if(version %in% c('GAINS','EDGARv8m')){
         return(rz)                                        #nocov
       }else{
         return(raster::rotate(rz))
@@ -716,7 +759,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       rz_spec <- list()
       for(i in 1:length(spec)){
         if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
-        if(version == 'GAINS'){
+        if(version %in% c('GAINS','EDGARv8m')){
           rz_spec[[i]] <- rz * spec[i]
         }else{
           rz_spec[[i]] <- raster::rotate(rz * spec[i])

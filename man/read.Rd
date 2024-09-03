@@ -6,6 +6,8 @@
 \source{
 Read abbout EDGAR at http://edgar.jrc.ec.europa.eu and MACCITY at
 http://accent.aero.jussieu.fr/MACC_metadata.php
+
+More info for EDGARv8.1 https://edgar.jrc.ec.europa.eu/dataset_ap81 for short live species and https://edgar.jrc.ec.europa.eu/dataset_ghg80 for GHG
 }
 \usage{
 read(
@@ -31,6 +33,7 @@ read(
   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
   EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
   EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+  EDGARv8m\tab 8.1 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
   GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
   RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
