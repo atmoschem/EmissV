@@ -107,7 +107,7 @@ download.file(paste0(url,'/TOTALS/',file), file)
 unzip('v432_NOx_2012.0.1x0.1.zip')
 
 ### 2. read the emissions (using the spec argument to split NOx into NO and NO2)
-nox  <- read(file    = dir(pattern = '.nc'),
+NOx  <- read(file    = dir(pattern = '.nc'),
              version = 'EDGAR',
              spec    = c(E_NO  = 0.9 ,   # 90% of NOx is NO
                          E_NO2 = 0.1 ))  # 10% of NOx is NO2
