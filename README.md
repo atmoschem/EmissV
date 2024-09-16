@@ -107,10 +107,10 @@ download.file(paste0(url,'/TOTALS/',file), file)
 unzip('v432_NOx_2012.0.1x0.1.zip')
 
 ### 2. read the emissions (using the spec argument to split NOx into NO and NO2)
-NOx <- read(paste0(file.path(tempdir(), "EDGAR"),'/v50_NOx_2015.0.1x0.1.nc'),
-            version = 'EDGAR',
-            spec    = c(E_NO  = 0.9 ,   # optional, 90% of NOx used to NO
-                        E_NO2 = 0.1 ))  # optional, 10% of NOx uset to NO2
+NOx  <- read(file    = dir(pattern = '.nc'),
+             version = 'EDGAR',
+             spec    = c(E_NO  = 0.9 ,   # 90% of NOx is NO
+                         E_NO2 = 0.1 ))  # 10% of NOx is NO2
 
 ### 3. get the information from a WRF grid from a initial conditions file (wrfinput)
 g   <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
