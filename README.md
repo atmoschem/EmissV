@@ -94,21 +94,17 @@ To generate a simple emission it's a straightforward process in 4 steps:
 
 ```r
 library(EmissV)
-### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package 
-### or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ 
-### EDGAR 5.0 website and unzip inside a temporary directory
+### 1. download the EDGAR Netcdf using R or from 
+### http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ 
 # create the temporary directory to download the data
-dir.create(file.path(tempdir(), "EDGAR"))
+dir.create(file.path(tempdir(), "EDGARv432"))
+folder <- setwd(file.path(tempdir(), "EDGARv432"))
 # download the total emissions of NOx from EDGAR v50_AP for 2015
-eixport::get_edgar(dataset = "v50_AP",
-                   pol     = 'NOx',
-                   sector  = "TOTALS",
-                   year    = 2015,
-                   type    = 'nc', ask = FALSE, copyright = FALSE,
-                   destpath = file.path(tempdir(), "EDGAR"))
+url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
+file <- 'v432_NOx_2012.0.1x0.1.zip'
+download.file(paste0(url,'/TOTALS/',file), file)
 # unzip the file
-unzip(zipfile = paste0(file.path(tempdir(), "EDGAR"),'/v50_NOx_2015.0.1x0.1.zip'),
-      exdir   = paste0(file.path(tempdir(), "EDGAR")))
+unzip('v432_NOx_2012.0.1x0.1.zip')
 
 ### 2. read the emissions (using the spec argument to split NOx into NO and NO2)
 NOx <- read(paste0(file.path(tempdir(), "EDGAR"),'/v50_NOx_2015.0.1x0.1.nc'),

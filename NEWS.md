@@ -1,3 +1,6 @@
+## Version: 0.665.8.0 (2023-09-16)
+- added support for Edgar v8.1 monthly on read() function
+
 ## Version: 0.665.6.6 (2023-03-24)
 - removed remain dependencies of sp package
 - removed suggest packages: osmar,RCurl,rgdal
