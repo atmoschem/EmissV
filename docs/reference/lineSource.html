@@ -23,7 +23,7 @@ and the output is normalized."><meta property="og:image" content="https://atmosc
 
     <a class="navbar-brand me-2" href="../index.html">EmissV</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.665.6.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.665.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@ and the output is normalized.</p>
 <span class="r-in"><span><span class="co"># loading a shapefile with osm data for sao paulo metropolitan area</span></span></span>
 <span class="r-in"><span><span class="va">roads</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,package<span class="op">=</span><span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/streets.shp"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading layer `streets' from data source </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   `C:\Users\schuch\AppData\Local\R\win-library\4.4\EmissV\extdata\streets.shp' </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   `C:\Users\schuch\AppData\Local\Temp\RtmpUrgplT\temp_libpath5a3c4e1b2426\EmissV\extdata\streets.shp' </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   using driver `ESRI Shapefile'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 5216 features and 3 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: LINESTRING</span>
@@ -143,7 +143,7 @@ and the output is normalized.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -46.87612 ymin: -23.8155 xmax: -46.35414 ymax: -23.4179</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  +proj=longlat +datum=WGS84 +no_defs</span>
 <span class="r-in"><span><span class="va">d3</span>    <span class="op">&lt;-</span> <span class="fu"><a href="gridInfo.html">gridInfo</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"EmissV"</span><span class="op">)</span>,<span class="st">"/wrfinput_d03"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Grid information from: C:/Users/schuch/AppData/Local/R/win-library/4.4/EmissV/extdata/wrfinput_d03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Grid information from: C:/Users/schuch/AppData/Local/Temp/RtmpUrgplT/temp_libpath5a3c4e1b2426/EmissV/extdata/wrfinput_d03 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># calculating only for 2 streets</span></span></span>
 <span class="r-in"><span><span class="va">roadLength</span> <span class="op">&lt;-</span> <span class="fu">lineSource</span><span class="op">(</span><span class="va">roads</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span>,<span class="va">d3</span>,as_raster<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
