@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">EmissV</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.665.6.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.665.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,21 +145,17 @@
 <p>To generate a simple emission it’s a straightforward process in 4 steps:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://atmoschem.github.io/EmissV/">EmissV</a></span><span class="op">)</span></span>
-<span><span class="co">### 1. download the EDGAR Netcdf using the function get_edgar from the eixport R-package </span></span>
-<span><span class="co">### or from the http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ </span></span>
-<span><span class="co">### EDGAR 5.0 website and unzip inside a temporary directory</span></span>
+<span><span class="co">### 1. download the EDGAR Netcdf using R or from </span></span>
+<span><span class="co">### http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ </span></span>
 <span><span class="co"># create the temporary directory to download the data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGARv432"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGARv432"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># download the total emissions of NOx from EDGAR v50_AP for 2015</span></span>
-<span><span class="fu">eixport</span><span class="fu">::</span><span class="fu">get_edgar</span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"v50_AP"</span>,</span>
-<span>                   pol     <span class="op">=</span> <span class="st">'NOx'</span>,</span>
-<span>                   sector  <span class="op">=</span> <span class="st">"TOTALS"</span>,</span>
-<span>                   year    <span class="op">=</span> <span class="fl">2015</span>,</span>
-<span>                   type    <span class="op">=</span> <span class="st">'nc'</span>, ask <span class="op">=</span> <span class="cn">FALSE</span>, copyright <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                   destpath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"</span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="st">'v432_NOx_2012.0.1x0.1.zip'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">url</span>,<span class="st">'/TOTALS/'</span>,<span class="va">file</span><span class="op">)</span>, <span class="va">file</span><span class="op">)</span></span>
 <span><span class="co"># unzip the file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span>zipfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span>,<span class="st">'/v50_NOx_2015.0.1x0.1.zip'</span><span class="op">)</span>,</span>
-<span>      exdir   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="st">'v432_NOx_2012.0.1x0.1.zip'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">### 2. read the emissions (using the spec argument to split NOx into NO and NO2)</span></span>
 <span><span class="va">NOx</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read.html">read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGAR"</span><span class="op">)</span>,<span class="st">'/v50_NOx_2015.0.1x0.1.nc'</span><span class="op">)</span>,</span>
