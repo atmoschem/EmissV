@@ -28,7 +28,7 @@
 #'              main ="Spatial Distribution by Lights for Sao Paulo - Brazil")
 #'}
 #'
-#'@source Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
+#'@source Data avaliable \url{https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/defense-meteorological-satellite-program}
 #'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 areaSource <- function(s,r,grid = NA,name = "",as_frac=FALSE,verbose = TRUE){

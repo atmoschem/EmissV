@@ -4,7 +4,7 @@
 \alias{areaSource}
 \title{Distribution of emissions by area}
 \source{
-Data avaliable \url{https://www.ospo.noaa.gov/Operations/DMSP/index.html}
+Data avaliable \url{https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/defense-meteorological-satellite-program}
 }
 \usage{
 areaSource(s, r, grid = NA, name = "", as_frac = FALSE, verbose = TRUE)
