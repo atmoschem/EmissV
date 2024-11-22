@@ -7,7 +7,8 @@
 [![cran checks](https://badges.cranchecks.info/worst/EmissV.svg)](https://cran.r-project.org/web/checks/check_results_EmissV.html)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/EmissV)](https://cran.r-project.org/package=EmissV)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/EmissV)](https://cran.r-project.org/package=EmissV)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) 
+[![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
 <!-- badges: end -->  
 
 This package provides tools to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
