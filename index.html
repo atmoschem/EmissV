@@ -148,8 +148,8 @@
 <span><span class="co">### 1. download the EDGAR 8.1 Netcdf flux file using R or from </span></span>
 <span><span class="co">### https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets</span></span>
 <span><span class="co"># create the temporary directory to download the data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGARv8.1"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGARv8.1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">folder</span><span class="op">)</span></span>
 <span><span class="co"># download the total emissions of NOx from EDGAR v50_AP for 2015</span></span>
 <span><span class="va">url</span>     <span class="op">&lt;-</span> <span class="st">"https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"</span></span>
 <span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="st">"v81_FT2022_AP_new/NOx/TOTALS/flx_nc"</span></span>
