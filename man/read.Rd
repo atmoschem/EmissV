@@ -77,8 +77,8 @@ for EDGAR (all versions), GAINS, RCP and MACCTITY, please use flux (kg m-2 s-1) 
 }
 \examples{
 \donttest{
-dir.create(file.path(tempdir(), "EDGARv8.1"))
 folder <- file.path(tempdir(), "EDGARv8.1")
+dir.create(folder)
 
 url     <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"
 dataset <- "v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
