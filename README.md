@@ -98,8 +98,8 @@ library(EmissV)
 ### 1. download the EDGAR 8.1 Netcdf flux file using R or from 
 ### https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets
 # create the temporary directory to download the data
-dir.create(file.path(tempdir(), "EDGARv8.1"))
 folder <- file.path(tempdir(), "EDGARv8.1")
+dir.create(folder)
 # download the total emissions of NOx from EDGAR v50_AP for 2015
 url     <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"
 dataset <- "v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
