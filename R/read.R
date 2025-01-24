@@ -71,20 +71,19 @@
 #'
 #' @examples \donttest{
 #' dir.create(file.path(tempdir(), "EDGARv432"))
-#' folder <- setwd(file.path(tempdir(), "EDGARv432"))
+#' folder <- file.path(tempdir(), "EDGARv432")
 #'
-#' url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
-#' file <- 'v432_NOx_2012.0.1x0.1.zip'
+#' url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
+#' file <- "v8.1_FT2022_AP_NOx_2022_TOTALS_flx_nc.zip"
 #'
-#' download.file(paste0(url,'/TOTALS/',file), file)
+#' download.file(paste0(url,"/",file), paste0(folder,"/",file))
 #'
-#' unzip('v432_NOx_2012.0.1x0.1.zip')
+#' unzip(paste0(folder,"/",file),exdir = folder)
 #'
-#' nox  <- read(file    = dir(pattern = '.nc'),
-#'              version = 'EDGAR',
+#' nox  <- read(file    = dir(path = folder,pattern = "flx\\.nc"),
+#'              version = "EDGAR",
 #'              spec    = c(E_NO  = 0.9 ,   # 90% of NOx is NO
 #'                          E_NO2 = 0.1 ))  # 10% of NOx is NO2
-#' setwd(folder)
 #' # creating a color scale
 #' cor <- colorRampPalette(colors = c(c("#031057", "#0522FC",
 #'                                      "#7E0AFA", "#EF0AFF",
@@ -94,7 +93,7 @@
 #'              main="NO emissions from EDGAR (in g / m2 s)")
 #'
 #' d1  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-#' NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01, plot = TRUE)
+#' NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01,plot = TRUE)
 #'}
 
 read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
