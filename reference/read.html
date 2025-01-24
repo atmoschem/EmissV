@@ -156,8 +156,8 @@ for the United States. Nature Scientific Data.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGARv8.1"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"EDGARv8.1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">folder</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">url</span>     <span class="op">&lt;-</span> <span class="st">"https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"</span></span></span>
 <span class="r-in"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="st">"v81_FT2022_AP_new/NOx/TOTALS/flx_nc"</span></span></span>
@@ -172,7 +172,7 @@ for the United States. Nature Scientific Data.</p>
 <span class="r-in"><span>             spec    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>E_NO  <span class="op">=</span> <span class="fl">0.9</span> ,   <span class="co"># 90% of NOx is NO</span></span></span>
 <span class="r-in"><span>                         E_NO2 <span class="op">=</span> <span class="fl">0.1</span> <span class="op">)</span><span class="op">)</span>  <span class="co"># 10% of NOx is NO2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> reading EDGARv8 emissions, output unit is g m-2 s-1 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> from /tmp/RtmpfJ6GDl/EDGARv8.1/v8.1_FT2022_AP_NOx_2022_TOTALS_flx.nc fluxes x 1.000000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> from /tmp/RtmpRJgcFd/EDGARv8.1/v8.1_FT2022_AP_NOx_2022_TOTALS_flx.nc fluxes x 1.000000 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> using the following speciation:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E_NO = 0.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E_NO2 = 0.1</span>
