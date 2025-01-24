@@ -11,14 +11,15 @@
 #'   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
 #'   EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 #'   EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
-#'   EDGARv8m\tab 8.1 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+#'   EDGARv8m\tab 8.1 monthly\tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+#'   EDGARv8\tab 8.1 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
 #'   GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
 #'   RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
 #'   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
 #'   FFDAS\tab 2.2 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 #'   ODIAC\tab 2020 \tab Global \tab 1 x 1 ° \tab  longlat\cr
-#'   VULCAN-y\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
-#'   VULCAN-h\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+#'   VULCAN-y\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
+#'   VULCAN-h\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
 #'   ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
 #'}
 #' @param coef coefficients to merge different sources (file) into one emission
@@ -70,27 +71,28 @@
 #' for the United States. Nature Scientific Data.
 #'
 #' @examples \donttest{
-#' dir.create(file.path(tempdir(), "EDGARv432"))
-#' folder <- file.path(tempdir(), "EDGARv432")
+#' dir.create(file.path(tempdir(), "EDGARv8.1"))
+#' folder <- file.path(tempdir(), "EDGARv8.1")
 #'
-#' url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
-#' file <- "v8.1_FT2022_AP_NOx_2022_TOTALS_flx_nc.zip"
+#' url     <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"
+#' dataset <- "v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
+#' file    <- "v8.1_FT2022_AP_NOx_2022_TOTALS_flx_nc.zip"
 #'
-#' download.file(paste0(url,"/",file), paste0(folder,"/",file))
+#' download.file(paste0(url,"/",dataset,"/",file), paste0(folder,"/",file))
 #'
 #' unzip(paste0(folder,"/",file),exdir = folder)
 #'
-#' nox  <- read(file    = dir(path = folder,pattern = "flx\\.nc"),
-#'              version = "EDGAR",
+#' nox  <- read(file    = dir(path=folder, pattern="flx\\.nc", full.names=TRUE),
+#'              version = "EDGARv8",
 #'              spec    = c(E_NO  = 0.9 ,   # 90% of NOx is NO
 #'                          E_NO2 = 0.1 ))  # 10% of NOx is NO2
 #' # creating a color scale
 #' cor <- colorRampPalette(colors = c(c("#031057", "#0522FC",
 #'                                      "#7E0AFA", "#EF0AFF",
 #'                                      "#FFA530", "#FFF957")))
-#' raster::plot(nox$E_NO,xlab="Lat", ylab="Lon",
+#' raster::plot(nox$E_NO, xlab="Latitude", ylab="Longitude",
 #'              col = cor(12),zlim = c(-6.5e-7,1.4e-5),
-#'              main="NO emissions from EDGAR (in g / m2 s)")
+#'              main="TOTAL NO emissions from EDGARv8.1 (in g / m2 s)")
 #'
 #' d1  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
 #' NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01,plot = TRUE)
@@ -104,6 +106,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     cat('versions supported:\n')
     cat(' - EDGAR\n')
     cat(' - EDGAR_HTAPv2\n')
+    cat(' - EDGAR_v8\n')
     cat(' - EDGAR_v8m\n')
     cat(' - GAINS\n')
     cat(' - RCP\n')
@@ -480,6 +483,43 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     }
   } # nocov end
 
+  if(version == "EDGARv8"){ # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- names(ed$var)
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version,
+                 " emissions",
+                 ", output unit is g m-2 s-1 ...\n"))
+    var    <- ncdf4::ncvar_get(ed,name)
+    varall <- units::as_units(0.0 * var,"g m-2 s-1")
+    var    <- apply(0.0 * var,1,rev)
+    if(as_raster){
+      r  <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      rz <- raster::raster(0.0 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+      raster::values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat"
+    }
+
+    for(i in 1:length(file)){
+      ed   <- ncdf4::nc_open(file[i])
+      name <- names(ed$var)
+      if(verbose)
+        cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
+      var  <- ncdf4::ncvar_get(ed,name)
+      if(as_raster){
+        var <- apply(var,1,rev)
+        r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
+        raster::crs(r) <- "+proj=longlat"
+        names(r) <- name[1]
+        rz       <- rz + r * coef[i]
+      }else{
+        var    <- units::set_units(1000 * var,"g m-2 s-1")
+        varall <- varall + var * coef[i]
+      }
+    }
+  } # nocov end
+
   if(version == "VULCAN" || version == "VULCAN-y"){   # nocov start
     if(version == "VULCAN")
       warning('using VULCAN-y (yearly) configuration!\n change version to VULCAN-y or VULCAN-h!')
@@ -748,7 +788,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
 
   if(as_raster){
     if(is.null(spec)){
-      if(version %in% c('GAINS','EDGARv8m')){
+      if(version %in% c('GAINS','EDGARv8m','EDGARv8')){
         return(rz)                                        #nocov
       }else{
         return(raster::rotate(rz))
@@ -758,7 +798,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       rz_spec <- list()
       for(i in 1:length(spec)){
         if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
-        if(version %in% c('GAINS','EDGARv8m')){
+        if(version %in% c('GAINS','EDGARv8m','EDGARv8')){
           rz_spec[[i]] <- rz * spec[i]
         }else{
           rz_spec[[i]] <- raster::rotate(rz * spec[i])

@@ -1,8 +1,8 @@
-pandoc: 3.1.11
-pkgdown: 2.1.0
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-09-16T21:38Z
+last_built: 2025-01-24T20:46Z
 urls:
   reference: https://atmoschem.github.io/EmissV/reference
   article: https://atmoschem.github.io/EmissV/articles

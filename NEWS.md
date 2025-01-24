@@ -1,3 +1,7 @@
+## Version: 0.665.9.0 (2025-01-24)
+- added support for Edgar v8.1 on read() function
+- updated read() example for EDGAR 8.1
+
 ## Version: 0.665.8.0 (2023-09-16)
 - added support for Edgar v8.1 monthly on read() function
 
