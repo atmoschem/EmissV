@@ -11,11 +11,11 @@
 [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
 <!-- badges: end -->  
 
-EmissV is a R-package that provides tools to create emissions for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/). The package can read inputs from global fluxes from inventories in Netcdf Format [1] or estimate the emissions using top-down approach for point/line/area sources [2].
+EmissV is a R-package that provides tools to create emissions for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/). The package can read inputs from global fluxes from inventories in Netcdf Format **[1]** or estimate the emissions using top-down approach for point/line/area sources **[2]**.
 
-[1] _Schuch D, Ibarra-Espinosa S, Dias de Freitas E, Andrade M (2018). “EmissV: A preprocessor for WRF-Chem model.” **Journal of Atmospheric Science Research**, 5, [doi:10.30564/jasr.v1i1.347](https://doi.org/10.30564/jasr.v1i1.347)_.
+**[1]** _Schuch D, Ibarra-Espinosa S, Dias de Freitas E, Andrade M (2018). “EmissV: A preprocessor for WRF-Chem model.” **Journal of Atmospheric Science Research**, 5, [doi:10.30564/jasr.v1i1.347](https://doi.org/10.30564/jasr.v1i1.347)_.
 
-[2] _Schuch D, Ibarra-Espinosa S, Dias de Freitas E (2018). “EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models.” **The Journal of Open Source Software**, 6, [doi:10.21105/joss.00662](https://doi.org/10.21105/joss.00662)_.
+**[2]** _Schuch D, Ibarra-Espinosa S, Dias de Freitas E (2018). “EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models.” **The Journal of Open Source Software**, 6, [doi:10.21105/joss.00662](https://doi.org/10.21105/joss.00662)_.
 
 ## Installation
 
