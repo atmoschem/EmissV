@@ -78,7 +78,7 @@ http://accent.aero.jussieu.fr/MACC_metadata.php</p>
 
 
 <dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>Character; One of  of the following:</p><table class="table table"><tr><td><strong>argument</strong></td><td><strong>tested</strong></td><td><strong>region</strong></td><td><strong>resolution</strong></td><td><strong>projection</strong></td></tr><tr><td>EDGAR</td><td>4.32 and 5.0</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>EDGAR_HTAPv2</td><td>2.2</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>EDGARv8m</td><td>8.1 monthly</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>EDGARv8</td><td>8.1</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>GAINS</td><td>v5a</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr><tr><td>RCP</td><td>RCP3PD Glb</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr><tr><td>MACCITY</td><td>2010</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr><tr><td>FFDAS</td><td>2.2</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>ODIAC</td><td>2020</td><td>Global</td><td>1 x 1 °</td><td>longlat</td></tr><tr><td>VULCAN-y</td><td>3.0</td><td>US</td><td>1 x 1 km</td><td>lcc</td></tr><tr><td>VULCAN-h</td><td>3.0</td><td>US</td><td>1 x 1 km</td><td>lcc</td></tr><tr><td>ACES</td><td>2020</td><td>NE US</td><td>1 x 1 km</td><td>lcc</td></tr></table></dd>
+<dd><p>Character; One of  of the following:</p><table class="table table"><tr><td><strong>argument</strong></td><td><strong>tested</strong></td><td><strong>region</strong></td><td><strong>resolution</strong></td><td><strong>projection</strong></td></tr><tr><td>EDGAR</td><td>4.32 and 5.0</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>EDGAR_HTAPv2</td><td>2.2</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>EDGARv8m</td><td>8.1 monthly</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>EDGARv8</td><td>8.1</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>GAINS</td><td>v5a</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr><tr><td>RCP</td><td>RCP3PD Glb</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr><tr><td>MACCITY</td><td>2010</td><td>Global</td><td>0.5 x 0.5 °</td><td>longlat</td></tr><tr><td>FFDAS</td><td>2.2</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>ODIAC</td><td>2020</td><td>Global</td><td>1 x 1 °</td><td>longlat</td></tr><tr><td>VULCAN-y</td><td>3.0</td><td>US</td><td>1 x 1 km</td><td>lcc</td></tr><tr><td>VULCAN-h</td><td>3.0</td><td>US</td><td>1 x 1 km</td><td>lcc</td></tr><tr><td>ACES</td><td>2020</td><td>NE US</td><td>1 x 1 km</td><td>lcc</td></tr><tr><td>GEMS</td><td>2023</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr><tr><td>GEMSm</td><td>2023</td><td>Global</td><td>0.1 x 0.1 °</td><td>longlat</td></tr></table></dd>
 
 
 <dt id="arg-coef">coef<a class="anchor" aria-label="anchor" href="#arg-coef"></a></dt>
@@ -94,7 +94,7 @@ http://accent.aero.jussieu.fr/MACC_metadata.php</p>
 
 
 <dt id="arg-month">month<a class="anchor" aria-label="anchor" href="#arg-month"></a></dt>
-<dd><p>the desired month of the inventory (MACCITY and ODIAC)</p></dd>
+<dd><p>the desired month of the inventory (MACCITY, ODIAC, EDGARv8m, and GEMSm)</p></dd>
 
 
 <dt id="arg-hour">hour<a class="anchor" aria-label="anchor" href="#arg-hour"></a></dt>
@@ -172,7 +172,7 @@ for the United States. Nature Scientific Data.</p>
 <span class="r-in"><span>             spec    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>E_NO  <span class="op">=</span> <span class="fl">0.9</span> ,   <span class="co"># 90% of NOx is NO</span></span></span>
 <span class="r-in"><span>                         E_NO2 <span class="op">=</span> <span class="fl">0.1</span> <span class="op">)</span><span class="op">)</span>  <span class="co"># 10% of NOx is NO2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> reading EDGARv8 emissions, output unit is g m-2 s-1 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> from /tmp/RtmpLJjGTj/EDGARv8.1/v8.1_FT2022_AP_NOx_2022_TOTALS_flx.nc fluxes x 1.000000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> from /tmp/Rtmpckcwdj/EDGARv8.1/v8.1_FT2022_AP_NOx_2022_TOTALS_flx.nc fluxes x 1.000000 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> using the following speciation:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E_NO = 0.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E_NO2 = 0.1</span>
