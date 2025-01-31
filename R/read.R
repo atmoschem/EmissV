@@ -21,11 +21,13 @@
 #'   VULCAN-y\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
 #'   VULCAN-h\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
 #'   ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
+#'   GEMS\tab 2023 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
+#'   GEMSm\tab 2023 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 #'}
 #' @param coef coefficients to merge different sources (file) into one emission
 #' @param spec numeric speciation vector to split emission into different species
 #' @param hour hour of the emission (only for ACES and VULCAN-h)
-#' @param month the desired month of the inventory (MACCITY and ODIAC)
+#' @param month the desired month of the inventory (MACCITY, ODIAC, EDGARv8m, and GEMSm)
 #' @param year scenario index (only for GAINS and VULCAN-y)
 #' @param categories considered categories (for MACCITY/GAINS variable names), empty for use all
 #' @param reproject to project the output to "+proj=longlat" needed for emission function (only for VULCAN and ACES)
@@ -315,7 +317,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
     var  <- ncdf4::ncvar_get(ed,name[1])
-    var  <- var[,,month]
+    var  <- var[,,month] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var  <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -336,7 +338,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       }
       for(j in 1:length(name)){
         cat(paste0("using ",name[j]),"\n")
-        var_a  <- ncdf4::ncvar_get(ed,name[j])[,,month]
+        var_a  <- ncdf4::ncvar_get(ed,name[j])[,,month] # improve arguments in ncvar_get
         var_a  <- units::as_units(var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
         var    <- var + var_a
@@ -453,7 +455,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                format(ISOdate(1996,month,1),"%B"),
                ", output unit is g m-2 s-1 ...\n"))
     var    <- ncdf4::ncvar_get(ed,name)
-    var    <- var[,,month,drop = T]
+    var    <- var[,,month,drop = T] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -469,7 +471,7 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(verbose)
         cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
       var  <- ncdf4::ncvar_get(ed,name)
-      var  <- var[,,month,drop = T]
+      var  <- var[,,month,drop = T] # improve in ncvar_get
       if(as_raster){
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
@@ -785,6 +787,86 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       return(a)
     }
   }                                                       # nocov end
+
+
+  if(version == "GEMS"){ # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- "emission"
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version,
+                 " emissions",
+                 ", output unit is g m-2 s-1 ...\n"))
+    var    <- ncdf4::ncvar_get(ed,name)
+    varall <- units::as_units(0.0 * var,"g m-2 s-1")
+    var    <- apply(0.0 * var,1,rev)
+    if(as_raster){
+      # g km-2 year-1 -> g m-2 s-1
+      # 3.17 * 10^(-14)
+      r  <- raster::raster(x = 3.1688088e-14 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+      rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+      raster::values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat"
+    }
+
+    for(i in 1:length(file)){
+      ed   <- ncdf4::nc_open(file[i])
+      if(verbose)
+        cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
+      var  <- ncdf4::ncvar_get(ed,name)
+      if(as_raster){
+        var <- apply(var,1,rev)
+        r   <- raster::raster(x = 3.1688088e-14 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+        raster::crs(r) <- "+proj=longlat"
+        names(r) <- name[1]
+        rz       <- rz + r * coef[i]
+      }else{
+        var    <- units::set_units(3.1688088e-14 * var,"g m-2 s-1")
+        varall <- varall + var * coef[i]
+      }
+    }
+  } # nocov end
+
+  if(version == "GEMSm"){ # nocov start
+    ed   <- ncdf4::nc_open(file[1])
+    name <- "emission"
+    if(verbose)
+      cat(paste0("reading",
+                 " ",version,
+                 " emissions for ",
+                 format(ISOdate(1996,month,1),"%B"),
+                 ", output unit is g m-2 s-1 ...\n"))
+    var    <- ncdf4::ncvar_get(ed,name)
+    var    <- var[,,month,drop = T] # improve in ncvar_get
+    varall <- units::as_units(0.0 * var,"g m-2 s-1")
+    var    <- apply(0.0 * var,1,rev)
+    if(as_raster){
+      # g km-2 year-1 -> g m-2 s-1
+      # 3.8 * 10^(-13)
+      r  <- raster::raster(x = 3.8026486e-13 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+      rz <- raster::raster(0.0 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+      raster::values(rz) <- rep(0,ncell(rz))
+      raster::crs(rz) <- "+proj=longlat"
+    }
+
+    for(i in 1:length(file)){
+      ed   <- ncdf4::nc_open(file[i])
+      if(verbose)
+        cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
+      var  <- ncdf4::ncvar_get(ed,name)
+      var  <- var[,,month,drop = T] # improve in ncvar_get
+      if(as_raster){
+        var <- apply(var,1,rev)
+        r   <- raster::raster(x = 3.8026486e-13 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
+        raster::crs(r) <- "+proj=longlat"
+        names(r) <- name[1]
+        rz       <- rz + r * coef[i]
+      }else{
+        var    <- units::set_units(3.8026486e-13 * var,"g m-2 s-1")
+        varall <- varall + var * coef[i]
+      }
+    }
+  } # nocov end
 
   if(as_raster){
     if(is.null(spec)){

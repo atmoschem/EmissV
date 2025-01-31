@@ -43,6 +43,8 @@ read(
   VULCAN-y\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
   VULCAN-h\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
   ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
+  GEMS\tab 2023 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
+  GEMSm\tab 2023 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 }}
 
 \item{coef}{coefficients to merge different sources (file) into one emission}
@@ -51,7 +53,7 @@ read(
 
 \item{year}{scenario index (only for GAINS and VULCAN-y)}
 
-\item{month}{the desired month of the inventory (MACCITY and ODIAC)}
+\item{month}{the desired month of the inventory (MACCITY, ODIAC, EDGARv8m, and GEMSm)}
 
 \item{hour}{hour of the emission (only for ACES and VULCAN-h)}
 
