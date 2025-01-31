@@ -190,8 +190,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     if(verbose)
       cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
-    var    <- ncdf4::ncvar_get(ed,name[1])
-    var    <- var[,,year]
+    var    <- ncdf4::ncvar_get(ed,name[1],count = c(-1,-1,1),start = c(1,1,year))
+    # var    <- var[,,year]
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     r      <- raster::raster(x = var,xmn=-180,xmx=180,ymn=-90,ymx=90)
@@ -223,10 +223,9 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       for(j in 1:length(name)){
         if(verbose)
           cat(paste0("using ",name[j]),"\n")
-        var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
+        # var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
+        var_a  <- ncdf4::ncvar_get(ed,name[j],count = c(-1,-1,1),start = c(1,1,year))
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
-        # var_a  <- var_a / area
-        # var_a  <- units::set_units(var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
         var    <- var + var_a
       }
@@ -262,8 +261,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     if(verbose)
       cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
-    var    <- ncdf4::ncvar_get(ed,name[1])
-    var    <- var[,,year]
+    var    <- ncdf4::ncvar_get(ed,name[1],count = c(-1,-1,1),start = c(1,1,year))
+    # var    <- var[,,year]
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     r      <- raster::raster(x = var,xmn=0,xmx=360,ymn=-90,ymx=90)
@@ -291,7 +290,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       for(j in 1:length(name)){
         if(verbose)
           cat(paste0("using ",name[j]),"\n")
-        var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
+        # var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
+        var_a  <- ncdf4::ncvar_get(ed,name[j],count = c(-1,-1,1),start = c(1,1,year))
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
         var    <- var + var_a
@@ -316,8 +316,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  " emissions for ",
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
-    var  <- ncdf4::ncvar_get(ed,name[1])
-    var  <- var[,,month] # improve in ncvar_get
+    var  <- ncdf4::ncvar_get(ed,name[1],count = c(-1,-1,1),start = c(1,1,month))
+    # var  <- var[,,month] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var  <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -338,7 +338,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       }
       for(j in 1:length(name)){
         cat(paste0("using ",name[j]),"\n")
-        var_a  <- ncdf4::ncvar_get(ed,name[j])[,,month] # improve arguments in ncvar_get
+        var_a  <- ncdf4::ncvar_get(ed,name[j],count = c(-1,-1,1),start = c(1,1,month))
+        # var_a  <- ncdf4::ncvar_get(ed,name[j])[,,month] # improve arguments in ncvar_get
         var_a  <- units::as_units(var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
         var    <- var + var_a
@@ -454,8 +455,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                " emissions for ",
                format(ISOdate(1996,month,1),"%B"),
                ", output unit is g m-2 s-1 ...\n"))
-    var    <- ncdf4::ncvar_get(ed,name)
-    var    <- var[,,month,drop = T] # improve in ncvar_get
+    var    <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
+    # var    <- var[,,month,drop = T] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -470,8 +471,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       name <- names(ed$var)
       if(verbose)
         cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
-      var  <- ncdf4::ncvar_get(ed,name)
-      var  <- var[,,month,drop = T] # improve in ncvar_get
+      var  <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
+      # var  <- var[,,month,drop = T] # improve in ncvar_get
       if(as_raster){
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
@@ -836,8 +837,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  " emissions for ",
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
-    var    <- ncdf4::ncvar_get(ed,name)
-    var    <- var[,,month,drop = T] # improve in ncvar_get
+    var    <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
+    # var    <- var[,,month,drop = T] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -853,8 +854,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       ed   <- ncdf4::nc_open(file[i])
       if(verbose)
         cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
-      var  <- ncdf4::ncvar_get(ed,name)
-      var  <- var[,,month,drop = T] # improve in ncvar_get
+      var  <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
+      # var  <- var[,,month,drop = T] # improve in ncvar_get
       if(as_raster){
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 3.8026486e-13 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
