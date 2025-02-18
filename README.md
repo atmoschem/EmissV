@@ -7,10 +7,15 @@
 [![cran checks](https://badges.cranchecks.info/worst/EmissV.svg)](https://cran.r-project.org/web/checks/check_results_EmissV.html)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/EmissV)](https://cran.r-project.org/package=EmissV)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/EmissV)](https://cran.r-project.org/package=EmissV)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) [![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1451027.svg)](https://doi.org/10.5281/zenodo.1451027) 
+[![status](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044/status.svg)](http://joss.theoj.org/papers/071d027997ac93d8992099cb5010a044)
 <!-- badges: end -->  
 
-This package provides tools to create emissions (with a focus on vehicular emissions) for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/).
+EmissV is a R-package that provides tools to create emissions for use in numeric air quality models such as [WRF-Chem](https://ruc.noaa.gov/wrf/wrf-chem/). The package can read inputs from global fluxes from inventories in Netcdf Format **[1]** or estimate the emissions using top-down approach for point/line/area sources **[2]**.
+
+**[1]** _Schuch D, Ibarra-Espinosa S, Dias de Freitas E, Andrade M (2018). “EmissV: A preprocessor for WRF-Chem model.” **Journal of Atmospheric Science Research**, 5, [doi:10.30564/jasr.v1i1.347](https://doi.org/10.30564/jasr.v1i1.347)_.
+
+**[2]** _Schuch D, Ibarra-Espinosa S, Dias de Freitas E (2018). “EmissV: An R package to create vehicular and other emissions by Top-down methods to air quality models.” **The Journal of Open Source Software**, 6, [doi:10.21105/joss.00662](https://doi.org/10.21105/joss.00662)_.
 
 ## Installation
 
@@ -65,24 +70,24 @@ and to install some requisites:
 ```
 
 ### Package installation
-To install the *[CRAN](https://cran.r-project.org/package=EmissV) version (0.665.5.2)*:
+To install the *[CRAN](https://cran.r-project.org/package=EmissV) version*:
 
 ```r
 install.packages("EmissV")
 ```
 
-To install the *development version (0.665.5.3)* using [remotes](https://CRAN.R-project.org/package=remotes):
+To install the *development version* using [remotes](https://CRAN.R-project.org/package=remotes):
 ```r
 require("remotes")
 remotes::install_github("atmoschem/EmissV")
 ```
-or to install the *development version (0.665.5.3)* using [devtools](https://CRAN.R-project.org/package=devtools):
+or to install the *development version* using [devtools](https://CRAN.R-project.org/package=devtools):
 ```r
 require("devtools")
 devtools::install_github("atmoschem/EmissV")
 ```
 
-## Using `EmissV` with EDGAR 5.0 emissions
+## Using `EmissV` with EDGAR 8.1 emissions
 
 `EmissV` can be used to process emissions of [atmospheric pollutants](https://en.wikipedia.org/wiki/Air_pollution#Sources) and [green house gases](https://en.wikipedia.org/wiki/Greenhouse_gas) from inventories such as [EDGAR](https://data.europa.eu/doi/10.2904/JRC_DATASET_EDGAR), [RCP](https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=welcome#), [GAINS](https://iiasa.ac.at/web/home/research/researchPrograms/air/GAINS.html) and other datasets in [NetCDF](https://www.unidata.ucar.edu/software/netcdf/) format, the [GEIA-ACCENT](http://accent.aero.jussieu.fr/database_table_inventories.php) and [ECCAD](https://eccad3.sedoo.fr/) emission data portal makes available some of these inventories. You can verify the supported format with:
 
@@ -94,21 +99,22 @@ To generate a simple emission it's a straightforward process in 4 steps:
 
 ```r
 library(EmissV)
-### 1. download the EDGAR Netcdf using R or from 
-### http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_AP/ 
+### 1. download the EDGAR 8.1 Netcdf flux file using R or from 
+### https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets
 # create the temporary directory to download the data
-dir.create(file.path(tempdir(), "EDGARv432"))
-folder <- setwd(file.path(tempdir(), "EDGARv432"))
+folder <- file.path(tempdir(), "EDGARv8.1")
+dir.create(folder)
 # download the total emissions of NOx from EDGAR v50_AP for 2015
-url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
-file <- 'v432_NOx_2012.0.1x0.1.zip'
-download.file(paste0(url,'/TOTALS/',file), file)
+url     <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"
+dataset <- "v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
+file    <- "v8.1_FT2022_AP_NOx_2022_TOTALS_flx_nc.zip"
+download.file(paste0(url,"/",dataset,"/",file), paste0(folder,"/",file))
 # unzip the file
-unzip('v432_NOx_2012.0.1x0.1.zip')
+unzip(paste0(folder,"/",file),exdir = folder)
 
 ### 2. read the emissions (using the spec argument to split NOx into NO and NO2)
-NOx  <- read(file    = dir(pattern = '.nc'),
-             version = 'EDGAR',
+nox  <- read(file    = dir(path=folder, pattern="flx\\.nc", full.names=TRUE),
+             version = "EDGARv8",
              spec    = c(E_NO  = 0.9 ,   # 90% of NOx is NO
                          E_NO2 = 0.1 ))  # 10% of NOx is NO2
 

@@ -33,15 +33,18 @@ read(
   \strong{argument}\tab \strong{tested}\tab \strong{region}\tab \strong{resolution}\tab \strong{projection}\cr
   EDGAR\tab 4.32 and 5.0 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
   EDGAR_HTAPv2\tab 2.2 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
-  EDGARv8m\tab 8.1 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+  EDGARv8m\tab 8.1 monthly\tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
+  EDGARv8\tab 8.1 \tab Global \tab 0.1 x 0.1 °  \tab  longlat\cr
   GAINS\tab v5a \tab Global \tab 0.5 x 0.5 ° \tab  longlat\cr
   RCP\tab RCP3PD Glb \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
   MACCITY\tab 2010 \tab Global \tab 0.5 x 0.5 °  \tab  longlat\cr
   FFDAS\tab 2.2 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
   ODIAC\tab 2020 \tab Global \tab 1 x 1 ° \tab  longlat\cr
-  VULCAN-y\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
-  VULCAN-h\tab 3.0 \tab US \tab 1 x 1 Km \tab  lcc\cr
+  VULCAN-y\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
+  VULCAN-h\tab 3.0 \tab US \tab 1 x 1 km \tab  lcc\cr
   ACES\tab 2020 \tab NE US \tab 1 x 1 km \tab  lcc\cr
+  GEMS\tab 2023 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
+  GEMSm\tab 2023 \tab Global \tab 0.1 x 0.1 ° \tab  longlat\cr
 }}
 
 \item{coef}{coefficients to merge different sources (file) into one emission}
@@ -50,7 +53,7 @@ read(
 
 \item{year}{scenario index (only for GAINS and VULCAN-y)}
 
-\item{month}{the desired month of the inventory (MACCITY and ODIAC)}
+\item{month}{the desired month of the inventory (MACCITY, ODIAC, EDGARv8m, and GEMSm)}
 
 \item{hour}{hour of the emission (only for ACES and VULCAN-h)}
 
@@ -76,31 +79,31 @@ for EDGAR (all versions), GAINS, RCP and MACCTITY, please use flux (kg m-2 s-1) 
 }
 \examples{
 \donttest{
-dir.create(file.path(tempdir(), "EDGARv432"))
-folder <- setwd(file.path(tempdir(), "EDGARv432"))
+folder <- file.path(tempdir(), "EDGARv8.1")
+dir.create(folder)
 
-url <- "http://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_AP/NOx"
-file <- 'v432_NOx_2012.0.1x0.1.zip'
+url     <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets"
+dataset <- "v81_FT2022_AP_new/NOx/TOTALS/flx_nc"
+file    <- "v8.1_FT2022_AP_NOx_2022_TOTALS_flx_nc.zip"
 
-download.file(paste0(url,'/TOTALS/',file), file)
+download.file(paste0(url,"/",dataset,"/",file), paste0(folder,"/",file))
 
-unzip('v432_NOx_2012.0.1x0.1.zip')
+unzip(paste0(folder,"/",file),exdir = folder)
 
-nox  <- read(file    = dir(pattern = '.nc'),
-             version = 'EDGAR',
+nox  <- read(file    = dir(path=folder, pattern="flx\\\\.nc", full.names=TRUE),
+             version = "EDGARv8",
              spec    = c(E_NO  = 0.9 ,   # 90\% of NOx is NO
                          E_NO2 = 0.1 ))  # 10\% of NOx is NO2
-setwd(folder)
 # creating a color scale
 cor <- colorRampPalette(colors = c(c("#031057", "#0522FC",
                                      "#7E0AFA", "#EF0AFF",
                                      "#FFA530", "#FFF957")))
-raster::plot(nox$E_NO,xlab="Lat", ylab="Lon",
+raster::plot(nox$E_NO, xlab="Latitude", ylab="Longitude",
              col = cor(12),zlim = c(-6.5e-7,1.4e-5),
-             main="NO emissions from EDGAR (in g / m2 s)")
+             main="TOTAL NO emissions from EDGARv8.1 (in g / m2 s)")
 
 d1  <- gridInfo(paste(system.file("extdata", package = "EmissV"),"/wrfinput_d01",sep=""))
-NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01, plot = TRUE)
+NO  <- emission(grid = d1, inventory = nox$E_NO, pol = "NO", mm = 30.01,plot = TRUE)
 }
 }
 \references{
