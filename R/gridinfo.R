@@ -67,7 +67,7 @@ gridInfo <- function(file = file.choose(),z = FALSE,
      x <- as.vector(inNCLon[,ncol(inNCLon):1])
      y <- as.vector(inNCLat[,ncol(inNCLat):1])
 
-     coords <- as.matrix(cbind(x, y))
+     coords <- as.matrix(cbind(x[1:2], y[1:2]))
 
      # Get geogrid and projection info
      map_proj <- ncdf4::ncatt_get(coordNC, varid=0, attname="MAP_PROJ")$value
@@ -152,7 +152,7 @@ gridInfo <- function(file = file.choose(),z = FALSE,
      pontos     <- sf::st_multipoint(x = coords, dim = "XY")
      coords     <- sf::st_sfc(x = pontos, crs = "+proj=longlat")
      transform  <- sf::st_transform(x = coords, crs = geogrd.proj)
-     projcoords <- sf::st_coordinates(transform)[,1:2]
+     projcoords <- sf::st_coordinates(transform)
 
      xmn <- projcoords[1,1] - dx*1000/2.0  # Left border
      ymx <- projcoords[1,2] + dx*1000/2.0  # upper border
