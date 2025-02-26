@@ -24,12 +24,12 @@ jobs:
         config:
           - { os: windows-latest, r: "release" }
           - {
-              os: ubuntu-20.04,
+              os: ubuntu-24.04,
               r: "release",
               rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest",
             }
           - {
-              os: ubuntu-20.04,
+              os: ubuntu-24.04,
               r: "devel",
               rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest",
             }
@@ -69,7 +69,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04"))')
 
       - name: Install dependencies
         run: |
