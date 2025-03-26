@@ -180,7 +180,8 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
       gx <- sf::st_sf(gx, geometry = g$geometry)
       return(gx)
     }
-    else if (type == "points") { # nocov start
+    else if (type == "points") { # nocov
+      # nocov start
       xgg <- data.table::data.table(sf::st_set_geometry(sf::st_intersection(net,
                                                                             g), NULL))
       xgg[is.na(xgg)] <- 0
@@ -191,7 +192,8 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
       gx <- merge(gx, dfm, by = "id", all.x = TRUE)
       gx[is.na(gx)] <- 0
       gx <- sf::st_sf(gx, geometry = g$geometry)
-      return(gx) # nocov end
+      return(gx)
+      # nocov end
     }
   }
 
@@ -249,7 +251,8 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
     }
   }
 
-  if(type %in% c("sp","sf")){ # nocov start
+  # nocov start
+  if(type %in% c("sp","sf")){ # nocov
     if("sp" %in% class(grid[1])){
       roads2 <- sf::st_as_sf(s)
     }else{
@@ -279,4 +282,5 @@ lineSource <- function(s, grid, as_raster = FALSE, type = "info",
       return(roads4)
     }
   }
+  # nocov end
 }

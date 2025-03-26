@@ -33,13 +33,13 @@ rasterSource <- function(r,grid,nlevels="all",conservative = TRUE,verbose = TRUE
   if(grid$map_proj %in% c(1,2,3,6)){
     box   <- grid$r
   }else{
-    col   <- grid$Horizontal[1]
-    rol   <- grid$Horizontal[2]
-    r.lat <- range(grid$Lat)
-    r.lon <- range(grid$Lon)
-    box   <- raster::raster(nrows=rol,ncols=col,
-                            xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2],
-                            crs='+proj=longlat')
+    col   <- grid$Horizontal[1] # nocov
+    rol   <- grid$Horizontal[2] # nocov
+    r.lat <- range(grid$Lat)    # nocov
+    r.lon <- range(grid$Lon)    # nocov
+    box   <- raster::raster(nrows=rol,ncols=col, # nocov
+                            xmn=r.lon[1],xmx=r.lon[2],ymn=r.lat[1],ymx=r.lat[2], # nocov
+                            crs='+proj=longlat') # nocov
   }
 
   if(is.na(grid$z[1])){

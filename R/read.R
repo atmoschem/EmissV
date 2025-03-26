@@ -104,7 +104,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  spec = NULL, year = 1,month = 1, hour = 1, categories,
                  reproject = TRUE, as_raster = TRUE, skip_missing = FALSE, verbose = TRUE){
 
-  if(is.na(version)){                 # nocov start
+  # nocov start
+  if(is.na(version)){
     cat('versions supported:\n')
     cat(' - EDGAR\n')
     cat(' - EDGAR_HTAPv2\n')
@@ -119,57 +120,48 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     cat(' - ACES\n')
     cat(' - VULCAN-y (annual)\n')
     cat(' - VULCAN-h (hourly)\n')
-    stop('check version argument')    # nocov end
+    stop('check version argument')
   }
 
-  raster_to_ncdf <- function(r,na_value = 0){      # nocov start
+  raster_to_ncdf <- function(r,na_value = 0){
     N_times <- dim(r)[3]
     a       <- array(na_value,c(dim(r)[2],dim(r)[1],N_times))
     for(i in 1:N_times){
       a[,,i] <- as.matrix(t(raster::flip(r[[i]],2)))
     }
     return(a)
-  }                                                # nocov end
+  }
 
-  if(length(coef) != length(file)){ # nocov start
+  if(length(coef) != length(file)){
     cat('file and coef has different length, check the read arguments!\n')
     cat('file:\n ')
     cat(paste0(1:length(file),' ',file,'\n'))
     cat('coef:\n ')
     cat(paste0(1:length(coef),' ',coef,'\n'))
-  }                                 # nocov end
+  }
 
   if(is.list(coef))
-    coef <- as.numeric(as.character(unlist(coef))) #nocov
+    coef <- as.numeric(as.character(unlist(coef)))
   if(is.list(spec))
-    spec <- as.numeric(as.character(unlist(spec))) #nocov
+    spec <- as.numeric(as.character(unlist(spec)))
 
-  if(!missing(categories) && skip_missing == TRUE){   #nocov start
+  if(!missing(categories) && skip_missing == TRUE){
     ed   <- ncdf4::nc_open(file[1])
     if(!(categories %in% names(ed$var))){
       cat('category',categories,'is missing, returning zero emission grid!\n')
       version = "ZEROS"
-      # warning(categories,' is missing on file: ',file,' using zero emission!\n')
       varall    <- matrix(NA, ncol = 360, nrow = 720)
       if(as_raster){
         rz <- raster::raster(0.0 * varall,xmn=0,xmx=360,ymn=-90,ymx=90)
         values(rz) <- rep(0,ncell(rz))
         raster::crs(rz) <- "+proj=longlat"
       }
-
-      # if(as_raster){
-      #   r      <- raster::raster(x = matrix(0,nrow = 360,ncol = 720),xmn=0,xmx=360,ymn=-90,ymx=90)
-      #   raster::crs(r) <- "+proj=longlat +ellps=GRS80 +no_defs"
-      #   rz     <- r
-      #   # return(r)
-      # }else{
-      #   # return(matrix(0,nrow = 720,ncol = 360))
-      #   varall <- matrix(0,nrow = 720,ncol = 360)
-      # }
     }
-  }                                                # nocov end
+  }
+  # nocov end
 
-  if(version == "GAINS"){                          # nocov start
+  # nocov start
+  if(version == "GAINS"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     name <- grep('date',             name, invert = TRUE, value = TRUE)
@@ -191,7 +183,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
     var    <- ncdf4::ncvar_get(ed,name[1],count = c(-1,-1,1),start = c(1,1,year))
-    # var    <- var[,,year]
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     r      <- raster::raster(x = var,xmn=-180,xmx=180,ymn=-90,ymx=90)
@@ -223,7 +214,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       for(j in 1:length(name)){
         if(verbose)
           cat(paste0("using ",name[j]),"\n")
-        # var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
         var_a  <- ncdf4::ncvar_get(ed,name[j],count = c(-1,-1,1),start = c(1,1,year))
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
@@ -238,9 +228,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  }                                              # nocov end
+  }
+  # nocov end
 
-  if(version == "RCP"){                          # nocov start
+  # nocov start
+  if(version == "RCP"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     name <- grep('date',             name, invert = TRUE, value = TRUE)
@@ -262,7 +254,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       cat(paste0("scenario: year ",format(data,"%Y"),"\n"))
 
     var    <- ncdf4::ncvar_get(ed,name[1],count = c(-1,-1,1),start = c(1,1,year))
-    # var    <- var[,,year]
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     r      <- raster::raster(x = var,xmn=0,xmx=360,ymn=-90,ymx=90)
@@ -290,7 +281,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       for(j in 1:length(name)){
         if(verbose)
           cat(paste0("using ",name[j]),"\n")
-        # var_a  <- ncdf4::ncvar_get(ed,name[j])[,,year]
         var_a  <- ncdf4::ncvar_get(ed,name[j],count = c(-1,-1,1),start = c(1,1,year))
         var_a  <- units::as_units(1000 * var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
@@ -305,9 +295,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  }                                                # nocov end
+  }
+  # nocov end
 
-  if(version == "MACCITY"){                        # nocov start
+  # nocov start
+  if(version == "MACCITY"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     if(verbose)
@@ -317,7 +309,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
     var  <- ncdf4::ncvar_get(ed,name[1],count = c(-1,-1,1),start = c(1,1,month))
-    # var  <- var[,,month] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var  <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -339,7 +330,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       for(j in 1:length(name)){
         cat(paste0("using ",name[j]),"\n")
         var_a  <- ncdf4::ncvar_get(ed,name[j],count = c(-1,-1,1),start = c(1,1,month))
-        # var_a  <- ncdf4::ncvar_get(ed,name[j])[,,month] # improve arguments in ncvar_get
         var_a  <- units::as_units(var_a,"g m-2 s-1")
         var_a  <- apply(var_a,1,rev)
         var    <- var + var_a
@@ -354,7 +344,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  }                                                # nocov end
+  }
+  # nocov end
 
   if(version == "EDGAR" || version == "EDGAR_v432"){
     ed   <- ncdf4::nc_open(file[1])
@@ -393,7 +384,8 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
     }
   }
 
-  if(version == "EDGAR_HTAPv2"){  # nocov start
+  # nocov start
+  if(version == "EDGAR_HTAPv2"){
     if(verbose)
       cat(paste0("reading",
                  " ",version,
@@ -445,9 +437,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  }                                                   # nocov end
+  }
+  # nocov end
 
-  if(version == "EDGARv8m"){ # nocov start
+  # nocov start
+  if(version == "EDGARv8m"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     cat(paste0("reading",
@@ -456,7 +450,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                format(ISOdate(1996,month,1),"%B"),
                ", output unit is g m-2 s-1 ...\n"))
     var    <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
-    # var    <- var[,,month,drop = T] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -472,7 +465,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(verbose)
         cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
       var  <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
-      # var  <- var[,,month,drop = T] # improve in ncvar_get
       if(as_raster){
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 1000 * var,xmn=-180,xmx=180,ymn=-90,ymx=90)
@@ -484,9 +476,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  } # nocov end
+  }
+  # nocov end
 
-  if(version == "EDGARv8"){ # nocov start
+  # nocov start
+  if(version == "EDGARv8"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     if(verbose)
@@ -521,9 +515,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  } # nocov end
+  }
+  # nocov end
 
-  if(version == "VULCAN" || version == "VULCAN-y"){   # nocov start
+  # nocov start
+  if(version == "VULCAN" || version == "VULCAN-y"){
     if(version == "VULCAN")
       warning('using VULCAN-y (yearly) configuration!\n change version to VULCAN-y or VULCAN-h!')
 
@@ -583,9 +579,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                              # nocov end
+  }
+  # nocov end
 
-  if(version == "VULCAN-h"){                     # nocov start
+  # nocov start
+  if(version == "VULCAN-h"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
@@ -640,9 +638,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                              # nocov end
+  }
+  # nocov end
 
-  if(version == "FFDAS"){                       # nocov start
+  # nocov start
+  if(version == "FFDAS"){
     name  <- 'flux'
     ed    <- ncdf4::nc_open(file[1])
     var   <- raster::stack(file[1])             # WARNINGS
@@ -675,9 +675,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                             # nocov end
+  }
+  # nocov end
 
-  if(version == "ODIAC"){                       # nocov start
+  # nocov start
+  if(version == "ODIAC"){
     var   <- raster::stack(file[1],varname='land')
     var2  <- raster::stack(file[1],varname='intl_bunker')
     var   <- var[[month]] + var2[[month]]
@@ -705,9 +707,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                            # nocov end
+  }
+  # nocov end
 
-  if(version == "ODIAC-tiff"){                       # nocov start
+  # nocov start
+  if(version == "ODIAC-tiff"){
     var   <- raster::stack(file[1],varname='Band1')
     var[is.na(var[])] <- 0
 
@@ -732,9 +736,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                        # nocov end
+  }
+  # nocov end
 
-  if(version == "ACES"){                       # nocov start
+  # nocov start
+  if(version == "ACES"){
     ed   <- ncdf4::nc_open(file[1])
     name <- names(ed$var)
     name <- grep('time_bnds',name, invert = TRUE, value = TRUE)
@@ -787,10 +793,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(dim(a)[3] == 1) a <- a[,,1,drop = TRUE]
       return(a)
     }
-  }                                                       # nocov end
+  }
+  # nocov end
 
-
-  if(version == "GEMS"){ # nocov start
+  # nocov start
+  if(version == "GEMS"){
     ed   <- ncdf4::nc_open(file[1])
     name <- "emission"
     if(verbose)
@@ -826,9 +833,11 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  } # nocov end
+  }
+  # nocov end
 
-  if(version == "GEMSm"){ # nocov start
+  # nocov start
+  if(version == "GEMSm"){
     ed   <- ncdf4::nc_open(file[1])
     name <- "emission"
     if(verbose)
@@ -838,7 +847,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
                  format(ISOdate(1996,month,1),"%B"),
                  ", output unit is g m-2 s-1 ...\n"))
     var    <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
-    # var    <- var[,,month,drop = T] # improve in ncvar_get
     varall <- units::as_units(0.0 * var,"g m-2 s-1")
     var    <- apply(0.0 * var,1,rev)
     if(as_raster){
@@ -855,7 +863,6 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
       if(verbose)
         cat(paste0("from ",file[i]),name[1],"x",sprintf("%02.6f",coef[i]),"\n")
       var  <- ncdf4::ncvar_get(ed,name,count = c(-1,-1,1),start = c(1,1,month))
-      # var  <- var[,,month,drop = T] # improve in ncvar_get
       if(as_raster){
         var <- apply(var,1,rev)
         r   <- raster::raster(x = 3.8026486e-13 * var,xmn=0,xmx=360,ymn=-90,ymx=90)
@@ -867,17 +874,19 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         varall <- varall + var * coef[i]
       }
     }
-  } # nocov end
+  }
+  # nocov end
 
   if(as_raster){
     if(is.null(spec)){
       if(version %in% c('GAINS','EDGARv8m','EDGARv8')){
-        return(rz)                                        #nocov
+        return(rz)                                        # nocov
       }else{
         return(raster::rotate(rz))
       }
     }else{
-      if(verbose)  cat("using the following speciation:\n") # nocov start
+      # nocov start
+      if(verbose)  cat("using the following speciation:\n")
       rz_spec <- list()
       for(i in 1:length(spec)){
         if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
@@ -888,20 +897,23 @@ read <- function(file = file.choose(), version = NA, coef = rep(1,length(file)),
         }
       }
       names(rz_spec) <- names(spec)
-      return(rz_spec)                                      # nocov end
+      return(rz_spec)
+      # nocov end
     }
   }else{
     if(is.null(spec)){
       return(varall)
     }else{
-      if(verbose)  cat("using the following speciation:\n") # nocov start
+      # nocov start
+      if(verbose)  cat("using the following speciation:\n")
       var_spec <- list()
       for(i in 1:length(spec)){
         if(verbose) cat(paste0(names(spec)[i]," = ",spec[i],"\n"))
         var_spec[[i]] <- varall * spec[i]
       }
       names(var_spec) <- names(spec)
-      return(var_spec)                                     # nocov end
+      return(var_spec)
+      # nocov end
     }
   }
 }
