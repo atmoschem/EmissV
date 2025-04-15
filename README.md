@@ -1,9 +1,9 @@
 # EmissV
 <!-- badges: start -->
-[![windown Build](https://ci.appveyor.com/api/projects/status/guuaaklaw6uyn4lj?svg=true)](https://ci.appveyor.com/project/Schuch666/emissv) 
+[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) 
 [![codecov](https://codecov.io/github/atmoschem/EmissV/graph/badge.svg?token=SDUpHzwgBh)](https://codecov.io/github/atmoschem/EmissV)
 [![R build status](https://github.com/atmoschem/EmissV/workflows/R-CMD-check/badge.svg)](https://github.com/atmoschem/EmissV/actions)
-[![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/eva3dm)](http://cran.r-project.org/web/packages/eva3dm)
 [![cran checks](https://badges.cranchecks.info/worst/EmissV.svg)](https://cran.r-project.org/web/checks/check_results_EmissV.html)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/grand-total/EmissV)](https://cran.r-project.org/package=EmissV)
 [![metacran downloads](https://cranlogs.r-pkg.org/badges/EmissV)](https://cran.r-project.org/package=EmissV)
