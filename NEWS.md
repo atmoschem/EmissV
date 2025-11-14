@@ -1,3 +1,6 @@
+## version: 0.666.0.0 (2025-11-14)
+- Added hourly and monthly profiles from Schuch et al. 2026a-b
+
 ## Version: 0.665.9.0 (2025-01-24)
 - added support for Edgar v8.1 on read() function
 - updated read() example for EDGAR 8.1
