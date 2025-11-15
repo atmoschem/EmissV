@@ -11,8 +11,7 @@ areaSource(s, r, grid = NA, name = "", as_frac = FALSE, verbose = TRUE)
 
 ## Source
 
-Data avaliable
-<https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/defense-meteorological-satellite-program>
+Example data from Defense Meteorological Satellite Program (DMSP)
 
 ## Arguments
 
@@ -43,11 +42,6 @@ Data avaliable
 ## Value
 
 a raster object containing the spatial distribution of emissions
-
-## Details
-
-About the DMSP and example data
-<https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program>
 
 ## Examples
 

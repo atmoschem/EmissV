@@ -10,12 +10,7 @@ rasterSource(r, grid, nlevels = "all", conservative = TRUE, verbose = TRUE)
 
 ## Source
 
-Exemple data is a low resolution cutting from image of persistent lights
-of the Defense Meteorological Satellite Program (DMSP)
-<https://pt.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program>
-
-Data avaliable
-<https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/defense-meteorological-satellite-program>
+Example data is from Defense Meteorological Satellite Program (DMSP).
 
 ## Arguments
 
@@ -43,11 +38,6 @@ Data avaliable
 
 Returns a matrix
 
-## Details
-
-About the DMSP and example data
-<https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program>
-
 ## See also
 
 [`gridInfo`](https://atmoschem.github.io/EmissV/reference/gridInfo.md)
@@ -63,5 +53,4 @@ x     <- raster::raster(paste(system.file("extdata", package = "EmissV"),"/dmsp.
 test  <- rasterSource(x, grid)
 #> Grid output: 99 columns 93 rows
 image(test, axe = FALSE, main = "Spatial distribution by Persistent Nocturnal Lights from DMSP")
-
 ```
