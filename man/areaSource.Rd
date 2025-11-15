@@ -4,7 +4,7 @@
 \alias{areaSource}
 \title{Distribution of emissions by area}
 \source{
-Data avaliable \url{https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/defense-meteorological-satellite-program}
+Example data from Defense Meteorological Satellite Program (DMSP)
 }
 \usage{
 areaSource(s, r, grid = NA, name = "", as_frac = FALSE, verbose = TRUE)
@@ -28,9 +28,6 @@ a raster object containing the spatial distribution of emissions
 \description{
 Calculate the spatial distribution by a raster masked by shape/model grid information.
 }
-\details{
-About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
-}
 \examples{
 shape  <- raster::shapefile(paste(system.file("extdata", package = "EmissV"),
                             "/BR.shp",sep=""),verbose = FALSE)
@@ -43,5 +40,4 @@ SP     <- areaSource(shape,raster,grid,name = "SPMA")
 raster::plot(SP,ylab="Lat",xlab="Lon",
              main ="Spatial Distribution by Lights for Sao Paulo - Brazil")
 }
-
 }

@@ -11,6 +11,8 @@
 #'
 #' @return a raster object containing the spatial distribution of emissions
 #'
+#' @source Example data from Defense Meteorological Satellite Program (DMSP)
+#'
 #' @export
 #'
 #' @import raster sf
@@ -27,9 +29,6 @@
 #' raster::plot(SP,ylab="Lat",xlab="Lon",
 #'              main ="Spatial Distribution by Lights for Sao Paulo - Brazil")
 #'}
-#'
-#'@source Data avaliable \url{https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/defense-meteorological-satellite-program}
-#'@details About the DMSP and example data \url{https://en.wikipedia.org/wiki/Defense_Meteorological_Satellite_Program}
 
 areaSource <- function(s,r,grid = NA,name = "",as_frac=FALSE,verbose = TRUE){
   if(verbose){
