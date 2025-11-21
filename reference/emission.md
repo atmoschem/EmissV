@@ -136,13 +136,10 @@ raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dms
 SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
 #> processing SP area ... 
 #> fraction of SP area inside the domain = 0.944981686036935
-RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
-#> processing RJ area ... 
-#> fraction of RJ area inside the domain = 0.734040064556526
 
 e_CO   <- emission(total = TOTAL,
                    pol = "CO",
-                   area = list(SP = SP, RJ = RJ),
+                   area = list(SP = SP),
                    grid = grid,
                    mm = 28)
 #> calculating emissions for CO using molar mass = 28 ...
