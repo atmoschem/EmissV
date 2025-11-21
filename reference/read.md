@@ -165,7 +165,7 @@ nox  <- read(file    = dir(path=folder, pattern="flx\\.nc", full.names=TRUE),
              spec    = c(E_NO  = 0.9 ,   # 90% of NOx is NO
                          E_NO2 = 0.1 ))  # 10% of NOx is NO2
 #> reading EDGARv8 emissions, output unit is g m-2 s-1 ...
-#> from /tmp/RtmpIseVIr/EDGARv8.1/v8.1_FT2022_AP_NOx_2022_TOTALS_flx.nc fluxes x 1.000000 
+#> from /tmp/Rtmpr8A57M/EDGARv8.1/v8.1_FT2022_AP_NOx_2022_TOTALS_flx.nc fluxes x 1.000000 
 #> using the following speciation:
 #> E_NO = 0.9
 #> E_NO2 = 0.1

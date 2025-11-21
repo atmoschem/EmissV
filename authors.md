@@ -11,7 +11,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/atmoschem/EmissV/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/atmoschem/EmissV/blob/Shinseiki/inst/CITATION)
 
 Schuch D, Ibarra-Espinosa S, Dias de Freitas E (2018). “EmissV: An R
 package to create vehicular and other emissions by Top-down methods to
