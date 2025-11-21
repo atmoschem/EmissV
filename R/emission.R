@@ -43,11 +43,10 @@
 #' raster <- raster::raster(paste0(system.file("extdata", package = "EmissV"),"/dmsp.tiff"))
 #'
 #' SP     <- areaSource(shape[22,1],raster,grid,name = "SP")
-#' RJ     <- areaSource(shape[17,1],raster,grid,name = "RJ")
 #'
 #' e_CO   <- emission(total = TOTAL,
 #'                    pol = "CO",
-#'                    area = list(SP = SP, RJ = RJ),
+#'                    area = list(SP = SP),
 #'                    grid = grid,
 #'                    mm = 28)
 #'
