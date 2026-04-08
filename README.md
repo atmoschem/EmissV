@@ -1,4 +1,4 @@
-# EmissV
+# EmissV <img src="man/figures/logo.png" align="right" alt="" width="140" />
 <!-- badges: start -->
 [![Licence:MIT](https://img.shields.io/github/license/hyperium/hyper.svg)](https://opensource.org/licenses/MIT) 
 [![codecov](https://codecov.io/github/atmoschem/EmissV/graph/badge.svg?token=SDUpHzwgBh)](https://codecov.io/github/atmoschem/EmissV)
